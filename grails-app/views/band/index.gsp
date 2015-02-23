@@ -56,6 +56,15 @@
                                 <li class="list-group-item">${band.type}</li>
                                 <li class="list-group-item"><g:message code="band.gold" args="[band.gold]"/></li>
                                 <li class="list-group-item"><g:message code="band.magical.stones" args="[band.magicalStones]"/></li>
+                                <li class="list-group-item">
+                                    <div class="btn-group">
+
+                                        <g:link controller="band" action="show" id="${band.id}" class="btn btn-success">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                            <g:message code="band.show"/></g:link>
+
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>
