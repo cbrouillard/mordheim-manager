@@ -9,7 +9,7 @@
     <div class="col-sm-10">
         <div class="input-group">
             <span class="input-group-addon"><span
-                    class="glyphicon glyphicon-font"></span>
+                    class="glyphicon glyphicon-font"></span></span>
             <g:textField name="name" required="" value="${bandInstance?.name}" class="form-control"/>
         </div>
 
@@ -25,7 +25,7 @@
     <div class="col-sm-10">
         <div class="input-group">
             <span class="input-group-addon"><span
-                    class="glyphicon glyphicon-asterisk"></span>
+                    class="glyphicon glyphicon-asterisk"></span></span>
             <g:textField name="type" required="" value="${bandInstance?.type}" class="form-control"/>
         </div>
 
@@ -41,7 +41,7 @@
     <div class="col-sm-10">
         <div class="input-group">
             <span class="input-group-addon"><span
-                    class="glyphicon glyphicon-edit"></span>
+                    class="glyphicon glyphicon-edit"></span></span>
             <g:textArea name="note" cols="40" rows="5" value="${bandInstance?.note}" class="form-control"/>
         </div>
 

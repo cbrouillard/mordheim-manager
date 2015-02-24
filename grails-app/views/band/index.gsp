@@ -61,7 +61,7 @@
 
                                         <g:link controller="band" action="show" id="${band.id}" class="btn btn-success">
                                             <span class="glyphicon glyphicon-pencil"></span>
-                                            <g:message code="band.show"/></g:link>
+                                            <g:message code="show"/></g:link>
 
                                     </div>
                                 </li>
