@@ -1,148 +1,144 @@
 <%@ page import="com.headbangers.mordheim.Hero" %>
 
 
+<div class="form-group ${hasErrors(bean: heroInstance, field: 'name', 'has-error')}">
 
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'note', 'error')} ">
-	<label for="note">
-		<g:message code="hero.note.label" default="Note" />
-		
-	</label>
-	<g:textArea name="note" cols="40" rows="5" value="${heroInstance?.note}"/>
+    <label for="name" class="col-sm-2 control-label"><g:message code="hero.name.label"/> *</label>
 
+    <div class="col-sm-10">
+        <div class="input-group">
+            <span class="input-group-addon"><span
+                    class="glyphicon glyphicon-font"></span></span>
+            <g:textField name="name" required="" value="${heroInstance?.name}" class="form-control"/>
+        </div>
+
+        <div class="help-block with-errors"></div>
+    </div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'competences', 'error')} ">
-	<label for="competences">
-		<g:message code="hero.competences.label" default="Competences" />
-		
-	</label>
-	<g:textArea name="competences" cols="40" rows="5" value="${heroInstance?.competences}"/>
+<div class="form-group ${hasErrors(bean: heroInstance, field: 'type', 'has-error')}">
 
+    <label for="type" class="col-sm-2 control-label"><g:message code="hero.type.label"/> *</label>
+
+    <div class="col-sm-10">
+        <div class="input-group">
+            <span class="input-group-addon"><span
+                    class="glyphicon glyphicon-asterisk"></span></span>
+            <g:textField name="type" required="" value="${heroInstance?.type}" class="form-control"/>
+        </div>
+
+        <div class="help-block with-errors"></div>
+    </div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'injuries', 'error')} ">
-	<label for="injuries">
-		<g:message code="hero.injuries.label" default="Injuries" />
-		
-	</label>
-	<g:textArea name="injuries" cols="40" rows="5" value="${heroInstance?.injuries}"/>
+<div class="form-group ${hasErrors(bean: heroInstance, field: 'CC', 'has-error')}">
 
+    <label class="col-sm-2 control-label"><g:message code="hero.profile.label"/> *</label>
+
+    <div class="col-sm-10">
+        <div class="input-group">
+
+            <table class="table table-condensed">
+                <thead>
+                <tr>
+                    <th class="text-center"><g:message code="profile.m"/></th>
+                    <th class="text-center"><g:message code="profile.cc"/></th>
+                    <th class="text-center"><g:message code="profile.ct"/></th>
+                    <th class="text-center"><g:message code="profile.f"/></th>
+                    <th class="text-center"><g:message code="profile.e"/></th>
+                    <th class="text-center"><g:message code="profile.pv"/></th>
+                    <th class="text-center"><g:message code="profile.i"/></th>
+                    <th class="text-center"><g:message code="profile.a"/></th>
+                    <th class="text-center"><g:message code="profile.cd"/></th>
+                </tr
+                </thead>
+                <tbody>
+                <tr>
+                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="M" required=""
+                                 value="${heroInstance?.M}" class="form-control"/></td>
+                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="CC" required=""
+                                 value="${heroInstance?.CC}" class="form-control"/></td>
+                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="CT" required=""
+                                 value="${heroInstance?.CT}" class="form-control"/></td>
+                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="F" required=""
+                                 value="${heroInstance?.F}" class="form-control"/></td>
+                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="E" required=""
+                                 value="${heroInstance?.E}" class="form-control"/></td>
+                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="PV" required=""
+                                 value="${heroInstance?.PV}" class="form-control"/></td>
+                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="I" required=""
+                                 value="${heroInstance?.I}" class="form-control"/></td>
+                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="A" required=""
+                                 value="${heroInstance?.A}" class="form-control"/></td>
+                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="CD" required=""
+                                 value="${heroInstance?.CD}" class="form-control"/></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="help-block with-errors"></div>
+    </div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'equipment', 'error')} ">
-	<label for="equipment">
-		<g:message code="hero.equipment.label" default="Equipment" />
-		
-	</label>
-	<g:textArea name="equipment" cols="40" rows="5" value="${heroInstance?.equipment}"/>
 
+<div class="form-group ${hasErrors(bean: heroInstance, field: 'equipment', 'has-error')}">
+
+    <label for="equipment" class="col-sm-2 control-label"><g:message code="hero.equipment.label"/></label>
+
+    <div class="col-sm-10">
+        <div class="input-group">
+            <span class="input-group-addon"><span
+                    class="glyphicon glyphicon-scissors"></span></span>
+            <g:textArea name="equipment" cols="40" rows="5" value="${heroInstance?.equipment}" class="form-control"/>
+        </div>
+
+        <div class="help-block with-errors"></div>
+    </div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'experience', 'error')} required">
-	<label for="experience">
-		<g:message code="hero.experience.label" default="Experience" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="experience" type="number" value="${heroInstance.experience}" required=""/>
+<div class="form-group ${hasErrors(bean: heroInstance, field: 'competences', 'has-error')}">
 
+    <label for="competences" class="col-sm-2 control-label"><g:message code="hero.competences.label"/></label>
+
+    <div class="col-sm-10">
+        <div class="input-group">
+            <span class="input-group-addon"><span
+                    class="glyphicon glyphicon-lamp"></span></span>
+            <g:textArea name="competences" cols="40" rows="5" value="${heroInstance?.competences}" class="form-control"/>
+        </div>
+
+        <div class="help-block with-errors"></div>
+    </div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'type', 'error')} required">
-	<label for="type">
-		<g:message code="hero.type.label" default="Type" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="type" required="" value="${heroInstance?.type}"/>
+<div class="form-group ${hasErrors(bean: heroInstance, field: 'experience', 'has-error')}">
 
+    <label for="experience" class="col-sm-2 control-label"><g:message code="hero.experience.label"/> *</label>
+
+    <div class="col-sm-10">
+        <div class="input-group">
+            <span class="input-group-addon"><span
+                    class="glyphicon glyphicon-lamp"></span></span>
+            <g:field maxlength="2" pattern="^([0-9])*" name="experience" type="number" value="${heroInstance?.experience}" required="" class="form-control"/>
+        </div>
+
+        <div class="help-block with-errors"></div>
+    </div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'name', 'error')} required">
-	<label for="name">
-		<g:message code="hero.name.label" default="Name" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="name" required="" value="${heroInstance?.name}"/>
+<div class="form-group ${hasErrors(bean: heroInstance, field: 'note', 'has-error')}">
 
+    <label for="note" class="col-sm-2 control-label"><g:message code="note.label"/></label>
+
+    <div class="col-sm-10">
+        <div class="input-group">
+            <span class="input-group-addon"><span
+                    class="glyphicon glyphicon-edit"></span></span>
+            <g:textArea name="note" cols="40" rows="5" value="${heroInstance?.note}" class="form-control"/>
+        </div>
+
+        <div class="help-block with-errors"></div>
+    </div>
 </div>
-
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'CC', 'error')} required">
-	<label for="CC">
-		<g:message code="hero.CC.label" default="CC" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="CC" type="number" value="${heroInstance.CC}" required=""/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'CD', 'error')} required">
-	<label for="CD">
-		<g:message code="hero.CD.label" default="CD" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="CD" type="number" value="${heroInstance.CD}" required=""/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'CT', 'error')} required">
-	<label for="CT">
-		<g:message code="hero.CT.label" default="CT" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="CT" type="number" value="${heroInstance.CT}" required=""/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'PV', 'error')} required">
-	<label for="PV">
-		<g:message code="hero.PV.label" default="PV" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="PV" type="number" value="${heroInstance.PV}" required=""/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'a', 'error')} required">
-	<label for="a">
-		<g:message code="hero.a.label" default="A" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="a" type="number" value="${heroInstance.a}" required=""/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'e', 'error')} required">
-	<label for="e">
-		<g:message code="hero.e.label" default="E" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="e" type="number" value="${heroInstance.e}" required=""/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'f', 'error')} required">
-	<label for="f">
-		<g:message code="hero.f.label" default="F" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="f" type="number" value="${heroInstance.f}" required=""/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'i', 'error')} required">
-	<label for="i">
-		<g:message code="hero.i.label" default="I" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="i" type="number" value="${heroInstance.i}" required=""/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: heroInstance, field: 'm', 'error')} required">
-	<label for="m">
-		<g:message code="hero.m.label" default="M" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="m" type="number" value="${heroInstance.m}" required=""/>
-
-</div>
-

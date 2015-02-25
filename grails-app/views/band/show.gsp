@@ -46,6 +46,10 @@
         </div>
 
         <table class="table">
+            <tr class="warning">
+                <td><strong><g:message code="band.value"/></strong></td>
+                <td></td>
+            </tr>
             <tr>
                 <td><strong><g:message code="band.name.label"/></strong></td>
                 <td>${bandInstance.name}</td>
@@ -54,13 +58,21 @@
                 <td><strong><g:message code="band.type.label"/></strong></td>
                 <td>${bandInstance.type}</td>
             </tr>
-            <tr>
+            %{--<tr>
                 <td><strong><g:message code="date.created.label"/></strong></td>
                 <td><g:formatDate formatName="date.format.short" date="${bandInstance.dateCreated}"/></td>
+            </tr>--}%
+            <tr>
+                <td><strong><g:message code="band.gold.title"/></strong></td>
+                <td><g:formatNumber number="${bandInstance.gold}"/> CO</td>
             </tr>
             <tr>
-                <td><strong><g:message code="band.note.label"/></strong></td>
-                <td><div class="well">${bandInstance.note}</div></td>
+                <td><strong><g:message code="band.magical.stones.title"/></strong></td>
+                <td><g:formatNumber number="${bandInstance.magicalStones}"/></td>
+            </tr>
+            <tr>
+                <td><strong><g:message code="note.label"/></strong></td>
+                <td>${bandInstance.note}</td>
             </tr>
         </table>
     </div>
@@ -72,15 +84,25 @@
     <div role="tabpanel">
 
         <!-- Nav tabs -->
+        <g:if test="${bandInstance.heroes.size() < 6}">
+            <div class="btn-group pull-right">
+                <g:link controller="hero" action="create" params="[band: bandInstance.id]" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <g:message code="hero.create"/>
+                </g:link>
+            </div>
+        </g:if>
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
                 <a href="#heroes" role="tab" data-toggle="tab">
-                    <g:message code="heroes"/>
+                    <g:message code="heroes" />
+                    <span class="badge">${bandInstance.heroes.size()}</span>
                 </a>
             </li>
             <li role="presentation">
                 <a href="#wrenches" role="tab" data-toggle="tab">
                     <g:message code="wrenches"/>
+                    <span class="badge">${bandInstance.wrenches.size()}</span>
                 </a>
             </li>
         </ul>
@@ -88,19 +110,12 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="heroes">
-                <br/>
-
-                <g:each in="${bandInstance.heroes}" var="hero">
-                    <div class="panel panel-default">
-
-                    </div>
-                </g:each>
+                <g:render template="heroes"/>
 
             </div>
 
             <div role="tabpanel" class="tab-pane" id="wrenches">
-                <br/>
-
+                <br/>test
             </div>
         </div>
 

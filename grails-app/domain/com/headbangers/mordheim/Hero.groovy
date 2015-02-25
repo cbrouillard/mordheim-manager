@@ -2,6 +2,8 @@ package com.headbangers.mordheim
 
 class Hero {
 
+    static belongsTo = [Band]
+
     String id
 
     String note
@@ -11,15 +13,15 @@ class Hero {
     String competences
     String injuries
 
-    Integer M;
-    Integer CC;
-    Integer CT;
-    Integer F;
-    Integer E;
-    Integer PV;
-    Integer I;
-    Integer A;
-    Integer CD;
+    Integer M = 0;
+    Integer CC = 0;
+    Integer CT = 0;
+    Integer F = 0;
+    Integer E = 0;
+    Integer PV = 1;
+    Integer I = 0;
+    Integer A = 0;
+    Integer CD = 0;
 
     String type
     String name

@@ -1,7 +1,6 @@
 package com.headbangers.mordheim
 
 
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -11,8 +10,8 @@ class HeroController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Hero.list(params), model:[heroInstanceCount: Hero.count()]
+        params.max = Math.min(max ?: 6, 6)
+        respond Hero.list(params), model: [heroInstanceCount: Hero.count()]
     }
 
     def show(Hero heroInstance) {
@@ -20,7 +19,8 @@ class HeroController {
     }
 
     def create() {
-        respond new Hero(params)
+        Hero hero = new Hero(params)
+        [bandId: params.band, heroInstance: hero]
     }
 
     @Transactional
@@ -30,12 +30,19 @@ class HeroController {
             return
         }
 
-        if (heroInstance.hasErrors()) {
-            respond heroInstance.errors, view:'create'
+        def band = Band.get(params.band)
+        if (band == null){
+            redirect action: 'index', controller: 'band'
             return
         }
 
-        heroInstance.save flush:true
+        if (heroInstance.hasErrors()) {
+            respond heroInstance.errors, view: 'create'
+            return
+        }
+
+        band.heroes.add(heroInstance)
+        band.save flush:true
 
         request.withFormat {
             form multipartForm {
@@ -58,18 +65,18 @@ class HeroController {
         }
 
         if (heroInstance.hasErrors()) {
-            respond heroInstance.errors, view:'edit'
+            respond heroInstance.errors, view: 'edit'
             return
         }
 
-        heroInstance.save flush:true
+        heroInstance.save flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Hero.label', default: 'Hero'), heroInstance.id])
                 redirect heroInstance
             }
-            '*'{ respond heroInstance, [status: OK] }
+            '*' { respond heroInstance, [status: OK] }
         }
     }
 
@@ -81,14 +88,22 @@ class HeroController {
             return
         }
 
-        heroInstance.delete flush:true
+        Band band = Band.get(params.band)
+        if (!band){
+            redirect(action:'index', controller: 'band')
+            return
+        }
+
+        band.removeFromHeroes(heroInstance)
+        band.save()
+        heroInstance.delete flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Hero.label', default: 'Hero'), heroInstance.id])
-                redirect action:"index", method:"GET"
+                redirect action: "show", controller: "band", id: band.id, method: "GET"
             }
-            '*'{ render status: NO_CONTENT }
+            '*' { render status: NO_CONTENT }
         }
     }
 
@@ -98,7 +113,7 @@ class HeroController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'hero.label', default: 'Hero'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 }

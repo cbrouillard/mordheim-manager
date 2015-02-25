@@ -35,7 +35,7 @@
 
 <div class="form-group ${hasErrors(bean: bandInstance, field: 'note', 'has-error')}">
 
-    <label for="note" class="col-sm-2 control-label"><g:message code="band.note.label"
+    <label for="note" class="col-sm-2 control-label"><g:message code="note.label"
                                                                 default="note"/> *</label>
 
     <div class="col-sm-10">
