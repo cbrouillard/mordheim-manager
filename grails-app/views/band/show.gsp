@@ -33,6 +33,7 @@
                     <div class="btn-group">
                         <g:link class="btn btn-success" controller="band" action="edit" id="${bandInstance.id}">
                             <span class="glyphicon glyphicon-edit"></span>
+                            <g:message code="default.button.edit.label"/>
                         </g:link>
                         <button type="submit" class="btn btn-danger"
                                 onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
@@ -90,15 +91,20 @@
                 <span class="glyphicon glyphicon-plus"></span>
                 <g:message code="hero.create"/>
             </g:link>
+            <g:link controller="wrenchmen" action="create" params="[band: bandInstance.id]"
+                    class="btn btn-success ${bandInstance.heroes.size() + bandInstance.wrenches.size() >= 21 ? "disabled" : ""}">
+                <span class="glyphicon glyphicon-plus"></span>
+                <g:message code="wrench.create"/>
+            </g:link>
         </div>
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active">
+            <li role="presentation" class=" ${!activeTab ? 'active' : ''}">
                 <a href="#heroes" role="tab" data-toggle="tab">
                     <g:message code="heroes"/>
                     <span class="badge">${bandInstance.heroes.size()}</span>
                 </a>
             </li>
-            <li role="presentation">
+            <li role="presentation"  class="${activeTab == 'wrench' ? 'active' : ''}">
                 <a href="#wrenches" role="tab" data-toggle="tab">
                     <g:message code="wrenches"/>
                     <span class="badge">${bandInstance.wrenches.size()}</span>
@@ -108,12 +114,12 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="heroes">
+            <div role="tabpanel" class="tab-pane ${!activeTab ? 'active' : ''}" id="heroes">
                 <g:render template="heroes"/>
 
             </div>
 
-            <div role="tabpanel" class="tab-pane" id="wrenches">
+            <div role="tabpanel" class="tab-pane ${activeTab == 'wrench' ? 'active' : ''}" id="wrenches">
                 <br/>test
             </div>
         </div>

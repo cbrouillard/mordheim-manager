@@ -31,53 +31,12 @@
     </div>
 </div>
 
-<div class="form-group ${hasErrors(bean: heroInstance, field: 'CC', 'has-error')}">
+<div class="form-group">
 
     <label class="col-sm-2 control-label"><g:message code="hero.profile.label"/> *</label>
 
     <div class="col-sm-10">
-        %{--<div class="input-group">--}%
-            <div class="table-responsive">
-                <table class="table table-condensed">
-                    <thead>
-                    <tr>
-                        <th class="text-center"><g:message code="profile.m"/></th>
-                        <th class="text-center"><g:message code="profile.cc"/></th>
-                        <th class="text-center"><g:message code="profile.ct"/></th>
-                        <th class="text-center"><g:message code="profile.f"/></th>
-                        <th class="text-center"><g:message code="profile.e"/></th>
-                        <th class="text-center"><g:message code="profile.pv"/></th>
-                        <th class="text-center"><g:message code="profile.i"/></th>
-                        <th class="text-center"><g:message code="profile.a"/></th>
-                        <th class="text-center"><g:message code="profile.cd"/></th>
-                    </tr
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="M" required=""
-                                     value="${heroInstance?.M}" class="form-control"/></td>
-                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="CC" required=""
-                                     value="${heroInstance?.CC}" class="form-control"/></td>
-                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="CT" required=""
-                                     value="${heroInstance?.CT}" class="form-control"/></td>
-                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="F" required=""
-                                     value="${heroInstance?.F}" class="form-control"/></td>
-                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="E" required=""
-                                     value="${heroInstance?.E}" class="form-control"/></td>
-                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="PV" required=""
-                                     value="${heroInstance?.PV}" class="form-control"/></td>
-                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="I" required=""
-                                     value="${heroInstance?.I}" class="form-control"/></td>
-                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="A" required=""
-                                     value="${heroInstance?.A}" class="form-control"/></td>
-                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="CD" required=""
-                                     value="${heroInstance?.CD}" class="form-control"/></td>
-                    </tr>
-                    </tbody>
-                </table>
-            %{--</div>--}%
-        </div>
-
+        <g:render template="/profilable/editprofile" model="[profilable: heroInstance]"/>
         <div class="help-block with-errors"></div>
     </div>
 </div>

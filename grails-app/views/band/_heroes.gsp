@@ -31,7 +31,7 @@
         <div class="panel-body">
 
             <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-info" role="progressbar" style="width: 60%;">
+                <div class="progress-bar progress-bar-striped progress-bar-info" role="progressbar" style="width: ${hero.experience * 90 / 100}%;">
                     <strong><g:message code="hero.experience.label" /> : ${hero.experience}</strong>
                 </div>
             </div>

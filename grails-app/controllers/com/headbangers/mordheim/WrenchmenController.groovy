@@ -1,7 +1,6 @@
 package com.headbangers.mordheim
 
 
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -12,7 +11,7 @@ class WrenchmenController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Wrenchmen.list(params), model:[wrenchmenInstanceCount: Wrenchmen.count()]
+        respond Wrenchmen.list(params), model: [wrenchmenInstanceCount: Wrenchmen.count()]
     }
 
     def show(Wrenchmen wrenchmenInstance) {
@@ -20,7 +19,8 @@ class WrenchmenController {
     }
 
     def create() {
-        respond new Wrenchmen(params)
+        Wrenchmen man = new Wrenchmen(params)
+        [bandId: params.band, wrenchmenInstance: man]
     }
 
     @Transactional
@@ -31,16 +31,23 @@ class WrenchmenController {
         }
 
         if (wrenchmenInstance.hasErrors()) {
-            respond wrenchmenInstance.errors, view:'create'
+            respond wrenchmenInstance.errors, view: 'create'
             return
         }
 
-        wrenchmenInstance.save flush:true
+        def band = Band.get(params.band)
+        if (band == null) {
+            redirect action: 'index', controller: 'band'
+            return
+        }
+
+        band.wrenches.add(wrenchmenInstance)
+        band.save flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'wrenchmen.label', default: 'Wrenchmen'), wrenchmenInstance.id])
-                redirect wrenchmenInstance
+                redirect controller: 'band', action: 'show', id: band.id, params: [tab: 'wrench']
             }
             '*' { respond wrenchmenInstance, [status: CREATED] }
         }
@@ -58,18 +65,18 @@ class WrenchmenController {
         }
 
         if (wrenchmenInstance.hasErrors()) {
-            respond wrenchmenInstance.errors, view:'edit'
+            respond wrenchmenInstance.errors, view: 'edit'
             return
         }
 
-        wrenchmenInstance.save flush:true
+        wrenchmenInstance.save flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Wrenchmen.label', default: 'Wrenchmen'), wrenchmenInstance.id])
                 redirect wrenchmenInstance
             }
-            '*'{ respond wrenchmenInstance, [status: OK] }
+            '*' { respond wrenchmenInstance, [status: OK] }
         }
     }
 
@@ -81,14 +88,14 @@ class WrenchmenController {
             return
         }
 
-        wrenchmenInstance.delete flush:true
+        wrenchmenInstance.delete flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Wrenchmen.label', default: 'Wrenchmen'), wrenchmenInstance.id])
-                redirect action:"index", method:"GET"
+                redirect action: "index", method: "GET"
             }
-            '*'{ render status: NO_CONTENT }
+            '*' { render status: NO_CONTENT }
         }
     }
 
@@ -98,7 +105,7 @@ class WrenchmenController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'wrenchmen.label', default: 'Wrenchmen'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 }

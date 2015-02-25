@@ -1,7 +1,6 @@
 package com.headbangers.mordheim
 
 
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -12,11 +11,11 @@ class BandController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Band.list(params), model:[bandInstanceCount: Band.count()]
+        respond Band.list(params), model: [bandInstanceCount: Band.count()]
     }
 
     def show(Band bandInstance) {
-        respond bandInstance
+        respond bandInstance, model: [activeTab: params.tab]
     }
 
     def create() {
@@ -31,11 +30,11 @@ class BandController {
         }
 
         if (bandInstance.hasErrors()) {
-            respond bandInstance.errors, view:'create'
+            respond bandInstance.errors, view: 'create'
             return
         }
 
-        bandInstance.save flush:true
+        bandInstance.save flush: true
 
         request.withFormat {
             form multipartForm {
@@ -58,18 +57,18 @@ class BandController {
         }
 
         if (bandInstance.hasErrors()) {
-            respond bandInstance.errors, view:'edit'
+            respond bandInstance.errors, view: 'edit'
             return
         }
 
-        bandInstance.save flush:true
+        bandInstance.save flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Band.label', default: 'Band'), bandInstance.id])
                 redirect bandInstance
             }
-            '*'{ respond bandInstance, [status: OK] }
+            '*' { respond bandInstance, [status: OK] }
         }
     }
 
@@ -81,14 +80,14 @@ class BandController {
             return
         }
 
-        bandInstance.delete flush:true
+        bandInstance.delete flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Band.label', default: 'Band'), bandInstance.id])
-                redirect action:"index", method:"GET"
+                redirect action: "index", method: "GET"
             }
-            '*'{ render status: NO_CONTENT }
+            '*' { render status: NO_CONTENT }
         }
     }
 
@@ -98,7 +97,7 @@ class BandController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'band.label', default: 'Band'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 }
