@@ -31,4 +31,17 @@ class Band {
 
     Date dateCreated
     Date lastUpdated
+
+    def getBandValue() {
+        Long memberNb = (heroes.size() + wrenches.size()) * 5
+        Long xp = 0
+        heroes.each { h ->
+            xp += h.experience
+        }
+        wrenches.each { w ->
+            xp += w.experience
+        }
+
+        return xp + memberNb
+    }
 }

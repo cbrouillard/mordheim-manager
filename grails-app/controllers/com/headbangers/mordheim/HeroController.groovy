@@ -47,7 +47,7 @@ class HeroController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'hero.label', default: 'Hero'), heroInstance.id])
-                redirect heroInstance
+                redirect controller: 'band', action:'show', id:band.id
             }
             '*' { respond heroInstance, [status: CREATED] }
         }
@@ -74,7 +74,7 @@ class HeroController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Hero.label', default: 'Hero'), heroInstance.id])
-                redirect heroInstance
+                redirect controller: 'band', action:'show', id:heroInstance.band.id
             }
             '*' { respond heroInstance, [status: OK] }
         }

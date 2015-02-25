@@ -36,46 +36,46 @@
     <label class="col-sm-2 control-label"><g:message code="hero.profile.label"/> *</label>
 
     <div class="col-sm-10">
-        <div class="input-group">
-
-            <table class="table table-condensed">
-                <thead>
-                <tr>
-                    <th class="text-center"><g:message code="profile.m"/></th>
-                    <th class="text-center"><g:message code="profile.cc"/></th>
-                    <th class="text-center"><g:message code="profile.ct"/></th>
-                    <th class="text-center"><g:message code="profile.f"/></th>
-                    <th class="text-center"><g:message code="profile.e"/></th>
-                    <th class="text-center"><g:message code="profile.pv"/></th>
-                    <th class="text-center"><g:message code="profile.i"/></th>
-                    <th class="text-center"><g:message code="profile.a"/></th>
-                    <th class="text-center"><g:message code="profile.cd"/></th>
-                </tr
-                </thead>
-                <tbody>
-                <tr>
-                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="M" required=""
-                                 value="${heroInstance?.M}" class="form-control"/></td>
-                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="CC" required=""
-                                 value="${heroInstance?.CC}" class="form-control"/></td>
-                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="CT" required=""
-                                 value="${heroInstance?.CT}" class="form-control"/></td>
-                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="F" required=""
-                                 value="${heroInstance?.F}" class="form-control"/></td>
-                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="E" required=""
-                                 value="${heroInstance?.E}" class="form-control"/></td>
-                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="PV" required=""
-                                 value="${heroInstance?.PV}" class="form-control"/></td>
-                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="I" required=""
-                                 value="${heroInstance?.I}" class="form-control"/></td>
-                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="A" required=""
-                                 value="${heroInstance?.A}" class="form-control"/></td>
-                    <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="CD" required=""
-                                 value="${heroInstance?.CD}" class="form-control"/></td>
-                </tr>
-                </tbody>
-            </table>
-
+        %{--<div class="input-group">--}%
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th class="text-center"><g:message code="profile.m"/></th>
+                        <th class="text-center"><g:message code="profile.cc"/></th>
+                        <th class="text-center"><g:message code="profile.ct"/></th>
+                        <th class="text-center"><g:message code="profile.f"/></th>
+                        <th class="text-center"><g:message code="profile.e"/></th>
+                        <th class="text-center"><g:message code="profile.pv"/></th>
+                        <th class="text-center"><g:message code="profile.i"/></th>
+                        <th class="text-center"><g:message code="profile.a"/></th>
+                        <th class="text-center"><g:message code="profile.cd"/></th>
+                    </tr
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="M" required=""
+                                     value="${heroInstance?.M}" class="form-control"/></td>
+                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="CC" required=""
+                                     value="${heroInstance?.CC}" class="form-control"/></td>
+                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="CT" required=""
+                                     value="${heroInstance?.CT}" class="form-control"/></td>
+                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="F" required=""
+                                     value="${heroInstance?.F}" class="form-control"/></td>
+                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="E" required=""
+                                     value="${heroInstance?.E}" class="form-control"/></td>
+                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="PV" required=""
+                                     value="${heroInstance?.PV}" class="form-control"/></td>
+                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="I" required=""
+                                     value="${heroInstance?.I}" class="form-control"/></td>
+                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="A" required=""
+                                     value="${heroInstance?.A}" class="form-control"/></td>
+                        <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="CD" required=""
+                                     value="${heroInstance?.CD}" class="form-control"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            %{--</div>--}%
         </div>
 
         <div class="help-block with-errors"></div>
@@ -83,11 +83,11 @@
 </div>
 
 
-<div class="form-group ${hasErrors(bean: heroInstance, field: 'equipment', 'has-error')}">
+<div class="form-group ${hasErrors(bean: heroInstance, field: 'equipment', 'has-error')} ${hasErrors(bean: heroInstance, field: 'competences', 'has-error')}">
 
     <label for="equipment" class="col-sm-2 control-label"><g:message code="hero.equipment.label"/></label>
 
-    <div class="col-sm-10">
+    <div class="col-sm-4">
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-scissors"></span></span>
@@ -96,22 +96,39 @@
 
         <div class="help-block with-errors"></div>
     </div>
-</div>
-
-<div class="form-group ${hasErrors(bean: heroInstance, field: 'competences', 'has-error')}">
 
     <label for="competences" class="col-sm-2 control-label"><g:message code="hero.competences.label"/></label>
 
-    <div class="col-sm-10">
+    <div class="col-sm-4">
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-lamp"></span></span>
-            <g:textArea name="competences" cols="40" rows="5" value="${heroInstance?.competences}" class="form-control"/>
+            <g:textArea name="competences" cols="40" rows="5" value="${heroInstance?.competences}"
+                        class="form-control"/>
         </div>
 
         <div class="help-block with-errors"></div>
     </div>
 </div>
+
+<g:if test="${params.action == 'edit'}">
+    <div class="form-group ${hasErrors(bean: heroInstance, field: 'injuries', 'has-error')}">
+
+        <label for="injuries" class="col-sm-2 control-label"><g:message code="hero.injuries.label"/></label>
+
+        <div class="col-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><span
+                        class="glyphicon glyphicon-plus-sign"></span></span>
+                <g:textArea name="injuries" cols="40" rows="5" value="${heroInstance?.injuries}" class="form-control"/>
+            </div>
+
+            <div class="help-block with-errors"></div>
+        </div>
+    </div>
+
+</g:if>
+
 
 <div class="form-group ${hasErrors(bean: heroInstance, field: 'experience', 'has-error')}">
 
@@ -120,8 +137,9 @@
     <div class="col-sm-10">
         <div class="input-group">
             <span class="input-group-addon"><span
-                    class="glyphicon glyphicon-lamp"></span></span>
-            <g:field maxlength="2" pattern="^([0-9])*" name="experience" type="number" value="${heroInstance?.experience}" required="" class="form-control"/>
+                    class="glyphicon glyphicon-check"></span></span>
+            <g:field maxlength="2" pattern="^([0-9])*" name="experience" type="number"
+                     value="${heroInstance?.experience}" required="" class="form-control"/>
         </div>
 
         <div class="help-block with-errors"></div>

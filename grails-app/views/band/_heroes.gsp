@@ -1,26 +1,41 @@
-<g:each in="${bandInstance.heroes}" var="hero" status="n">
+<g:each in="${bandInstance.heroes.sort({ it.dateCreated })}" var="hero" status="n">
     <div class="panel panel-default">
 
         <div class="panel-heading">
-            <div class="form-inline pull-right">
-                <g:form url="[resource: hero, action: 'delete']" method="DELETE"
-                        class="form-inline pull-right">
-                    <g:hiddenField name="band" value="${bandInstance.id}"/>
-                    <div class="btn-group">
-                        <g:link class="btn btn-success" controller="hero" action="edit" id="${hero.id}">
-                            <span class="glyphicon glyphicon-edit"></span>
-                        </g:link>
-                        <button type="submit" class="btn btn-danger"
-                                onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                            <span class="glyphicon glyphicon-trash"></span> ${message(code: 'default.button.delete.label', default: 'Delete')}
-                        </button>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <h5>${hero.name} :: ${hero.type}</h5>
+                </div>
+
+                <div class="col-sm-8">
+                    <div class="form-inline">
+                        <g:form url="[resource: hero, action: 'delete']" method="DELETE"
+                                class="form-inline pull-right">
+                            <g:hiddenField name="band" value="${bandInstance.id}"/>
+                            <div class="btn-group">
+                                <g:link class="btn btn-success" controller="hero" action="edit" id="${hero.id}">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </g:link>
+                                <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </div>
+                        </g:form>
                     </div>
-                </g:form>
+                </div>
             </div>
-            <h5>${hero.name} :: ${hero.type}</h5>
         </div>
 
         <div class="panel-body">
+
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-info" role="progressbar" style="width: 60%;">
+                    <strong><g:message code="hero.experience.label" /> : ${hero.experience}</strong>
+                </div>
+            </div>
+
             <div class="table-responsive">
                 <table class="table table-condensed">
                     <thead>
@@ -68,35 +83,39 @@
                 </table>
             </div>
 
-            <div class="col-sm-4">
-                <div class="panel panel-info">
-                    <div class="panel-heading"><g:message code="hero.equipment.label"/></div>
+            <div class="row">
 
-                    <div class="panel-body">
-                        ${hero.equipment}
+                <div class="col-sm-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading"><g:message code="hero.equipment.label"/></div>
+
+                        <div class="panel-body">
+                            <pre>${hero.equipment}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading"><g:message code="hero.competences.label"/></div>
+
+                        <div class="panel-body">
+                            <pre>${hero.competences}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading"><g:message code="hero.injuries.label"/></div>
+
+                        <div class="panel-body">
+                            <pre>${hero.injuries}</pre>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-sm-4">
-                <div class="panel panel-info">
-                    <div class="panel-heading"><g:message code="hero.competences.label"/></div>
-
-                    <div class="panel-body">
-                        ${hero.competences}
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="panel panel-info">
-                    <div class="panel-heading"><g:message code="hero.injuries.label"/></div>
-
-                    <div class="panel-body">
-                        ${hero.injuries}
-                    </div>
-                </div>
-            </div>
         </div>
 
     </div>

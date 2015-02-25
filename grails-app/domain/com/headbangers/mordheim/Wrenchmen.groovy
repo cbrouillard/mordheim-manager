@@ -26,6 +26,8 @@ class Wrenchmen {
 
     Integer number
 
+    Band band
+
     static constraints = {
         note nullable: true, blank: true, widget: 'textarea'
         competences nullable: true, blank: true, widget: 'textarea'

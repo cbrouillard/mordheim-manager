@@ -48,7 +48,7 @@
         <table class="table">
             <tr class="warning">
                 <td><strong><g:message code="band.value"/></strong></td>
-                <td></td>
+                <td><strong>${bandInstance.bandValue}</strong></td>
             </tr>
             <tr>
                 <td><strong><g:message code="band.name.label"/></strong></td>
@@ -84,18 +84,17 @@
     <div role="tabpanel">
 
         <!-- Nav tabs -->
-        <g:if test="${bandInstance.heroes.size() < 6}">
-            <div class="btn-group pull-right">
-                <g:link controller="hero" action="create" params="[band: bandInstance.id]" class="btn btn-success">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <g:message code="hero.create"/>
-                </g:link>
-            </div>
-        </g:if>
+        <div class="btn-group pull-right ">
+            <g:link controller="hero" action="create" params="[band: bandInstance.id]"
+                    class="btn btn-success ${bandInstance.heroes.size() >= 6 ? "disabled" : ""}">
+                <span class="glyphicon glyphicon-plus"></span>
+                <g:message code="hero.create"/>
+            </g:link>
+        </div>
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
                 <a href="#heroes" role="tab" data-toggle="tab">
-                    <g:message code="heroes" />
+                    <g:message code="heroes"/>
                     <span class="badge">${bandInstance.heroes.size()}</span>
                 </a>
             </li>

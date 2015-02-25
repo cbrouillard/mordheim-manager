@@ -26,6 +26,8 @@ class Hero {
     String type
     String name
 
+    Band band
+
     static constraints = {
         note nullable: true, blank: true, widget: 'textarea'
         competences nullable: true, blank: true, widget: 'textarea'
