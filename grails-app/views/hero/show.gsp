@@ -61,7 +61,7 @@
 			
 				<g:if test="${heroInstance?.experience}">
 				<li class="fieldcontain">
-					<span id="experience-label" class="property-label"><g:message code="hero.experience.label" default="Experience" /></span>
+					<span id="experience-label" class="property-label"><g:message code="experience.label" default="Experience" /></span>
 					
 						<span class="property-value" aria-labelledby="experience-label"><g:fieldValue bean="${heroInstance}" field="experience"/></span>
 					

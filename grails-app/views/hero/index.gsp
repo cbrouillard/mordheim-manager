@@ -32,7 +32,7 @@
 					
 						<g:sortableColumn property="equipment" title="${message(code: 'hero.equipment.label', default: 'Equipment')}" />
 					
-						<g:sortableColumn property="experience" title="${message(code: 'hero.experience.label', default: 'Experience')}" />
+						<g:sortableColumn property="experience" title="${message(code: 'experience.label', default: 'Experience')}" />
 					
 						<g:sortableColumn property="type" title="${message(code: 'hero.type.label', default: 'Type')}" />
 					

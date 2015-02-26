@@ -89,12 +89,12 @@
             <g:link controller="hero" action="create" params="[band: bandInstance.id]"
                     class="btn btn-success ${bandInstance.heroes.size() >= 6 ? "disabled" : ""}">
                 <span class="glyphicon glyphicon-plus"></span>
-                <g:message code="hero.create"/>
+                <g:message code="hero"/>
             </g:link>
             <g:link controller="wrenchmen" action="create" params="[band: bandInstance.id]"
                     class="btn btn-success ${bandInstance.heroes.size() + bandInstance.wrenches.size() >= 21 ? "disabled" : ""}">
                 <span class="glyphicon glyphicon-plus"></span>
-                <g:message code="wrench.create"/>
+                <g:message code="wrench"/>
             </g:link>
         </div>
         <ul class="nav nav-tabs" role="tablist">
@@ -104,7 +104,7 @@
                     <span class="badge">${bandInstance.heroes.size()}</span>
                 </a>
             </li>
-            <li role="presentation"  class="${activeTab == 'wrench' ? 'active' : ''}">
+            <li role="presentation" class="${activeTab == 'wrench' ? 'active' : ''}">
                 <a href="#wrenches" role="tab" data-toggle="tab">
                     <g:message code="wrenches"/>
                     <span class="badge">${bandInstance.wrenches.size()}</span>
@@ -115,12 +115,12 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane ${!activeTab ? 'active' : ''}" id="heroes">
-                <g:render template="heroes"/>
+                <g:render template="/hero/heroes"/>
 
             </div>
 
             <div role="tabpanel" class="tab-pane ${activeTab == 'wrench' ? 'active' : ''}" id="wrenches">
-                <br/>test
+                <g:render template="/wrenchmen/wrenches"/>
             </div>
         </div>
 

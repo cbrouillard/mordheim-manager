@@ -91,7 +91,7 @@
 
 <div class="form-group ${hasErrors(bean: heroInstance, field: 'experience', 'has-error')}">
 
-    <label for="experience" class="col-sm-2 control-label"><g:message code="hero.experience.label"/> *</label>
+    <label for="experience" class="col-sm-2 control-label"><g:message code="experience.label"/> *</label>
 
     <div class="col-sm-10">
         <div class="input-group">
