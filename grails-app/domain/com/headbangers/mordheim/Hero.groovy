@@ -9,6 +9,7 @@ class Hero {
     String note
 
     Integer experience = 0
+    Integer earnedXp = 0
     String equipment
     String competences
     String injuries
@@ -34,6 +35,7 @@ class Hero {
         injuries nullable: true, blank: true, widget: 'textarea'
         equipment nullable: true, blank: true, widget: 'textarea'
         experience nullable: false, defaultValue: 0
+        earnedXp nullable:false, defaultValue:0
         type nullable: false, blank: false
         name nullable: false, blank: false
     }
@@ -48,4 +50,8 @@ class Hero {
 
     Date dateCreated
     Date lastUpdated
+
+    Integer getFullXp (){
+        return this.experience + this.earnedXp
+    }
 }

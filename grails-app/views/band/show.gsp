@@ -85,29 +85,27 @@
     <div role="tabpanel">
 
         <!-- Nav tabs -->
-        <div class="btn-group pull-right ">
-            <g:link controller="hero" action="create" params="[band: bandInstance.id]"
-                    class="btn btn-success ${bandInstance.heroes.size() >= 6 ? "disabled" : ""}">
-                <span class="glyphicon glyphicon-plus"></span>
-                <g:message code="hero"/>
-            </g:link>
-            <g:link controller="wrenchmen" action="create" params="[band: bandInstance.id]"
-                    class="btn btn-success ${bandInstance.heroes.size() + bandInstance.wrenches.size() >= 21 ? "disabled" : ""}">
-                <span class="glyphicon glyphicon-plus"></span>
-                <g:message code="wrench"/>
-            </g:link>
-        </div>
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class=" ${!activeTab ? 'active' : ''}">
                 <a href="#heroes" role="tab" data-toggle="tab">
-                    <g:message code="heroes"/>
                     <span class="badge">${bandInstance.heroes.size()}</span>
+                    <g:message code="heroes"/>
+
+                    <button class="btn btn-success btn-xs ${bandInstance.heroes.size() >= 6 ? "disabled" : ""}"
+                            onclick="document.location = '${createLink(controller: 'hero', action:'create', params: [band:bandInstance.id])}'">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
                 </a>
+
             </li>
             <li role="presentation" class="${activeTab == 'wrench' ? 'active' : ''}">
                 <a href="#wrenches" role="tab" data-toggle="tab">
-                    <g:message code="wrenches"/>
                     <span class="badge">${bandInstance.wrenches.size()}</span>
+                    <g:message code="wrenches"/>
+                    <button class="btn btn-success btn-xs ${bandInstance.heroes.size() + bandInstance.wrenches.size() >= 21 ? "disabled" : ""}"
+                            onclick="document.location = '${createLink(controller: 'wrenchmen', action:'create', params: [band:bandInstance.id])}'">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
                 </a>
             </li>
         </ul>

@@ -16,6 +16,11 @@
     </div>
 </div>
 
+<jq:jquery>
+    $('#number').focus()
+</jq:jquery>
+
+
 <div class="form-group ${hasErrors(bean: wrenchmenInstance, field: 'name', 'has-error')}">
 
     <label for="name" class="col-sm-2 control-label"><g:message code="wrench.name.label"/> *</label>

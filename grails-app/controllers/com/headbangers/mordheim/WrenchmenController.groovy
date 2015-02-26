@@ -88,12 +88,13 @@ class WrenchmenController {
             return
         }
 
+        def band = wrenchmenInstance.band
         wrenchmenInstance.delete flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Wrenchmen.label', default: 'Wrenchmen'), wrenchmenInstance.id])
-                redirect action: "index", method: "GET"
+                redirect action: "show", controller: 'band', id: band.id, method: "GET", params: [tab: 'wrench']
             }
             '*' { render status: NO_CONTENT }
         }

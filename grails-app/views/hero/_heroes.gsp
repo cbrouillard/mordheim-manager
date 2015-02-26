@@ -1,5 +1,5 @@
 <g:each in="${bandInstance.heroes.sort({ it.dateCreated })}" var="hero" status="n">
-    <div class="panel panel-default" xmlns="http://www.w3.org/1999/html">
+    <div class="panel panel-warning" xmlns="http://www.w3.org/1999/html">
 
         <div class="panel-heading">
 
@@ -32,11 +32,14 @@
         <div class="panel-body">
 
             <div>
-                <span class="badge pull-right"><g:message code="experience.label"/> : ${hero.experience} </span>
+                <span class="label label-info pull-right"><g:message code="experience.label"/> : ${hero.fullXp} </span>
 
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-info" role="progressbar"
                          style="width: ${hero.experience * 90 / 100}%;">
+                    </div>
+                    <div class="progress-bar progress-bar-striped progress-bar-success" role="progressbar"
+                         style="width: ${hero.earnedXp * 90 / 100}%;">
                     </div>
                 </div>
             </div>

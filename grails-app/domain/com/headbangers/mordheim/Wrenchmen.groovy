@@ -2,11 +2,14 @@ package com.headbangers.mordheim
 
 class Wrenchmen {
 
+    static belongsTo = [Band]
+
     String id
 
     String note
 
     Integer experience = 0
+    Integer earnedXp = 0
     String equipment
     String competences
     String specialRules
@@ -34,6 +37,7 @@ class Wrenchmen {
         specialRules nullable: true, blank: true, widget: 'textarea'
         equipment nullable: true, blank: true, widget: 'textarea'
         experience nullable: false, defaultValue: 0
+        earnedXp nullable:false, defaultValue:0
         type nullable: false, blank: false
         name nullable: false, blank: false
         number nullable: false
@@ -49,4 +53,8 @@ class Wrenchmen {
 
     Date dateCreated
     Date lastUpdated
+
+    Integer getFullXp (){
+        return this.experience + this.earnedXp
+    }
 }

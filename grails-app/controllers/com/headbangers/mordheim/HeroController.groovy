@@ -88,14 +88,7 @@ class HeroController {
             return
         }
 
-        Band band = Band.get(params.band)
-        if (!band){
-            redirect(action:'index', controller: 'band')
-            return
-        }
-
-        band.removeFromHeroes(heroInstance)
-        band.save()
+        def band = heroInstance.band
         heroInstance.delete flush: true
 
         request.withFormat {

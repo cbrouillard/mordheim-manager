@@ -17,6 +17,10 @@
     </div>
 </div>
 
+<jq:jquery>
+    $('#name').focus()
+</jq:jquery>
+
 <div class="form-group ${hasErrors(bean: bandInstance, field: 'type', 'has-error')}">
 
     <label for="type" class="col-sm-2 control-label"><g:message code="band.type.label"
@@ -32,6 +36,41 @@
         <div class="help-block with-errors"></div>
     </div>
 </div>
+
+<g:if test="${params.action == 'edit'}">
+    <div class="form-group ${hasErrors(bean: bandInstance, field: 'gold', 'has-error')}">
+
+        <label for="gold" class="col-sm-2 control-label"><g:message code="band.gold.title"
+                                                                    default="Type"/> *</label>
+
+        <div class="col-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><span
+                        class="glyphicon glyphicon-euro"></span></span>
+                <g:field type="number" name="gold" required="" value="${bandInstance?.gold}" class="form-control"/>
+            </div>
+
+            <div class="help-block with-errors"></div>
+        </div>
+    </div>
+
+    <div class="form-group ${hasErrors(bean: bandInstance, field: 'magicalStones', 'has-error')}">
+
+        <label for="magicalStones" class="col-sm-2 control-label"><g:message
+                code="band.magical.stones.title"/> *</label>
+
+        <div class="col-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><span
+                        class="glyphicon glyphicon-star"></span></span>
+                <g:field type="number" name="magicalStones" required="" value="${bandInstance?.magicalStones}"
+                         class="form-control"/>
+            </div>
+
+            <div class="help-block with-errors"></div>
+        </div>
+    </div>
+</g:if>
 
 <div class="form-group ${hasErrors(bean: bandInstance, field: 'note', 'has-error')}">
 
