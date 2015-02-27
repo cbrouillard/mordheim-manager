@@ -13,6 +13,9 @@
             <h1><g:message
                     code="band.show"/> <small>${bandInstance.name}</small>
             </h1>
+            <g:link controller="band" action="pdf" id="${bandInstance.id}">
+                PDF
+            </g:link>
             <hr/>
         </div>
 

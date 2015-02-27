@@ -9,6 +9,8 @@ class BandController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def wkhtmltoxService
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Band.list(params), model: [bandInstanceCount: Band.count()]
@@ -20,6 +22,32 @@ class BandController {
 
     def create() {
         respond new Band(params)
+    }
+
+    def pdf() {
+        Band band = Band.get(params.id)
+        if (band) {
+            def byte[] pdfData = wkhtmltoxService.makePdf(
+                    view: "/pdf/pdf",
+                    model: [band: band],
+                    //header: "/pdf/someHeader",
+                    //footer: "/pdf/someFooter",
+                    marginLeft: 20,
+                    marginTop: 35,
+                    marginBottom: 20,
+                    marginRight: 20,
+                    headerSpacing: 10,
+            )
+
+            response.setContentType("application/octet-stream")
+            // or or image/JPEG or text/xml or whatever type the file is
+            response.setHeader("Content-disposition", "attachment;filename=\"${band.name}.pdf\"")
+            response.outputStream << pdfData
+            return
+        }
+
+        redirect(action: 'index')
+        return
     }
 
     @Transactional
