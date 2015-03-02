@@ -20,7 +20,7 @@ class Band {
         gold nullable: false, defaultValue: 0
         magicalStones nullable: false, defaultValue: 0
         name nullable: false, blank: false
-        reserve nullable: true, blank: true, widget: 'textarea'
+        reserve nullable: true, blank: false, widget: 'textarea'
     }
 
     static mapping = {
@@ -45,5 +45,26 @@ class Band {
 
         return xp
 
+    }
+
+    def getNbWarriors() {
+        Long number = 0
+        number += this.heroes.size()
+        wrenches.each { w ->
+            number += w.number
+        }
+        return number
+    }
+
+    def getTotalXp() {
+        Long xp = 0
+        heroes.each { h ->
+            xp += h.experience
+        }
+        wrenches.each { w ->
+            xp += w.experience
+        }
+
+        return xp
     }
 }

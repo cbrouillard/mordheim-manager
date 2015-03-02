@@ -87,53 +87,54 @@ body {
 }
 
 .ft0 {
-    font: 48px 'Arial';
+    font: 24px 'Arial';
     line-height: 55px;
 }
 
 .ft1 {
-    font: 13px 'Times New Roman';
+    font: 10px 'Arial';
     line-height: 15px;
+    padding-left: 10px;
 }
 
 .ft2 {
-    font: 1px 'Times New Roman';
+    font: 1px 'Arial';
     line-height: 1px;
 }
 
 .ft3 {
-    font: 1px 'Times New Roman';
+    font: 1px 'Arial';
     line-height: 6px;
 }
 
 .ft4 {
-    font: 1px 'Times New Roman';
+    font: 1px 'Arial';
     line-height: 7px;
 }
 
 .ft5 {
-    font: 1px 'Times New Roman';
+    font: 1px 'Arial';
     line-height: 8px;
 }
 
 .ft6 {
-    font: 1px 'Times New Roman';
+    font: 1px 'Arial';
     line-height: 9px;
 }
 
 .ft7 {
-    font: 12px 'Times New Roman';
+    font: 12px 'Arial';
     line-height: 15px;
 }
 
 .ft8 {
-    font: 13px 'Times New Roman';
+    font: 13px 'Arial';
     color: #ffffff;
     line-height: 15px;
 }
 
 .ft9 {
-    font: 10px 'Times New Roman';
+    font: 10px 'Arial';
     line-height: 12px;
 }
 
@@ -197,7 +198,14 @@ body {
 
 .p1 {
     text-align: left;
-    padding-left: 8px;
+    padding-left: 20px;
+    padding-top: 5px;
+    white-space: nowrap;
+}
+
+.p1bis {
+    text-align: left;
+    padding-left: 10px;
     margin-top: 0px;
     margin-bottom: 0px;
     white-space: nowrap;
@@ -211,24 +219,20 @@ body {
 }
 
 .p3 {
+    padding-left: 0px;
     text-align: left;
-    padding-left: 6px;
-    margin-top: 0px;
-    margin-bottom: 0px;
     white-space: nowrap;
 }
 
 .p4 {
     text-align: left;
-    padding-left: 31px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    padding-left: 20px;
     white-space: nowrap;
 }
 
 .p5 {
     text-align: left;
-    padding-left: 10px;
+    padding-left: 20px;
     margin-top: 0px;
     margin-bottom: 0px;
     white-space: nowrap;
@@ -316,8 +320,6 @@ body {
 }
 
 .td0 {
-    border-left: #000000 1px solid;
-    border-top: #000000 1px solid;
     padding: 0px;
     margin: 0px;
     width: 127px;
@@ -779,14 +781,14 @@ body {
 .t0 {
     width: 659px;
     margin-top: 16px;
-    font: 13px 'Times New Roman';
+    font: 13px 'Arial';
 }
 
 .t1 {
     width: 543px;
     margin-left: 8px;
     margin-top: 17px;
-    font: 13px 'Times New Roman';
+    font: 13px 'Arial';
     color: #111;
 }
 
@@ -804,20 +806,28 @@ body {
     font: 10px 'Arial';
 }
 
+table {
+    border: none;
+}
+
+td {
+    border: none !important;
+}
+
 </STYLE>
 </HEAD>
 
 <BODY>
 <DIV id="page_1">
 <DIV id="dimg1">
-    <asset:image src="Feuille_bande_Heros_6slots1x1.jpg" id="img1"/>
+    <asset:image src="page1.jpg" id="img1" absolute="true"/>
 </DIV>
 
 
 <DIV class="dclr"></DIV>
 
 <DIV id="id_1">
-<P class="p0 ft0">Henchmen</P>
+<P class="p0 ft0"><g:message code="wrenches"/></P>
 <TABLE cellpadding=0 cellspacing=0 class="t0">
     <TR>
         <TD class="tr0 td0"><P class="p1 ft1">WARBAND NAME:</P></TD>
@@ -829,28 +839,6 @@ body {
         <TD class="tr0 td5"><P class="p2 ft2">&nbsp;</P></TD>
         <TD class="tr1 td6"><P class="p2 ft2">&nbsp;</P></TD>
         <TD class="tr0 td7"><P class="p3 ft1">WARBAND TYPE:</P></TD>
-    </TR>
-    <TR>
-        <TD class="tr2 td8"><P class="p2 ft3">&nbsp;</P></TD>
-        <TD class="tr2 td9"><P class="p2 ft3">&nbsp;</P></TD>
-        <TD class="tr2 td10"><P class="p2 ft3">&nbsp;</P></TD>
-        <TD class="tr2 td11"><P class="p2 ft3">&nbsp;</P></TD>
-        <TD class="tr2 td12"><P class="p2 ft3">&nbsp;</P></TD>
-        <TD class="tr2 td9"><P class="p2 ft3">&nbsp;</P></TD>
-        <TD class="tr2 td13"><P class="p2 ft3">&nbsp;</P></TD>
-        <TD class="tr3 td6"><P class="p2 ft4">&nbsp;</P></TD>
-        <TD class="tr2 td14"><P class="p2 ft3">&nbsp;</P></TD>
-    </TR>
-    <TR>
-        <TD class="tr4 td15"><P class="p2 ft2">&nbsp;</P></TD>
-        <TD class="tr5 td16"><P class="p2 ft2">&nbsp;</P></TD>
-        <TD class="tr4 td10"><P class="p2 ft2">&nbsp;</P></TD>
-        <TD class="tr4 td11"><P class="p2 ft2">&nbsp;</P></TD>
-        <TD class="tr4 td12"><P class="p2 ft2">&nbsp;</P></TD>
-        <TD class="tr5 td16"><P class="p2 ft2">&nbsp;</P></TD>
-        <TD class="tr4 td17"><P class="p2 ft2">&nbsp;</P></TD>
-        <TD class="tr4 td9"><P class="p2 ft2">&nbsp;</P></TD>
-        <TD class="tr4 td18"><P class="p2 ft2">&nbsp;</P></TD>
     </TR>
     <TR>
         <TD class="tr6 td19"><P class="p4 ft1">TREASURY:</P></TD>
@@ -1172,7 +1160,7 @@ body {
 
 <DIV id="page_2">
 <DIV id="dimg1">
-    <asset:image src="Feuille_bande_Heros_6slots2x1.jpg" id="img1"/>
+    <asset:image src="page2.jpg" id="img1" absolute="true"/>
 </DIV>
 
 
