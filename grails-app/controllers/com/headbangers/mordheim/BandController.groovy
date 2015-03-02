@@ -27,22 +27,15 @@ class BandController {
     def pdf() {
         Band band = Band.get(params.id)
         if (band) {
-
-            // touch band.
-            def test = band.heroes.size()
-            def test2 = band.wrenches.size()
-
             def byte[] pdfData = wkhtmltoxService.makePdf(
                     view: "/pdf/good",
                     model: [band: band],
                     //header: "/pdf/someHeader",
                     //footer: "/pdf/someFooter",
-                    marginLeft: 10,
-                    marginTop: 10,
-                    marginBottom: 10,
-                    marginRight: 10,
-                    headerSpacing: 0,
-            )
+                    marginLeft: 0,
+                    marginTop: 0,
+                    marginBottom: 0,
+                    marginRight: 0)
             response.setContentType("application/octet-stream")
             response.setHeader("Content-disposition", "attachment;filename=\"${band.name}.pdf\"")
             response.outputStream << pdfData

@@ -94,27 +94,27 @@
 <g:set var="left" value="${new java.lang.Integer(45)}"/>
 <g:each in="${band.wrenches.sort{it.dateCreated}}" var="wrench">
     <div class="pos" id="23:228" style="top:${top};left:${left}">
-        <span id="9.8" style=" font-family:Arial; font-size:12px; color:#892a1a24">
+        <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.name" args="[wrench.name]"/></span>
     </div>
 
     <div class="pos" id="221:228" style="top:${top};left:${left + 405}">
-        <span id="9.8" style=" font-family:Arial; font-size:12px; color:#892a1a24">
+        <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.equipment" args="[wrench.equipment]"/></span>
     </div>
 
     <div class="pos" id="404:228" style="top:${top};left:${left + 800}">
-        <span id="9.3" style=" font-family:Arial; font-size:12px; color:#892a1a24">
+        <span id="9.3" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.specialrules" args="[wrench.specialRules]"/></span>
     </div>
 
     <div class="pos" id="23:243" style="top:${top + 35};left:${left}">
-        <span id="9.8" style=" font-family:Arial; font-size:12px; color:#892a1a24">
+        <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.number" args="[wrench.number]"/></span>
     </div>
 
     <div class="pos" id="88:243" style="top:${top + 35};left:${left + 140}">
-        <span id="9.8" style=" font-family:Arial; font-size:12px; color:#892a1a24">
+        <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.type" args="[wrench.type]"/></span>
     </div>
 
@@ -209,7 +209,7 @@
     </div>
 
     <div class="pos" id="219:288" style="top:${top + 132};left:${left + 500}">
-        <span id="8.8" style=" font-family:Arial; font-size:12px; color:#892a1a24">
+        <span id="8.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.experience"/></span>
     </div>
 
