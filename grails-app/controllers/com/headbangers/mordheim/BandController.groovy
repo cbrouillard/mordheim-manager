@@ -38,10 +38,15 @@ class BandController {
                     marginTop: 0,
                     marginBottom: 0,
                     marginRight: 0)
-            response.setContentType("application/octet-stream")
+
+            def output = new FileOutputStream(new File("/home/cyril/${band.name}.pdf"))
+            output << pdfData
+            output.close()
+
+            /*response.setContentType("application/octet-stream")
             response.setHeader("Content-disposition", "attachment;filename=\"${band.name}.pdf\"")
-            response.outputStream << pdfData
-            //render (view: '/pdf/good', model:[band:band])
+            response.outputStream << pdfData*/
+            render(view: '/pdf/good', model: [band: band])
             return
         }
 

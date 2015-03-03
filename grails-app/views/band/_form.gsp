@@ -79,12 +79,27 @@
             <div class="help-block with-errors"></div>
         </div>
     </div>
+
+    <div class="form-group ${hasErrors(bean: bandInstance, field: 'reserve', 'has-error')}">
+
+        <label for="reserve" class="col-sm-2 control-label"><g:message code="reserve.label"/></label>
+
+        <div class="col-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><span
+                        class="glyphicon glyphicon-scissors"></span></span>
+                <g:textArea name="reserve" cols="40" rows="5" value="${bandInstance?.reserve}" class="form-control"/>
+            </div>
+
+            <div class="help-block with-errors"></div>
+        </div>
+    </div>
 </g:if>
 
 <div class="form-group ${hasErrors(bean: bandInstance, field: 'note', 'has-error')}">
 
     <label for="note" class="col-sm-2 control-label"><g:message code="note.label"
-                                                                default="note"/> *</label>
+                                                                default="note"/></label>
 
     <div class="col-sm-10">
         <div class="input-group">

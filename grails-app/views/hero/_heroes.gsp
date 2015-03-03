@@ -36,11 +36,11 @@
 
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-info" role="progressbar"
-                         style="width: ${hero.experience * 90 / 100}%;">
+                         style="width: ${hero.experience * 100 / 90}%;">
                         ${hero.experience}
                     </div>
                     <div class="progress-bar progress-bar-striped progress-bar-success" role="progressbar"
-                         style="width: ${hero.earnedXp * 90 / 100}%;">
+                         style="width: ${hero.earnedXp * 100 / 90}%;">
                         ${hero.earnedXp}
                     </div>
                 </div>

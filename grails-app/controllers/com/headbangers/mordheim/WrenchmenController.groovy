@@ -65,7 +65,7 @@ class WrenchmenController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Wrenchmen.label', default: 'Wrenchmen'), wrenchmenInstance.id])
-                redirect wrenchmenInstance
+                redirect action: "show", controller: 'band', id: wrenchmenInstance.band.id, method: "GET", params: [tab: 'wrench']
             }
             '*' { respond wrenchmenInstance, [status: OK] }
         }

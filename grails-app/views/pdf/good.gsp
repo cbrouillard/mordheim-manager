@@ -89,10 +89,10 @@
         <g:message code="warband.total.value" args="[band.getBandValue()]"/></span>
 </div>
 
-<!-- PROFIL HERO -->
+<!-- PROFIL HOMME DE MAIN -->
 <g:set var="top" value="${new java.lang.Integer(480)}"/>
 <g:set var="left" value="${new java.lang.Integer(45)}"/>
-<g:each in="${band.wrenches.sort{it.dateCreated}}" var="wrench">
+<g:each in="${band.wrenches?.sort { it.dateCreated }}" var="wrench">
     <div class="pos" id="23:228" style="top:${top};left:${left}">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.name" args="[wrench.name]"/></span>
@@ -208,79 +208,176 @@
             ${wrench.CD}</span>
     </div>
 
-    <div class="pos" id="219:288" style="top:${top + 132};left:${left + 500}">
+    <div class="pos" id="219:288" style="top:${top + 132};left:${left + 485}">
         <span id="8.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.experience"/></span>
+            <g:message code="warband.warrior.experience" args="[wrench.experience]"/></span>
     </div>
 
-    <g:set var="top" value="${top+206}"/>
+    <!-- XP &#x22A0; -->
+    <g:set var="cpt" value="${new Integer(1)}"/>
+    <g:set var="xpLeft" value="${new Integer(727)}"/>
+    <g:set var="xpTop" value="${top + 122}"/>
+    <g:while test="${cpt <= 14}">
+        <div class="pos" id="219:288" style="top:${xpTop};left:${xpLeft}">
+            <g:if test="${cpt == 2 || cpt == 5 || cpt == 9 || cpt == 14}">
+                <span id="8.8" style=" font-family:Arial; font-size:29px; color: red;font-weight:bold">
+            </g:if>
+            <g:else>
+                <span id="8.8" style=" font-family:Arial; font-size:29px; color: #892a1a24">
+            </g:else>
+            <g:if test="${wrench.experience >= cpt}">
+                &#x25A3;
+            </g:if>
+            <g:else>
+                &#x25A2;
+            </g:else>
+        </span>
+        </div>
+        <% cpt++ %>
+        <% xpLeft += 28 %>
+    </g:while>
+
+
+    <g:set var="top" value="${top + 206}"/>
 </g:each>
 
 
 <div class="pos" id="0:0" style="top:1754">
     <img name="_842:596" src="${resource(dir: 'images', file: 'page_002.jpg', absolute: true)}" border="0"/></div>
 
+
+<div class="pos" id="493:850" style="top:1790;left:990">
+    <span id="35.3" style=" font-family:Arial; font-size:65px; color:#892a1a24">
+        <g:message code="warband.heroes"/></span>
+</div>
+
+<!-- PROFIL HERO -->
+<g:set var="top" value="${new java.lang.Integer(1908)}"/>
+<g:set var="left" value="${new java.lang.Integer(45)}"/>
+<g:each in="${band.heroes?.sort({ it.dateCreated })}" var="hero">
+    <div class="pos" id="23:911" style="top:${top};left:${left}">
+        <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
+            <g:message code="warband.warrior.name" args="[hero.name]"/></span>
+    </div>
+
+    <div class="pos" id="221:912" style="top:${top};left:${left + 405}">
+        <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
+            <g:message code="warband.warrior.equipment" args="[hero.equipment]"/></span>
+    </div>
+
+    <div class="pos" id="404:912" style="top:${top};left:${left + 786}">
+        <span id="9.4" style=" font-family:Arial; font-size:14px; color:#892a1a24">
+            <g:message code="warband.warrior.competences" args="[hero.competences, hero.injuries]"/></span>
+    </div>
+
+    <div class="pos" id="23:928" style="top:${top + 35};left:${left}">
+        <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
+            <g:message code="warband.warrior.type" args="[hero.type]"/></span>
+    </div>
+
+    <div class="pos" id="28:951" style="top:${top + 85};left:${left + 19}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#fff">
+            <g:message code="profile.m"/></span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 112};left:${left + 19}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
+            ${hero.M}</span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 85};left:${left + 56}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#fff">
+            <g:message code="profile.cc"/></span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 112};left:${left + 61}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
+            ${hero.CC}</span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 85};left:${left + 100}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#fff">
+            <g:message code="profile.ct"/></span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 112};left:${left + 106}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
+            ${hero.CT}</span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 85};left:${left + 148}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#fff">
+            <g:message code="profile.f"/></span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 112};left:${left + 149}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
+            ${hero.F}</span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 85};left:${left + 190}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#fff">
+            <g:message code="profile.e"/></span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 112};left:${left + 191}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
+            ${hero.E}</span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 85};left:${left + 230}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#fff">
+            <g:message code="profile.pv"/></span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 112};left:${left + 234}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
+            ${hero.PV}</span>
+    </div>
+
+
+    <div class="pos" id="28:270" style="top:${top + 85};left:${left + 280}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#fff">
+            <g:message code="profile.i"/></span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 112};left:${left + 279}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
+            ${hero.I}</span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 85};left:${left + 322}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#fff">
+            <g:message code="profile.a"/></span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 112};left:${left + 322}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
+            ${hero.A}</span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 85};left:${left + 359}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#fff">
+            <g:message code="profile.cd"/></span>
+    </div>
+
+    <div class="pos" id="28:270" style="top:${top + 112};left:${left + 364}">
+        <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
+            ${hero.CD}</span>
+    </div>
+
+    <div class="pos" id="159:983" style="top:${top + 150};left:${left + 220}">
+        <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
+            <g:message code="warband.warrior.experience.hero" args="[hero.experience]"/></span>
+    </div>
+
+    <g:set var="top" value="${top + 263}"/>
+
+</g:each>
+
+
+
 <!--
-<div class="pos" id="493:850" style="top:850;left:493">
-    <span id="35.3" style=" font-family:Arial; font-size:35.3px; color:#892a1a24">
-        H&#233;ros</span>
-</div>
-
-<div class="pos" id="23:911" style="top:911;left:23">
-    <span id="9.8" style=" font-family:Arial; font-size:12px; color:#892a1a24">
-        N*M</span>
-</div>
-
-<div class="pos" id="221:912" style="top:912;left:221">
-    <span id="9.8" style=" font-family:Arial; font-size:12px; color:#892a1a24">
-        &#201;Q*IPEMENT</span>
-</div>
-
-<div class="pos" id="404:912" style="top:912;left:404">
-    <span id="9.4" style=" font-family:Arial; font-size:9.4px; color:#892a1a24">
-        COMP&#201;*ENCES, BLESSURES, ETC.</span>
-</div>
-
-<div class="pos" id="23:928" style="top:928;left:23">
-    <span id="9.8" style=" font-family:Arial; font-size:12px; color:#892a1a24">
-        TYPE</span>
-</div>
-
-<div class="pos" id="28:951" style="top:951;left:28">
-    <span id="9.8" style=" font-family:Arial; font-size:12px; color:#ffff0000">
-        M CC CT</span>
-</div>
-
-<div class="pos" id="91:951" style="top:951;left:91">
-    <span id="9.8" style=" font-family:Arial; font-size:12px; color:#ffff0000">
-        *</span>
-</div>
-
-<div class="pos" id="112:951" style="top:951;left:112">
-    <span id="9.8" style=" font-family:Arial; font-size:12px; color:#ffff0000">
-        E</span>
-</div>
-
-<div class="pos" id="129:951" style="top:951;left:129">
-    <span id="9.8" style=" font-family:Arial; font-size:12px; color:#ffff0000">
-        PV</span>
-</div>
-
-<div class="pos" id="155:951" style="top:951;left:155">
-    <span id="10.7" style=" font-family:Arial; font-size:10.7px; color:#ffff0000">
-        I</span>
-</div>
-
-<div class="pos" id="173:951" style="top:951;left:173">
-    <span id="9.8" style=" font-family:Arial; font-size:12px; color:#ffff0000">
-        A</span>
-</div>
-
-<div class="pos" id="191:951" style="top:951;left:191">
-    <span id="9.8" style=" font-family:Arial; font-size:12px; color:#ffff0000">
-        Cd</span>
-</div>
-
 <div class="pos" id="159:983" style="top:983;left:159">
     <span id="9.8" style=" font-family:Arial; font-size:12px; color:#892a1a24">
         Exp&#233;ri*n*e :</span>
