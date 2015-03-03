@@ -1,0 +1,117 @@
+default.doesnt.match.message=La propriété [{0}] de la classe [{1}] avec la valeur [{2}] ne correspond pas au pattern [{3}]
+default.invalid.url.message=La propriété [{0}] de la classe [{1}] avec la valeur [{2}] n'est pas une URL valide
+default.invalid.creditCard.message=La propriété [{0}] de la classe [{1}] avec la valeur [{2}] n'est pas un numéro de carte de crédit valide
+default.invalid.email.message=La propriété [{0}] de la classe [{1}] avec la valeur [{2}] n'est pas une adresse e-mail valide
+default.invalid.range.message=La propriété [{0}] de la classe [{1}] avec la valeur [{2}] n'est pas contenue dans l'intervalle [{3}] à [{4}]
+default.invalid.size.message=La propriété [{0}] de la classe [{1}] avec la valeur [{2}] n'est pas contenue dans l'intervalle [{3}] à [{4}]
+default.invalid.max.message=La propriété [{0}] de la classe [{1}] avec la valeur [{2}] est supérieure à la valeur maximum [{3}]
+default.invalid.min.message=La propriété [{0}] de la classe [{1}] avec la valeur [{2}] est inférieure à la valeur minimum [{3}]
+default.invalid.max.size.message=La propriété [{0}] de la classe [{1}] avec la valeur [{2}] est supérieure à la valeur maximum [{3}]
+default.invalid.min.size.message=La propriété [{0}] de la classe [{1}] avec la valeur [{2}] est inférieure à la valeur minimum [{3}]
+default.invalid.validator.message=La propriété [{0}] de la classe [{1}] avec la valeur [{2}] n'est pas valide
+default.not.inlist.message=La propriété [{0}] de la classe [{1}] avec la valeur [{2}] ne fait pas partie de la liste [{3}]
+default.blank.message=La propriété [{0}] de la classe [{1}] ne peut pas être vide
+default.not.equal.message=La propriété [{0}] de la classe [{1}] avec la valeur [{2}] ne peut pas être égale à [{3}]
+default.null.message=La propriété [{0}] de la classe [{1}] ne peut pas être nulle
+default.not.unique.message=La propriété [{0}] de la classe [{1}] avec la valeur [{2}] doit être unique
+
+default.paginate.prev=Précédent
+default.paginate.next=Suivant
+
+default.button.delete.confirm.message=Confirmer la suppression ?
+
+date.format.short=dd/MM/yyyy
+date.created.label=Création le
+
+generate.pdf=Générer le fichier PDF
+
+show=Afficher
+default.button.create.label=Enregistrer
+default.button.delete.label=Effacer
+default.button.edit.label=Editer
+
+app.title=Mordheim | Gérer ses bandes
+app.name=Mordheim
+
+heroes=Héros
+hero=Héro
+hero.create=Ajouter un héro
+hero.edit=Editer un héro
+hero.create.hint=Un héro c'est trop badass !
+hero.edit.hint="Il est arrivé quelque chose docteur ?"
+band.value=Valeur de bande
+hero.name.label=Nom
+hero.type.label=Type
+hero.profile.label=Profil
+hero.equipment.label=Equipement
+hero.competences.label=Compétences / sorts
+experience.label=Expérience
+hero.injuries.label=Blessures
+
+wrenches=Hommes de main
+wrench=Homme de main
+wrench.create=Ajouter un homme de main
+wrench.edit=Editer un homme de main
+wrench.edit.hint="Il a changé, je ne le reconnais plus..."
+wrench.create.hint=Un guerrier fier qui consacre sa vie à la bande
+wrench.number.label=Nombre
+wrench.type.label=Type
+wrench.name.label=Nom
+wrench.profile.label=Profil
+wrench.equipment.label=Equipement
+wrench.specialRules.label=Règles spéciales
+
+band.list=Liste des bandes
+band.list.hint=Toutes vos bandes enregistrées sont ici, prêtes à combattre !
+band.create=Ajouter une bande
+band.gold={0} CO
+band.gold.title=Or
+band.magical.stones={0} {0,choice,0#pierre magique|1<pierres magiques}
+band.magical.stones.title=Pierres magiques
+<<<<<<< HEAD
+band.equipment=Réserve
+=======
+reserve.label=Réserve d'équipement
+>>>>>>> Modifs pour la génération du PDF. J'y suis presque !
+
+band.create.hint=Une nouvelle bande de fiers guerriers prêts à affronter les horreurs de Mordheim
+band.name.label=Nom
+band.type.label=Type
+note.label=Note / commentaires
+
+band.edit=Editer les infos d'une bande
+band.edit.hint=Tzeentch n'est pas bien loin.
+
+band.show=Bande
+band.infos=Informations
+
+profile.m=M
+profile.cc=CC
+profile.ct=CT
+profile.f=F
+profile.e=E
+profile.pv=PV
+profile.i=I
+profile.a=A
+profile.cd=Cd
+
+#PDF
+warband.name=Nom de la bande : <strong>{0}</strong>
+warband.type=Type de bande : <strong>{0}</strong>
+warband.treasure=<u>Magot</u>
+warband.value=<u>Calcul de valeur</u>
+warband.equipment=<u>Réserve d''équipement</u><br/><strong>{0}</strong>
+warband.gold=Couronnes : <strong>{0}</strong> [___]
+warband.magical.stones=Pierres magiques : <strong>{0}</strong> [___]
+warband.total.experience=Total expérience : <strong>{0}</strong> [___]
+warband.members=Membres ({0}) x 5 : <strong>{1}</strong> [___]
+warband.total.value=Valeur : <strong>{0}</strong> [___]
+warband.warrior.name=Nom : <strong>{0}</strong>
+warband.warrior.number=Nombre : <strong>{0}</strong>
+warband.warrior.type=Type : <strong>{0}</strong>
+warband.warrior.equipment=<u>Equipement :</u><br/><strong>{0}</strong>
+warband.warrior.specialrules=<u>Règles spéciales / autre :</u><br/><strong>{0}</strong>
+warband.warrior.experience=Expérience des membres (<strong>{0}</strong>) :
+warband.heroes=Héros
+warband.warrior.competences=<u>Compétences</u><br/><strong>{0}</strong><br/><i><u>Blessures</u><br/><strong>{1}</strong></i>
+warband.warrior.experience.hero=Expérience du héro (<strong>{0}</strong>) :
