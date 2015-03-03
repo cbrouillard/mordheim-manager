@@ -50,9 +50,7 @@ class Band {
     def getNbWarriors() {
         Long number = 0
         number += this.heroes.size()
-        wrenches.each { w ->
-            number += w.number
-        }
+        number += getNbWrenches()
         return number
     }
 
@@ -66,5 +64,13 @@ class Band {
         }
 
         return xp
+    }
+
+    def getNbWrenches() {
+        Long number = 0
+        wrenches.each { w ->
+            number += w.number
+        }
+        return number
     }
 }

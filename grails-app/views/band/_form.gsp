@@ -27,7 +27,7 @@
             ['color', ['color']],
             ['para', ['ul', 'ol']]
           ],
-          height: 200});
+          height: 150});
 </jq:jquery>
 
 <div class="form-group ${hasErrors(bean: bandInstance, field: 'type', 'has-error')}">
@@ -88,7 +88,7 @@
             <div class="input-group">
                 <span class="input-group-addon"><span
                         class="glyphicon glyphicon-scissors"></span></span>
-                <g:textArea name="reserve" cols="40" rows="5" value="${bandInstance?.reserve}" class="form-control"/>
+                <g:textArea name="reserve" cols="40" rows="5" value="${bandInstance?.reserve}" class="form-control editor"/>
             </div>
 
             <div class="help-block with-errors"></div>

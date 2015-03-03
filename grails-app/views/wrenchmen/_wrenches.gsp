@@ -101,7 +101,7 @@
                         <div class="panel-heading"><g:message code="wrench.equipment.label"/></div>
 
                         <div class="panel-body">
-                            <pre>${wrench.equipment}</pre>
+                            <div class="well">${raw(wrench.equipment)}</div>
                         </div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
                         <div class="panel-heading"><g:message code="wrench.specialRules.label"/></div>
 
                         <div class="panel-body">
-                            <pre>${wrench.specialRules}</pre>
+                            <div class="well">${raw(wrench.specialRules)}</div>
                         </div>
                     </div>
                 </div>

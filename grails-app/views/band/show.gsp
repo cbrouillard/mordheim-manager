@@ -64,6 +64,10 @@
                 <td>${bandInstance.type}</td>
             </tr>
             <tr>
+                <td><strong><g:message code="band.nbwarrior"/></strong></td>
+                <td>${bandInstance.nbWarriors}</td>
+            </tr>
+            <tr>
                 <td><strong><g:message code="band.gold.title"/></strong></td>
                 <td><g:message code="band.gold" args="[bandInstance.gold]"/></td>
             </tr>
@@ -104,7 +108,7 @@
             </li>
             <li role="presentation" class="${activeTab == 'wrench' ? 'active' : ''}">
                 <a href="#wrenches" role="tab" data-toggle="tab">
-                    <span class="badge">${bandInstance.wrenches.size()}</span>
+                    <span class="badge">${bandInstance.nbWrenches}</span>
                     <g:message code="wrenches"/>
                     <button class="btn btn-success btn-xs ${bandInstance.nbWarriors >= 21 ? "disabled" : ""}"
                             onclick="document.location = '${createLink(controller: 'wrenchmen', action:'create', params: [band:bandInstance.id])}'">

@@ -72,8 +72,6 @@
 </div>
 
 
-
-
 <div class="form-group ${hasErrors(bean: wrenchmenInstance, field: 'equipment', 'has-error')} ${hasErrors(bean: wrenchmenInstance, field: 'speciaLRules', 'has-error')}">
 
     <label for="equipment" class="col-sm-2 control-label"><g:message code="wrench.equipment.label"/></label>
@@ -82,7 +80,8 @@
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-scissors"></span></span>
-            <g:textArea name="equipment" cols="40" rows="5" value="${wrenchmenInstance?.equipment}" class="form-control editor"/>
+            <g:textArea name="equipment" cols="40" rows="5" value="${wrenchmenInstance?.equipment}"
+                        class="form-control editor"/>
         </div>
 
         <div class="help-block with-errors"></div>
@@ -103,11 +102,11 @@
 </div>
 
 <g:if test="${params.action == 'edit'}">
-    <div class="form-group ${hasErrors(bean: wrenchmenInstance, field: 'experience', 'has-error')}">
+    <div class="form-group ${hasErrors(bean: wrenchmenInstance, field: 'experience', 'has-error')} ${hasErrors(bean: wrenchmenInstance, field: 'earnedXp', 'has-error')}">
 
         <label for="experience" class="col-sm-2 control-label"><g:message code="experience.label"/> *</label>
 
-        <div class="col-sm-10">
+        <div class="col-sm-2">
             <div class="input-group">
                 <span class="input-group-addon"><span
                         class="glyphicon glyphicon-check"></span></span>
@@ -117,7 +116,19 @@
 
             <div class="help-block with-errors"></div>
         </div>
+
+        <div class="col-sm-8">
+            <div class="input-group">
+                <span class="input-group-addon"><span
+                        class="glyphicon glyphicon-plus"></span></span>
+                <g:field maxlength="2" pattern="^([0-9])*" name="earnedXp" type="number"
+                         value="${wrenchmenInstance?.earnedXp}" required="" class="form-control"/>
+            </div>
+
+            <div class="help-block with-errors"></div>
+        </div>
     </div>
+
 </g:if>
 
 <div class="form-group ${hasErrors(bean: wrenchmenInstance, field: 'note', 'has-error')}">

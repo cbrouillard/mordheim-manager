@@ -103,7 +103,7 @@
 </g:if>
 
 
-<div class="form-group ${hasErrors(bean: heroInstance, field: 'experience', 'has-error')}">
+<div class="form-group ${hasErrors(bean: heroInstance, field: 'experience', 'has-error')} ${hasErrors(bean: heroInstance, field: 'earnedXp', 'has-error')}">
 
     <label for="experience" class="col-sm-2 control-label"><g:message code="experience.label"/> *</label>
 
