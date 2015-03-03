@@ -12,7 +12,9 @@ class BandController {
     def wkhtmltoxService
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 12, 100)
+        params.sort = params.sort ?: "dateCreated"
+        params.order = params.order ?: "desc"
         respond Band.list(params), model: [bandInstanceCount: Band.count()]
     }
 

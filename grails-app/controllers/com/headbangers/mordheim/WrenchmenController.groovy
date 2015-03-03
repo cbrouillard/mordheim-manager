@@ -9,15 +9,6 @@ class WrenchmenController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Wrenchmen.list(params), model: [wrenchmenInstanceCount: Wrenchmen.count()]
-    }
-
-    def show(Wrenchmen wrenchmenInstance) {
-        respond wrenchmenInstance
-    }
-
     def create() {
         Wrenchmen man = new Wrenchmen(params)
         [bandId: params.band, wrenchmenInstance: man]

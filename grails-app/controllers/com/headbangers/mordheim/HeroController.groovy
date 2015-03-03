@@ -9,15 +9,6 @@ class HeroController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 6, 6)
-        respond Hero.list(params), model: [heroInstanceCount: Hero.count()]
-    }
-
-    def show(Hero heroInstance) {
-        respond heroInstance
-    }
-
     def create() {
         Hero hero = new Hero(params)
         [bandId: params.band, heroInstance: hero]

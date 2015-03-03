@@ -12,10 +12,11 @@
         <div>
             <h1><g:message
                     code="band.show"/> <small>${bandInstance.name}</small>
+                <g:link controller="band" action="pdf" id="${bandInstance.id}" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-list-alt"></span> <g:message code="generate.pdf"/>
+                </g:link>
             </h1>
-            <g:link controller="band" action="pdf" id="${bandInstance.id}">
-                PDF
-            </g:link>
+
             <hr/>
         </div>
 
@@ -62,13 +63,9 @@
                 <td><strong><g:message code="band.type.label"/></strong></td>
                 <td>${bandInstance.type}</td>
             </tr>
-            %{--<tr>
-                <td><strong><g:message code="date.created.label"/></strong></td>
-                <td><g:formatDate formatName="date.format.short" date="${bandInstance.dateCreated}"/></td>
-            </tr>--}%
             <tr>
                 <td><strong><g:message code="band.gold.title"/></strong></td>
-                <td><g:formatNumber number="${bandInstance.gold}"/> CO</td>
+                <td><g:message code="band.gold" args="[bandInstance.gold]"/></td>
             </tr>
             <tr>
                 <td><strong><g:message code="band.magical.stones.title"/></strong></td>
@@ -109,7 +106,7 @@
                 <a href="#wrenches" role="tab" data-toggle="tab">
                     <span class="badge">${bandInstance.wrenches.size()}</span>
                     <g:message code="wrenches"/>
-                    <button class="btn btn-success btn-xs ${bandInstance.heroes.size() + bandInstance.wrenches.size() >= 21 ? "disabled" : ""}"
+                    <button class="btn btn-success btn-xs ${bandInstance.nbWarriors >= 21 ? "disabled" : ""}"
                             onclick="document.location = '${createLink(controller: 'wrenchmen', action:'create', params: [band:bandInstance.id])}'">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
