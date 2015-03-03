@@ -37,7 +37,12 @@
 
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-info" role="progressbar"
-                         style="width: ${wrench.experience * 14 / 100}%;">
+                         style="width: ${wrench.experience * 100 / 14}%;">
+                        ${wrench.experience}
+                    </div>
+                    <div class="progress-bar progress-bar-striped progress-bar-success" role="progressbar"
+                         style="width: ${wrench.earnedXp * 100 / 14}%;">
+                        ${wrench.earnedXp}
                     </div>
                 </div>
             </div>

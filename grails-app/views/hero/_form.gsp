@@ -17,7 +17,16 @@
 </div>
 
 <jq:jquery>
-    $('#name').focus()
+    $('#name').focus();
+    $('.editor').summernote({
+            toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol']]
+          ],
+          height: 150});
 </jq:jquery>
 
 
@@ -55,7 +64,7 @@
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-scissors"></span></span>
-            <g:textArea name="equipment" cols="40" rows="5" value="${heroInstance?.equipment}" class="form-control"/>
+            <g:textArea name="equipment" cols="40" rows="5" value="${heroInstance?.equipment}" class="form-control editor"/>
         </div>
 
         <div class="help-block with-errors"></div>
@@ -68,7 +77,7 @@
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-lamp"></span></span>
             <g:textArea name="competences" cols="40" rows="5" value="${heroInstance?.competences}"
-                        class="form-control"/>
+                        class="form-control editor"/>
         </div>
 
         <div class="help-block with-errors"></div>
@@ -84,7 +93,7 @@
             <div class="input-group">
                 <span class="input-group-addon"><span
                         class="glyphicon glyphicon-plus-sign"></span></span>
-                <g:textArea name="injuries" cols="40" rows="5" value="${heroInstance?.injuries}" class="form-control"/>
+                <g:textArea name="injuries" cols="40" rows="5" value="${heroInstance?.injuries}" class="form-control editor"/>
             </div>
 
             <div class="help-block with-errors"></div>
@@ -98,7 +107,7 @@
 
     <label for="experience" class="col-sm-2 control-label"><g:message code="experience.label"/> *</label>
 
-    <div class="col-sm-10">
+    <div class="col-sm-${params.action == 'edit' ? '2' : '10'}">
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-check"></span></span>
@@ -107,7 +116,21 @@
         </div>
 
         <div class="help-block with-errors"></div>
+
     </div>
+
+    <g:if test="${params.action == 'edit'}">
+        <div class="col-sm-8">
+            <div class="input-group">
+                <span class="input-group-addon"><span
+                        class="glyphicon glyphicon-plus"></span></span>
+                <g:field maxlength="2" pattern="^([0-9])*" name="earnedXp" type="number"
+                         value="${heroInstance?.earnedXp}" required="" class="form-control"/>
+            </div>
+
+            <div class="help-block with-errors"></div>
+        </div>
+    </g:if>
 </div>
 
 <div class="form-group ${hasErrors(bean: heroInstance, field: 'note', 'has-error')}">
@@ -118,7 +141,7 @@
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-edit"></span></span>
-            <g:textArea name="note" cols="40" rows="5" value="${heroInstance?.note}" class="form-control"/>
+            <g:textArea name="note" cols="40" rows="5" value="${heroInstance?.note}" class="form-control editor"/>
         </div>
 
         <div class="help-block with-errors"></div>

@@ -17,7 +17,16 @@
 </div>
 
 <jq:jquery>
-    $('#number').focus()
+    $('#number').focus();
+    $('.editor').summernote({
+            toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol']]
+          ],
+          height: 150});
 </jq:jquery>
 
 
@@ -73,7 +82,7 @@
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-scissors"></span></span>
-            <g:textArea name="equipment" cols="40" rows="5" value="${wrenchmenInstance?.equipment}" class="form-control"/>
+            <g:textArea name="equipment" cols="40" rows="5" value="${wrenchmenInstance?.equipment}" class="form-control editor"/>
         </div>
 
         <div class="help-block with-errors"></div>
@@ -86,7 +95,7 @@
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-lamp"></span></span>
             <g:textArea name="specialRules" cols="40" rows="5" value="${wrenchmenInstance?.specialRules}"
-                        class="form-control"/>
+                        class="form-control editor"/>
         </div>
 
         <div class="help-block with-errors"></div>
@@ -101,7 +110,7 @@
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-edit"></span></span>
-            <g:textArea name="note" cols="40" rows="5" value="${wrenchmenInstance?.note}" class="form-control"/>
+            <g:textArea name="note" cols="40" rows="5" value="${wrenchmenInstance?.note}" class="form-control editor"/>
         </div>
 
         <div class="help-block with-errors"></div>

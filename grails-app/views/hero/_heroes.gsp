@@ -37,9 +37,11 @@
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-info" role="progressbar"
                          style="width: ${hero.experience * 90 / 100}%;">
+                        ${hero.experience}
                     </div>
                     <div class="progress-bar progress-bar-striped progress-bar-success" role="progressbar"
                          style="width: ${hero.earnedXp * 90 / 100}%;">
+                        ${hero.earnedXp}
                     </div>
                 </div>
             </div>
@@ -98,7 +100,7 @@
                         <div class="panel-heading"><g:message code="hero.equipment.label"/></div>
 
                         <div class="panel-body">
-                            <pre>${hero.equipment}</pre>
+                            <div class="well">${raw(hero.equipment)}</div>
                         </div>
                     </div>
                 </div>
@@ -108,7 +110,7 @@
                         <div class="panel-heading"><g:message code="hero.competences.label"/></div>
 
                         <div class="panel-body">
-                            <pre>${hero.competences}</pre>
+                            <div class="well">${raw(hero.competences)}</div>
                         </div>
                     </div>
                 </div>
@@ -118,7 +120,7 @@
                         <div class="panel-heading"><g:message code="hero.injuries.label"/></div>
 
                         <div class="panel-body">
-                            <pre>${hero.injuries}</pre>
+                            <div class="well">${raw(hero.injuries)}</div>
                         </div>
                     </div>
                 </div>

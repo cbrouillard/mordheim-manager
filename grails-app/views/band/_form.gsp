@@ -18,7 +18,16 @@
 </div>
 
 <jq:jquery>
-    $('#name').focus()
+    $('#name').focus();
+    $('.editor').summernote({
+            toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol']]
+          ],
+          height: 200});
 </jq:jquery>
 
 <div class="form-group ${hasErrors(bean: bandInstance, field: 'type', 'has-error')}">
@@ -81,7 +90,8 @@
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-edit"></span></span>
-            <g:textArea name="note" cols="40" rows="5" value="${bandInstance?.note}" class="form-control"/>
+
+            <g:textArea name="note" cols="40" rows="5" value="${bandInstance?.note}" class="form-control editor"/>
         </div>
 
         <div class="help-block with-errors"></div>

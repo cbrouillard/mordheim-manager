@@ -36,11 +36,11 @@ class Band {
         Long xp = 0
         heroes.each { h ->
             xp += 5
-            xp += h.experience
+            xp += h.fullXp
         }
         wrenches.each { w ->
             xp += (w.number * 5)
-            xp += w.experience
+            xp += w.fullXp
         }
 
         return xp
@@ -59,10 +59,10 @@ class Band {
     def getTotalXp() {
         Long xp = 0
         heroes.each { h ->
-            xp += h.experience
+            xp += h.fullXp
         }
         wrenches.each { w ->
-            xp += w.experience
+            xp += w.fullXp
         }
 
         return xp

@@ -75,8 +75,12 @@
                 <td><g:formatNumber number="${bandInstance.magicalStones}"/></td>
             </tr>
             <tr>
+                <td><strong><g:message code="band.equipment"/></strong></td>
+                <td><div class="well">${raw(bandInstance.reserve)}</div></td>
+            </tr>
+            <tr>
                 <td><strong><g:message code="note.label"/></strong></td>
-                <td>${bandInstance.note}</td>
+                <td><div class="well">${raw(bandInstance.note)}</div></td>
             </tr>
         </table>
     </div>
