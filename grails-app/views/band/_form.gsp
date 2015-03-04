@@ -19,15 +19,14 @@
 
 <jq:jquery>
     $('#name').focus();
-    $('.editor').summernote({
+    $('textarea.editor').summernote({
             toolbar: [
             ['style', ['bold', 'italic', 'underline', 'clear']],
             ['font', ['strikethrough']],
             ['fontsize', ['fontsize']],
             ['color', ['color']],
             ['para', ['ul', 'ol']]
-          ],
-          height: 150});
+          ]});
 </jq:jquery>
 
 <div class="form-group ${hasErrors(bean: bandInstance, field: 'type', 'has-error')}">
