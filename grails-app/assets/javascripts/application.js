@@ -8,7 +8,6 @@
 //= require jquery
 //= require bootstrap
 //= require validator
-//= require summernote.min
 //= require_tree .
 //= require_self
 

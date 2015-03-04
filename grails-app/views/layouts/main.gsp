@@ -15,6 +15,9 @@
 
     <asset:stylesheet src="application.css"/>
     <asset:javascript src="application.js"/>
+
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+    <script>tinymce.init({selector:'textarea',plugins: "textcolor", toolbar: "bullist numlist | bold italic underline | forecolor backcolor", menubar : false, statusbar : false});</script>
     <g:layoutHead/>
 </head>
 
