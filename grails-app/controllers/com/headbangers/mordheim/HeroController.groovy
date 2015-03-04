@@ -1,5 +1,6 @@
 package com.headbangers.mordheim
 
+import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -9,12 +10,14 @@ class HeroController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    @Secured(['ROLE_USER'])
     def create() {
         Hero hero = new Hero(params)
         [bandId: params.band, heroInstance: hero]
     }
 
     @Transactional
+    @Secured(['ROLE_USER'])
     def save(Hero heroInstance) {
         if (heroInstance == null) {
             notFound()
@@ -44,11 +47,13 @@ class HeroController {
         }
     }
 
+    @Secured(['ROLE_USER'])
     def edit(Hero heroInstance) {
         respond heroInstance
     }
 
     @Transactional
+    @Secured(['ROLE_USER'])
     def update(Hero heroInstance) {
         if (heroInstance == null) {
             notFound()
@@ -72,6 +77,7 @@ class HeroController {
     }
 
     @Transactional
+    @Secured(['ROLE_USER'])
     def delete(Hero heroInstance) {
 
         if (heroInstance == null) {

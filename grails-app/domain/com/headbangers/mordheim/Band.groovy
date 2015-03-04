@@ -1,6 +1,10 @@
 package com.headbangers.mordheim
 
+import com.headbangers.mordheim.security.Person
+
 class Band {
+
+    static belongsTo = [Person]
 
     String id
 
@@ -14,6 +18,8 @@ class Band {
     String name
     String type
     String reserve
+
+    Person owner
 
     static constraints = {
         note nullable: true, blank: true, widget: 'textarea'

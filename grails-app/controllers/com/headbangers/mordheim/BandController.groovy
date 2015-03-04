@@ -1,5 +1,6 @@
 package com.headbangers.mordheim
 
+import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -10,24 +11,37 @@ class BandController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def wkhtmltoxService
+    def springSecurityService
 
+    @Secured(['ROLE_USER'])
     def index(Integer max) {
         params.max = Math.min(max ?: 12, 100)
         params.sort = params.sort ?: "dateCreated"
         params.order = params.order ?: "desc"
-        respond Band.list(params), model: [bandInstanceCount: Band.count()]
+        respond Band.findAllByOwner(springSecurityService.currentUser, params), model: [bandInstanceCount: Band.countByOwner(springSecurityService.currentUser)]
     }
 
-    def show(Band bandInstance) {
+    @Secured(['ROLE_USER'])
+    def show() {
+        def bandInstance = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (!bandInstance) {
+            redirect controller: 'band', action: 'index'
+            return
+        }
+
         respond bandInstance, model: [activeTab: params.tab]
     }
 
+    @Secured(['ROLE_USER'])
     def create() {
-        respond new Band(params)
+        Band band = new Band(params)
+        band.owner = springSecurityService.currentUser
+        respond band
     }
 
+    @Secured(['ROLE_USER'])
     def pdf() {
-        Band band = Band.get(params.id)
+        Band band = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
         if (band) {
             def byte[] pdfData = wkhtmltoxService.makePdf(
                     view: "/pdf/good",
@@ -43,10 +57,10 @@ class BandController {
             output << pdfData
             output.close()
 
-            /*response.setContentType("application/octet-stream")
+            response.setContentType("application/octet-stream")
             response.setHeader("Content-disposition", "attachment;filename=\"${band.name}.pdf\"")
-            response.outputStream << pdfData*/
-            render(view: '/pdf/good', model: [band: band])
+            response.outputStream << pdfData
+            //render(view: '/pdf/good', model: [band: band])
             return
         }
 
@@ -55,11 +69,15 @@ class BandController {
     }
 
     @Transactional
+    @Secured(['ROLE_USER'])
     def save(Band bandInstance) {
         if (bandInstance == null) {
             notFound()
             return
         }
+
+        bandInstance.owner = springSecurityService.currentUser
+        bandInstance.validate()
 
         if (bandInstance.hasErrors()) {
             respond bandInstance.errors, view: 'create'
@@ -77,11 +95,18 @@ class BandController {
         }
     }
 
-    def edit(Band bandInstance) {
+    @Secured(['ROLE_USER'])
+    def edit() {
+        def bandInstance = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (!bandInstance) {
+            redirect controller: 'band', action: 'index'
+            return
+        }
         respond bandInstance
     }
 
     @Transactional
+    @Secured(['ROLE_USER'])
     def update(Band bandInstance) {
         if (bandInstance == null) {
             notFound()
@@ -105,7 +130,14 @@ class BandController {
     }
 
     @Transactional
-    def delete(Band bandInstance) {
+    @Secured(['ROLE_USER'])
+    def delete() {
+
+        def bandInstance = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (!bandInstance) {
+            redirect controller: 'band', action: 'index'
+            return
+        }
 
         if (bandInstance == null) {
             notFound()

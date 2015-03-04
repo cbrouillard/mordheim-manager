@@ -36,7 +36,7 @@
                     <g:message code="band.create"/></g:link>
 
             </div>
-            <h5>Total : ${bandInstanceCount}</h5>
+            <h5><span class="label label-default">Total : ${bandInstanceCount}</span></h5>
         </div>
 
         <div class="panel-body">
