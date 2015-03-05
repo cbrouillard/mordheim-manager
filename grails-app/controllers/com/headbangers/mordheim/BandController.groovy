@@ -68,6 +68,18 @@ class BandController {
         return
     }
 
+    @Secured(['ROLE_USER'])
+    def previewpdf() {
+        Band band = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (band) {
+            render(view: '/pdf/good', model: [band: band])
+            return
+        }
+
+        redirect(action: 'index')
+        return
+    }
+
     @Transactional
     @Secured(['ROLE_USER'])
     def save(Band bandInstance) {
