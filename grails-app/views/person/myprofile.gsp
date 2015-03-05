@@ -35,7 +35,7 @@
 
 <div class="col-xs-12">
 
-    <g:form url="[resource: personInstance, action: 'updateprofile']" class="form-horizontal" data-toggle="validator"
+    <g:form url="[resource: personInstance, controller: 'person', action: 'updateprofile']" class="form-horizontal" data-toggle="validator"
             method="PUT">
         <div class="panel panel-default">
             <div class="panel-body">

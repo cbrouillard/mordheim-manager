@@ -43,6 +43,33 @@ class PersonController {
     }
 
     @Transactional
+    @Secured(['ROLE_USER'])
+    def updateprofile (){
+        Person personInstance = springSecurityService.currentUser
+
+        personInstance.email = params.email
+        if (params.passwordNew && params.passwordCheck && params.passwordNew == params.passwordCheck) {
+            personInstance.password = params.passwordNew
+        }
+
+        if (personInstance.hasErrors()) {
+            respond personInstance.errors, view: 'myprofile'
+            return
+        }
+
+        personInstance.save flush: true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Person.label', default: 'Person'), personInstance.id])
+                redirect action: 'myprofile', methode: "GET"
+            }
+            '*' { respond personInstance, [status: OK] }
+        }
+
+    }
+
+    @Transactional
     @Secured(['ROLE_ADMIN'])
     def update(Person personInstance) {
         if (personInstance == null) {

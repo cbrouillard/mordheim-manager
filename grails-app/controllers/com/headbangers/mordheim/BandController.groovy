@@ -101,7 +101,7 @@ class BandController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'band.label', default: 'Band'), bandInstance.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'Band.label', default: 'Band'), bandInstance.id])
                 redirect bandInstance
             }
             '*' { respond bandInstance, [status: CREATED] }
