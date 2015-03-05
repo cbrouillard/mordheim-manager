@@ -25,8 +25,8 @@ class BandController {
     @Secured(['ROLE_USER'])
     def foruser(Integer max) {
         Person person = Person.get(params.id)
-        if (!person){
-            redirect(controller: 'admin', action:'index')
+        if (!person) {
+            redirect(controller: 'admin', action: 'index')
             return
         }
 
@@ -35,19 +35,21 @@ class BandController {
         params.order = params.order ?: "desc"
         render(view: 'index',
                 model: [bandInstanceList : Band.findAllByOwner(person, params),
-                        bandInstanceCount: Band.countByOwner(person), asAdmin:true, person:person])
+                        bandInstanceCount: Band.countByOwner(person), asAdmin: true, person: person])
         return
     }
 
     @Secured(['ROLE_USER'])
     def show() {
-        def bandInstance = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        boolean asAdmin = adminRight(params)
+
+        def bandInstance = asAdmin ? Band.get(params.id) : Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
         if (!bandInstance) {
             redirect controller: 'band', action: 'index'
             return
         }
 
-        respond bandInstance, model: [activeTab: params.tab]
+        respond bandInstance, model: [activeTab: params.tab, asAdmin: asAdmin]
     }
 
     @Secured(['ROLE_USER'])
@@ -193,5 +195,17 @@ class BandController {
             }
             '*' { render status: NOT_FOUND }
         }
+    }
+
+    protected boolean adminRight(def params) {
+        boolean isAdmin = false
+        Person person = springSecurityService.currentUser
+        person.authorities.each { role ->
+            if (role.authority.equals("ROLE_ADMIN")) {
+                isAdmin = true
+            }
+        }
+
+        return isAdmin && params.asAdmin
     }
 }

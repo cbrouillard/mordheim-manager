@@ -10,6 +10,7 @@
 <div class="row-fluid">
     <div class="col-sm-12">
         <div>
+
             <h1><g:message
                     code="band.show"/> <small>${bandInstance.name}</small>
 
@@ -32,6 +33,9 @@
                     </ul>
                 </div>
             </h1>
+            <g:if test="${asAdmin}">
+                <span class="label label-danger"><g:message code="as.admin"/></span>
+            </g:if>
 
             <hr/>
         </div>

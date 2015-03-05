@@ -32,6 +32,24 @@ class BootStrap {
             PersonRole.create(admin, roleUser, true)
         }
 
+        def simpleUser = Person.findByUsername("toto")
+        if (!simpleUser){
+            // Création de l'user admin
+            simpleUser = new Person()
+            simpleUser.accountExpired = false
+            simpleUser.accountLocked = false
+            simpleUser.email = "toto@gmail.com"
+            simpleUser.enabled = true
+            simpleUser.passwordExpired = false
+            simpleUser.username = "toto"
+
+            simpleUser.password = "cyril"
+            simpleUser.save(flush: true)
+
+            def roleUser = Role.findByAuthority("ROLE_USER")
+            PersonRole.create(simpleUser, roleUser, true)
+        }
+
     }
     def destroy = {
     }
