@@ -51,6 +51,22 @@
                         </g:link>
                     </li>
                 </sec:ifAllGranted>
+                <sec:ifLoggedIn>
+                    <li><g:link controller="logout" class="logout"><span
+                            class="glyphicon glyphicon-log-out"></span> <g:message code="logout"/></g:link>
+                    </li>
+                </sec:ifLoggedIn>
+                <sec:ifSwitched>
+                    <li>
+                        <a href='${request.contextPath}/j_spring_security_exit_user'>
+                            <span class="label label-danger"><g:message code="as.admin"
+                                                                        args="[sec.loggedInUserInfo(field: 'username')]"/></span>
+                            <span class="label label-danger"><g:message
+                                    code="admin.resume.as" args="[sec.switchedUserOriginalUsername()]"/></span>
+
+                        </a>
+                    </li>
+                </sec:ifSwitched>
             </ul>
         </div>
 

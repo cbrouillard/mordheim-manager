@@ -23,33 +23,14 @@ class BandController {
     }
 
     @Secured(['ROLE_USER'])
-    def foruser(Integer max) {
-        Person person = Person.get(params.id)
-        if (!person) {
-            redirect(controller: 'admin', action: 'index')
-            return
-        }
-
-        params.max = Math.min(max ?: 12, 100)
-        params.sort = params.sort ?: "dateCreated"
-        params.order = params.order ?: "desc"
-        render(view: 'index',
-                model: [bandInstanceList : Band.findAllByOwner(person, params),
-                        bandInstanceCount: Band.countByOwner(person), asAdmin: true, person: person])
-        return
-    }
-
-    @Secured(['ROLE_USER'])
     def show() {
-        boolean asAdmin = adminRight(params)
-
-        def bandInstance = asAdmin ? Band.get(params.id) : Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        def bandInstance = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
         if (!bandInstance) {
             redirect controller: 'band', action: 'index'
             return
         }
 
-        respond bandInstance, model: [activeTab: params.tab, asAdmin: asAdmin]
+        respond bandInstance, model: [activeTab: params.tab]
     }
 
     @Secured(['ROLE_USER'])

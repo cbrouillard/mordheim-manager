@@ -36,7 +36,7 @@
                     <g:sortableColumn property="username"
                                       title="${message(code: 'person.username.label', default: 'Username')}"/>
 
-                    <td></td>
+
 
                     <g:sortableColumn property="email"
                                       title="${message(code: 'person.email.label', default: 'Email')}"/>
@@ -56,15 +56,14 @@
                     <g:sortableColumn property="dateCreated"
                                       title="${message(code: 'person.dateCreated.label', default: 'Date Created')}"/>
 
+                    <td>Actions</td>
+
                 </tr>
 
                 <g:each in="${personInstanceList}" var="person">
                     <tr>
                         <td><g:link controller="person" action="edit" id="${person.id}">
                             <span class="glyphicon glyphicon-pencil"></span> ${person.username}</g:link></td>
-
-                        <td><g:link controller="band" action="foruser" id="${person.id}">
-                            <span class="glyphicon glyphicon-zoom-in"></span> <g:message code="admin.show.bands"/></g:link></td>
 
                         <td>${person.email}</td>
                         <td>
@@ -97,6 +96,19 @@
                             </g:link>
                         </td>
                         <td><g:formatDate date="${person.dateCreated}" formatName="date.format.short"/></td>
+                        <td>
+                            <g:if test="${sec.loggedInUserInfo(field: "username") != person.username}">
+                                <sec:ifAllGranted roles='ROLE_ADMIN'>
+                                    <form action='${request.contextPath}/j_spring_security_switch_user' method='POST'>
+                                        <g:hiddenField name="j_username" value="${person.username}"/>
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <span class="glyphicon glyphicon-user"></span> ${message(code: 'default.button.switch.label', default: 'Switch')}
+                                        </button>
+                                    </form>
+
+                                </sec:ifAllGranted>
+                            </g:if>
+                        </td>
                     </tr>
                 </g:each>
 

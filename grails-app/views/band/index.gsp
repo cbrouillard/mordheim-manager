@@ -55,7 +55,7 @@
                     <div class="row-fluid">
                 </g:if>
                 <div class="col-lg-2 col-md-4 col-sm-5">
-                    <div class="thumbnail panel-${asAdmin ? 'danger' : 'primary'}">
+                    <div class="thumbnail panel-primary">
 
                         <asset:image src="Mordheim.gif" width="100px"/>
                         <div class="caption text-center">
@@ -68,8 +68,7 @@
                                 <li class="list-group-item">
                                     <div class="btn-group">
 
-                                        <g:link controller="band" action="show" id="${band.id}" class="btn btn-success"
-                                                params="${asAdmin ? [asAdmin: true] : []}">
+                                        <g:link controller="band" action="show" id="${band.id}" class="btn btn-success">
                                             <span class="glyphicon glyphicon-pencil"></span>
                                             <g:message code="show"/></g:link>
 
