@@ -1,20 +1,22 @@
 <%@ page import="com.headbangers.mordheim.security.Person" %>
 
-<div class="form-group ${hasErrors(bean: personInstance, field: 'username', 'has-error')}">
+<g:if test="${params.action != 'myprofile'}">
+    <div class="form-group ${hasErrors(bean: personInstance, field: 'username', 'has-error')}">
 
-    <label for="username" class="col-sm-2 control-label"><g:message code="person.username.label"
-                                                                    default="Name"/> *</label>
+        <label for="username" class="col-sm-2 control-label"><g:message code="person.username.label"
+                                                                        default="Name"/> *</label>
 
-    <div class="col-sm-10">
-        <div class="input-group">
-            <span class="input-group-addon"><span
-                    class="glyphicon glyphicon-user"></span></span>
-            <g:textField name="username" required="" value="${personInstance?.username}" class="form-control"/>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><span
+                        class="glyphicon glyphicon-user"></span></span>
+                <g:textField name="username" required="" value="${personInstance?.username}" class="form-control"/>
+            </div>
+
+            <div class="help-block with-errors"></div>
         </div>
-
-        <div class="help-block with-errors"></div>
     </div>
-</div>
+</g:if>
 
 <div class="form-group">
 
@@ -34,7 +36,7 @@
 <div class="form-group">
 
     <label for="passwordNew" class="col-sm-2 control-label"><g:message code="person.pass.label"
-                                                                    default="Pass"/></label>
+                                                                       default="Pass"/></label>
 
     <div class="col-sm-10">
         <div class="input-group">
@@ -53,7 +55,8 @@
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-cog"></span></span>
-            <g:passwordField name="passwordCheck" class="form-control" data-match-error="${message(code:'pass.notmatch')}" data-match="#passwordNew"/>
+            <g:passwordField name="passwordCheck" class="form-control"
+                             data-match-error="${message(code: 'pass.notmatch')}" data-match="#passwordNew"/>
         </div>
 
         <div class="help-block with-errors"></div>

@@ -32,5 +32,38 @@
     </div>
 </div>
 
+
+<div class="col-xs-12">
+
+    <g:form url="[resource: personInstance, action: 'updateprofile']" class="form-horizontal" data-toggle="validator"
+            method="PUT">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <fieldset class="form">
+                    <g:render template="form"/>
+                </fieldset>
+
+            </div>
+
+            <div class="panel-footer">
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+
+                        <button type="submit" class="btn btn-success">
+                            <span class="glyphicon glyphicon-save"></span> ${message(code: 'default.button.create.label', default: 'Save')}
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </g:form>
+
+</div>
+
 </body>
 </html>
