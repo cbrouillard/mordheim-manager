@@ -36,6 +36,8 @@
                     <g:sortableColumn property="username"
                                       title="${message(code: 'person.username.label', default: 'Username')}"/>
 
+                    <td></td>
+
                     <g:sortableColumn property="email"
                                       title="${message(code: 'person.email.label', default: 'Email')}"/>
 
@@ -58,8 +60,12 @@
 
                 <g:each in="${personInstanceList}" var="person">
                     <tr>
-                        <td><g:link controller="person" action="edit" id="${person.id}" class="btn btn-warning btn-sm">
+                        <td><g:link controller="person" action="edit" id="${person.id}">
                             <span class="glyphicon glyphicon-pencil"></span> ${person.username}</g:link></td>
+
+                        <td><g:link controller="band" action="foruser" id="${person.id}">
+                            <span class="glyphicon glyphicon-zoom-in"></span> <g:message code="admin.show.bands"/></g:link></td>
+
                         <td>${person.email}</td>
                         <td>
                             <g:link controller="person" action="toggle" id="${person.id}" params="[t: 'enabled']"

@@ -1,5 +1,6 @@
 package com.headbangers.mordheim
 
+import com.headbangers.mordheim.security.Person
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -19,6 +20,23 @@ class BandController {
         params.sort = params.sort ?: "dateCreated"
         params.order = params.order ?: "desc"
         respond Band.findAllByOwner(springSecurityService.currentUser, params), model: [bandInstanceCount: Band.countByOwner(springSecurityService.currentUser)]
+    }
+
+    @Secured(['ROLE_USER'])
+    def foruser(Integer max) {
+        Person person = Person.get(params.id)
+        if (!person){
+            redirect(controller: 'admin', action:'index')
+            return
+        }
+
+        params.max = Math.min(max ?: 12, 100)
+        params.sort = params.sort ?: "dateCreated"
+        params.order = params.order ?: "desc"
+        render(view: 'index',
+                model: [bandInstanceList : Band.findAllByOwner(person, params),
+                        bandInstanceCount: Band.countByOwner(person), asAdmin:true, person:person])
+        return
     }
 
     @Secured(['ROLE_USER'])

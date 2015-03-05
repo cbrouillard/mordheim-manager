@@ -36,7 +36,12 @@
                     <g:message code="band.create"/></g:link>
 
             </div>
-            <h5><span class="label label-default">Total : ${bandInstanceCount}</span></h5>
+            <h5>
+                <g:if test="${asAdmin}">
+                    <span class="label label-danger"><g:message code="as.admin"/></span>
+                    <span class="label label-danger"><g:message code="as.admin.person.consulted" args="[person.username]"/></span>
+                </g:if>
+                <span class="label label-default">Total : ${bandInstanceCount}</span></h5>
         </div>
 
         <div class="panel-body">
@@ -47,7 +52,7 @@
                     <div class="row-fluid">
                 </g:if>
                 <div class="col-lg-2 col-md-4 col-sm-5">
-                    <div class="thumbnail panel-primary">
+                    <div class="thumbnail panel-${asAdmin ? 'danger' : 'primary'}">
 
                         <asset:image src="Mordheim.gif" width="100px"/>
                         <div class="caption text-center">
