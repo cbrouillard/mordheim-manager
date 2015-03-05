@@ -1,0 +1,107 @@
+<%@ page import="com.headbangers.mordheim.security.Person" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="layout" content="main">
+</head>
+
+<body>
+
+<div class="row-fluid">
+    <div class="col-sm-12">
+        <div>
+            <h1><g:message
+                    code="person.list"/> <small><g:message code="person.list.hint"/></small>
+            </h1>
+            <hr/>
+        </div>
+        <g:if test="${flash.message}">
+            <div class="alert alert-info" role="status">${flash.message}</div>
+        </g:if>
+    </div>
+</div>
+
+
+<div class="col-sm-12">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5><span class="label label-default">Total : ${personInstanceCount}</span></h5>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <tr>
+
+                    <g:sortableColumn property="username"
+                                      title="${message(code: 'person.username.label', default: 'Username')}"/>
+
+                    <g:sortableColumn property="email"
+                                      title="${message(code: 'person.email.label', default: 'Email')}"/>
+
+                    <g:sortableColumn property="enabled"
+                                      title="${message(code: 'person.enabled.label', default: 'Enabled')}"/>
+
+                    <g:sortableColumn property="accountExpired"
+                                      title="${message(code: 'person.accountExpired.label', default: 'Account Expired')}"/>
+
+                    <g:sortableColumn property="accountLocked"
+                                      title="${message(code: 'person.accountLocked.label', default: 'Account Locked')}"/>
+
+                    <g:sortableColumn property="passwordExpired"
+                                      title="${message(code: 'person.passwordExpired.label', default: 'passwordExpired')}"/>
+
+                    <g:sortableColumn property="dateCreated"
+                                      title="${message(code: 'person.dateCreated.label', default: 'Date Created')}"/>
+
+                </tr>
+
+                <g:each in="${personInstanceList}" var="person">
+                    <tr>
+                        <td><g:link controller="person" action="edit" id="${person.id}" class="btn btn-warning btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span> ${person.username}</g:link></td>
+                        <td>${person.email}</td>
+                        <td>
+                            <g:link controller="person" action="toggle" id="${person.id}" params="[t: 'enabled']"
+                                    class="btn btn-sm btn-${person.enabled ? 'success' : 'danger'}">
+                                <span class="glyphicon glyphicon-option-vertical"></span> <g:formatBoolean
+                                    boolean="${person.enabled}"/>
+                            </g:link>
+                        </td>
+                        <td>
+                            <g:link controller="person" action="toggle" id="${person.id}" params="[t: 'accountExpired']"
+                                    class="btn btn-sm btn-${person.accountExpired ? 'danger' : 'success'}">
+                                <span class="glyphicon glyphicon-option-vertical"></span> <g:formatBoolean
+                                    boolean="${person.accountExpired}"/>
+                            </g:link>
+                        </td>
+                        <td>
+                            <g:link controller="person" action="toggle" id="${person.id}" params="[t: 'accountLocked']"
+                                    class="btn btn-sm btn-${person.accountLocked ? 'danger' : 'success'}">
+                                <span class="glyphicon glyphicon-option-vertical"></span> <g:formatBoolean
+                                    boolean="${person.accountLocked}"/>
+                            </g:link>
+                        </td>
+                        <td>
+                            <g:link controller="person" action="toggle" id="${person.id}"
+                                    params="[t: 'passwordExpired']"
+                                    class="btn btn-sm btn-${person.passwordExpired ? 'danger' : 'success'}">
+                                <span class="glyphicon glyphicon-option-vertical"></span> <g:formatBoolean
+                                    boolean="${person.passwordExpired}"/>
+                            </g:link>
+                        </td>
+                        <td><g:formatDate date="${person.dateCreated}" formatName="date.format.short"/></td>
+                    </tr>
+                </g:each>
+
+            </table>
+        </div>
+
+        <div class="panel-footer">
+            <g:paginate total="${personInstanceCount ?: 0}"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
