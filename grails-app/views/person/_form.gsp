@@ -40,7 +40,7 @@
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-cog"></span></span>
-            <g:passwordField name="passwordNew" class="form-control" data-match-error="${message(code:'pass.notmatch')}" data-match="#passwordCheck"/>
+            <g:passwordField name="passwordNew" class="form-control"/>
         </div>
 
         <div class="help-block with-errors"></div>

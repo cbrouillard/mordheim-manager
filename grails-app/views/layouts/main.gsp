@@ -52,6 +52,10 @@
                     </li>
                 </sec:ifAllGranted>
                 <sec:ifLoggedIn>
+                    <li><g:link controller="person" action="myprofile"><span
+                            class="glyphicon glyphicon-user"></span> <g:message code="my.profile"/></g:link>
+                    </li>
+
                     <li><g:link controller="logout" class="logout"><span
                             class="glyphicon glyphicon-log-out"></span> <g:message code="logout"/></g:link>
                     </li>

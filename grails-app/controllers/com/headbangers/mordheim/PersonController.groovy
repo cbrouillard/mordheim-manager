@@ -11,44 +11,18 @@ class PersonController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def springSecurityService
+
     @Secured(['ROLE_ADMIN'])
     def index(Integer max) {
         params.max = Math.min(max ?: 50, 100)
         respond Person.list(params), model: [personInstanceCount: Person.count()]
     }
 
-    @Secured(['ROLE_ADMIN'])
-    def show(Person personInstance) {
+    @Secured(['ROLE_USER'])
+    def myprofile (){
+        Person personInstance = springSecurityService.currentUser
         respond personInstance
-    }
-
-    @Secured(['ROLE_ADMIN'])
-    def create() {
-        respond new Person(params)
-    }
-
-    @Transactional
-    @Secured(['ROLE_ADMIN'])
-    def save(Person personInstance) {
-        if (personInstance == null) {
-            notFound()
-            return
-        }
-
-        if (personInstance.hasErrors()) {
-            respond personInstance.errors, view: 'create'
-            return
-        }
-
-        personInstance.save flush: true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'person.label', default: 'Person'), personInstance.id])
-                redirect personInstance
-            }
-            '*' { respond personInstance, [status: CREATED] }
-        }
     }
 
     @Secured(['ROLE_ADMIN'])
@@ -81,12 +55,16 @@ class PersonController {
             return
         }
 
+        if (params.passwordNew && params.passwordCheck && params.passwordNew == params.passwordCheck) {
+            personInstance.password = params.passwordNew
+        }
+
         personInstance.save flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Person.label', default: 'Person'), personInstance.id])
-                redirect personInstance
+                redirect action: 'index', methode: "GET"
             }
             '*' { respond personInstance, [status: OK] }
         }
