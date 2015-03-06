@@ -9,7 +9,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class PersonController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", saveregistration: 'POST']
 
     def springSecurityService
 
@@ -19,8 +19,46 @@ class PersonController {
         respond Person.list(params), model: [personInstanceCount: Person.count()]
     }
 
+    // anonymous access
+    def register() {
+        Person personInstance = new Person()
+        respond personInstance
+    }
+
+    // anonymous access
+    @Transactional
+    def saveregistration(Person personInstance) {
+        if (personInstance == null) {
+            notFound()
+            return
+        }
+
+        if (params.passwordNew && params.passwordCheck && params.passwordNew == params.passwordCheck) {
+            personInstance.password = params.passwordNew
+        }
+
+        if (personInstance.hasErrors()) {
+            respond personInstance.errors, view: 'register'
+            return
+        }
+
+        personInstance.enabled = false
+        personInstance.save(flush: true)
+
+        println personInstance
+        // todo send mail to person
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.registered.message', args: [personInstance.username, personInstance.email])
+                chain controller: "login", methode: "GET"
+            }
+            '*' { respond personInstance, [status: OK] }
+        }
+    }
+
     @Secured(['ROLE_USER'])
-    def myprofile (){
+    def myprofile() {
         Person personInstance = springSecurityService.currentUser
         respond personInstance
     }
@@ -44,7 +82,7 @@ class PersonController {
 
     @Transactional
     @Secured(['ROLE_USER'])
-    def updateprofile (){
+    def updateprofile() {
         Person personInstance = springSecurityService.currentUser
 
         personInstance.email = params.email

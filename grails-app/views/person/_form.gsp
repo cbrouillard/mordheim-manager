@@ -36,13 +36,18 @@
 <div class="form-group">
 
     <label for="passwordNew" class="col-sm-2 control-label"><g:message code="person.pass.label"
-                                                                       default="Pass"/></label>
+                                                                       default="Pass"/> ${params.action == 'register' ? '*' : ''}</label>
 
     <div class="col-sm-10">
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-cog"></span></span>
-            <g:passwordField name="passwordNew" class="form-control"/>
+            <g:if test="${params.action == 'register'}">
+                <g:passwordField name="passwordNew" class="form-control" required=""/>
+            </g:if>
+            <g:else>
+                <g:passwordField name="passwordNew" class="form-control"/>
+            </g:else>
         </div>
 
         <div class="help-block with-errors"></div>
@@ -55,8 +60,14 @@
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-cog"></span></span>
-            <g:passwordField name="passwordCheck" class="form-control"
-                             data-match-error="${message(code: 'pass.notmatch')}" data-match="#passwordNew"/>
+            <g:if test="${params.action == 'register'}">
+                <g:passwordField name="passwordCheck" class="form-control"
+                                 data-match-error="${message(code: 'pass.notmatch')}" data-match="#passwordNew" required=""/>
+            </g:if>
+            <g:else>
+                <g:passwordField name="passwordCheck" class="form-control"
+                                 data-match-error="${message(code: 'pass.notmatch')}" data-match="#passwordNew"/>
+            </g:else>
         </div>
 
         <div class="help-block with-errors"></div>

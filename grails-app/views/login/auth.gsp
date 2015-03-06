@@ -56,9 +56,18 @@
                     </label>
                 </div>
                 <button class="btn btn-lg btn-success btn-block" type="submit"><g:message code="login.go"/></button>
+
             </form>
         </div>
 
+    </div>
+
+    <div class="panel panel-warning">
+        <div class="panel-body">
+            <g:link controller="person" action="register" class="btn btn-lg btn-primary btn-block">
+                <g:message code="register"/>
+            </g:link>
+        </div>
     </div>
 
 </div>
