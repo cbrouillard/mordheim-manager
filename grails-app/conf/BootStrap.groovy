@@ -18,6 +18,7 @@ class BootStrap {
             admin.username = "cyril"
 
             admin.password = "cyril"
+            admin.token = UUID.randomUUID().toString();
             admin.save(flush: true)
 
             def roleAdmin = Role.findByAuthority("ROLE_ADMIN")
@@ -44,6 +45,7 @@ class BootStrap {
             simpleUser.username = "toto"
 
             simpleUser.password = "cyril"
+            simpleUser.token = UUID.randomUUID().toString();
             simpleUser.save(flush: true)
 
             def roleUser = Role.findByAuthority("ROLE_USER")

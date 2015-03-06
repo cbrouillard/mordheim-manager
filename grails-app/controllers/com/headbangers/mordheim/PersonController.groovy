@@ -1,6 +1,8 @@
 package com.headbangers.mordheim
 
 import com.headbangers.mordheim.security.Person
+import com.headbangers.mordheim.security.PersonRole
+import com.headbangers.mordheim.security.Role
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -36,7 +38,9 @@ class PersonController {
         if (params.passwordNew && params.passwordCheck && params.passwordNew == params.passwordCheck) {
             personInstance.password = params.passwordNew
         }
+        personInstance.token = UUID.randomUUID().toString();
 
+        personInstance.validate()
         if (personInstance.hasErrors()) {
             respond personInstance.errors, view: 'register'
             return
@@ -45,16 +49,47 @@ class PersonController {
         personInstance.enabled = false
         personInstance.save(flush: true)
 
-        println personInstance
-        // todo send mail to person
+        Role role = Role.findByAuthority("ROLE_USER")
+        PersonRole.create(personInstance, role, true)
+
+        sendMail {
+            async true
+            to personInstance.email
+            subject message (code:'registration.email')
+            html g.render(template:"/mail/registration", model: [person:personInstance])
+        }
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.registered.message', args: [personInstance.username, personInstance.email])
-                chain controller: "login", methode: "GET"
+                chain (controller: 'login', action: 'auth')
             }
             '*' { respond personInstance, [status: OK] }
         }
+    }
+
+    // anonymous access
+    @Transactional
+    def validate() {
+        Person person = Person.get(params.id)
+        if (person && person.token == params.token) {
+            person.enabled = true
+            person.save(flush: true)
+
+            sendMail {
+                async true
+                to "cyril.brouillard+mordheim@gmail.com"
+                subject message (code:'new.registration.validated.email')
+                html g.render(template:"/mail/heynewuser", model: [person:person])
+            }
+
+            flash.message = message(code: 'registration.over', args: [person.username])
+            chain (controller: 'login', action: 'auth')
+            return
+        }
+
+        redirect(controller: 'login')
+        return
     }
 
     @Secured(['ROLE_USER'])

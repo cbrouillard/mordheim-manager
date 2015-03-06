@@ -39,6 +39,13 @@ class PersonRole implements Serializable {
 		}.count() > 0
 	}
 
+    static boolean exists(String personId, long roleId) {
+        PersonRole.where {
+            person == Person.load(personId) &&
+                    role == Role.load(roleId)
+        }.count() > 0
+    }
+
 	static PersonRole create(Person person, Role role, boolean flush = false) {
 		def instance = new PersonRole(person: person, role: role)
 		instance.save(flush: flush, insert: true)

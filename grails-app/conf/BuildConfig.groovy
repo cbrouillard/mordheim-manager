@@ -77,5 +77,6 @@ grails.project.dependency.resolution = {
         compile ":wkhtmltopdf:0.1.8"
         compile ":spring-security-core:2.0-RC4"
         compile ":google-visualization:1.0.1"
+        compile ":mail:1.0.7"
     }
 }

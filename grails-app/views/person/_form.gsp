@@ -10,7 +10,7 @@
             <div class="input-group">
                 <span class="input-group-addon"><span
                         class="glyphicon glyphicon-user"></span></span>
-                <g:textField name="username" required="" value="${personInstance?.username}" class="form-control"/>
+                <g:textField name="username" required="" value="${personInstance?.username}" class="form-control" autofocus=""/>
             </div>
 
             <div class="help-block with-errors"></div>
@@ -18,7 +18,7 @@
     </div>
 </g:if>
 
-<div class="form-group">
+<div class="form-group ${hasErrors(bean: personInstance, field: 'email', 'has-error')}">
 
     <label for="email" class="col-sm-2 control-label"><g:message code="person.email.label"
                                                                  default="Email"/> *</label>
@@ -33,16 +33,16 @@
     </div>
 </div>
 
-<div class="form-group">
+<div class="form-group ${hasErrors(bean: personInstance, field: 'password', 'has-error')}">
 
     <label for="passwordNew" class="col-sm-2 control-label"><g:message code="person.pass.label"
-                                                                       default="Pass"/> ${params.action == 'register' ? '*' : ''}</label>
+                                                                       default="Pass"/> ${params.action.contains('regist') ? '*' : ''}</label>
 
     <div class="col-sm-10">
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-cog"></span></span>
-            <g:if test="${params.action == 'register'}">
+            <g:if test="${params.action.contains('regist')}">
                 <g:passwordField name="passwordNew" class="form-control" required=""/>
             </g:if>
             <g:else>
@@ -60,7 +60,7 @@
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-cog"></span></span>
-            <g:if test="${params.action == 'register'}">
+            <g:if test="${params.action.contains('regist')}">
                 <g:passwordField name="passwordCheck" class="form-control"
                                  data-match-error="${message(code: 'pass.notmatch')}" data-match="#passwordNew" required=""/>
             </g:if>

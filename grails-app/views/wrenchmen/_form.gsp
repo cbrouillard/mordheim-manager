@@ -105,7 +105,7 @@
                          value="${wrenchmenInstance?.experience}" required="" class="form-control"/>
             </div>
 
-            <div class="help-block with-errors"></div>
+            <div class="help-block with-errors"><g:message code="experience.start.hint"/></div>
         </div>
 
         <div class="col-sm-8">
@@ -116,7 +116,7 @@
                          value="${wrenchmenInstance?.earnedXp}" required="" class="form-control"/>
             </div>
 
-            <div class="help-block with-errors"></div>
+            <div class="help-block with-errors"><g:message code="experience.earned.hint"/></div>
         </div>
     </div>
 

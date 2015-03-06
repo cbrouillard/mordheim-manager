@@ -106,7 +106,9 @@
                      value="${heroInstance?.experience}" required="" class="form-control"/>
         </div>
 
-        <div class="help-block with-errors"></div>
+        <div class="help-block with-errors">
+            <g:message code="experience.start.hint"/>
+        </div>
 
     </div>
 
@@ -119,7 +121,9 @@
                          value="${heroInstance?.earnedXp}" required="" class="form-control"/>
             </div>
 
-            <div class="help-block with-errors"></div>
+            <div class="help-block with-errors">
+                <g:message code="experience.earned.hint"/>
+            </div>
         </div>
     </g:if>
 </div>
