@@ -9,6 +9,9 @@
 
 <div class="row-fluid">
     <div class="col-sm-12">
+        <div class="thumbnail pull-right">
+            <asset:image src="Mordheim.gif" class="imgband"/>
+        </div>
         <div>
 
             <h1><g:message
@@ -36,6 +39,8 @@
             <g:if test="${asAdmin}">
                 <span class="label label-danger"><g:message code="as.admin"/></span>
             </g:if>
+
+
 
             <hr/>
         </div>
@@ -137,6 +142,8 @@
                 </a>
             </li>
         </ul>
+
+
 
         <!-- Tab panes -->
         <div class="tab-content">

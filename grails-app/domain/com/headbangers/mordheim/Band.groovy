@@ -21,12 +21,15 @@ class Band {
 
     Person owner
 
+    byte[] photo
+
     static constraints = {
         note nullable: true, blank: true, widget: 'textarea'
         gold nullable: false, defaultValue: 0
         magicalStones nullable: false, defaultValue: 0
         name nullable: false, blank: false
         reserve nullable: true, blank: false, widget: 'textarea'
+        photo nullable: true
     }
 
     static mapping = {

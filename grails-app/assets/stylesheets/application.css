@@ -18,3 +18,8 @@ body {
     background-attachment: fixed;*/
     padding-bottom: 70px;
 }
+
+img.imgband{
+    max-height: 100px;
+    max-width: 100px;
+}

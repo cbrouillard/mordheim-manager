@@ -29,15 +29,18 @@ class Hero {
 
     Band band
 
+    byte[] photo
+
     static constraints = {
         note nullable: true, blank: true, widget: 'textarea'
         competences nullable: true, blank: false, widget: 'textarea'
         injuries nullable: true, blank: false, widget: 'textarea'
         equipment nullable: true, blank: false, widget: 'textarea'
         experience nullable: false, defaultValue: 0
-        earnedXp nullable:false, defaultValue:0
+        earnedXp nullable: false, defaultValue: 0
         type nullable: false, blank: false
         name nullable: false, blank: false
+        photo nullable: true
     }
 
     static mapping = {
@@ -51,7 +54,7 @@ class Hero {
     Date dateCreated
     Date lastUpdated
 
-    Integer getFullXp (){
+    Integer getFullXp() {
         return this.experience + this.earnedXp
     }
 }

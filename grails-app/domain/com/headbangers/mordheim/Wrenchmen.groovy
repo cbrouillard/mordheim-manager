@@ -31,6 +31,8 @@ class Wrenchmen {
 
     Band band
 
+    byte[] photo
+
     static constraints = {
         note nullable: true, blank: true, widget: 'textarea'
         competences nullable: true, blank: false, widget: 'textarea'
@@ -41,6 +43,7 @@ class Wrenchmen {
         type nullable: false, blank: false
         name nullable: false, blank: false
         number nullable: false
+        photo nullable: true
     }
 
     static mapping = {
