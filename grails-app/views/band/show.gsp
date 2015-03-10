@@ -39,15 +39,10 @@
                     </ul>
                 </div>
 
-                <g:link controller="game" action="endgame" id="${bandInstance.id}" class="btn btn-warning">
+                %{--<g:link controller="game" action="endgame" id="${bandInstance.id}" class="btn btn-warning">
                     <span class="glyphicon glyphicon-ok-circle"></span> <g:message code="end.game"/>
-                </g:link>
+                </g:link>--}%
             </h1>
-            <g:if test="${asAdmin}">
-                <span class="label label-danger"><g:message code="as.admin"/></span>
-            </g:if>
-
-
 
             <hr/>
         </div>
