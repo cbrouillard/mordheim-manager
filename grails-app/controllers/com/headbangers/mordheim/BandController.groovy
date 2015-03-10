@@ -189,4 +189,11 @@ class BandController {
 
         return isAdmin && params.asAdmin
     }
+
+    def endgameFlow = {
+        flow.bandInstance = Band.get(params.id)
+        deadWrenches {
+
+        }
+    }
 }

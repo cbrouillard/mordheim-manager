@@ -56,7 +56,6 @@
                 </g:if>
                 <div class="col-lg-2 col-md-4 col-sm-5">
                     <div class="thumbnail panel-primary">
-
                         <asset:image src="Mordheim.gif" width="100px"/>
                         <div class="caption text-center">
                             <ul class="list-group">
@@ -66,17 +65,26 @@
                                 <li class="list-group-item"><g:message code="band.magical.stones"
                                                                        args="[band.magicalStones]"/></li>
                                 <li class="list-group-item">
-                                    <div class="btn-group">
+                                    <g:form url="[resource: band, action: 'delete']" method="DELETE">
 
-                                        <g:link controller="band" action="show" id="${band.id}" class="btn btn-success">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                            <g:message code="show"/></g:link>
+                                        <div class="btn-group">
+                                            <button type="submit" class="btn btn-danger"
+                                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
 
-                                    </div>
+                                            <g:link controller="band" action="show" id="${band.id}"
+                                                    class="btn btn-success">
+                                                <span class="glyphicon glyphicon-pencil"></span>
+                                                <g:message code="show"/></g:link>
+
+                                        </div>
+                                    </g:form>
                                 </li>
                             </ul>
                         </div>
                     </div>
+
                 </div>
 
                 <g:if test="${counter == 0}">

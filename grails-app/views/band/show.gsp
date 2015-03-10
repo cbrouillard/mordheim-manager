@@ -12,10 +12,13 @@
         <div class="thumbnail pull-right">
             <asset:image src="Mordheim.gif" class="imgband"/>
         </div>
+
         <div>
 
-            <h1><g:message
-                    code="band.show"/> <small>${bandInstance.name}</small>
+            <h1>
+                <g:message
+                        code="band.show"/> <small>${bandInstance.name}</small>
+
 
                 <div class="btn-group">
                     <g:link controller="band" action="pdf" id="${bandInstance.id}" class="btn btn-primary">
@@ -28,13 +31,17 @@
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <g:link controller="band" action="previewpdf" id="${bandInstance.id}">
-                                <span class="glyphicon glyphicon-info-sign"></span> <g:message
+                            <g:link controller="band" action="previewpdf" id="${bandInstance.id}" target="_blank">
+                                <span class="glyphicon glyphicon-eye-open"></span> <g:message
                                     code="generate.preview.pdf"/>
                             </g:link>
                         </li>
                     </ul>
                 </div>
+
+                <g:link controller="game" action="endgame" id="${bandInstance.id}" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-ok-circle"></span> <g:message code="end.game"/>
+                </g:link>
             </h1>
             <g:if test="${asAdmin}">
                 <span class="label label-danger"><g:message code="as.admin"/></span>
@@ -46,6 +53,8 @@
         </div>
 
         <g:if test="${flash.message}">
+            <div class="clearfix">&nbsp;</div>
+
             <div class="alert alert-info" role="status">${flash.message}</div>
         </g:if>
     </div>
@@ -66,7 +75,7 @@
                         </g:link>
                         <button type="submit" class="btn btn-danger"
                                 onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                            <span class="glyphicon glyphicon-trash"></span> ${message(code: 'default.button.delete.label', default: 'Delete')}
+                            <span class="glyphicon glyphicon-remove"></span> ${message(code: 'default.button.delete.label', default: 'Delete')}
                         </button>
                     </div>
                 </g:form>

@@ -5,6 +5,7 @@
 
             <div class="row">
                 <div class="col-sm-4">
+                    <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
                     <h5><strong>${wrench.name}</strong></h5>
                     <span class="label label-default pull-left">${wrench.number} ${wrench.type}</span>
                 </div>
@@ -20,7 +21,7 @@
                                 </g:link>
                                 <button type="submit" class="btn btn-danger"
                                         onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                                    <span class="glyphicon glyphicon-trash"></span>
+                                    <span class="glyphicon glyphicon-remove"></span>
                                 </button>
                             </div>
                         </g:form>

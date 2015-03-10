@@ -70,7 +70,7 @@
             </g:else>
         </div>
 
-        <div class="help-block with-errors"></div>
+        <div class="help-block with-errors"><g:message code="password.hint"/></div>
     </div>
 </div>
 
