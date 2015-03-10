@@ -43,7 +43,7 @@
     <div class="row">
 
         <g:each in="${bandInstance.wrenches?.sort({ it.dateCreated })}" var="wrenchgroup">
-            <div class="col-sm-6 col-xs-12">
+            <div class="col-sm-12 col-xs-12">
                 <div class="panel panel-warning">
                     <div class="panel-heading">
                         <div class="row">
@@ -55,39 +55,41 @@
                         </div>
                     </div>
 
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tbody>
-                                <g:set var="i" value="${new Integer(0)}"/>
-                                <g:while test="${i < wrenchgroup.number}">
-                                    <tr>
-                                        <td>
-                                            <span class="label label-warning">${wrenchgroup.type} #${i + 1}</span>
-                                        </td>
-                                        <td><g:message code="experience.current" args="[wrenchgroup.fullXp]"/></td>
-                                        <td class="text-right">
-                                            <div class="btn-group" data-toggle="buttons">
-                                                <label class="btn btn-default">
-                                                    <input type="radio" name="options" id="option1" autocomplete="off">
-                                                    <span class="glyphicon glyphicon-thumbs-up"></span> <g:message
-                                                        code="warrior.living"/>
-                                                </label>
-                                                <label class="btn btn-default">
-                                                    <input type="radio" name="options" id="option2" autocomplete="off">
-                                                    <span class="glyphicon glyphicon-thumbs-down"></span> <g:message
-                                                        code="warrior.deceased"/>
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <% i++ %>
-                                </g:while>
-                                </tbody>
-                            </table>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <tbody>
+                            <g:set var="i" value="${new Integer(0)}"/>
+                            <g:while test="${i < wrenchgroup.number}">
+                                <tr>
+                                    <td>
+                                        <span class="label label-warning">${wrenchgroup.type} #${i + 1}</span>
+                                    </td>
+                                    <td><g:message code="experience.current" args="[wrenchgroup.fullXp]"/></td>
+                                    <td class="text-right">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default">
+                                                <input type="radio" name="options" id="option1" autocomplete="off">
+                                                <span class="glyphicon glyphicon-thumbs-up"></span> <g:message
+                                                    code="warrior.living"/>
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" name="options" id="option2" autocomplete="off">
+                                                <span class="glyphicon glyphicon-thumbs-down"></span> <g:message
+                                                    code="warrior.deceased"/>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% i++ %>
+                            </g:while>
+                            </tbody>
+                        </table>
 
-                        </div>
+                    </div>
 
+
+                    <div class="panel-footer text-right">
+                        Résultats (javascript)
                     </div>
 
                 </div>
