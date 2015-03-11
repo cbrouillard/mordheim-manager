@@ -14,6 +14,8 @@ class Hero {
     String competences
     String injuries
 
+    Integer cost
+
     Integer M = 0;
     Integer CC = 0;
     Integer CT = 0;
@@ -41,6 +43,7 @@ class Hero {
         type nullable: false, blank: false
         name nullable: false, blank: false
         photo nullable: true
+        cost nullable: false, defaultValue: 0
     }
 
     static mapping = {

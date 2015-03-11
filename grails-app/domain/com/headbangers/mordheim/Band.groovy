@@ -49,7 +49,7 @@ class Band {
         }
         wrenches.each { w ->
             xp += (w.number * 5)
-            xp += w.fullXp
+            xp += (w.number * w.fullXp)
         }
 
         return xp
@@ -69,7 +69,7 @@ class Band {
             xp += h.fullXp
         }
         wrenches.each { w ->
-            xp += w.fullXp
+            xp += (w.fullXp * w.number)
         }
 
         return xp

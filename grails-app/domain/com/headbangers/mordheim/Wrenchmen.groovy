@@ -14,6 +14,8 @@ class Wrenchmen {
     String competences
     String specialRules
 
+    Integer cost
+
     Integer M = 0;
     Integer CC = 0;
     Integer CT = 0;
@@ -39,11 +41,12 @@ class Wrenchmen {
         specialRules nullable: true, blank: false, widget: 'textarea'
         equipment nullable: true, blank: true, widget: 'textarea'
         experience nullable: false, defaultValue: 0
-        earnedXp nullable:false, defaultValue:0
+        earnedXp nullable: false, defaultValue: 0
         type nullable: false, blank: false
         name nullable: false, blank: false
         number nullable: false
         photo nullable: true
+        cost nullable: false, defaultValue: 0
     }
 
     static mapping = {
@@ -57,7 +60,7 @@ class Wrenchmen {
     Date dateCreated
     Date lastUpdated
 
-    Integer getFullXp (){
+    Integer getFullXp() {
         return this.experience + this.earnedXp
     }
 }

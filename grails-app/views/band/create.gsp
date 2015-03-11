@@ -50,7 +50,7 @@
                     <div class="col-sm-offset-2 col-sm-10">
 
                         <button type="submit" class="btn btn-success">
-                            <span class="glyphicon glyphicon-save"></span> ${message(code: 'default.button.create.label', default: 'Save')}
+                            <span class="glyphicon glyphicon-forward"></span> ${message(code: 'next.step', default: 'Save')}
                         </button>
 
                     </div>
