@@ -26,14 +26,14 @@ class BootStrap {
             if (!roleAdmin) {
                 roleAdmin = new Role(authority: "ROLE_ADMIN").save(flush: true)
             }
-            if (!roleUser){
+            if (!roleUser) {
                 roleUser = new Role(authority: "ROLE_USER").save(flush: true)
             }
             PersonRole.create(admin, roleAdmin, true)
             PersonRole.create(admin, roleUser, true)
         }
 
-        def simpleUser = Person.findByUsername("toto")
+        /*def simpleUser = Person.findByUsername("toto")
         if (!simpleUser){
             // Création de l'user admin
             simpleUser = new Person()
@@ -50,7 +50,7 @@ class BootStrap {
 
             def roleUser = Role.findByAuthority("ROLE_USER")
             PersonRole.create(simpleUser, roleUser, true)
-        }
+        }*/
 
     }
     def destroy = {

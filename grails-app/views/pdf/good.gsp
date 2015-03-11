@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-
+    <meta charset="UTF-8"/>
     <style type="text/css">
     <!--
     body {
@@ -19,6 +19,7 @@
     -->
     </style>
 </head>
+
 <body>
 <nobr><nowrap>
 <div class="pos" id="0:0" style="top:0">
@@ -53,7 +54,7 @@
 
 <div class="pos" id="280:126" style="top:260;left:575">
     <span id="11.5" style=" font-family:Arial; font-size:20px; color:#892a1a24">
-        <g:message code="warband.equipment" args="[band.reserve?:'']" /></span>
+        <g:message code="warband.equipment" args="[raw(band.reserve ?: '')]"/></span>
 </div>
 
 <div class="pos" id="20:146" style="top:300;left:35">
@@ -92,12 +93,12 @@
 
     <div class="pos" id="221:228" style="top:${top};left:${left + 405}">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.equipment" args="[raw(wrench.equipment?:'')]"/></span>
+            <g:message code="warband.warrior.equipment" args="[raw(wrench.equipment ?: '')]"/></span>
     </div>
 
     <div class="pos" id="404:228" style="top:${top};left:${left + 800}">
         <span id="9.3" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.specialrules" args="[raw(wrench.specialRules?:'')]"/></span>
+            <g:message code="warband.warrior.specialrules" args="[raw(wrench.specialRules ?: '')]"/></span>
     </div>
 
     <div class="pos" id="23:243" style="top:${top + 35};left:${left}">
@@ -254,17 +255,17 @@
 
     <div class="pos" id="221:912" style="top:${top};left:${left + 405}">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.equipment" args="[raw(hero.equipment?:'')]" /></span>
+            <g:message code="warband.warrior.equipment" args="[raw(hero.equipment ?: '')]"/></span>
     </div>
 
     <div class="pos" id="404:912" style="top:${top};left:${left + 645}">
         <span id="9.4" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.competences" args="[raw(hero.competences?:'')]"/></span>
+            <g:message code="warband.warrior.competences" args="[raw(hero.competences ?: '')]"/></span>
     </div>
 
     <div class="pos" id="404:912" style="top:${top};left:${left + 930}">
         <span id="9.4" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.injuries" args="[raw(hero.injuries?:'')]"/></span>
+            <g:message code="warband.warrior.injuries" args="[raw(hero.injuries ?: '')]"/></span>
     </div>
 
     <div class="pos" id="23:928" style="top:${top + 35};left:${left}">
@@ -372,7 +373,7 @@
     <g:set var="cpt" value="${new Integer(1)}"/>
     <g:set var="xpLeft" value="${new Integer(440)}"/>
     <g:set var="xpTop" value="${top + 140}"/>
-    <g:set var="level" value="[2,4,6,8,11,14,17,20,24,28,32,36,41,46,51,57,63,69,76,83,90]"/>
+    <g:set var="level" value="[2, 4, 6, 8, 11, 14, 17, 20, 24, 28, 32, 36, 41, 46, 51, 57, 63, 69, 76, 83, 90]"/>
     <g:while test="${cpt <= 90}">
         <div class="pos" id="219:288" style="top:${xpTop};left:${xpLeft}">
             <g:if test="${level.contains(cpt)}">
@@ -391,7 +392,7 @@
         </div>
         <% cpt++ %>
         <% xpLeft += 25 %>
-        <g:if test="${cpt == 31 || cpt==61}">
+        <g:if test="${cpt == 31 || cpt == 61}">
             <g:set var="xpTop" value="${xpTop + 25}"/>
             <g:set var="xpLeft" value="${new Integer(440)}"/>
         </g:if>
