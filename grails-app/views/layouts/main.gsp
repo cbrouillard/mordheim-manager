@@ -52,6 +52,14 @@
                     </li>
                 </sec:ifAllGranted>
                 <sec:ifLoggedIn>
+                    <li><g:link controller="band" action="index"><span
+                            class="glyphicon glyphicon-list-alt"></span> <g:message code="band.list"/></g:link>
+                    </li>
+
+                   %{-- <li><g:link controller="buddy" action="index"><span
+                            class="glyphicon glyphicon-star"></span> <g:message code="buddies"/></g:link>
+                    </li>--}%
+
                     <li><g:link controller="person" action="myprofile"><span
                             class="glyphicon glyphicon-user"></span> <g:message code="my.profile"/></g:link>
                     </li>
@@ -83,10 +91,10 @@
 
 <footer>
     <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-        <div class="container-fluid">
+        <div class="container-fluid clearfix">
 
             <p class="navbar-text pull-left">© BROUILLARD Cyril - 2015 <g:message
-                    code="app.name"/> - <g:message code="app.disclaimer"/></p>
+                    code="app.name"/></p>
 
             <div class="navbar-text pull-right dons">
 

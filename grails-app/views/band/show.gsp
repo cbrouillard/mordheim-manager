@@ -58,7 +58,7 @@
 <div class="col-sm-4 col-xs-12">
 
     <div class="panel panel-info">
-        <div class="panel-heading">
+        <div class="panel-heading clearfix">
 
             <div class="form-inline pull-right">
                 <g:form url="[resource: bandInstance, action: 'delete']" method="DELETE"

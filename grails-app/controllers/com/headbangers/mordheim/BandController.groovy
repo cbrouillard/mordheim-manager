@@ -16,10 +16,13 @@ class BandController {
 
     @Secured(['ROLE_USER'])
     def index(Integer max) {
-        params.max = Math.min(max ?: 12, 100)
+        params.max = Math.min(max ?: 12, 12)
         params.sort = params.sort ?: "dateCreated"
         params.order = params.order ?: "desc"
-        respond Band.findAllByOwner(springSecurityService.currentUser, params), model: [bandInstanceCount: Band.countByOwner(springSecurityService.currentUser)]
+
+        def person = springSecurityService.currentUser
+
+        respond Band.findAllByOwner(person, params), model: [bandInstanceCount: Band.countByOwner(person), person: person]
     }
 
     @Secured(['ROLE_USER'])

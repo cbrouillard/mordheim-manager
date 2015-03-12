@@ -4,6 +4,8 @@ class Person {
 
     transient springSecurityService
 
+    //static hasMany = [buddies:Person]
+
     String id
 
     String username

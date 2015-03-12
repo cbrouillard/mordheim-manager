@@ -122,24 +122,29 @@
 
 </g:if>
 
-<g:if test="${params.action != 'edit'}">
-    <div class="form-group ${hasErrors(bean: wrenchmenInstance, field: 'cost', 'has-error')}">
+<div class="form-group ${hasErrors(bean: wrenchmenInstance, field: 'cost', 'has-error')}">
 
-        <label for="cost" class="col-sm-2 control-label"><g:message code="cost.label"/> *</label>
+    <label for="cost" class="col-sm-2 control-label"><g:message code="cost.label"/> *</label>
 
-        <div class="col-sm-10">
-            <div class="input-group">
-                <span class="input-group-addon"><span
-                        class="glyphicon glyphicon-link"></span></span>
-                <g:field maxlength="2" pattern="^([0-9])*" name="cost" type="number"
-                         value="${wrenchmenInstance?.cost}" required="" class="form-control"/>
-            </div>
-
-            <div class="help-block with-errors"><g:message code="cost.hint"/></div>
+    <div class="col-sm-10">
+        <div class="input-group">
+            <span class="input-group-addon"><span
+                    class="glyphicon glyphicon-link"></span></span>
+            <g:field maxlength="2" pattern="^([0-9])*" name="cost" type="number"
+                     value="${wrenchmenInstance?.cost}" required="" class="form-control"/>
         </div>
 
+        <div class="help-block with-errors">
+            <g:if test="${params.action == 'edit'}">
+                <g:message code="cost.hint.edit"/>
+            </g:if>
+            <g:else>
+                <g:message code="cost.hint"/>
+            </g:else>
+        </div>
     </div>
-</g:if>
+
+</div>
 
 
 <div class="form-group ${hasErrors(bean: wrenchmenInstance, field: 'note', 'has-error')}">

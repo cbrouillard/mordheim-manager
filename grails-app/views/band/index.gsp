@@ -15,11 +15,6 @@
                 <g:message
                         code="band.list"/> <small><g:message code="band.list.hint"/></small>
             </h1>
-            <g:if test="${asAdmin}">
-                <span class="label label-danger"><g:message code="as.admin"/></span>
-                <span class="label label-danger"><g:message code="as.admin.person.consulted"
-                                                            args="[person.username]"/></span>
-            </g:if>
             <hr/>
         </div>
         <g:if test="${flash.message}">
