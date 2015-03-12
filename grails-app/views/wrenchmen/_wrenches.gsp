@@ -7,7 +7,8 @@
                 <div class="col-sm-4">
                     <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
                     <h5><strong>${wrench.name}</strong></h5>
-                    <span class="label label-default pull-left">${wrench.number} ${wrench.type}</span>
+                    <span class="label label-default">${wrench.number} ${wrench.type}</span>
+                    <span class="label label-default"><g:message code="recruted.for" args="[wrench.cost]"/></span>
                 </div>
 
                 <div class="col-sm-8">

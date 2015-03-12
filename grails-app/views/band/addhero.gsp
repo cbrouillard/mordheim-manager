@@ -19,20 +19,6 @@
             <div class="alert alert-info" role="status">${flash.message}</div>
         </g:if>
 
-        <div class="row">
-            <div class="col-xs-6">
-
-            </div>
-
-            <div class="col-xs-6">
-                <div class="panel">
-                    <g:each in="${heroInstance.band.wrenches}" var="wrench">
-                        ${wrench.name}
-                    </g:each>
-                </div>
-            </div>
-        </div>
-
         <g:hasErrors bean="${heroInstance}">
             <div class="alert-danger alert">
                 <ul class="errors" role="alert">
@@ -46,11 +32,11 @@
     </div>
 </div>
 
-<div class="col-sm-2 col-xs-12">
+<div class="col-sm-3 col-xs-12">
     <g:render template="recruits" model="[from:heroInstance]"/>
 </div>
 
-<div class="col-sm-10 col-xs-12">
+<div class="col-sm-9 col-xs-12">
 
     <g:form url="[action: 'savehero']" class="form-horizontal" data-toggle="validator">
         <div class="panel panel-default">
@@ -77,11 +63,6 @@
                                 <span class="glyphicon glyphicon-forward"></span> ${message(code: 'next.step.wrench', default: 'Save')}
                             </button>
                         </div>
-
-                        <g:link class="btn btn-warning" controller="band" action="addwrench" id="${bandId}">
-                            <span class="glyphicon glyphicon-backward"></span> <g:message
-                                code="next.step.nosave.wrench"/>
-                        </g:link>
 
                         <div class="btn-group pull-right">
                             <button type="submit" class="btn btn-success" value="show" name="next">

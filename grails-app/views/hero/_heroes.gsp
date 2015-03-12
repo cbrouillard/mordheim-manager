@@ -8,7 +8,8 @@
                 <div class="col-sm-4">
                     <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
                     <h5><strong>${hero.name}</strong></h5>
-                    <span class="label label-default pull-left">${hero.type}</span>
+                    <span class="label label-default">${hero.type}</span>
+                    <span class="label label-default"><g:message code="recruted.for" args="[hero.cost]"/></span>
                 </div>
 
                 <div class="col-sm-8">
