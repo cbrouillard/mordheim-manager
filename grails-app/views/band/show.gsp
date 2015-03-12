@@ -163,6 +163,13 @@
 
     </div>
 
+    <g:if test="${bandInstance.nbWarriors == 0}">&nbsp;
+        <div class="alert alert-info">
+            <g:message encodeAs="raw" code="help.nowarriors"
+                       args="[createLink(controller: 'band', action: 'addhero', id: bandInstance.id)]"/>
+        </div>
+    </g:if>
+
 </div>
 </body>
 </html>

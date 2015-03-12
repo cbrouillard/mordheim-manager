@@ -137,6 +137,14 @@ class BandController {
             return
         }
 
+
+        if (band.heroes.size() >= 6) {
+            // nope, trop de héros.
+            flash.message = message(code: 'too.many.hero')
+            redirect(action: 'addwrench', id: band.id)
+            return
+        }
+
         band.heroes.add(heroInstance)
         band.gold = band.gold - heroInstance.cost
         band.save flush: true
@@ -175,6 +183,13 @@ class BandController {
 
         if (wrenchmenInstance.hasErrors()) {
             respond wrenchmenInstance.errors, view: 'addwrench'
+            return
+        }
+
+        if (band.wrenches.size() >= 6) {
+            // nope, trop de wrench.
+            flash.message = message(code: 'too.many.wrench.group')
+            redirect(action: 'addhero', id: band.id)
             return
         }
 

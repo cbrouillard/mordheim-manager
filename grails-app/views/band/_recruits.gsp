@@ -1,37 +1,62 @@
 <h4>${from.band.name} <small>${from.band.type}</small></h4>
 <hr/>
+
 <div class="panel panel-warning">
     <div class="panel-heading"><g:message code="recruit.heroes"/></div>
-    <div class="panel-body">
-        <g:each in="${from.band.heroes.sort({it.dateCreated})}" var="hero">
-            <div class="thumbnail">
-                <strong>${hero.name}</strong> <span class="label label-default">${hero.type}</span>
-                <span class="badge">${hero.cost} CO</span>
-            </div>
-        </g:each>
+
+    <div class="table-responsive">
+
+        <table class="table">
+            <g:each in="${from.band.heroes.sort({ it.dateCreated })}" var="hero">
+                <tr>
+                    <td><strong>${hero.name}</strong></td>
+                    <td><span class="label label-default">${hero.type}</span></td>
+                    <td class="text-right"><span class="badge">${hero.cost} CO</span></td>
+                </tr>
+            </g:each>
+        </table>
     </div>
-    <div class="panel-footer">
-        <g:link class="btn btn-warning" controller="band" action="addhero" id="${bandId}">
-            <span class="glyphicon glyphicon-forward"></span> <g:message
-                code="next.step.nosave.hero"/>
-        </g:link>
-    </div>
+
+    <g:if test="${from.band.heroes.size() < 6}">
+        <div class="panel-footer clearfix">
+            <g:link class="btn btn-warning pull-right" controller="band" action="addhero" id="${bandId}">
+                <span class="glyphicon glyphicon-forward"></span> <g:message
+                    code="next.step.nosave.hero"/>
+            </g:link>
+        </div>
+    </g:if>
 </div>
 
 <div class="panel panel-warning">
     <div class="panel-heading"><g:message code="recruit.wrenches"/></div>
-    <div class="panel-body">
-        <g:each in="${from.band.wrenches.sort({it.dateCreated})}" var="wrench">
-            <div class="thumbnail">
-                <strong>${wrench.name}</strong> <span class="label label-default">${wrench.type}</span>
-                <span class="badge">${wrench.cost} CO</span>
-            </div>
-        </g:each>
+
+    <div class="table-responsive">
+        <table class="table">
+            <g:each in="${from.band.wrenches.sort({ it.dateCreated })}" var="wrench">
+                <tr>
+                    <td><strong>${wrench.name}</strong></td>
+                    <td><span class="label label-default">${wrench.type}</span></td>
+                    <td class="text-right"><span class="badge">${wrench.cost} CO</span></td>
+                </tr>
+            </g:each>
+        </table>
     </div>
-    <div class="panel-footer">
-        <g:link class="btn btn-warning" controller="band" action="addwrench" id="${bandId}">
-            <span class="glyphicon glyphicon-forward"></span> <g:message
-                code="next.step.nosave.wrench"/>
-        </g:link>
-    </div>
+
+    <g:if test="${from.band.wrenches.size() < 6}">
+        <div class="panel-footer clearfix">
+            <g:link class="btn btn-warning pull-right" controller="band" action="addwrench" id="${bandId}">
+                <span class="glyphicon glyphicon-forward"></span> <g:message
+                    code="next.step.nosave.wrench"/>
+            </g:link>
+        </div>
+    </g:if>
+</div>
+
+<g:link class="btn btn-primary btn-block" controller="band" action="show" id="${bandId}">
+    <span class="glyphicon glyphicon-ok-circle"></span> <g:message
+        code="recruit.done"/>
+</g:link>
+
+<div class="alert alert-info">
+    <g:message code="recruit.done.hint"/>
 </div>
