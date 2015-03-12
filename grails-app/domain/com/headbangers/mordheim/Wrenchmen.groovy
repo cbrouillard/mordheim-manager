@@ -14,7 +14,7 @@ class Wrenchmen {
     String competences
     String specialRules
 
-    Integer cost
+    Integer cost = 0
 
     Integer M = 0;
     Integer CC = 0;

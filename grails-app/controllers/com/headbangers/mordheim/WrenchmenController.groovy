@@ -10,6 +10,8 @@ class WrenchmenController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def springSecurityService
+
     @Secured(['ROLE_USER'])
     def create() {
         Wrenchmen man = new Wrenchmen(params)
@@ -29,18 +31,19 @@ class WrenchmenController {
             return
         }
 
-        def band = Band.get(params.band)
+        def band = Band.findByIdAndOwner(params.band, springSecurityService.currentUser)
         if (band == null) {
             redirect action: 'index', controller: 'band'
             return
         }
 
         band.wrenches.add(wrenchmenInstance)
+        band.gold = band.gold - wrenchmenInstance.cost
         band.save flush: true
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'wrenchmen.label', default: 'Wrenchmen'), wrenchmenInstance.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'Wrenchmen.label', default: 'Wrenchmen'), wrenchmenInstance.name])
                 redirect controller: 'band', action: 'show', id: band.id, params: [tab: 'wrench']
             }
             '*' { respond wrenchmenInstance, [status: CREATED] }
@@ -69,7 +72,7 @@ class WrenchmenController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Wrenchmen.label', default: 'Wrenchmen'), wrenchmenInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Wrenchmen.label', default: 'Wrenchmen'), wrenchmenInstance.name])
                 redirect action: "show", controller: 'band', id: wrenchmenInstance.band.id, method: "GET", params: [tab: 'wrench']
             }
             '*' { respond wrenchmenInstance, [status: OK] }
@@ -90,7 +93,7 @@ class WrenchmenController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Wrenchmen.label', default: 'Wrenchmen'), wrenchmenInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Wrenchmen.label', default: 'Wrenchmen'), wrenchmenInstance.name])
                 redirect action: "show", controller: 'band', id: band.id, method: "GET", params: [tab: 'wrench']
             }
             '*' { render status: NO_CONTENT }
@@ -100,7 +103,7 @@ class WrenchmenController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'wrenchmen.label', default: 'Wrenchmen'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'Wrenchmen.label', default: 'Wrenchmen'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NOT_FOUND }

@@ -53,6 +53,11 @@
                             <span class="glyphicon glyphicon-save"></span> ${message(code: 'default.button.create.label', default: 'Save')}
                         </button>
 
+                        <g:link class="btn btn-default" controller="band" action="show" id="${bandId}">
+                            <span class="glyphicon glyphicon-triangle-left"></span> <g:message
+                                code="cancel"/>
+                        </g:link>
+
                     </div>
                 </div>
             </div>

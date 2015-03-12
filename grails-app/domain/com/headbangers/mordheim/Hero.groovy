@@ -14,7 +14,7 @@ class Hero {
     String competences
     String injuries
 
-    Integer cost
+    Integer cost = 0
 
     Integer M = 0;
     Integer CC = 0;

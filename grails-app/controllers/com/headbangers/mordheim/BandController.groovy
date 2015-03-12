@@ -34,13 +34,6 @@ class BandController {
     }
 
     @Secured(['ROLE_USER'])
-    def create() {
-        Band band = new Band(params)
-        band.owner = springSecurityService.currentUser
-        respond band
-    }
-
-    @Secured(['ROLE_USER'])
     def pdf() {
         Band band = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
         if (band) {
@@ -81,6 +74,13 @@ class BandController {
         return
     }
 
+    @Secured(['ROLE_USER'])
+    def create() {
+        Band band = new Band(params)
+        band.owner = springSecurityService.currentUser
+        respond band
+    }
+
     @Transactional
     @Secured(['ROLE_USER'])
     def save(Band bandInstance) {
@@ -90,6 +90,7 @@ class BandController {
         }
 
         bandInstance.owner = springSecurityService.currentUser
+        bandInstance.gold = 500
         bandInstance.validate()
 
         if (bandInstance.hasErrors()) {
@@ -101,10 +102,92 @@ class BandController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'Band.label', default: 'Band'), bandInstance.id])
-                redirect bandInstance
+                flash.message = message(code: 'default.created.message', args: [message(code: 'Band.label', default: 'Band'), bandInstance.name])
+                redirect action: 'addhero', id: bandInstance.id
             }
             '*' { respond bandInstance, [status: CREATED] }
+        }
+    }
+
+    @Secured(['ROLE_USER'])
+    def addhero() {
+        Band band = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (!band) {
+            redirect action: 'index'
+            return
+        }
+
+        Hero hero = new Hero(params)
+        hero.band = band
+        [bandId: params.id, heroInstance: hero]
+    }
+
+    @Transactional
+    @Secured(['ROLE_USER'])
+    def savehero(Hero heroInstance) {
+
+        def band = Band.findByIdAndOwner(params.band, springSecurityService.currentUser)
+        if (band == null) {
+            redirect action: 'index', controller: 'band'
+            return
+        }
+
+        if (heroInstance.hasErrors()) {
+            respond heroInstance.errors, view: 'addhero'
+            return
+        }
+
+        band.heroes.add(heroInstance)
+        band.gold = band.gold - heroInstance.cost
+        band.save flush: true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Hero.label', default: 'Hero'), heroInstance.name])
+                redirect action: params.next, id: heroInstance.band.id
+            }
+            '*' { respond heroInstance, [status: OK] }
+        }
+    }
+
+    @Secured(['ROLE_USER'])
+    def addwrench() {
+        Band band = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (!band) {
+            redirect action: 'index'
+            return
+        }
+
+        Wrenchmen wrench = new Wrenchmen(params)
+        wrench.band = band
+        [bandId: params.id, wrenchmenInstance: wrench]
+    }
+
+    @Transactional
+    @Secured(['ROLE_USER'])
+    def savewrench(Wrenchmen wrenchmenInstance) {
+
+        def band = Band.findByIdAndOwner(params.band, springSecurityService.currentUser)
+        if (band == null) {
+            redirect action: 'index', controller: 'band'
+            return
+        }
+
+        if (wrenchmenInstance.hasErrors()) {
+            respond wrenchmenInstance.errors, view: 'addwrench'
+            return
+        }
+
+        band.wrenches.add(wrenchmenInstance)
+        band.gold = band.gold - wrenchmenInstance.cost
+        band.save flush: true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Wrenchmen.label', default: 'Hero'), wrenchmenInstance.name])
+                redirect action: params.next, id: wrenchmenInstance.band.id
+            }
+            '*' { respond wrenchmenInstance, [status: OK] }
         }
     }
 
@@ -135,7 +218,7 @@ class BandController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Band.label', default: 'Band'), bandInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Band.label', default: 'Band'), bandInstance.name])
                 redirect bandInstance
             }
             '*' { respond bandInstance, [status: OK] }
@@ -161,7 +244,7 @@ class BandController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Band.label', default: 'Band'), bandInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Band.label', default: 'Band'), bandInstance.name])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }
@@ -171,7 +254,7 @@ class BandController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'band.label', default: 'Band'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'Band.label', default: 'Band'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NOT_FOUND }
@@ -188,12 +271,5 @@ class BandController {
         }
 
         return isAdmin && params.asAdmin
-    }
-
-    def endgameFlow = {
-        flow.bandInstance = Band.get(params.id)
-        deadWrenches {
-
-        }
     }
 }

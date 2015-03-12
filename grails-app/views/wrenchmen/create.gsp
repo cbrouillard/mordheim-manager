@@ -21,7 +21,7 @@
         <g:hasErrors bean="${wrenchmenInstance}">
             <div class="alert-danger alert">
                 <ul class="errors" role="alert">
-                    <g:eachError bean="${bandInstance}" var="error">
+                    <g:eachError bean="${wrenchmenInstance}" var="error">
                         <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
                                 error="${error}"/></li>
                     </g:eachError>
@@ -31,35 +31,40 @@
     </div>
 </div>
 
+<div class="col-xs-12">
 
+    <g:form url="[resource: wrenchmenInstance, action: 'save']" class="form-horizontal" data-toggle="validator">
+        <div class="panel panel-default">
+            <div class="panel-body">
 
-<g:form url="[resource: wrenchmenInstance, action: 'save']" class="form-horizontal" data-toggle="validator">
-    <div class="panel panel-default">
-        <div class="panel-body">
+                <fieldset class="form">
+                    <g:render template="form"/>
+                    <g:hiddenField name="band" value="${bandId}"/>
+                </fieldset>
 
-            <fieldset class="form">
-                <g:render template="form"/>
-                <g:hiddenField name="band" value="${bandId}"/>
-            </fieldset>
+            </div>
 
-        </div>
+            <div class="panel-footer">
 
-        <div class="panel-footer">
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
 
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-success">
+                            <span class="glyphicon glyphicon-save"></span> ${message(code: 'default.button.create.label', default: 'Save')}
+                        </button>
 
-                    <button type="submit" class="btn btn-success">
-                        <span class="glyphicon glyphicon-save"></span> ${message(code: 'default.button.create.label', default: 'Save')}
-                    </button>
+                        <g:link class="btn btn-default" controller="band" action="show" id="${bandId}">
+                            <span class="glyphicon glyphicon-triangle-left"></span> <g:message
+                                code="cancel"/>
+                        </g:link>
 
+                    </div>
                 </div>
             </div>
+
         </div>
 
-    </div>
-
-</g:form>
+    </g:form>
 
 </div>
 </body>

@@ -134,7 +134,7 @@ class PersonController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Person.label', default: 'Person'), personInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Person.label', default: 'Person'), personInstance.username])
                 redirect action: 'myprofile', methode: "GET"
             }
             '*' { respond personInstance, [status: OK] }
@@ -163,7 +163,7 @@ class PersonController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Person.label', default: 'Person'), personInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Person.label', default: 'Person'), personInstance.username])
                 redirect action: 'index', methode: "GET"
             }
             '*' { respond personInstance, [status: OK] }
@@ -183,7 +183,7 @@ class PersonController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Person.label', default: 'Person'), personInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Person.label', default: 'Person'), personInstance.username])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }
@@ -193,7 +193,7 @@ class PersonController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'person.label', default: 'Person'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'Person.label', default: 'Person'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NOT_FOUND }

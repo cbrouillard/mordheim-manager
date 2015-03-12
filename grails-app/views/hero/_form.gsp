@@ -38,7 +38,7 @@
 
 <div class="form-group">
 
-    <label class="col-sm-2 control-label"><g:message code="hero.profile.label"/> *</label>
+    <label class="col-sm-2 control-label"><g:message code="hero.profile.label"/></label>
 
     <div class="col-sm-10">
         <g:render template="/profilable/editprofile" model="[profilable: heroInstance]"/>
@@ -55,7 +55,8 @@
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-scissors"></span></span>
-            <g:textArea name="equipment" cols="40" rows="5" value="${heroInstance?.equipment}" class="form-control editor"/>
+            <g:textArea name="equipment" cols="40" rows="5" value="${heroInstance?.equipment}"
+                        class="form-control editor"/>
         </div>
 
         <div class="help-block with-errors"></div>
@@ -84,7 +85,8 @@
             <div class="input-group">
                 <span class="input-group-addon"><span
                         class="glyphicon glyphicon-plus-sign"></span></span>
-                <g:textArea name="injuries" cols="40" rows="5" value="${heroInstance?.injuries}" class="form-control editor"/>
+                <g:textArea name="injuries" cols="40" rows="5" value="${heroInstance?.injuries}"
+                            class="form-control editor"/>
             </div>
 
             <div class="help-block with-errors"></div>
@@ -127,6 +129,25 @@
         </div>
     </g:if>
 </div>
+
+<g:if test="${params.action != 'edit'}">
+    <div class="form-group ${hasErrors(bean: heroInstance, field: 'cost', 'has-error')}">
+
+        <label for="cost" class="col-sm-2 control-label"><g:message code="cost.label"/> *</label>
+
+        <div class="col-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><span
+                        class="glyphicon glyphicon-link"></span></span>
+                <g:field maxlength="2" pattern="^([0-9])*" name="cost" type="number"
+                         value="${heroInstance?.cost}" required="" class="form-control"/>
+            </div>
+
+            <div class="help-block with-errors"><g:message code="cost.hint"/></div>
+        </div>
+
+    </div>
+</g:if>
 
 <div class="form-group ${hasErrors(bean: heroInstance, field: 'note', 'has-error')}">
 
