@@ -26,8 +26,8 @@
          border="0"/>
 </div>
 
-<div class="pos" id="365:23" style="top:65px;left:680px">
-    <span id="31.4" style=" font-family:Arial; font-size:65px; color:#892a1a24">
+<div class="pos" id="365:23" style="top:60px;left:650px;width:530px;">
+    <span id="31.4" style=" font-family:Arial; font-size:60px; color:#892a1a24">
         <g:message code="wrenches"/></span>
 </div>
 
