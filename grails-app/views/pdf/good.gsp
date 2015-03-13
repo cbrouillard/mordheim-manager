@@ -21,7 +21,6 @@
 </head>
 
 <body>
-<nobr><nowrap>
 <div class="pos" id="0:0" style="top:0">
     <img name="_842:596" src="${resource(dir: 'images', file: 'page_001.jpg', absolute: true)}"
          border="0"/>
@@ -32,12 +31,12 @@
         <g:message code="wrenches"/></span>
 </div>
 
-<div class="pos" id="22:88" style="top:190;left:35">
+<div class="pos" id="22:88" style="top:190;left:35;width: 625px;">
     <span id="11.8" style=" font-family:Arial; font-size:20px; color:#892a1a24">
         <g:message code="warband.name" args="[band.name]"/></span>
 </div>
 
-<div class="pos" id="347:88" style="top:190;left:720">
+<div class="pos" id="347:88" style="top:190;left:720;width: 475px;">
     <span id="11.8" style=" font-family:Arial; font-size:20px; color:#892a1a24">
         <g:message code="warband.type" args="[band.type]"/></span>
 </div>
@@ -52,7 +51,7 @@
         <g:message code="warband.value"/> :</span>
 </div>
 
-<div class="pos" id="280:126" style="top:260;left:575">
+<div class="pos" id="280:126" style="top:260;left:575;width: 615px;">
     <span id="11.5" style=" font-family:Arial; font-size:20px; color:#892a1a24">
         <g:message code="warband.equipment" args="[raw(band.reserve ?: '')]"/></span>
 </div>
@@ -86,27 +85,27 @@
 <g:set var="top" value="${new java.lang.Integer(480)}"/>
 <g:set var="left" value="${new java.lang.Integer(45)}"/>
 <g:each in="${band.wrenches?.sort { it.dateCreated }}" var="wrench">
-    <div class="pos" id="23:228" style="top:${top};left:${left}">
+    <div class="pos" id="23:228" style="top:${top};left:${left};width: 385px;">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.name" args="[wrench.name]"/></span>
     </div>
 
-    <div class="pos" id="221:228" style="top:${top};left:${left + 405}">
+    <div class="pos" id="221:228" style="top:${top};left:${left + 405};width: 380px;">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.equipment" args="[raw(wrench.equipment ?: '')]"/></span>
     </div>
 
-    <div class="pos" id="404:228" style="top:${top};left:${left + 800}">
+    <div class="pos" id="404:228" style="top:${top};left:${left + 800};width: 355px;">
         <span id="9.3" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.specialrules" args="[raw(wrench.specialRules ?: '')]"/></span>
     </div>
 
-    <div class="pos" id="23:243" style="top:${top + 35};left:${left}">
+    <div class="pos" id="23:243" style="top:${top + 35};left:${left};width: 125px;">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.number" args="[wrench.number]"/></span>
     </div>
 
-    <div class="pos" id="88:243" style="top:${top + 35};left:${left + 140}">
+    <div class="pos" id="88:243" style="top:${top + 35};left:${left + 140};width: 250px;">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.type" args="[wrench.type]"/></span>
     </div>
@@ -248,27 +247,27 @@
 <g:set var="top" value="${new java.lang.Integer(1908)}"/>
 <g:set var="left" value="${new java.lang.Integer(45)}"/>
 <g:each in="${band.heroes?.sort({ it.dateCreated })}" var="hero">
-    <div class="pos" id="23:911" style="top:${top};left:${left}">
+    <div class="pos" id="23:911" style="top:${top};left:${left};width: 385px;">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.name" args="[hero.name]"/></span>
     </div>
 
-    <div class="pos" id="221:912" style="top:${top};left:${left + 405}">
-        <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
+    <div class="pos" id="221:912" style="top:${top};left:${left + 405};width: 225px;">
+        <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24;">
             <g:message code="warband.warrior.equipment" args="[raw(hero.equipment ?: '')]"/></span>
     </div>
 
-    <div class="pos" id="404:912" style="top:${top};left:${left + 645}">
+    <div class="pos" id="404:912" style="top:${top};left:${left + 645};width: 270px;">
         <span id="9.4" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.competences" args="[raw(hero.competences ?: '')]"/></span>
     </div>
 
-    <div class="pos" id="404:912" style="top:${top};left:${left + 930}">
+    <div class="pos" id="404:912" style="top:${top};left:${left + 930};width: 220px;">
         <span id="9.4" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.injuries" args="[raw(hero.injuries ?: '')]"/></span>
     </div>
 
-    <div class="pos" id="23:928" style="top:${top + 35};left:${left}">
+    <div class="pos" id="23:928" style="top:${top + 35};left:${left};width: 385px;">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
             <g:message code="warband.warrior.type" args="[hero.type]"/></span>
     </div>
@@ -403,6 +402,5 @@
 
 </g:each>
 
-</nowrap></nobr>
 </body>
 </html>

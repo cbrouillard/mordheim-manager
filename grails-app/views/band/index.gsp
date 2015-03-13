@@ -26,7 +26,7 @@
 <div class="col-sm-12">
 
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading clearfix">
 
             <div class="btn-group pull-right" role="group">
                 <g:link class="btn btn-default" controller="band" action="index"

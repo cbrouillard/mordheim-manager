@@ -15,7 +15,7 @@
 
                 <div class="panel-body">
                     <g:each in="${buddy.bands}" var="band">
-                        <div class="col-lg-2 col-md-4 col-sm-5">
+                        <div class="col-lg-3 col-md-4 col-sm-5">
                             <div class="thumbnail panel-primary">
                                 <asset:image src="Mordheim.gif" width="100px"/>
                                 <div class="caption text-center">

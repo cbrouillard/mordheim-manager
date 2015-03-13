@@ -9,7 +9,9 @@
                     <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
                     <h5><strong>${hero.name}</strong></h5>
                     <span class="label label-default">${hero.type}</span>
-                    <span class="label label-default"><g:message code="recruted.for" args="[hero.cost]"/></span>
+                    <g:if test="${hero.cost > 0}">
+                        <span class="label label-default"><g:message code="recruted.for" args="[hero.cost]"/></span>
+                    </g:if>
                 </div>
 
                 <g:if test="${!anonymous}">

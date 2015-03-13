@@ -10,7 +10,8 @@
             <div class="input-group">
                 <span class="input-group-addon"><span
                         class="glyphicon glyphicon-user"></span></span>
-                <g:textField name="username" required="" value="${personInstance?.username}" class="form-control" autofocus=""/>
+                <g:textField name="username" required="" value="${personInstance?.username}" class="form-control"
+                             autofocus=""/>
             </div>
 
             <div class="help-block with-errors"></div>
@@ -62,7 +63,8 @@
                     class="glyphicon glyphicon-cog"></span></span>
             <g:if test="${params.action.contains('regist')}">
                 <g:passwordField name="passwordCheck" class="form-control"
-                                 data-match-error="${message(code: 'pass.notmatch')}" data-match="#passwordNew" required=""/>
+                                 data-match-error="${message(code: 'pass.notmatch')}" data-match="#passwordNew"
+                                 required=""/>
             </g:if>
             <g:else>
                 <g:passwordField name="passwordCheck" class="form-control"
@@ -70,7 +72,11 @@
             </g:else>
         </div>
 
-        <div class="help-block with-errors"><g:message code="password.hint"/></div>
+        <div class="help-block with-errors"><g:message code="password.hint"/>
+        <g:if test="${params.action == 'myprofile'}">
+            <g:message code="leave.empty.to.set.unchanged"/>
+        </g:if>
+        </div>
     </div>
 </div>
 

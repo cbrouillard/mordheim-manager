@@ -97,10 +97,8 @@
 
 <div class="col-sm-8 col-xs-12">
     <g:if test="${!groups}">
-        <div class="panel-body">
-            <div class="alert alert-info">
-                <g:message code="no.joined.groups"/>
-            </div>
+        <div class="alert alert-info">
+            <g:message code="no.joined.groups"/>
         </div>
     </g:if>
     <g:else>

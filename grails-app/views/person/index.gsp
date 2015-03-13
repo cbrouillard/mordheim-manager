@@ -99,12 +99,25 @@
                         <td>
                             <g:if test="${sec.loggedInUserInfo(field: "username") != person.username}">
                                 <sec:ifAllGranted roles='ROLE_ADMIN'>
-                                    <form action='${request.contextPath}/j_spring_security_switch_user' method='POST'>
-                                        <g:hiddenField name="j_username" value="${person.username}"/>
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <span class="glyphicon glyphicon-user"></span> ${message(code: 'default.button.switch.label', default: 'Switch')}
-                                        </button>
-                                    </form>
+                                    <div class="btn-group">
+                                        <g:form url="[resource: person, action: 'delete']" method="DELETE"
+                                                class="form-inline pull-right">&nbsp;
+                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+
+                                        </g:form>
+                                        <form action='${request.contextPath}/j_spring_security_switch_user'
+                                              method='POST' class="form-inline pull-right">
+                                            <g:hiddenField name="j_username" value="${person.username}"/>
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <span class="glyphicon glyphicon-user"></span> ${message(code: 'default.button.switch.label', default: 'Switch')}
+                                            </button>
+                                        </form>
+
+
+                                    </div>
 
                                 </sec:ifAllGranted>
                             </g:if>

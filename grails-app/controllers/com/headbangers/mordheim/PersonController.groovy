@@ -179,6 +179,7 @@ class PersonController {
             return
         }
 
+        PersonRole.removeAll(personInstance, true)
         personInstance.delete flush: true
 
         request.withFormat {

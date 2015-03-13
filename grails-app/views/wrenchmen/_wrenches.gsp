@@ -8,7 +8,9 @@
                     <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
                     <h5><strong>${wrench.name}</strong></h5>
                     <span class="label label-default">${wrench.number} ${wrench.type}</span>
-                    <span class="label label-default"><g:message code="recruted.for" args="[wrench.cost]"/></span>
+                    <g:if test="${wrench.cost > 0}">
+                        <span class="label label-default"><g:message code="recruted.for" args="[wrench.cost]"/></span>
+                    </g:if>
                 </div>
 
                 <g:if test="${!anonymous}">
