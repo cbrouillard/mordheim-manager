@@ -43,14 +43,7 @@
         <div class="collapse navbar-collapse" id="navbar-collapse-1">
 
             <ul class="nav navbar-nav">
-                <sec:ifAllGranted roles="ROLE_ADMIN">
-                    <li>
-                        <g:link controller="admin">
-                            <span class="glyphicon glyphicon-cog"></span>
-                            <g:message code="admin.console"/>
-                        </g:link>
-                    </li>
-                </sec:ifAllGranted>
+
                 <sec:ifLoggedIn>
                     <li><g:link controller="band" action="index"><span
                             class="glyphicon glyphicon-list-alt"></span> <g:message code="band.list"/></g:link>
@@ -68,6 +61,9 @@
                             class="glyphicon glyphicon-log-out"></span> <g:message code="logout"/></g:link>
                     </li>
                 </sec:ifLoggedIn>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
                 <sec:ifSwitched>
                     <li>
                         <a href='${request.contextPath}/j_spring_security_exit_user'>
@@ -79,7 +75,16 @@
                         </a>
                     </li>
                 </sec:ifSwitched>
+                <sec:ifAllGranted roles="ROLE_ADMIN">
+                    <li>
+                        <g:link controller="admin">
+                            <span class="glyphicon glyphicon-cog"></span>
+                            <g:message code="admin.console"/>
+                        </g:link>
+                    </li>
+                </sec:ifAllGranted>
             </ul>
+
         </div>
 
     </div>

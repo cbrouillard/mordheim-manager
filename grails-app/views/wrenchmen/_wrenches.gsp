@@ -11,23 +11,26 @@
                     <span class="label label-default"><g:message code="recruted.for" args="[wrench.cost]"/></span>
                 </div>
 
-                <div class="col-sm-8">
-                    <div class="form-inline">
-                        <g:form url="[resource: wrench, action: 'delete']" method="DELETE"
-                                class="form-inline pull-right">
-                            <g:hiddenField name="band" value="${bandInstance.id}"/>
-                            <div class="btn-group">
-                                <g:link class="btn btn-success" controller="wrenchmen" action="edit" id="${wrench.id}">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                </g:link>
-                                <button type="submit" class="btn btn-danger"
-                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                            </div>
-                        </g:form>
+                <g:if test="${!anonymous}">
+                    <div class="col-sm-8">
+                        <div class="form-inline">
+                            <g:form url="[resource: wrench, action: 'delete']" method="DELETE"
+                                    class="form-inline pull-right">
+                                <g:hiddenField name="band" value="${bandInstance.id}"/>
+                                <div class="btn-group">
+                                    <g:link class="btn btn-success" controller="wrenchmen" action="edit"
+                                            id="${wrench.id}">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </g:link>
+                                    <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
+                            </g:form>
+                        </div>
                     </div>
-                </div>
+                </g:if>
             </div>
 
         </div>
@@ -42,6 +45,7 @@
                          style="width: ${wrench.experience * 100 / 14}%;">
                         ${wrench.experience}
                     </div>
+
                     <div class="progress-bar progress-bar-striped progress-bar-success" role="progressbar"
                          style="width: ${wrench.earnedXp * 100 / 14}%;">
                         ${wrench.earnedXp}

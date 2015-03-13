@@ -19,29 +19,30 @@
                 <g:message
                         code="band.show"/> <small>${bandInstance.name}</small>
 
-
-                <div class="btn-group">
-                    <g:link controller="band" action="pdf" id="${bandInstance.id}" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-list-alt"></span> <g:message code="generate.pdf"/>
-                    </g:link>
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                            aria-expanded="false">
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <g:link controller="band" action="previewpdf" id="${bandInstance.id}" target="_blank">
-                                <span class="glyphicon glyphicon-eye-open"></span> <g:message
-                                    code="generate.preview.pdf"/>
-                            </g:link>
-                        </li>
-                    </ul>
-                </div>
+                <g:if test="${!anonymous}">
+                    <div class="btn-group">
+                        <g:link controller="band" action="pdf" id="${bandInstance.id}" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-list-alt"></span> <g:message code="generate.pdf"/>
+                        </g:link>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <g:link controller="band" action="previewpdf" id="${bandInstance.id}" target="_blank">
+                                    <span class="glyphicon glyphicon-eye-open"></span> <g:message
+                                        code="generate.preview.pdf"/>
+                                </g:link>
+                            </li>
+                        </ul>
+                    </div>
 
                 %{--<g:link controller="game" action="endgame" id="${bandInstance.id}" class="btn btn-warning">
                     <span class="glyphicon glyphicon-ok-circle"></span> <g:message code="end.game"/>
                 </g:link>--}%
+                </g:if>
             </h1>
 
             <hr/>
@@ -60,21 +61,23 @@
     <div class="panel panel-info">
         <div class="panel-heading clearfix">
 
-            <div class="form-inline pull-right">
-                <g:form url="[resource: bandInstance, action: 'delete']" method="DELETE"
-                        class="form-inline pull-right">
-                    <div class="btn-group">
-                        <g:link class="btn btn-success" controller="band" action="edit" id="${bandInstance.id}">
-                            <span class="glyphicon glyphicon-edit"></span>
-                            <g:message code="default.button.edit.label"/>
-                        </g:link>
-                        <button type="submit" class="btn btn-danger"
-                                onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                            <span class="glyphicon glyphicon-remove"></span> ${message(code: 'default.button.delete.label', default: 'Delete')}
-                        </button>
-                    </div>
-                </g:form>
-            </div>
+            <g:if test="${!anonymous}">
+                <div class="form-inline pull-right">
+                    <g:form url="[resource: bandInstance, action: 'delete']" method="DELETE"
+                            class="form-inline pull-right">
+                        <div class="btn-group">
+                            <g:link class="btn btn-success" controller="band" action="edit" id="${bandInstance.id}">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                <g:message code="default.button.edit.label"/>
+                            </g:link>
+                            <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                <span class="glyphicon glyphicon-remove"></span> ${message(code: 'default.button.delete.label', default: 'Delete')}
+                            </button>
+                        </div>
+                    </g:form>
+                </div>
+            </g:if>
             <h5><g:message code="band.infos"/></h5>
 
         </div>
@@ -127,11 +130,12 @@
                 <a href="#heroes" role="tab" data-toggle="tab">
                     <span class="badge">${bandInstance.heroes.size()}</span>
                     <g:message code="heroes"/>
-
-                    <button class="btn btn-success btn-xs ${bandInstance.heroes.size() >= 6 ? "disabled" : ""}"
-                            onclick="document.location = '${createLink(controller: 'hero', action:'create', params: [band:bandInstance.id])}'">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
+                    <g:if test="${!anonymous}">
+                        <button class="btn btn-success btn-xs ${bandInstance.heroes.size() >= 6 ? "disabled" : ""}"
+                                onclick="document.location = '${createLink(controller: 'hero', action:'create', params: [band:bandInstance.id])}'">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </g:if>
                 </a>
 
             </li>
@@ -139,10 +143,12 @@
                 <a href="#wrenches" role="tab" data-toggle="tab">
                     <span class="badge">${bandInstance.nbWrenches}</span>
                     <g:message code="wrenches"/>
-                    <button class="btn btn-success btn-xs ${bandInstance.nbWarriors >= 21 ? "disabled" : ""}"
-                            onclick="document.location = '${createLink(controller: 'wrenchmen', action:'create', params: [band:bandInstance.id])}'">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
+                    <g:if test="${!anonymous}">
+                        <button class="btn btn-success btn-xs ${bandInstance.nbWarriors >= 21 ? "disabled" : ""}"
+                                onclick="document.location = '${createLink(controller: 'wrenchmen', action:'create', params: [band:bandInstance.id])}'">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </g:if>
                 </a>
             </li>
         </ul>

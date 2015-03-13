@@ -12,36 +12,39 @@
                     <span class="label label-default"><g:message code="recruted.for" args="[hero.cost]"/></span>
                 </div>
 
-                <div class="col-sm-8">
-                    <div class="form-inline">
-                        <g:form url="[resource: hero, action: 'delete']" method="DELETE"
-                                class="form-inline pull-right">
-                            <g:hiddenField name="band" value="${bandInstance.id}"/>
-                            <div class="btn-group">
-                                <g:link class="btn btn-success" controller="hero" action="edit" id="${hero.id}">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                </g:link>
-                                <button type="submit" class="btn btn-danger"
-                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                            </div>
-                        </g:form>
+                <g:if test="${!anonymous}">
+                    <div class="col-sm-8">
+                        <div class="form-inline">
+                            <g:form url="[resource: hero, action: 'delete']" method="DELETE"
+                                    class="form-inline pull-right">
+                                <g:hiddenField name="band" value="${bandInstance.id}"/>
+                                <div class="btn-group">
+                                    <g:link class="btn btn-success" controller="hero" action="edit" id="${hero.id}">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </g:link>
+                                    <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
+                            </g:form>
+                        </div>
                     </div>
-                </div>
+                </g:if>
             </div>
         </div>
 
         <div class="panel-body">
 
             <div>
-                <span class="label label-info pull-right"><g:message code="experience.label"/> : ${hero.fullXp} </span>
+                <span class="label label-info pull-right"><g:message code="experience.label"/> : ${hero.fullXp}</span>
 
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-info" role="progressbar"
                          style="width: ${hero.experience * 100 / 90}%;">
                         ${hero.experience}
                     </div>
+
                     <div class="progress-bar progress-bar-striped progress-bar-success" role="progressbar"
                          style="width: ${hero.earnedXp * 100 / 90}%;">
                         ${hero.earnedXp}

@@ -11,6 +11,7 @@ class MordGroup {
 
     String name
     boolean isPublic = true
+    boolean enabled = true
 
     Person owner
 
@@ -18,6 +19,7 @@ class MordGroup {
         name nullable: false, blank: false
         owner nullable:false
         isPublic nullable:false
+        enabled nullable:false
     }
 
     static mapping = {

@@ -1,10 +1,12 @@
 package com.headbangers.mordheim.security
 
+import com.headbangers.mordheim.Band
+
 class Person {
 
     transient springSecurityService
 
-    //static hasMany = [buddies:Person]
+    static hasMany = [bands:Band    ]
 
     String id
 
