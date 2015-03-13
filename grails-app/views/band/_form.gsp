@@ -10,16 +10,12 @@
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-font"></span></span>
-            <g:textField name="name" required="" value="${bandInstance?.name}" class="form-control"/>
+            <g:textField name="name" required="" value="${bandInstance?.name}" class="form-control" autofocus=""/>
         </div>
 
         <div class="help-block with-errors"></div>
     </div>
 </div>
-
-<jq:jquery>
-    $('#name').focus();
-</jq:jquery>
 
 <div class="form-group ${hasErrors(bean: bandInstance, field: 'type', 'has-error')}">
 

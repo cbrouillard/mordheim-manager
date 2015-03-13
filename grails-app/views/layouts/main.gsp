@@ -56,9 +56,9 @@
                             class="glyphicon glyphicon-list-alt"></span> <g:message code="band.list"/></g:link>
                     </li>
 
-                   %{-- <li><g:link controller="buddy" action="index"><span
+                    <li><g:link controller="mordGroup" action="index"><span
                             class="glyphicon glyphicon-star"></span> <g:message code="buddies"/></g:link>
-                    </li>--}%
+                    </li>
 
                     <li><g:link controller="person" action="myprofile"><span
                             class="glyphicon glyphicon-user"></span> <g:message code="my.profile"/></g:link>
