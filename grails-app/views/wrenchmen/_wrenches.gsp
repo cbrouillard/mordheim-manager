@@ -42,17 +42,7 @@
             <div>
                 <span class="label label-info pull-right"><g:message code="experience.label"/> : ${wrench.fullXp}</span>
 
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-info" role="progressbar"
-                         style="width: ${wrench.experience * 100 / 14}%;">
-                        ${wrench.experience}
-                    </div>
-
-                    <div class="progress-bar progress-bar-striped progress-bar-success" role="progressbar"
-                         style="width: ${wrench.earnedXp * 100 / 14}%;">
-                        ${wrench.earnedXp}
-                    </div>
-                </div>
+                <g:render template="/profilable/experience" model="[from: wrench, maxXp: 14]"/>
             </div>
 
             <div class="table-responsive">

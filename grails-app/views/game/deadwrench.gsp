@@ -3,6 +3,39 @@
 <html>
 <head>
     <meta name="layout" content="main">
+    <script type="text/javascript">
+
+        var result = function (wrenchgroupId) {
+            var allDead = 1;
+            var allLife = 1;
+
+            $('#' + wrenchgroupId + ' input[type=radio]:checked').each(
+                    function (index) {
+                        var val = $(this).val();
+                        console.log(index + ": " + val);
+
+                        if (val == 'death') {
+                            allLife = 0;
+                        } else {
+                            allDead = 0;
+                        }
+
+                    });
+
+            var message = "<g:message code="endgame.notalldead.notalllife"/>";
+            if (allDead) {
+                message = "<g:message code="endgame.alldead"/>";
+                $('#' + wrenchgroupId+"progress").hide();
+            } else if (allLife) {
+                message = "<g:message code="endgame.alllife"/>";
+                $('#' + wrenchgroupId+"progress").show();
+            } else {
+                $('#' + wrenchgroupId+"progress").show();
+            }
+
+            $('#' + wrenchgroupId + "results").html(message);
+        }
+    </script>
 </head>
 
 <body>
@@ -26,8 +59,6 @@
             <ol class="breadcrumb">
                 <li class="active"><g:message code="end.wrenchmen.states"/></li>
                 <li><g:message code="end.heroes.states"/></li>
-                <li><g:message code="end.wrenchment.xp"/></li>
-                <li><g:message code="end.heroes.xp"/></li>
                 <li><g:message code="end.gains"/></li>
             </ol>
 
@@ -39,73 +70,86 @@
     </div>
 </div>
 
-<div class="col-sm-12 col-xs-12">
-    <div class="row">
+<g:form action="savedeadwrench" method="POST"><g:hiddenField name="band" value="${bandInstance.id}"/>
+    <div class="col-sm-12 col-xs-12">
+        <div class="row">
 
-        <g:each in="${bandInstance.wrenches?.sort({ it.dateCreated })}" var="wrenchgroup">
-            <div class="col-sm-12 col-xs-12">
-                <div class="panel panel-warning">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
-                                <h5><strong>${wrenchgroup.name}</strong></h5>
-                                <span class="label label-default pull-left">${wrenchgroup.number} ${wrenchgroup.type}</span>
+            <g:each in="${bandInstance.wrenches?.sort({ it.dateCreated })}" var="wrenchgroup">
+                <div class="col-lg-4 col-sm-6 col-xs-12">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
+                                    <h5><strong>${wrenchgroup.name}</strong></h5>
+                                    <span class="label label-default">${wrenchgroup.number} ${wrenchgroup.type}</span>
+                                    <span class="label label-default"><g:message code="experience.current" args="[wrenchgroup.fullXp]"/></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <g:render template="experience" model="[from: wrenchgroup, maxXp: 14]"/>
+                                </div>
                             </div>
                         </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <tbody>
+                                <g:set var="i" value="${new Integer(0)}"/>
+                                <g:while test="${i < wrenchgroup.number}">
+                                    <tr>
+                                        <td>
+                                            <span class="label label-warning">${wrenchgroup.type} #${i + 1}</span>
+                                        </td>
+                                        <td class="text-right">
+                                            <div class="btn-group" data-toggle="buttons" id="${wrenchgroup.id}">
+                                                <label class="btn btn-default active">
+                                                    <input type="radio" name="${wrenchgroup.id}#${i}"
+                                                           id="${wrenchgroup.id}${i}_life"
+                                                           onchange="javascript:result('${wrenchgroup.id}');"
+                                                           autocomplete="off" checked="" value="life">
+                                                    <span class="glyphicon glyphicon-thumbs-up"></span> <g:message
+                                                        code="warrior.living"/>
+                                                </label>
+                                                <label class="btn btn-default">
+                                                    <input type="radio" name="${wrenchgroup.id}#${i}"
+                                                           id="${wrenchgroup.id}${i}_death"
+                                                           onchange="javascript:result('${wrenchgroup.id}');"
+                                                           autocomplete="off" value="death">
+                                                    <span class="glyphicon glyphicon-thumbs-down"></span> <g:message
+                                                        code="warrior.deceased"/>
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% i++ %>
+                                </g:while>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
+                        <div class="panel-footer text-right">
+                            <span id="${wrenchgroup.id}results" class="label label-default">
+                                <g:message code="endgame.alllife"/>
+                            </span>
+                        </div>
+
                     </div>
-
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <tbody>
-                            <g:set var="i" value="${new Integer(0)}"/>
-                            <g:while test="${i < wrenchgroup.number}">
-                                <tr>
-                                    <td>
-                                        <span class="label label-warning">${wrenchgroup.type} #${i + 1}</span>
-                                    </td>
-                                    <td><g:message code="experience.current" args="[wrenchgroup.fullXp]"/></td>
-                                    <td class="text-right">
-                                        <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-default">
-                                                <input type="radio" name="options" id="option1" autocomplete="off">
-                                                <span class="glyphicon glyphicon-thumbs-up"></span> <g:message
-                                                    code="warrior.living"/>
-                                            </label>
-                                            <label class="btn btn-default">
-                                                <input type="radio" name="options" id="option2" autocomplete="off">
-                                                <span class="glyphicon glyphicon-thumbs-down"></span> <g:message
-                                                    code="warrior.deceased"/>
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <% i++ %>
-                            </g:while>
-                            </tbody>
-                        </table>
-
-                    </div>
-
-
-                    <div class="panel-footer text-right">
-                        Résultats (javascript)
-                    </div>
-
                 </div>
-            </div>
-        </g:each>
+            </g:each>
+
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-xs-12">
+
+        <button type="submit" class="pull-right btn btn-success">
+            <span class="glyphicon glyphicon-forward"></span> ${message(code: 'next.step', default: 'Save')}
+        </button>
 
     </div>
-</div>
-
-<div class="col-sm-12 col-xs-12">
-
-    <button type="submit" class="pull-right btn btn-success">
-        <span class="glyphicon glyphicon-forward"></span> ${message(code: 'next.step', default: 'Save')}
-    </button>
-
-</div>
+</g:form>
 
 </body>
 </html>

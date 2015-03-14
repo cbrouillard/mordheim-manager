@@ -41,17 +41,8 @@
             <div>
                 <span class="label label-info pull-right"><g:message code="experience.label"/> : ${hero.fullXp}</span>
 
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-info" role="progressbar"
-                         style="width: ${hero.experience * 100 / 90}%;">
-                        ${hero.experience}
-                    </div>
+                <g:render template="/profilable/experience" model="[from: hero, maxXp: 90]"/>
 
-                    <div class="progress-bar progress-bar-striped progress-bar-success" role="progressbar"
-                         style="width: ${hero.earnedXp * 100 / 90}%;">
-                        ${hero.earnedXp}
-                    </div>
-                </div>
             </div>
 
             <div class="table-responsive">

@@ -39,9 +39,9 @@
                         </ul>
                     </div>
 
-                %{--<g:link controller="game" action="endgame" id="${bandInstance.id}" class="btn btn-warning">
-                    <span class="glyphicon glyphicon-ok-circle"></span> <g:message code="end.game"/>
-                </g:link>--}%
+                    <g:link controller="game" action="endgame" id="${bandInstance.id}" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-ok-circle"></span> <g:message code="end.game"/>
+                    </g:link>
                 </g:if>
             </h1>
 

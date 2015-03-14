@@ -15,7 +15,7 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             driverClassName = "org.postgresql.Driver"
             username = "cyrils"
             password = "lesbogossesdu75"
