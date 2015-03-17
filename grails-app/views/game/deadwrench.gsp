@@ -25,12 +25,12 @@
             var message = "<g:message code="endgame.notalldead.notalllife"/>";
             if (allDead) {
                 message = "<g:message code="endgame.alldead"/>";
-                $('#' + wrenchgroupId+"progress").hide();
+                $('#' + wrenchgroupId + "progress").hide();
             } else if (allLife) {
                 message = "<g:message code="endgame.alllife"/>";
-                $('#' + wrenchgroupId+"progress").show();
+                $('#' + wrenchgroupId + "progress").show();
             } else {
-                $('#' + wrenchgroupId+"progress").show();
+                $('#' + wrenchgroupId + "progress").show();
             }
 
             $('#' + wrenchgroupId + "results").html(message);
@@ -83,10 +83,12 @@
                                     <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
                                     <h5><strong>${wrenchgroup.name}</strong></h5>
                                     <span class="label label-default">${wrenchgroup.number} ${wrenchgroup.type}</span>
-                                    <span class="label label-default"><g:message code="experience.current" args="[wrenchgroup.fullXp]"/></span>
+                                    <span class="label label-default"><g:message code="experience.current"
+                                                                                 args="[wrenchgroup.fullXp]"/></span>
                                 </div>
+
                                 <div class="col-sm-6">
-                                    <g:render template="experience" model="[from: wrenchgroup, maxXp: 14]"/>
+                                    <g:render template="experience" model="[from: wrenchgroup, maxXp: 1]"/>
                                 </div>
                             </div>
                         </div>
@@ -151,5 +153,9 @@
     </div>
 </g:form>
 
+<jq:jquery>
+    $(".progress-chief").hide();
+    $(".progress-kill").hide();
+</jq:jquery>
 </body>
 </html>

@@ -1,5 +1,9 @@
-<h4>${from.band.name} <small>${from.band.type}</small></h4>
-<hr/>
+<div class="clearfix">
+
+    <h4>${from.band.name} <small>${from.band.type}</small><span class="badge pull-right"><g:message code="band.gold" args="[from.band.gold]"/></span></h4>
+
+    <hr/>
+</div>
 
 <div class="panel panel-warning">
     <div class="panel-heading"><g:message code="recruit.heroes"/></div>

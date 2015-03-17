@@ -19,6 +19,20 @@
 
             $('#' + heroId + "results").html(message);
         }
+
+        var recalculExperience = function (heroId) {
+            console.log($("#"+heroId+"kill").val());
+        }
+
+        var noOtherChief = function (heroId) {
+            console.log ($("#"+heroId+'chief').val());
+
+            $(".chief-selector").hide();
+            $("#"+heroId+'chief-selector').show();
+
+            $(".progress-chief").hide();
+            $("#"+heroId+"winnerchief").show();
+        }
     </script>
 </head>
 
@@ -71,7 +85,7 @@
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <g:render template="experience" model="[from: hero, maxXp: 90]"/>
+                                    <g:render template="experience" model="[from: hero, maxXp: 3]"/>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +94,16 @@
                             <table class="table">
                                 <tbody>
                                 <tr>
+                                    <td>
+                                        <div class="checkbox chief-selector" id="${hero.id}chief-selector">
+                                            <label>
+                                                <input type="checkbox" name='${hero.id}[chief]' id='${hero.id}chief' onchange="javascript:noOtherChief('${hero.id}');"/>
+                                                <g:message code="is.hero.chief"/>
+                                            </label>
+                                        </div>
+                                    </td>
                                     <td class="text-right">
+
                                         <div class="btn-group" data-toggle="buttons" id="${hero.id}">
                                             <label class="btn btn-default active">
                                                 <input type="radio" name="${hero.id}"
@@ -102,10 +125,29 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td colspan="2">
                                         <div class="form-group">
 
-                                            <label for="injuries" class="col-sm-12 control-label"><g:message
+                                            <label for="${hero.id}[kill]" class="col-sm-12 control-label"><g:message code="how.many.kill.label"/></label>
+
+                                            <div class="col-sm-12">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span
+                                                            class="glyphicon glyphicon-remove-sign"></span></span>
+                                                    <g:field maxlength="2" pattern="^([0-9])*" name="${hero.id}[kill]" type="number"
+                                                             value="0" required="" class="form-control" id="${hero.id}kill"
+                                                                onchange="javascript:recalculExperience('${hero.id}')"/>
+                                                </div>
+
+                                                <div class="help-block with-errors">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label for="${hero.id}[injuries]" class="col-sm-12 control-label"><g:message
                                                     code="hero.injuries.label"/></label>
 
                                             <div class="col-sm-12">
@@ -122,7 +164,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="competences" class="col-sm-12 control-label"><g:message
+                                            <label for="${hero.id}[competences]" class="col-sm-12 control-label"><g:message
                                                     code="hero.competences.label"/></label>
 
                                             <div class="col-sm-12">
@@ -166,6 +208,10 @@
 
     </div>
 </g:form>
+
+<jq:jquery>
+    $(".progress-chief").hide();
+</jq:jquery>
 
 </body>
 </html>

@@ -7,7 +7,11 @@
 <body>
 <div class="row-fluid">
     <div class="col-xs-12">
-        <div>
+        <div class="thumbnail pull-right">
+            <asset:image src="Mordheim.gif" class="imgband"/>
+        </div>
+
+        <div class="clearfix">
             <h1><g:message
                     code="band.create.addwrench"/> <small><g:message code="band.create.addwrench.hint"/></small>
             </h1>
