@@ -21,17 +21,38 @@
         }
 
         var recalculExperience = function (heroId) {
-            console.log($("#"+heroId+"kill").val());
+            var howManyKill = $("#" + heroId + "kill").val();
+            var state = $("#" + heroId + " input[type=radio]:checked").val();
+            var victoriousChief = $("#" + heroId + "chief").is(":checked")
+
+            /*
+             console.log("Kills " + howManyKill);
+             console.log("State " + state);
+             console.log("Is victorious chief " + victoriousChief);
+             */
+
+            var total = Number(howManyKill) + (state == "life" ? 1 : 0) + (victoriousChief ? 1 : 0)
+            console.log("Total " + total);
+
+            $("#" + heroId + "warrioralive").width("" + (1 * 100 / total) + "%");
+            $("#" + heroId + "herokill").width("" + (Number(howManyKill) * 100 / total) + "%");
+            $("#" + heroId + "herokill").html("+" + howManyKill)
+            $("#" + heroId + "winnerchief").width("" + ((victoriousChief ? 1 : 0) * 100 / total) + "%");
         }
 
         var noOtherChief = function (heroId) {
-            console.log ($("#"+heroId+'chief').val());
+            var value = $("#" + heroId + 'chief').is(":checked");
+            console.log("Value " + value);
 
-            $(".chief-selector").hide();
-            $("#"+heroId+'chief-selector').show();
+            if (value) {
+                $(".chief-selector").hide();
+                $("#" + heroId + 'chief-selector').show();
+            } else {
+                $(".chief-selector").show();
+            }
 
-            $(".progress-chief").hide();
-            $("#"+heroId+"winnerchief").show();
+            recalculExperience(heroId);
+
         }
     </script>
 </head>
@@ -81,11 +102,12 @@
                                     <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
                                     <h5><strong>${hero.name}</strong></h5>
                                     <span class="label label-default">${hero.type}</span>
-                                    <span class="label label-default"><g:message code="experience.current" args="[hero.fullXp]"/></span>
+                                    <span class="label label-default"><g:message code="experience.current"
+                                                                                 args="[hero.fullXp]"/></span>
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <g:render template="experience" model="[from: hero, maxXp: 3]"/>
+                                    <g:render template="experience" model="[from: hero, maxXp: 1]"/>
                                 </div>
                             </div>
                         </div>
@@ -94,17 +116,10 @@
                             <table class="table">
                                 <tbody>
                                 <tr>
-                                    <td>
-                                        <div class="checkbox chief-selector" id="${hero.id}chief-selector">
-                                            <label>
-                                                <input type="checkbox" name='${hero.id}[chief]' id='${hero.id}chief' onchange="javascript:noOtherChief('${hero.id}');"/>
-                                                <g:message code="is.hero.chief"/>
-                                            </label>
-                                        </div>
-                                    </td>
                                     <td class="text-right">
 
                                         <div class="btn-group" data-toggle="buttons" id="${hero.id}">
+
                                             <label class="btn btn-default active">
                                                 <input type="radio" name="${hero.id}"
                                                        id="${hero.id}_life"
@@ -112,6 +127,13 @@
                                                        autocomplete="off" checked="" value="life">
                                                 <span class="glyphicon glyphicon-thumbs-up"></span> <g:message
                                                     code="warrior.living"/>
+                                            </label>
+                                            <label class="btn btn-default chief-selector" id="${hero.id}chief-selector">
+                                                <input type="checkbox" autocomplete="off" name='${hero.id}[chief]'
+                                                       id='${hero.id}chief'
+                                                       onchange="javascript:noOtherChief('${hero.id}');">
+                                                <span class="glyphicon glyphicon-star"></span> <g:message
+                                                    code="is.hero.chief"/>
                                             </label>
                                             <label class="btn btn-default">
                                                 <input type="radio" name="${hero.id}"
@@ -128,15 +150,18 @@
                                     <td colspan="2">
                                         <div class="form-group">
 
-                                            <label for="${hero.id}[kill]" class="col-sm-12 control-label"><g:message code="how.many.kill.label"/></label>
+                                            <label for="${hero.id}[kill]" class="col-sm-12 control-label"><g:message
+                                                    code="how.many.kill.label"/></label>
 
                                             <div class="col-sm-12">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><span
                                                             class="glyphicon glyphicon-remove-sign"></span></span>
-                                                    <g:field maxlength="2" pattern="^([0-9])*" name="${hero.id}[kill]" type="number"
-                                                             value="0" required="" class="form-control" id="${hero.id}kill"
-                                                                onchange="javascript:recalculExperience('${hero.id}')"/>
+                                                    <g:field maxlength="2" pattern="^([0-9])*" name="${hero.id}[kill]"
+                                                             type="number"
+                                                             value="0" required="" class="form-control"
+                                                             id="${hero.id}kill"
+                                                             onchange="javascript:recalculExperience('${hero.id}')"/>
                                                 </div>
 
                                                 <div class="help-block with-errors">
@@ -164,7 +189,8 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="${hero.id}[competences]" class="col-sm-12 control-label"><g:message
+                                            <label for="${hero.id}[competences]"
+                                                   class="col-sm-12 control-label"><g:message
                                                     code="hero.competences.label"/></label>
 
                                             <div class="col-sm-12">
@@ -208,10 +234,6 @@
 
     </div>
 </g:form>
-
-<jq:jquery>
-    $(".progress-chief").hide();
-</jq:jquery>
 
 </body>
 </html>
