@@ -41,7 +41,19 @@ class GameController {
 
     def savedeadheroes(){
         println params
-        redirect(action:'deadheroes', id: params.band)
+        redirect(action:'bandgains', id: params.band)
         return
+    }
+
+    def bandgains (){
+        def bandInstance = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (bandInstance) {
+
+            render view: 'bandgains', model: [bandInstance: bandInstance]
+
+        } else {
+            redirect action: 'index', controller: 'band'
+            return
+        }
     }
 }
