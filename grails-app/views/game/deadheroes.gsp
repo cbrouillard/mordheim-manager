@@ -84,7 +84,7 @@
         </div>
 
         <g:if test="${flash.message}">
-            <div class="alert alert-info" role="status">${flash.message}</div>
+            <div class="alert alert-info" role="status">${raw(flash.message)}</div>
         </g:if>
     </div>
 </div>
@@ -231,6 +231,10 @@
 
                             </div>
                         </div>
+
+                        <jq:jquery>
+                            recalculExperience('${hero.id}');
+                        </jq:jquery>
                     </g:each>
 
                 </div>

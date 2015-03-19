@@ -31,7 +31,7 @@
         </div>
 
         <g:if test="${flash.message}">
-            <div class="alert alert-info" role="status">${flash.message}</div>
+            <div class="alert alert-info" role="status">${raw(flash.message)}</div>
         </g:if>
     </div>
 </div>
@@ -47,34 +47,36 @@
 
                     <div class="form-group ${hasErrors(bean: bandInstance, field: 'gold', 'has-error')}">
 
-                        <label for="gold" class="col-sm-2 control-label"><g:message code="band.gold.title"
-                                                                                    default="Type"/> *</label>
+                        <label for="gold" class="col-sm-2 control-label"><g:message code="band.earned.gold.title"/></label>
 
                         <div class="col-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><span
-                                        class="glyphicon glyphicon-euro"></span></span>
-                                <g:field type="number" name="gold" required="" class="form-control"/>
+                                        class="glyphicon glyphicon-plus"></span></span>
+                                <g:field type="number" name="gold" class="form-control" value="0"/>
                             </div>
 
-                            <div class="help-block with-errors"></div>
+                            <div class="help-block with-errors"><g:message code="band.earned.gold.hint"/></div>
                         </div>
                     </div>
 
                     <div class="form-group ${hasErrors(bean: bandInstance, field: 'magicalStones', 'has-error')}">
 
                         <label for="magicalStones" class="col-sm-2 control-label"><g:message
-                                code="band.magical.stones.title"/> *</label>
+                                code="band.earned.magical.stones.title"/></label>
 
                         <div class="col-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><span
-                                        class="glyphicon glyphicon-star"></span></span>
-                                <g:field type="number" name="magicalStones" required=""
+                                        class="glyphicon glyphicon-plus"></span></span>
+                                <g:field type="number" name="magicalStones" value="0"
                                          class="form-control"/>
                             </div>
 
-                            <div class="help-block with-errors"></div>
+                            <div class="help-block with-errors">
+                                <g:message
+                                        code="band.earned.magical.stones.hint"/>
+                            </div>
                         </div>
                     </div>
 

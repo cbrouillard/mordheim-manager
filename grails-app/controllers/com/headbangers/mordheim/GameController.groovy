@@ -31,6 +31,8 @@ class GameController {
             return
         }
 
+        StringBuffer recap = new StringBuffer(message(code:'wrench.endgame.recap'))
+
         bandInstance.wrenches.each { wrenches ->
             def status = params.wrench[wrenches.id]
 
@@ -49,16 +51,19 @@ class GameController {
 
                 if (death == wrenches.number) {
                     // everyone is dead.
+                    recap.append(message(code:'wrench.endgame.recap.dead', args: [wrenches.name]))
                     bandInstance.removeFromWrenches(wrenches)
                     wrenches.delete()
                 } else {
+                    recap.append(message(code:'wrench.endgame.recap.alive', args: [wrenches.name, wrenches.number]))
                     wrenches.earnedXp += 1
                     wrenches.number = life
                 }
             }
         }
 
-        flash.message = "// todo message"
+        recap.append(message (code: "wrench.endgame.recap.closemessage"))
+        flash.message = recap.toString()
         bandInstance.save(flush: true)
 
         redirect(action: 'deadheroes', id: params.band)
@@ -82,11 +87,13 @@ class GameController {
             return
         }
 
+        StringBuffer recap = new StringBuffer(message(code:'hero.endgame.recap'))
         bandInstance.heroes.each { hero ->
             def infos = params[hero.id]
 
             if (infos.state == "death") {
                 // dead. so bad.
+                recap.append (message(code:'hero.endgame.recap.death', args: [hero.name]))
                 bandInstance.removeFromHeroes(hero)
                 hero.delete()
             } else {
@@ -107,10 +114,12 @@ class GameController {
                 // bind data
                 bindData(hero, params, [included: ["injuries", "competences"]])
                 hero.earnedXp += earnedXp
+                recap.append (message(code:'hero.endgame.recap.alive', args: [hero.name, earnedXp]))
             }
         }
 
-        flash.message = "// todo message"
+        recap.append (message(code:'hero.endgame.recap.closemessage'))
+        flash.message = recap.toString()
         bandInstance.save(flush: true)
 
         redirect(action: 'bandgains', id: params.band)
@@ -148,7 +157,7 @@ class GameController {
 
         bandInstance.save(flush: true)
 
-        flash.message = "// todo message"
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'Band.label', default: 'Band'), bandInstance.name])
         redirect(controller: "band", action: 'show', id: params.band)
         return
     }
