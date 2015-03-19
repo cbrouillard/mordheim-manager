@@ -16,14 +16,15 @@
     <asset:stylesheet src="application.css"/>
     <asset:javascript src="application.js"/>
 
-    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+    <script src="${resource(dir:'js/tinymce', file:'tinymce.min.js')}"></script>
     <script>
         tinymce.init({
             selector: 'textarea.editor',
             plugins: "textcolor",
             toolbar: "fontsizeselect | bullist numlist | bold italic underline | forecolor backcolor",
             menubar: false, statusbar: false,
-            fontsize_formats: "6pt 7pt 8pt 9pt 10pt 11pt 12pt"});
+            fontsize_formats: "6pt 7pt 8pt 9pt 10pt 11pt 12pt",
+            language: '${message(code:'tinymce.lang', default: 'en_GB')}'});
     </script>
     <g:layoutHead/>
 </head>

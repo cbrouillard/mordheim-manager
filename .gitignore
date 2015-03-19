@@ -22,6 +22,8 @@
 /*.zip
 /plugin.xml
 
+/*.iml
+
 # older plugin install locations
 /plugins
 /web-app/plugins
