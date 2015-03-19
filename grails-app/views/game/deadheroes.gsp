@@ -90,7 +90,7 @@
 </div>
 
 <div class="col-sm-12 col-xs-12">
-    <g:form action="savedeadheroes" method="POST"><g:hiddenField name="band" value="${bandInstance.id}"/>
+    <g:form action="savedeadheroes" method="POST" data-toggle="validator"><g:hiddenField name="band" value="${bandInstance.id}"/>
 
         <div class="panel panel-default">
             <div class="panel-body">
@@ -124,7 +124,7 @@
                                                 <div class="btn-group" data-toggle="buttons" id="${hero.id}">
 
                                                     <label class="btn btn-default active">
-                                                        <input type="radio" name="${hero.id}[state]"
+                                                        <input type="radio" name="${hero.id}.state"
                                                                id="${hero.id}_life"
                                                                onchange="javascript:result('${hero.id}');"
                                                                autocomplete="off" checked="" value="life">
@@ -134,14 +134,14 @@
                                                     <label class="btn btn-default chief-selector"
                                                            id="${hero.id}chief-selector">
                                                         <input type="checkbox" autocomplete="off"
-                                                               name='${hero.id}[chief]'
+                                                               name='${hero.id}.victoriouschief'
                                                                id='${hero.id}chief'
                                                                onchange="javascript:noOtherChief('${hero.id}');">
                                                         <span class="glyphicon glyphicon-star"></span> <g:message
                                                             code="is.hero.chief"/>
                                                     </label>
                                                     <label class="btn btn-default">
-                                                        <input type="radio" name="${hero.id}[state]"
+                                                        <input type="radio" name="${hero.id}.state"
                                                                id="${hero.id}_death"
                                                                onchange="javascript:result('${hero.id}');"
                                                                autocomplete="off" value="death">
@@ -165,7 +165,7 @@
                                                                     class="glyphicon glyphicon-remove-sign"></span>
                                                             </span>
                                                             <g:field maxlength="2" pattern="^([0-9])*"
-                                                                     name="${hero.id}[kill]"
+                                                                     name="${hero.id}.kill"
                                                                      type="number"
                                                                      value="0" required="" class="form-control"
                                                                      id="${hero.id}kill"
@@ -188,7 +188,7 @@
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><span
                                                                     class="glyphicon glyphicon-plus-sign"></span></span>
-                                                            <g:textArea name="${hero.id}[injuries]" cols="40" rows="5"
+                                                            <g:textArea name="${hero.id}.injuries" cols="40" rows="5"
                                                                         value="${hero?.injuries}"
                                                                         class="form-control editor"/>
                                                         </div>
@@ -206,7 +206,7 @@
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><span
                                                                     class="glyphicon glyphicon-lamp"></span></span>
-                                                            <g:textArea name="${hero.id}[competences]" cols="40"
+                                                            <g:textArea name="${hero.id}.competences" cols="40"
                                                                         rows="5"
                                                                         value="${hero?.competences}"
                                                                         class="form-control editor"/>

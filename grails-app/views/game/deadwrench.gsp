@@ -107,7 +107,7 @@
                                                 <td class="text-right">
                                                     <div class="btn-group" data-toggle="buttons" id="${wrenchgroup.id}">
                                                         <label class="btn btn-default active">
-                                                            <input type="radio" name="${wrenchgroup.id}[${i}]"
+                                                            <input type="radio" name="wrench.${wrenchgroup.id}.${i}"
                                                                    id="${wrenchgroup.id}${i}_life"
                                                                    onchange="javascript:result('${wrenchgroup.id}');"
                                                                    autocomplete="off" checked="" value="life">
@@ -115,7 +115,7 @@
                                                                 code="warrior.living"/>
                                                         </label>
                                                         <label class="btn btn-default">
-                                                            <input type="radio" name="${wrenchgroup.id}[${i}]"
+                                                            <input type="radio" name="wrench.${wrenchgroup.id}.${i}"
                                                                    id="${wrenchgroup.id}${i}_death"
                                                                    onchange="javascript:result('${wrenchgroup.id}');"
                                                                    autocomplete="off" value="death">
