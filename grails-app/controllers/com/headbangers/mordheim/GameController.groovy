@@ -55,7 +55,7 @@ class GameController {
                     bandInstance.removeFromWrenches(wrenches)
                     wrenches.delete()
                 } else {
-                    recap.append(message(code:'wrench.endgame.recap.alive', args: [wrenches.name, wrenches.number]))
+                    recap.append(message(code:'wrench.endgame.recap.alive', args: [wrenches.name, life]))
                     wrenches.earnedXp += 1
                     wrenches.number = life
                 }
@@ -112,7 +112,7 @@ class GameController {
                 earnedXp += infos.victoriouschief ? 1 : 0
 
                 // bind data
-                bindData(hero, params, [included: ["injuries", "competences"]])
+                bindData(hero, infos, include: ["injuries", "competences"])
                 hero.earnedXp += earnedXp
                 recap.append (message(code:'hero.endgame.recap.alive', args: [hero.name, earnedXp]))
             }
@@ -145,7 +145,7 @@ class GameController {
             return
         }
 
-        bindData(bandInstance, params, [included: ["reserve", "note"]])
+        bindData(bandInstance, params, include: ["reserve", "note"])
 
         // ajouter gold et stones
         try {

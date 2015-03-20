@@ -9,7 +9,7 @@
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-align-justify"></span></span>
             <g:field name="number" type="number" value="${wrenchmenInstance.number}" required="" class="form-control"
-                     pattern="([0-9])*"/>
+                     pattern="([0-9])*" min="0" />
         </div>
 
         <div class="help-block with-errors"></div>
@@ -102,7 +102,7 @@
                 <span class="input-group-addon"><span
                         class="glyphicon glyphicon-check"></span></span>
                 <g:field maxlength="2" pattern="^([0-9])*" name="experience" type="number"
-                         value="${wrenchmenInstance?.experience}" required="" class="form-control"/>
+                         value="${wrenchmenInstance?.experience}" required="" class="form-control" min="0" />
             </div>
 
             <div class="help-block with-errors"><g:message code="experience.start.hint"/></div>
@@ -113,7 +113,7 @@
                 <span class="input-group-addon"><span
                         class="glyphicon glyphicon-plus"></span></span>
                 <g:field maxlength="2" pattern="^([0-9])*" name="earnedXp" type="number"
-                         value="${wrenchmenInstance?.earnedXp}" required="" class="form-control"/>
+                         value="${wrenchmenInstance?.earnedXp}" required="" class="form-control" min="0" />
             </div>
 
             <div class="help-block with-errors"><g:message code="experience.earned.hint"/></div>
@@ -131,7 +131,7 @@
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-link"></span></span>
             <g:field maxlength="2" pattern="^([0-9])*" name="cost" type="number"
-                     value="${wrenchmenInstance?.cost}" required="" class="form-control"/>
+                     value="${wrenchmenInstance?.cost}" required="" class="form-control" min="0" />
         </div>
 
         <div class="help-block with-errors">

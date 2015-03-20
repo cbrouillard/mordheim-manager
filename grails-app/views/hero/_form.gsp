@@ -105,7 +105,7 @@
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-check"></span></span>
             <g:field maxlength="2" pattern="^([0-9])*" name="experience" type="number"
-                     value="${heroInstance?.experience}" required="" class="form-control"/>
+                     value="${heroInstance?.experience}" required="" class="form-control" min="0" />
         </div>
 
         <div class="help-block with-errors">
@@ -120,7 +120,7 @@
                 <span class="input-group-addon"><span
                         class="glyphicon glyphicon-plus"></span></span>
                 <g:field maxlength="2" pattern="^([0-9])*" name="earnedXp" type="number"
-                         value="${heroInstance?.earnedXp}" required="" class="form-control"/>
+                         value="${heroInstance?.earnedXp}" required="" class="form-control" min="0" />
             </div>
 
             <div class="help-block with-errors">
@@ -139,7 +139,7 @@
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-link"></span></span>
             <g:field maxlength="2" pattern="^([0-9])*" name="cost" type="number"
-                     value="${heroInstance?.cost}" required="" class="form-control"/>
+                     value="${heroInstance?.cost}" required="" class="form-control" min="0" />
         </div>
 
         <div class="help-block with-errors">

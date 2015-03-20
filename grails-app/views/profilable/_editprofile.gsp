@@ -16,23 +16,23 @@
         <tbody>
         <tr>
             <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="M" required=""
-                         value="${profilable?.M}" class="form-control"/></td>
+                         value="${profilable?.M}" class="form-control" min="0" /></td>
             <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="CC" required=""
-                         value="${profilable?.CC}" class="form-control"/></td>
+                         value="${profilable?.CC}" class="form-control" min="0" /></td>
             <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="CT" required=""
-                         value="${profilable?.CT}" class="form-control"/></td>
+                         value="${profilable?.CT}" class="form-control" min="0" /></td>
             <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="F" required=""
-                         value="${profilable?.F}" class="form-control"/></td>
+                         value="${profilable?.F}" class="form-control" min="0" /></td>
             <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="E" required=""
-                         value="${profilable?.E}" class="form-control"/></td>
+                         value="${profilable?.E}" class="form-control" min="0" /></td>
             <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="PV" required=""
-                         value="${profilable?.PV}" class="form-control"/></td>
+                         value="${profilable?.PV}" class="form-control" min="0" /></td>
             <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="I" required=""
-                         value="${profilable?.I}" class="form-control"/></td>
+                         value="${profilable?.I}" class="form-control" min="0" /></td>
             <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="A" required=""
-                         value="${profilable?.A}" class="form-control"/></td>
+                         value="${profilable?.A}" class="form-control" min="0" /></td>
             <td><g:field type="number" maxlength="2" pattern="^([0-9]){1,2}" name="CD" required=""
-                         value="${profilable?.CD}" class="form-control"/></td>
+                         value="${profilable?.CD}" class="form-control" min="0" /></td>
         </tr>
         </tbody>
     </table>

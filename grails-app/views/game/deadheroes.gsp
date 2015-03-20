@@ -167,7 +167,7 @@
                                                             <g:field maxlength="2" pattern="^([0-9])*"
                                                                      name="${hero.id}.kill"
                                                                      type="number"
-                                                                     value="0" required="" class="form-control"
+                                                                     value="0" min="0" required="" class="form-control"
                                                                      id="${hero.id}kill"
                                                                      onchange="javascript:recalculExperience('${hero.id}')"/>
                                                         </div>

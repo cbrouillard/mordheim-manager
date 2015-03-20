@@ -53,7 +53,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-plus"></span></span>
-                                <g:field type="number" name="gold" class="form-control" value="0"/>
+                                <g:field type="number" name="gold" class="form-control" value="0" min="0"/>
                             </div>
 
                             <div class="help-block with-errors"><g:message code="band.earned.gold.hint"/></div>
@@ -70,7 +70,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-plus"></span></span>
                                 <g:field type="number" name="magicalStones" value="0"
-                                         class="form-control"/>
+                                         class="form-control" min="0" />
                             </div>
 
                             <div class="help-block with-errors">

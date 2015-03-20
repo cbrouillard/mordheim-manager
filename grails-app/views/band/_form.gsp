@@ -43,7 +43,7 @@
             <div class="input-group">
                 <span class="input-group-addon"><span
                         class="glyphicon glyphicon-euro"></span></span>
-                <g:field type="number" name="gold" required="" value="${bandInstance?.gold}" class="form-control"/>
+                <g:field type="number" name="gold" required="" value="${bandInstance?.gold}" class="form-control" min="0" />
             </div>
 
             <div class="help-block with-errors"></div>
@@ -60,7 +60,7 @@
                 <span class="input-group-addon"><span
                         class="glyphicon glyphicon-star"></span></span>
                 <g:field type="number" name="magicalStones" required="" value="${bandInstance?.magicalStones}"
-                         class="form-control"/>
+                         class="form-control" min="0" />
             </div>
 
             <div class="help-block with-errors"></div>
