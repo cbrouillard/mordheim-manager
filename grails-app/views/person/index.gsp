@@ -21,8 +21,42 @@
     </div>
 </div>
 
+<div class="col-sm-4 col-xs-12">
 
-<div class="col-sm-12">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h5><g:message code="last.created.bands"/></h5>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                <g:each in="${bands}" var="band">
+                    <tr>
+                        <td><g:formatDate date="${band.dateCreated}"/></td>
+                        <td><strong>${band.name}</strong> <span class="label label-default">${band.type}</span></td>
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <g:link controller="person" action="edit" id="${band.owner.id}"
+                                        class="btn btn-warning btn-xs">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                    ${band.owner.username}
+                                </g:link>
+                                <g:link controller="admin" action="showband" id="${band.id}" class="btn btn-success btn-xs">
+                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                </g:link>
+                            </div>
+                        </td>
+                    </tr>
+                </g:each>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-sm-8 col-xs-12">
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -68,21 +102,21 @@
                         <td>${person.email}</td>
                         <td>
                             <g:link controller="person" action="toggle" id="${person.id}" params="[t: 'enabled']"
-                                    class="btn btn-sm btn-${person.enabled ? 'success' : 'danger'}">
+                                    class="btn btn-xs btn-${person.enabled ? 'success' : 'danger'}">
                                 <span class="glyphicon glyphicon-option-vertical"></span> <g:formatBoolean
                                     boolean="${person.enabled}"/>
                             </g:link>
                         </td>
                         <td>
                             <g:link controller="person" action="toggle" id="${person.id}" params="[t: 'accountExpired']"
-                                    class="btn btn-sm btn-${person.accountExpired ? 'danger' : 'success'}">
+                                    class="btn btn-xs btn-${person.accountExpired ? 'danger' : 'success'}">
                                 <span class="glyphicon glyphicon-option-vertical"></span> <g:formatBoolean
                                     boolean="${person.accountExpired}"/>
                             </g:link>
                         </td>
                         <td>
                             <g:link controller="person" action="toggle" id="${person.id}" params="[t: 'accountLocked']"
-                                    class="btn btn-sm btn-${person.accountLocked ? 'danger' : 'success'}">
+                                    class="btn btn-xs btn-${person.accountLocked ? 'danger' : 'success'}">
                                 <span class="glyphicon glyphicon-option-vertical"></span> <g:formatBoolean
                                     boolean="${person.accountLocked}"/>
                             </g:link>
@@ -90,7 +124,7 @@
                         <td>
                             <g:link controller="person" action="toggle" id="${person.id}"
                                     params="[t: 'passwordExpired']"
-                                    class="btn btn-sm btn-${person.passwordExpired ? 'danger' : 'success'}">
+                                    class="btn btn-xs btn-${person.passwordExpired ? 'danger' : 'success'}">
                                 <span class="glyphicon glyphicon-option-vertical"></span> <g:formatBoolean
                                     boolean="${person.passwordExpired}"/>
                             </g:link>
@@ -102,7 +136,7 @@
                                     <div class="btn-group">
                                         <g:form url="[resource: person, action: 'delete']" method="DELETE"
                                                 class="form-inline pull-right">&nbsp;
-                                            <button type="submit" class="btn btn-danger btn-sm"
+                                            <button type="submit" class="btn btn-danger btn-xs"
                                                     onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
                                                 <span class="glyphicon glyphicon-remove"></span>
                                             </button>
@@ -111,11 +145,10 @@
                                         <form action='${request.contextPath}/j_spring_security_switch_user'
                                               method='POST' class="form-inline pull-right">
                                             <g:hiddenField name="j_username" value="${person.username}"/>
-                                            <button type="submit" class="btn btn-sm btn-danger">
+                                            <button type="submit" class="btn btn-xs btn-danger">
                                                 <span class="glyphicon glyphicon-user"></span> ${message(code: 'default.button.switch.label', default: 'Switch')}
                                             </button>
                                         </form>
-
 
                                     </div>
 

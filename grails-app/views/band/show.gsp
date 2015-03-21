@@ -20,6 +20,7 @@
                         code="band.show"/> <small>${bandInstance.name}</small>
 
                 <g:if test="${!anonymous}">
+
                     <div class="btn-group">
                         <g:link controller="band" action="pdf" id="${bandInstance.id}" class="btn btn-primary">
                             <span class="glyphicon glyphicon-list-alt"></span> <g:message code="generate.pdf"/>
@@ -31,7 +32,8 @@
                         </button>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <g:link controller="band" action="previewpdf" id="${bandInstance.id}" target="_blank">
+                                <g:link controller="band" action="previewpdf" id="${bandInstance.id}"
+                                        target="_blank">
                                     <span class="glyphicon glyphicon-eye-open"></span> <g:message
                                         code="generate.preview.pdf"/>
                                 </g:link>
@@ -39,9 +41,11 @@
                         </ul>
                     </div>
 
-                    <g:link controller="game" action="endgame" id="${bandInstance.id}" class="btn btn-warning">
-                        <span class="glyphicon glyphicon-ok-circle"></span> <g:message code="end.game"/>
-                    </g:link>
+                    <g:if test="${bandInstance.nbWarriors > 0}">
+                        <g:link controller="game" action="endgame" id="${bandInstance.id}" class="btn btn-warning">
+                            <span class="glyphicon glyphicon-ok-circle"></span> <g:message code="end.game"/>
+                        </g:link>
+                    </g:if>
                 </g:if>
             </h1>
 

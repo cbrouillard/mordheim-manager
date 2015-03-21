@@ -18,7 +18,10 @@ class PersonController {
     @Secured(['ROLE_ADMIN'])
     def index(Integer max) {
         params.max = Math.min(max ?: 50, 100)
-        respond Person.list(params), model: [personInstanceCount: Person.count()]
+
+        def lastBands = Band.list([sort:"dateCreated", order: "desc", max: 10])
+
+        respond Person.list(params), model: [personInstanceCount: Person.count(), bands:lastBands]
     }
 
     // anonymous access
@@ -100,6 +103,7 @@ class PersonController {
 
     @Secured(['ROLE_ADMIN'])
     def edit(Person personInstance) {
+
         respond personInstance
     }
 

@@ -6,7 +6,7 @@ class Person {
 
     transient springSecurityService
 
-    static hasMany = [bands:Band    ]
+    static hasMany = [bands: Band]
 
     String id
 

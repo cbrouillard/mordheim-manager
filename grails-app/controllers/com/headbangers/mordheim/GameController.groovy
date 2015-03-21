@@ -112,7 +112,7 @@ class GameController {
                 earnedXp += infos.victoriouschief ? 1 : 0
 
                 // bind data
-                bindData(hero, infos, include: ["injuries", "competences"])
+                bindData(hero, infos, [include: ["injuries", "competences"]])
                 hero.earnedXp += earnedXp
                 recap.append (message(code:'hero.endgame.recap.alive', args: [hero.name, earnedXp]))
             }
@@ -145,7 +145,7 @@ class GameController {
             return
         }
 
-        bindData(bandInstance, params, include: ["reserve", "note"])
+        bindData(bandInstance, params, [include: ["reserve", "note"]])
 
         // ajouter gold et stones
         try {
