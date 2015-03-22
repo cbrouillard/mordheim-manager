@@ -85,6 +85,12 @@
                 </sec:ifSwitched>
                 <sec:ifAllGranted roles="ROLE_ADMIN">
                     <li>
+                        <g:link controller="referentiel">
+                            <span class="glyphicon glyphicon-folder-close"></span>
+                            <g:message code="referentiel"/>
+                        </g:link>
+                    </li>
+                    <li>
                         <g:link controller="admin">
                             <span class="glyphicon glyphicon-cog"></span>
                             <g:message code="admin.console"/>

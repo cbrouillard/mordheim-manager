@@ -81,6 +81,54 @@ class WrenchmenController {
 
     @Transactional
     @Secured(['ROLE_USER'])
+    def promote() {
+        def wrench = Wrenchmen.get(params.id)
+        if (!wrench) {
+            redirect(controller: "band", action: "index")
+            return
+        }
+
+        if (wrench.band.heroes.size() >= 6) {
+            flash.message = message(code: 'too.many.hero')
+            redirect(controller: 'band', action: 'show', id: wrench.band.id, params: [tab: 'wrench'])
+            return
+        }
+
+        Hero hero = new Hero()
+        hero.experience = wrench.fullXp
+        hero.band = wrench.band
+        hero.competences = wrench.competences
+        hero.cost = 0
+        hero.equipment = wrench.equipment
+        hero.name = wrench.name
+        hero.note = wrench.note
+        hero.type = wrench.type + ' ' + message(code: 'promoted')
+        hero.M = wrench.M
+        hero.CC = wrench.CC
+        hero.CT = wrench.CT
+        hero.F = wrench.F
+        hero.E = wrench.E
+        hero.A = wrench.A
+        hero.PV = wrench.PV
+        hero.I = wrench.I
+        hero.CD = wrench.CD
+
+        hero.save(flush:true)
+        flash.message = message(code: 'wrench.has.been.promoted', args: [hero.name])
+
+        if (wrench.number == 1) {
+            wrench.delete(flush: true)
+        } else {
+            wrench.number -= 1
+            wrench.save(flush: true)
+        }
+
+        redirect(controller: 'band', action: 'show', id: wrench.band.id)
+        return
+    }
+
+    @Transactional
+    @Secured(['ROLE_USER'])
     def delete(Wrenchmen wrenchmenInstance) {
 
         if (wrenchmenInstance == null) {

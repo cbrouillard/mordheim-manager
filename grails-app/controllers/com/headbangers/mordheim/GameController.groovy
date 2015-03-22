@@ -31,8 +31,8 @@ class GameController {
             return
         }
 
-        StringBuffer recap = new StringBuffer(message(code:'wrench.endgame.recap'))
-
+        def toDelete = []
+        StringBuffer recap = new StringBuffer(message(code: 'wrench.endgame.recap'))
         bandInstance.wrenches.each { wrenches ->
             def status = params.wrench[wrenches.id]
 
@@ -51,18 +51,23 @@ class GameController {
 
                 if (death == wrenches.number) {
                     // everyone is dead.
-                    recap.append(message(code:'wrench.endgame.recap.dead', args: [wrenches.name]))
+                    recap.append(message(code: 'wrench.endgame.recap.dead', args: [wrenches.name]))
                     bandInstance.removeFromWrenches(wrenches)
-                    wrenches.delete()
+                    toDelete.add(wrenches)
                 } else {
-                    recap.append(message(code:'wrench.endgame.recap.alive', args: [wrenches.name, life]))
+                    recap.append(message(code: 'wrench.endgame.recap.alive', args: [wrenches.name, life]))
                     wrenches.earnedXp += 1
                     wrenches.number = life
                 }
             }
         }
 
-        recap.append(message (code: "wrench.endgame.recap.closemessage"))
+        toDelete.each{bye ->
+            bandInstance.removeFromWrenches(bye)
+        }
+        Wrenchmen.deleteAll(toDelete)
+
+        recap.append(message(code: "wrench.endgame.recap.closemessage"))
         flash.message = recap.toString()
         bandInstance.save(flush: true)
 
@@ -87,15 +92,21 @@ class GameController {
             return
         }
 
-        StringBuffer recap = new StringBuffer(message(code:'hero.endgame.recap'))
+        def toDelete = []
+
+        StringBuffer recap = new StringBuffer(message(code: 'hero.endgame.recap'))
         bandInstance.heroes.each { hero ->
             def infos = params[hero.id]
 
             if (infos.state == "death") {
                 // dead. so bad.
-                recap.append (message(code:'hero.endgame.recap.death', args: [hero.name]))
-                bandInstance.removeFromHeroes(hero)
-                hero.delete()
+                recap.append(message(code: 'hero.endgame.recap.death', args: [hero.name]))
+                toDelete.add(hero)
+            } else if (infos.state == "notin") {
+
+                //nothing.
+                recap.append(message(code: 'hero.endgame.recap.notingame', args: [hero.name]))
+
             } else {
                 // alive
                 def earnedXp = 1
@@ -114,11 +125,16 @@ class GameController {
                 // bind data
                 bindData(hero, infos, [include: ["injuries", "competences"]])
                 hero.earnedXp += earnedXp
-                recap.append (message(code:'hero.endgame.recap.alive', args: [hero.name, earnedXp]))
+                recap.append(message(code: 'hero.endgame.recap.alive', args: [hero.name, earnedXp]))
             }
         }
 
-        recap.append (message(code:'hero.endgame.recap.closemessage'))
+        toDelete.each{bye ->
+            bandInstance.removeFromHeroes(bye)
+        }
+        Hero.deleteAll(toDelete)
+
+        recap.append(message(code: 'hero.endgame.recap.closemessage'))
         flash.message = recap.toString()
         bandInstance.save(flush: true)
 

@@ -18,6 +18,7 @@ class Band {
     String name
     String type
     String reserve
+    Integer nbGame = 0
 
     Person owner
 
@@ -30,6 +31,7 @@ class Band {
         name nullable: false, blank: false
         reserve nullable: true, blank: false, widget: 'textarea'
         photo nullable: true
+        nbGame nullable:true
     }
 
     static mapping = {

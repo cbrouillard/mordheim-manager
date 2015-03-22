@@ -12,6 +12,9 @@
             if (state == "death") {
                 message = "<g:message code="endgame.alldead.hero"/>";
                 $('#' + heroId + "progress").hide();
+            } else if (state == "notin") {
+                message = "<g:message code="endgame.notin.hero"/>";
+                $('#' + heroId + "progress").hide();
             } else {
                 message = "<g:message code="endgame.alllife.hero"/>";
                 $('#' + heroId + "progress").show();
@@ -90,7 +93,8 @@
 </div>
 
 <div class="col-sm-12 col-xs-12">
-    <g:form action="savedeadheroes" method="POST" data-toggle="validator"><g:hiddenField name="band" value="${bandInstance.id}"/>
+    <g:form action="savedeadheroes" method="POST" data-toggle="validator"><g:hiddenField name="band"
+                                                                                         value="${bandInstance.id}"/>
 
         <div class="panel panel-default">
             <div class="panel-body">
@@ -139,6 +143,15 @@
                                                                onchange="javascript:noOtherChief('${hero.id}');">
                                                         <span class="glyphicon glyphicon-star"></span> <g:message
                                                             code="is.hero.chief"/>
+                                                    </label>
+
+                                                    <label class="btn btn-default">
+                                                        <input type="radio" name="${hero.id}.state"
+                                                               id="${hero.id}_notin"
+                                                               onchange="javascript:result('${hero.id}');"
+                                                               autocomplete="off" value="notin">
+                                                        <span class="glyphicon glyphicon-hand-right"></span> <g:message
+                                                            code="warrior.notingame"/>
                                                     </label>
                                                     <label class="btn btn-default">
                                                         <input type="radio" name="${hero.id}.state"

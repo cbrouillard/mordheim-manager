@@ -29,6 +29,11 @@
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </button>
                                 </div>
+
+                                <g:link class="btn btn-warning" controller="wrenchmen" action="promote" id="${wrench.id}">
+                                    <span class="glyphicon glyphicon-circle-arrow-up"></span>
+                                    <g:message code="wrench.promote"/>
+                                </g:link>
                             </g:form>
                         </div>
                     </div>

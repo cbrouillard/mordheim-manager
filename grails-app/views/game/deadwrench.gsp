@@ -8,6 +8,7 @@
         var result = function (wrenchgroupId) {
             var allDead = 1;
             var allLife = 1;
+            var notInGame = 1;
 
             $('#' + wrenchgroupId + ' input[type=radio]:checked').each(
                     function (index) {
@@ -114,6 +115,14 @@
                                                             <span class="glyphicon glyphicon-thumbs-up"></span> <g:message
                                                                 code="warrior.living"/>
                                                         </label>
+                                                        %{--<label class="btn btn-default">
+                                                            <input type="radio" name="wrench.${wrenchgroup.id}.${i}"
+                                                                   id="${wrenchgroup.id}${i}_notingame"
+                                                                   onchange="javascript:result('${wrenchgroup.id}');"
+                                                                   autocomplete="off" value="notingame">
+                                                            <span class="glyphicon glyphicon-hand-right"></span> <g:message
+                                                                code="warrior.notingame"/>
+                                                        </label>--}%
                                                         <label class="btn btn-default">
                                                             <input type="radio" name="wrench.${wrenchgroup.id}.${i}"
                                                                    id="${wrenchgroup.id}${i}_death"
