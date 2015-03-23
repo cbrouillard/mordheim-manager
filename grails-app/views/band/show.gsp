@@ -41,11 +41,11 @@
                         </ul>
                     </div>
 
-                    %{--<g:if test="${bandInstance.nbWarriors > 0}">
+                    <g:if test="${bandInstance.nbWarriors > 0}">
                         <g:link controller="game" action="endgame" id="${bandInstance.id}" class="btn btn-warning">
                             <span class="glyphicon glyphicon-ok-circle"></span> <g:message code="end.game"/>
                         </g:link>
-                    </g:if>--}%
+                    </g:if>
                 </g:if>
             </h1>
 

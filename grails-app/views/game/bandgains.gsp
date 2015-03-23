@@ -26,6 +26,7 @@
                 <li><g:message code="end.wrenchmen.states"/></li>
                 <li><g:message code="end.heroes.states"/></li>
                 <li class="active"><g:message code="end.gains"/></li>
+                <li><g:message code="end.recap"/></li>
             </ol>
 
         </div>
@@ -124,7 +125,7 @@
                     <div class="col-sm-offset-2 col-sm-10">
 
                         <button type="submit" class="btn btn-success">
-                            <span class="glyphicon glyphicon-save"></span> ${message(code: 'default.button.create.label', default: 'Save')}
+                            <span class="glyphicon glyphicon-forward"></span> ${message(code: 'recap', default: 'Save')}
                         </button>
 
                     </div>

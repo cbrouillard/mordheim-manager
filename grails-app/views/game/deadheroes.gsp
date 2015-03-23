@@ -82,6 +82,7 @@
                 <li><g:message code="end.wrenchmen.states"/></li>
                 <li class="active"><g:message code="end.heroes.states"/></li>
                 <li><g:message code="end.gains"/></li>
+                <li><g:message code="end.recap"/></li>
             </ol>
 
         </div>
