@@ -210,6 +210,47 @@ class BandController {
     }
 
     @Secured(['ROLE_USER'])
+    def addmaverick() {
+        Band band = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (!band) {
+            redirect action: 'index'
+            return
+        }
+
+        Maverick maverick = new Maverick(params)
+        maverick.band = band
+        [bandId: params.id, maverickInstance: maverick]
+    }
+
+    @Transactional
+    @Secured(['ROLE_USER'])
+    def savemaverick(Maverick maverickInstance) {
+
+        def band = Band.findByIdAndOwner(params.band, springSecurityService.currentUser)
+        if (band == null) {
+            redirect action: 'index', controller: 'band'
+            return
+        }
+
+        if (maverickInstance.hasErrors()) {
+            respond maverickInstance.errors, view: 'addmaverick'
+            return
+        }
+
+        band.mavericks.add(maverickInstance)
+        band.gold = band.gold - maverickInstance.cost
+        band.save flush: true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Maverick.label'), maverickInstance.name])
+                redirect action: params.next, id: maverickInstance.band.id
+            }
+            '*' { respond maverickInstance, [status: OK] }
+        }
+    }
+
+    @Secured(['ROLE_USER'])
     def edit() {
         def bandInstance = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
         if (!bandInstance) {

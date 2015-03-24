@@ -71,6 +71,10 @@
                                     <span class="glyphicon glyphicon-forward"></span> ${message(code: 'next.step.wrench', default: 'Save')}
                                 </button>
                             </g:if>
+
+                            <button type="submit" class="btn btn-success" value="addmaverick" name="next">
+                                <span class="glyphicon glyphicon-forward"></span> ${message(code: 'next.step.maverick', default: 'Save')}
+                            </button>
                         </div>
 
                         <div class="btn-group pull-right">

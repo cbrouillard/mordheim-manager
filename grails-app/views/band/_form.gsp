@@ -34,6 +34,22 @@
 </div>
 
 <g:if test="${params.action == 'edit'}">
+    <div class="form-group ${hasErrors(bean: bandInstance, field: 'nbGame', 'has-error')}">
+
+        <label for="nbGame" class="col-sm-2 control-label"><g:message code="band.nbGame.title"/> *</label>
+
+        <div class="col-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><span
+                        class="glyphicon glyphicon-info-sign"></span></span>
+                <g:field type="number" name="nbGame" required="" value="${bandInstance?.nbGame}" class="form-control"
+                         min="0"/>
+            </div>
+
+            <div class="help-block with-errors"></div>
+        </div>
+    </div>
+
     <div class="form-group ${hasErrors(bean: bandInstance, field: 'gold', 'has-error')}">
 
         <label for="gold" class="col-sm-2 control-label"><g:message code="band.gold.title"
@@ -43,7 +59,8 @@
             <div class="input-group">
                 <span class="input-group-addon"><span
                         class="glyphicon glyphicon-euro"></span></span>
-                <g:field type="number" name="gold" required="" value="${bandInstance?.gold}" class="form-control" min="0" />
+                <g:field type="number" name="gold" required="" value="${bandInstance?.gold}" class="form-control"
+                         min="0"/>
             </div>
 
             <div class="help-block with-errors"></div>
@@ -60,7 +77,7 @@
                 <span class="input-group-addon"><span
                         class="glyphicon glyphicon-star"></span></span>
                 <g:field type="number" name="magicalStones" required="" value="${bandInstance?.magicalStones}"
-                         class="form-control" min="0" />
+                         class="form-control" min="0"/>
             </div>
 
             <div class="help-block with-errors"></div>
@@ -75,7 +92,8 @@
             <div class="input-group">
                 <span class="input-group-addon"><span
                         class="glyphicon glyphicon-scissors"></span></span>
-                <g:textArea name="reserve" cols="40" rows="5" value="${bandInstance?.reserve}" class="form-control editor"/>
+                <g:textArea name="reserve" cols="40" rows="5" value="${bandInstance?.reserve}"
+                            class="form-control editor"/>
             </div>
 
             <div class="help-block with-errors"></div>

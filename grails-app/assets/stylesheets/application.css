@@ -19,12 +19,19 @@ body {
     padding-bottom: 70px;
 }
 
-img.imgband{
+@media screen and (max-width: 480px) {
+    .no-show-onphone {
+        display: none;
+    }
+
+}
+
+img.imgband {
     max-height: 100px;
     max-width: 100px;
 }
 
-img.imgwarrior{
+img.imgwarrior {
     max-height: 55px;
     max-width: 55px;
     margin-top: 5px;

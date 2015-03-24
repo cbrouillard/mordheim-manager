@@ -115,7 +115,7 @@
             <p class="navbar-text pull-left">© BROUILLARD Cyril - 2015 <g:message
                     code="app.name"/></p>
 
-            <div class="navbar-text pull-right dons">
+            <div class="navbar-text pull-right dons no-show-onphone">
 
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                     <input type="hidden" name="cmd" value="_s-xclick">

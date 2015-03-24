@@ -238,5 +238,7 @@ class GameController {
         } catch (NumberFormatException e) {
             // osef
         }
+
+        bandInstance.nbGame += 1
     }
 }

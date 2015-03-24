@@ -26,6 +26,9 @@
                 <li><g:message code="end.wrenchmen.states"/></li>
                 <li><g:message code="end.heroes.states"/></li>
                 <li class="active"><g:message code="end.gains"/></li>
+                <g:if test="${bandInstance.mavericks}">
+                    <li><g:message code="end.mavericks.states"/></li>
+                </g:if>
                 <li><g:message code="end.recap"/></li>
             </ol>
 

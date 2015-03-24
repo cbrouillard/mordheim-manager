@@ -93,4 +93,12 @@ class Band {
     def getNbMavericks() {
         return this.mavericks.size()
     }
+
+    def getMavericksSumValue() {
+        Long value = 0
+        mavericks.each { m ->
+            value += m.bandSupValue
+        }
+        return value
+    }
 }
