@@ -67,7 +67,7 @@
                                         </g:if>
                                         <g:if test="${dead}">
                                             <span class="label label-danger"><g:message code="dead"
-                                                                                        args="[alive]"/></span>
+                                                                                        args="[dead]"/></span>
                                         </g:if>
                                     </td>
                                     <td class="text-right">
@@ -111,7 +111,7 @@
                                         </g:if>
                                         <g:set var="xp" value="${xp + new Integer(infos.kill)}"/>
                                         <span class="label label-default"><g:message code="hero.kill"
-                                                                                     args="${infos.kill}"/></span>
+                                                                                     args="[new Integer(infos.kill)]"/></span>
                                         <g:if test="${infos.state == "death"}">
                                             <span class="label label-danger"><g:message code="dead.hero"/></span>
                                             <g:set var="xp" value="${new Integer(0)}"/>
@@ -120,7 +120,8 @@
                                             <span class="label label-warning"><g:message code="notin.hero"/></span>
                                             <g:set var="xp" value="${new Integer(0)}"/>
                                         </g:if>
-
+                                    </td>
+                                    <td>
                                         <button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip"
                                                 data-placement="top"
                                                 title="${infos.injuries ?: message(code: 'no.injuries')}">
@@ -141,7 +142,7 @@
             </div>
 
             <div class="col-sm-3 col-xs-12">
-                <div class="panel panel-default">
+                <div class="panel panel-warning">
                     <div class="panel-heading">
                         <h5><g:message code="end.gains"/></h5>
                     </div>
