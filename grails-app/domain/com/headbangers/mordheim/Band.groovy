@@ -8,7 +8,7 @@ class Band {
 
     String id
 
-    static hasMany = [heroes: Hero, wrenches: Wrenchmen]
+    static hasMany = [heroes: Hero, wrenches: Wrenchmen, mavericks: Maverick]
 
     String note
 
@@ -31,7 +31,7 @@ class Band {
         name nullable: false, blank: false
         reserve nullable: true, blank: false, widget: 'textarea'
         photo nullable: true
-        nbGame nullable:true
+        nbGame nullable: false
     }
 
     static mapping = {
@@ -52,6 +52,11 @@ class Band {
         wrenches.each { w ->
             xp += (w.number * 5)
             xp += (w.number * w.fullXp)
+        }
+
+        mavericks.each { m ->
+            xp += m.bandSupValue
+            xp += m.fullXp
         }
 
         return xp
@@ -83,5 +88,9 @@ class Band {
             number += w.number
         }
         return number
+    }
+
+    def getNbMavericks() {
+        return this.mavericks.size()
     }
 }

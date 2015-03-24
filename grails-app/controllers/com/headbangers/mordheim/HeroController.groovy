@@ -104,7 +104,7 @@ class HeroController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'Hero.label', default: 'Hero'), params.id])
-                redirect action: "index", method: "GET"
+                redirect action: "index", method: "GET", controller: 'band'
             }
             '*' { render status: NOT_FOUND }
         }
