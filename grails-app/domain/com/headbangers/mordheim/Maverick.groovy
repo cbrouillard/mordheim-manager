@@ -1,6 +1,7 @@
 package com.headbangers.mordheim
 
 class Maverick {
+
     static belongsTo = [Band]
 
     String id

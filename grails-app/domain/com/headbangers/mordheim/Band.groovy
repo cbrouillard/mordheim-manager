@@ -8,7 +8,9 @@ class Band {
 
     String id
 
-    static hasMany = [heroes: Hero, wrenches: Wrenchmen, mavericks: Maverick]
+    static hasMany = [heroes   : Hero,
+                      wrenches : Wrenchmen,
+                      mavericks: Maverick]
 
     String note
 

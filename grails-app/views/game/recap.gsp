@@ -26,6 +26,9 @@
                 <li><g:message code="end.wrenchmen.states"/></li>
                 <li><g:message code="end.heroes.states"/></li>
                 <li><g:message code="end.gains"/></li>
+                <g:if test="${bandInstance.mavericks}">
+                    <li><g:message code="end.mavericks.states"/></li>
+                </g:if>
                 <li class="active"><g:message code="end.recap"/></li>
             </ol>
 
@@ -44,7 +47,7 @@
 
     <div class="panel panel-default">
         <div class="panel-body">
-            <div class="col-sm-4 col-xs-12">
+            <div class="col-sm-6 col-xs-12">
                 <div class="panel panel-warning">
                     <div class="panel-heading">
                         <h5><g:message code="end.wrenchmen.states"/></h5>
@@ -85,7 +88,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-5 col-xs-12">
+            <div class="col-sm-6 col-xs-12">
                 <div class="panel panel-warning">
                     <div class="panel-heading">
                         <h5><g:message code="end.heroes.states"/></h5>
@@ -141,7 +144,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-3 col-xs-12">
+            <div class="col-sm-6 col-xs-12">
                 <div class="panel panel-warning">
                     <div class="panel-heading">
                         <h5><g:message code="end.gains"/></h5>
@@ -181,6 +184,56 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-sm-6 col-xs-12">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h5><g:message code="end.mavericks.states"/></h5>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <g:each in="${bandInstance.mavericks.sort({ it.dateCreated })}" var="maverick">
+                                <tr>
+                                    <td><strong>${maverick.name}</strong>
+                                        <span class="label label-default">${maverick.type}</span>
+                                    </td>
+                                    <td>
+                                        <g:set var="infos" value="${data.mavericks[maverick.id]}"/>
+                                        <g:set var="xp" value="${new Integer(0)}"/>
+                                        <g:if test="${infos.state == "life"}">
+                                            <span class="label label-success"><g:message code="alive.hero"/></span>
+                                            <g:set var="xp" value="${xp + 1}"/>
+                                        </g:if>
+                                        <g:if test="${infos.state == "death"}">
+                                            <span class="label label-danger"><g:message code="dead.hero"/></span>
+                                            <g:set var="xp" value="${new Integer(0)}"/>
+                                        </g:if>
+                                        <g:if test="${infos.state == "notin"}">
+                                            <span class="label label-warning"><g:message code="notin.hero"/></span>
+                                            <g:set var="xp" value="${new Integer(0)}"/>
+                                        </g:if>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip"
+                                                data-placement="top"
+                                                title="${infos.injuries ?: message(code: 'no.injuries')}">
+                                            <g:message code="hero.injuries.label"/></button>
+                                        <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip"
+                                                data-placement="top"
+                                                title="${infos.competences ?: message(code: 'no.competences')}">
+                                            <g:message code="hero.competences.label.short"/></button>
+                                    </td>
+                                    <td class="text-right">
+                                        + ${xp} xp
+                                    </td>
+                                </tr>
+                            </g:each>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="panel-footer clearfix">

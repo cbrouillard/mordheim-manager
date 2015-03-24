@@ -12,6 +12,7 @@ class GameController {
         Map wrenches
         Map heroes
         Map band
+        Map mavericks
     }
 
     def endgame() {
@@ -104,6 +105,34 @@ class GameController {
         }
 
         gameData.band = params
+        redirect(action: bandInstance.mavericks ? 'deadmavericks' : 'recap', id: params.band)
+        return
+    }
+
+    def deadmavericks() {
+        def bandInstance = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (bandInstance) {
+            render view: 'deadmavericks', model: [bandInstance: bandInstance]
+        } else {
+            redirect action: 'index', controller: 'band'
+            return
+        }
+    }
+
+    def savedeadmavericks() {
+        def bandInstance = Band.findByIdAndOwner(params.band, springSecurityService.currentUser)
+        if (!bandInstance) {
+            redirect(action: 'index', controller: 'band')
+            return
+        }
+
+        EndGameData gameData = session['endGameData']
+        if (!gameData) {
+            redirect(action: 'endgame', controller: 'game')
+            return
+        }
+
+        gameData.mavericks = params
         redirect(action: 'recap', id: params.band)
         return
     }

@@ -51,7 +51,8 @@
 
                     <div class="form-group ${hasErrors(bean: bandInstance, field: 'gold', 'has-error')}">
 
-                        <label for="gold" class="col-sm-2 control-label"><g:message code="band.earned.gold.title"/></label>
+                        <label for="gold" class="col-sm-2 control-label"><g:message
+                                code="band.earned.gold.title"/></label>
 
                         <div class="col-sm-10">
                             <div class="input-group">
@@ -74,7 +75,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-plus"></span></span>
                                 <g:field type="number" name="magicalStones" value="0"
-                                         class="form-control" min="0" />
+                                         class="form-control" min="0"/>
                             </div>
 
                             <div class="help-block with-errors">
@@ -128,7 +129,7 @@
                     <div class="col-sm-offset-2 col-sm-10">
 
                         <button type="submit" class="btn btn-success pull-right">
-                            <span class="glyphicon glyphicon-forward"></span> ${message(code: 'recap', default: 'Save')}
+                            <span class="glyphicon glyphicon-forward"></span> ${message(code: bandInstance.mavericks ? 'next.step' : 'recap', default: 'Save')}
                         </button>
 
                     </div>
