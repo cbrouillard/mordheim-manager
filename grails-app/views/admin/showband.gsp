@@ -121,6 +121,12 @@
 
                 </a>
             </li>
+            <li role="presentation" class="${activeTab == 'maverick' ? 'active' : ''}">
+                <a href="#mavericks" role="tab" data-toggle="tab">
+                    <span class="badge">${bandInstance.nbMavericks}</span>
+                    <g:message code="mavericks"/>
+                </a>
+            </li>
         </ul>
 
 
@@ -134,6 +140,10 @@
 
             <div role="tabpanel" class="tab-pane ${activeTab == 'wrench' ? 'active' : ''}" id="wrenches">
                 <g:render template="/wrenchmen/wrenches"/>
+            </div>
+
+            <div role="tabpanel" class="tab-pane ${activeTab == 'maverick' ? 'active' : ''}" id="mavericks">
+                <g:render template="/maverick/mavericks"/>
             </div>
         </div>
 
