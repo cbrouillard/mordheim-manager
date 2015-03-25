@@ -80,6 +80,9 @@ class Band {
         wrenches.each { w ->
             xp += (w.fullXp * w.number)
         }
+        mavericks.each {m ->
+            xp += m.fullXp
+        }
 
         return xp
     }

@@ -33,9 +33,9 @@
                 <tbody>
                 <g:each in="${bands}" var="band">
                     <tr>
-                        <td><g:formatDate date="${band.dateCreated}"/></td>
-                        <td><strong>${band.name}</strong> <span class="label label-default">${band.type}</span></td>
-                        <td class="text-right">
+                        <td class="col-md-3"><g:formatDate date="${band.dateCreated}"/></td>
+                        <td class="col-md-5"><strong>${band.name}</strong> <span class="label label-default">${band.type}</span></td>
+                        <td class="text-right col-md-4">
                             <div class="btn-group">
                                 <g:link controller="person" action="edit" id="${band.owner.id}"
                                         class="btn btn-warning btn-xs">

@@ -23,11 +23,15 @@ class BootStrap {
 
             def roleAdmin = Role.findByAuthority("ROLE_ADMIN")
             def roleUser = Role.findByAuthority("ROLE_USER")
+            def roleScribe = Role.findByAuthority("ROLE_SCRIBE")
             if (!roleAdmin) {
                 roleAdmin = new Role(authority: "ROLE_ADMIN").save(flush: true)
             }
             if (!roleUser) {
                 roleUser = new Role(authority: "ROLE_USER").save(flush: true)
+            }
+            if (!roleScribe){
+                roleScribe = new Role(authority: "ROLE_SCRIBE").save(flush: true)
             }
             PersonRole.create(admin, roleAdmin, true)
             PersonRole.create(admin, roleUser, true)

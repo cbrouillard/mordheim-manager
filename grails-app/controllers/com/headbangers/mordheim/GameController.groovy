@@ -171,8 +171,14 @@ class GameController {
             savewrenches(bandInstance, gameData.wrenches)
             saveHeroes(bandInstance, gameData.heroes)
             saveBand(bandInstance, gameData.band)
+            if (bandInstance.mavericks) {
+                saveMavericks(bandInstance, gameData.mavericks)
+            }
 
             bandInstance.save(flush: true)
+
+            session['endGameData'] = null
+
             flash.message = message(code: 'default.updated.message', args: [message(code: 'Band.label', default: 'Band'), bandInstance.name])
             redirect(controller: "band", action: 'show', id: bandInstance.id)
             return
@@ -255,6 +261,32 @@ class GameController {
             bandInstance.removeFromHeroes(bye)
         }
         Hero.deleteAll(toDelete)
+    }
+
+    private def saveMavericks(Band bandInstance, mavericksData) {
+        def toDelete = []
+
+        bandInstance.mavericks.each { maverick ->
+            def infos = mavericksData[maverick.id]
+
+            if (infos.state == "death") {
+                // dead. so bad.
+                toDelete.add(maverick)
+            } else if (infos.state == "notin") {
+
+                //nothing.
+
+            } else {
+                // bind data
+                bindData(maverick, infos, [include: ["injuries", "competences"]])
+                maverick.earnedXp += 1
+            }
+        }
+
+        toDelete.each { bye ->
+            bandInstance.removeFromMavericks(bye)
+        }
+        Maverick.deleteAll(toDelete)
     }
 
     private def saveBand(Band bandInstance, bandData) {
