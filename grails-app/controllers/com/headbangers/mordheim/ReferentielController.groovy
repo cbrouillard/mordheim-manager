@@ -7,7 +7,7 @@ import grails.plugin.springsecurity.annotation.Secured
 
 class ReferentielController {
 
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_SCRIBE'])
     def index() {
         def races = Race.list()
         def equipments = RefEquipment.list()

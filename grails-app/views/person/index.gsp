@@ -34,7 +34,8 @@
                 <g:each in="${bands}" var="band">
                     <tr>
                         <td class="col-md-3"><g:formatDate date="${band.dateCreated}"/></td>
-                        <td class="col-md-5"><strong>${band.name}</strong> <span class="label label-default">${band.type}</span></td>
+                        <td class="col-md-5"><strong>${band.name}</strong> <span
+                                class="label label-default">${band.type}</span></td>
                         <td class="text-right col-md-4">
                             <div class="btn-group">
                                 <g:link controller="person" action="edit" id="${band.owner.id}"
@@ -42,7 +43,8 @@
                                     <span class="glyphicon glyphicon-pencil"></span>
                                     ${band.owner.username}
                                 </g:link>
-                                <g:link controller="admin" action="showband" id="${band.id}" class="btn btn-success btn-xs">
+                                <g:link controller="admin" action="showband" id="${band.id}"
+                                        class="btn btn-success btn-xs">
                                     <span class="glyphicon glyphicon-eye-open"></span>
                                 </g:link>
                             </div>
@@ -90,6 +92,7 @@
                     <g:sortableColumn property="dateCreated"
                                       title="${message(code: 'person.dateCreated.label', default: 'Date Created')}"/>
 
+                    <td>Scribe</td>
                     <td>Actions</td>
 
                 </tr>
@@ -130,6 +133,18 @@
                             </g:link>
                         </td>
                         <td><g:formatDate date="${person.dateCreated}" formatName="date.format.short"/></td>
+                        <td>
+                            <g:if test="${com.headbangers.mordheim.security.PersonRole.exists(person.id, roleScribe.id)}">
+                                <g:link controller="person" action="setscribe" id="${person.id}" params="[value:false]" class="btn btn-success btn-xs">
+                                    <span class="glyphicon glyphicon-tag"></span> Est scribe
+                                </g:link>
+                            </g:if>
+                            <g:else>
+                                <g:link controller="person" action="setscribe" id="${person.id}" params="[value:true]" class="btn btn-danger btn-xs">
+                                    <span class="glyphicon glyphicon-tag"></span> N'est pas scribe
+                                </g:link>
+                            </g:else>
+                        </td>
                         <td>
                             <g:if test="${sec.loggedInUserInfo(field: "username") != person.username}">
                                 <sec:ifAllGranted roles='ROLE_ADMIN'>

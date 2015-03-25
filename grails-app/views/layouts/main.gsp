@@ -16,7 +16,7 @@
     <asset:stylesheet src="application.css"/>
     <asset:javascript src="application.js"/>
 
-    <script src="${resource(dir:'js/tinymce', file:'tinymce.min.js')}"></script>
+    <script src="${resource(dir: 'js/tinymce', file: 'tinymce.min.js')}"></script>
     <script>
         tinymce.init({
             selector: 'textarea.editor',
@@ -83,13 +83,15 @@
                         </a>
                     </li>
                 </sec:ifSwitched>
-                <sec:ifAllGranted roles="ROLE_ADMIN">
+                <sec:ifAllGranted roles="ROLE_SCRIBE">
                     <li>
                         <g:link controller="referentiel">
                             <span class="glyphicon glyphicon-folder-close"></span>
                             <g:message code="referentiel"/>
                         </g:link>
                     </li>
+                </sec:ifAllGranted>
+                <sec:ifAllGranted roles="ROLE_ADMIN">
                     <li>
                         <g:link controller="admin">
                             <span class="glyphicon glyphicon-cog"></span>

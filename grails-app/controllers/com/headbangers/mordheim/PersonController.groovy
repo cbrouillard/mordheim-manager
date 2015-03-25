@@ -19,9 +19,26 @@ class PersonController {
     def index(Integer max) {
         params.max = Math.min(max ?: 50, 100)
 
-        def lastBands = Band.list([sort:"dateCreated", order: "desc", max: 10])
+        def lastBands = Band.list([sort: "dateCreated", order: "desc", max: 10])
+        def roleScribe = Role.findByAuthority("ROLE_SCRIBE")
 
-        respond Person.list(params), model: [personInstanceCount: Person.count(), bands:lastBands]
+        respond Person.list(params), model: [personInstanceCount: Person.count(), bands: lastBands, roleScribe: roleScribe]
+    }
+
+    @Transactional
+    @Secured(['ROLE_ADMIN'])
+    def setscribe() {
+        def person = Person.get(params.id)
+        def value = new Boolean(params.value)
+
+        if (value) {
+            PersonRole.create(person, Role.findByAuthority("ROLE_SCRIBE"), true)
+        } else {
+            PersonRole.remove(person, Role.findByAuthority("ROLE_SCRIBE"), true)
+        }
+
+        redirect(action: 'index')
+        return
     }
 
     // anonymous access
@@ -58,14 +75,14 @@ class PersonController {
         sendMail {
             async true
             to personInstance.email
-            subject message (code:'registration.email')
-            html g.render(template:"/mail/registration", model: [person:personInstance])
+            subject message(code: 'registration.email')
+            html g.render(template: "/mail/registration", model: [person: personInstance])
         }
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.registered.message', args: [personInstance.username, personInstance.email])
-                chain (controller: 'login', action: 'auth')
+                chain(controller: 'login', action: 'auth')
             }
             '*' { respond personInstance, [status: OK] }
         }
@@ -82,12 +99,12 @@ class PersonController {
             sendMail {
                 async true
                 to "cyril.brouillard+mordheim@gmail.com"
-                subject message (code:'new.registration.validated.email')
-                html g.render(template:"/mail/heynewuser", model: [person:person])
+                subject message(code: 'new.registration.validated.email')
+                html g.render(template: "/mail/heynewuser", model: [person: person])
             }
 
             flash.message = message(code: 'registration.over', args: [person.username])
-            chain (controller: 'login', action: 'auth')
+            chain(controller: 'login', action: 'auth')
             return
         }
 

@@ -6,6 +6,19 @@ class BootStrap {
 
     def init = { servletContext ->
 
+        def roleAdmin = Role.findByAuthority("ROLE_ADMIN")
+        def roleUser = Role.findByAuthority("ROLE_USER")
+        def roleScribe = Role.findByAuthority("ROLE_SCRIBE")
+        if (!roleAdmin) {
+            roleAdmin = new Role(authority: "ROLE_ADMIN").save(flush: true)
+        }
+        if (!roleUser) {
+            roleUser = new Role(authority: "ROLE_USER").save(flush: true)
+        }
+        if (!roleScribe) {
+            roleScribe = new Role(authority: "ROLE_SCRIBE").save(flush: true)
+        }
+
         def admin = Person.findByUsername("cyril")
         if (!admin) {
             // Création de l'user admin
@@ -21,24 +34,13 @@ class BootStrap {
             admin.token = UUID.randomUUID().toString();
             admin.save(flush: true)
 
-            def roleAdmin = Role.findByAuthority("ROLE_ADMIN")
-            def roleUser = Role.findByAuthority("ROLE_USER")
-            def roleScribe = Role.findByAuthority("ROLE_SCRIBE")
-            if (!roleAdmin) {
-                roleAdmin = new Role(authority: "ROLE_ADMIN").save(flush: true)
-            }
-            if (!roleUser) {
-                roleUser = new Role(authority: "ROLE_USER").save(flush: true)
-            }
-            if (!roleScribe){
-                roleScribe = new Role(authority: "ROLE_SCRIBE").save(flush: true)
-            }
             PersonRole.create(admin, roleAdmin, true)
+            PersonRole.create(admin, roleScribe, true)
             PersonRole.create(admin, roleUser, true)
         }
 
         def simpleUser = Person.findByUsername("toto")
-        if (!simpleUser){
+        if (!simpleUser) {
             // Création de l'user admin
             simpleUser = new Person()
             simpleUser.accountExpired = false
@@ -52,7 +54,6 @@ class BootStrap {
             simpleUser.token = UUID.randomUUID().toString();
             simpleUser.save(flush: true)
 
-            def roleUser = Role.findByAuthority("ROLE_USER")
             PersonRole.create(simpleUser, roleUser, true)
         }
     }
