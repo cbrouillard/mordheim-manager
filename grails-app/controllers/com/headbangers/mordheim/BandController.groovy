@@ -66,6 +66,18 @@ class BandController {
     }
 
     @Secured(['ROLE_USER'])
+    def bbcode() {
+        Band band = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (band) {
+            render(view: 'bbcode', model: [bandInstance: band])
+            return
+        }
+        redirect(action: 'index')
+        return
+    }
+
+
+    @Secured(['ROLE_USER'])
     def previewpdf() {
         Band band = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
         if (band) {

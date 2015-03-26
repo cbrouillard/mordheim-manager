@@ -41,6 +41,10 @@
                         </ul>
                     </div>
 
+                    <g:link controller="band" action="bbcode" id="${bandInstance.id}" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-console"></span> <g:message code="generate.bbcode"/>
+                    </g:link>
+
                     <g:if test="${bandInstance.nbWarriors > 0}">
                         <g:link controller="game" action="endgame" id="${bandInstance.id}" class="btn btn-warning">
                             <span class="glyphicon glyphicon-ok-circle"></span> <g:message code="end.game"/>
