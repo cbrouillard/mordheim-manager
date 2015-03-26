@@ -36,6 +36,21 @@
 
             $('#' + wrenchgroupId + "results").html(message);
         }
+
+        var wrenchNotApply = function (wrenchId) {
+            var value = $('#' + wrenchId + 'notin').is(":checked");
+            console.log(value);
+
+            var message = "<g:message code="endgame.ignored"/>";
+            if (value) {
+                $('#' + wrenchId + 'container').hide();
+                $('#' + wrenchId + "progress").hide();
+                $('#' + wrenchId + "results").html(message);
+            } else {
+                $('#' + wrenchId + 'container').show();
+                result(wrenchId);
+            }
+        }
     </script>
 </head>
 
@@ -96,11 +111,22 @@
 
                                         <div class="col-sm-6">
                                             <g:render template="experience" model="[from: wrenchgroup, maxXp: 1]"/>
+                                            <div class="btn-group pull-right" data-toggle="buttons">
+                                                <label class="btn btn-default"
+                                                       id="${wrenchgroup.id}notin_label">
+                                                    <input type="checkbox" autocomplete="off"
+                                                           name='wrench.${wrenchgroup.id}.notin'
+                                                           id='${wrenchgroup.id}notin'
+                                                           onchange="javascript:wrenchNotApply('${wrenchgroup.id}');">
+                                                    <span class="glyphicon glyphicon-hand-right"></span> <g:message
+                                                        code="wrench.notapply"/>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="table-responsive">
+                                <div class="table-responsive" id="${wrenchgroup.id}container">
                                     <table class="table table-hover">
                                         <tbody>
                                         <g:set var="i" value="${new Integer(0)}"/>

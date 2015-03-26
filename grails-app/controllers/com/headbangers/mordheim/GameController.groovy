@@ -191,7 +191,9 @@ class GameController {
     private def savewrenches(Band bandInstance, wrenchesData) {
         def toDelete = []
         bandInstance.wrenches.each { wrenches ->
+
             def status = wrenchesData.wrench[wrenches.id]
+            def notin = wrenchesData.wrench[wrenches.id]["notin"]
 
             if (status) {
                 def life = 0
@@ -206,13 +208,15 @@ class GameController {
 
                 log.debug "Wrench $wrenches.id life=$life && death=$death"
 
-                if (death == wrenches.number) {
-                    // everyone is dead.
-                    bandInstance.removeFromWrenches(wrenches)
-                    toDelete.add(wrenches)
-                } else {
-                    wrenches.earnedXp += 1
-                    wrenches.number = life
+                if (!notin) {
+                    if (death == wrenches.number) {
+                        // everyone is dead.
+                        bandInstance.removeFromWrenches(wrenches)
+                        toDelete.add(wrenches)
+                    } else {
+                        wrenches.earnedXp += 1
+                        wrenches.number = life
+                    }
                 }
             }
         }

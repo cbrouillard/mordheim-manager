@@ -100,25 +100,37 @@
                                 class="label label-default">#${wrench.number} ${wrench.type}</span></td>
                         <td>
                             <g:set var="infos" value="${data.wrenches.wrench[wrench.id]}"/>
+                            <g:set var="notin" value="${data.wrenches.wrench[wrench.id]["notin"]}"/>
                             <g:set var="alive" value="${infos.count { it.value == 'life' }}"/>
                             <g:set var="dead" value="${infos.count { it.value == 'death' }}"/>
 
-                            <g:if test="${alive}">
-                                <span class="label label-success"><g:message code="alive"
-                                                                             args="[alive]"/></span>
+                            <g:if test="${notin}">
+                                <span class="label label-warning"><g:message code="notin.hero"/></span>
                             </g:if>
-                            <g:if test="${dead}">
-                                <span class="label label-danger"><g:message code="dead"
-                                                                            args="[dead]"/></span>
-                            </g:if>
+                            <g:else>
+                                <g:if test="${alive}">
+                                    <span class="label label-success"><g:message code="alive"
+                                                                                 args="[alive]"/></span>
+                                </g:if>
+                                <g:if test="${dead}">
+                                    <span class="label label-danger"><g:message code="dead"
+                                                                                args="[dead]"/></span>
+                                </g:if>
+                            </g:else>
+
                         </td>
                         <td class="text-right" colspan="3">
                             <span class="badge">
-                                <g:if test="${alive}">
-                                    + 1 xp
+                                <g:if test="${notin}">
+                                    + 0 xp
                                 </g:if>
                                 <g:else>
-                                    + 0 xp
+                                    <g:if test="${alive}">
+                                        + 1 xp
+                                    </g:if>
+                                    <g:else>
+                                        + 0 xp
+                                    </g:else>
                                 </g:else>
                             </span>
                         </td>
