@@ -38,8 +38,17 @@
                 <g:each in="${races}" var="race">
                     <tr>
                         <td><strong>${race.name}</strong></td>
+                        <td>
+                            <span class="label label-default">${race.minFigures}&lt;=</span>
+                            <span class="label label-default">=&gt;${race.maxFigures}</span>
+                            <span class="label label-default"><g:message code="band.gold"
+                                                                         args="${race.initialTreasure}"/></span>
+                        </td>
                         <td class="text-right">
-
+                            <g:link class="btn btn-default btn-xs" controller="referentiel" action="manage"
+                                    id="${race.id}">
+                                <g:message code="referentiel.manage"/>
+                            </g:link>
                         </td>
                     </tr>
                 </g:each>

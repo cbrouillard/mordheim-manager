@@ -12,7 +12,6 @@ class Race {
     Integer maxFigures = 20
     Integer initialTreasure = 500
 
-
     static constraints = {
         name nullable: false, blank: false
         minFigures nullable: false
