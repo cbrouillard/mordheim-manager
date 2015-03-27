@@ -1,5 +1,6 @@
 package com.headbangers.mordheim
 
+import com.headbangers.mordheim.reference.Race
 import com.headbangers.mordheim.security.Person
 
 class Band {
@@ -26,6 +27,8 @@ class Band {
 
     byte[] photo
 
+    Race race
+
     static constraints = {
         note nullable: true, blank: true, widget: 'textarea'
         gold nullable: false, defaultValue: 0
@@ -34,6 +37,7 @@ class Band {
         reserve nullable: true, blank: false, widget: 'textarea'
         photo nullable: true
         nbGame nullable: false
+        race nullable:true
     }
 
     static mapping = {

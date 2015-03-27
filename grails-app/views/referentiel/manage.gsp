@@ -20,5 +20,55 @@
         </g:if>
     </div>
 </div>
+
+<div class="col-sm-3 col-xs-12">
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            <div class="btn-group pull-right" role="group">
+                <g:link controller="referentiel" action="createracerule" class="btn btn-success" id="${raceInstance.id}">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </g:link>
+            </div>
+            <h5>
+                <g:message code="referentiel.race.specialRules"/>
+            </h5>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-9 col-xs-12">
+    <div class="row">
+        <div class="col-sm-6 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <div class="btn-group pull-right" role="group">
+                        <g:link controller="referentiel" action="createhero" class="btn btn-success" id="${raceInstance.id}">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </g:link>
+                    </div>
+                    <h5>
+                        <g:message code="heroes"/>
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <div class="btn-group pull-right" role="group">
+                        <g:link controller="referentiel" action="createwrench" class="btn btn-success" id="${raceInstance.id}">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </g:link>
+                    </div>
+                    <h5>
+                        <g:message code="wrenches"/>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

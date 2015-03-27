@@ -3,6 +3,7 @@ package com.headbangers.mordheim
 import com.headbangers.mordheim.reference.Race
 import com.headbangers.mordheim.reference.RefCompetence
 import com.headbangers.mordheim.reference.RefEquipment
+import com.headbangers.mordheim.reference.RefHero
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.CREATED
@@ -45,5 +46,15 @@ class ReferentielController {
     def manage() {
         def race = Race.get(params.id)
         [raceInstance: race]
+    }
+
+    def createhero (){
+        Race race = Race.get(params.id)
+        if (!race){
+            redirect(action:'index')
+            return
+        }
+        RefHero refHero = new RefHero()
+        respond refHero, model: [race:race]
     }
 }

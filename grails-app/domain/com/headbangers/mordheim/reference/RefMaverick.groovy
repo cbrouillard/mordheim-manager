@@ -23,11 +23,16 @@ class RefMaverick {
     Integer retenueCost
     Integer valueBandModifier
 
+    String equipment
+    String competences
+
     static constraints = {
         type nullable: false, blank: false
         startingExperience nullable: false
         costWithoutEquipment nullable: false
         retenueCost nullable: false
         valueBandModifier nullable: false
+        equipment nullable:true, blank:false
+        competences nullable:true, blank:false
     }
 }

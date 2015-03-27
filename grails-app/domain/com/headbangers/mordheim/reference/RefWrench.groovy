@@ -22,10 +22,15 @@ class RefWrench {
 
     Integer costWithoutEquipment
 
+    String equipment
+    String rules
+
     static constraints = {
         type nullable:false, blank: false
         maxInBand nullable:true
         startingExperience nullable:false
         costWithoutEquipment nullable: false
+        equipment nullable: true, blank:false
+        rules nullable:true, blank:false
     }
 }

@@ -9,7 +9,7 @@
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-font"></span></span>
-            <g:textField name="name" required="" value="${heroInstance?.name}" class="form-control"/>
+            <g:textField name="name" required="" value="${heroInstance?.name}" class="form-control" autofocus=""/>
         </div>
 
         <div class="help-block with-errors"></div>

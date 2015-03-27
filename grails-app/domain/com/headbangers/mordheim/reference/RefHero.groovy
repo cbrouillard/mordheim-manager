@@ -22,10 +22,15 @@ class RefHero {
 
     Integer costWithoutEquipment
 
+    String equipment
+    String competences
+
     static constraints = {
         type nullable: false, blank: false
         maxInBand nullable: false
         startingExperience nullable: false
         costWithoutEquipment nullable: false
+        equipment nullable:true, blank:false
+        competences nullable:true, blank:false
     }
 }
