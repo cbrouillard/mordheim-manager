@@ -35,13 +35,17 @@
 
 <div class="col-sm-3 col-xs-12">
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading clearfix">
+            <g:link controller="referentiel" action="manage" id="${race.id}" class="btn btn-default pull-right">
+                <span class="glyphicon glyphicon-backward"></span> ${race.name}
+            </g:link>
+
             <h5><g:message code="referentiel.already.created.heroes"/></h5>
         </div>
 
         <div class="table-responsive">
             <table class="table">
-                <g:each in="${race.heroes.sort({ it.dateCreated })}" var="hero">
+                <g:each in="${race.heroes.sort({ it.type })}" var="hero">
                     <tr>
                         <td><strong>${hero.type}</strong></td>
                     </tr>

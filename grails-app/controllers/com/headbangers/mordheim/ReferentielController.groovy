@@ -5,6 +5,7 @@ import com.headbangers.mordheim.reference.RefCompetence
 import com.headbangers.mordheim.reference.RefEquipment
 import com.headbangers.mordheim.reference.RefHero
 import grails.plugin.springsecurity.annotation.Secured
+import grails.transaction.Transactional
 
 import static org.springframework.http.HttpStatus.CREATED
 
@@ -12,7 +13,7 @@ import static org.springframework.http.HttpStatus.CREATED
 class ReferentielController {
 
     def index() {
-        def races = Race.list()
+        def races = Race.list([sort: 'name', order: "asc"])
         def equipments = RefEquipment.list()
         def competences = RefCompetence.list()
 
@@ -25,6 +26,7 @@ class ReferentielController {
         respond race
     }
 
+    @Transactional
     def saverace(Race raceInstance) {
 
         if (raceInstance.hasErrors()) {
@@ -48,13 +50,33 @@ class ReferentielController {
         [raceInstance: race]
     }
 
-    def createhero (){
+    def createhero() {
         Race race = Race.get(params.id)
-        if (!race){
-            redirect(action:'index')
+        if (!race) {
+            redirect(action: 'index')
             return
         }
         RefHero refHero = new RefHero()
-        respond refHero, model: [race:race]
+        respond refHero, model: [race: race]
+    }
+
+    @Transactional
+    def savehero(RefHero refHeroInstance) {
+        def race = Race.get(params.race)
+        if (!race) {
+            redirect(action: 'index')
+            return
+        }
+
+
+        if (refHeroInstance.hasErrors()) {
+            respond refHeroInstance.errors, view: 'create', model: [race: race]
+            return
+        }
+
+        race.addToHeroes(refHeroInstance);
+        race.save(flush: true)
+        redirect(action: 'createhero', id: race.id)
+        return
     }
 }

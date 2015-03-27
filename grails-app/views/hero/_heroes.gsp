@@ -45,52 +45,7 @@
 
             </div>
 
-            <div class="table-responsive">
-                <table class="table table-condensed">
-                    <thead>
-                    <tr>
-                        <th class="text-center"><g:message code="profile.m"/></th>
-                        <th class="text-center"><g:message code="profile.cc"/></th>
-                        <th class="text-center"><g:message code="profile.ct"/></th>
-                        <th class="text-center"><g:message code="profile.f"/></th>
-                        <th class="text-center"><g:message code="profile.e"/></th>
-                        <th class="text-center"><g:message code="profile.pv"/></th>
-                        <th class="text-center"><g:message code="profile.i"/></th>
-                        <th class="text-center"><g:message code="profile.a"/></th>
-                        <th class="text-center"><g:message code="profile.cd"/></th>
-                    </tr
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="text-center"><span
-                                class="label label-${hero?.M <= 2 ? "danger" : (hero?.M <= 4 ? 'warning' : 'success')}">${hero?.M}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${hero?.CC <= 2 ? "danger" : (hero?.CC <= 3 ? 'warning' : 'success')}">${hero?.CC}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${hero?.CT <= 2 ? "danger" : (hero?.CT <= 3 ? 'warning' : 'success')}">${hero?.CT}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${hero?.F <= 2 ? "danger" : (hero?.F <= 3 ? 'warning' : 'success')}">${hero?.F}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${hero?.E <= 2 ? "danger" : (hero?.E <= 3 ? 'warning' : 'success')}">${hero?.E}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${hero?.PV >= 2 ? "success" : "default"}">${hero?.PV}</span></td>
-                        <td class="text-center"><span
-                                class="label label-${hero?.I <= 2 ? "danger" : (hero?.I <= 3 ? 'warning' : 'success')}">${hero?.I}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${hero?.A >= 2 ? "success" : "default"}">${hero?.A}</span></td>
-                        <td class="text-center"><span
-                                class="label label-${hero?.CD <= 6 ? "danger" : (hero?.CD <= 7 ? 'warning' : 'success')}">${hero?.CD}</span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <g:render template="/profilable/showprofile" model="[warrior: hero]"/>
 
             <div class="row">
 

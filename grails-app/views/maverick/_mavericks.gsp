@@ -51,52 +51,7 @@
 
             </div>
 
-            <div class="table-responsive">
-                <table class="table table-condensed">
-                    <thead>
-                    <tr>
-                        <th class="text-center"><g:message code="profile.m"/></th>
-                        <th class="text-center"><g:message code="profile.cc"/></th>
-                        <th class="text-center"><g:message code="profile.ct"/></th>
-                        <th class="text-center"><g:message code="profile.f"/></th>
-                        <th class="text-center"><g:message code="profile.e"/></th>
-                        <th class="text-center"><g:message code="profile.pv"/></th>
-                        <th class="text-center"><g:message code="profile.i"/></th>
-                        <th class="text-center"><g:message code="profile.a"/></th>
-                        <th class="text-center"><g:message code="profile.cd"/></th>
-                    </tr
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="text-center"><span
-                                class="label label-${maverick?.M <= 2 ? "danger" : (maverick?.M <= 4 ? 'warning' : 'success')}">${maverick?.M}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${maverick?.CC <= 2 ? "danger" : (maverick?.CC <= 3 ? 'warning' : 'success')}">${maverick?.CC}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${maverick?.CT <= 2 ? "danger" : (maverick?.CT <= 3 ? 'warning' : 'success')}">${maverick?.CT}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${maverick?.F <= 2 ? "danger" : (maverick?.F <= 3 ? 'warning' : 'success')}">${maverick?.F}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${maverick?.E <= 2 ? "danger" : (maverick?.E <= 3 ? 'warning' : 'success')}">${maverick?.E}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${maverick?.PV >= 2 ? "success" : "default"}">${maverick?.PV}</span></td>
-                        <td class="text-center"><span
-                                class="label label-${maverick?.I <= 2 ? "danger" : (maverick?.I <= 3 ? 'warning' : 'success')}">${maverick?.I}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${maverick?.A >= 2 ? "success" : "default"}">${maverick?.A}</span></td>
-                        <td class="text-center"><span
-                                class="label label-${maverick?.CD <= 6 ? "danger" : (maverick?.CD <= 7 ? 'warning' : 'success')}">${maverick?.CD}</span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <g:render template="/profilable/showprofile" model="[warrior: maverick]"/>
 
             <div class="row">
 

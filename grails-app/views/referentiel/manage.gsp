@@ -25,7 +25,8 @@
     <div class="panel panel-default">
         <div class="panel-heading clearfix">
             <div class="btn-group pull-right" role="group">
-                <g:link controller="referentiel" action="createracerule" class="btn btn-success" id="${raceInstance.id}">
+                <g:link controller="referentiel" action="createracerule" class="btn btn-success"
+                        id="${raceInstance.id}">
                     <span class="glyphicon glyphicon-plus"></span>
                 </g:link>
             </div>
@@ -42,7 +43,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
                     <div class="btn-group pull-right" role="group">
-                        <g:link controller="referentiel" action="createhero" class="btn btn-success" id="${raceInstance.id}">
+                        <g:link controller="referentiel" action="createhero" class="btn btn-success"
+                                id="${raceInstance.id}">
                             <span class="glyphicon glyphicon-plus"></span>
                         </g:link>
                     </div>
@@ -50,6 +52,25 @@
                         <g:message code="heroes"/>
                     </h5>
                 </div>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <g:each in="${raceInstance.heroes.sort({ it.type })}" var="hero">
+                            <tr>
+                                <td><strong>${hero.type}</strong></td>
+                                <td>
+                                    <span class="label label-default"><g:message code="band.gold"
+                                                                                 args="[hero.costWithoutEquipment]"/></span>
+                                    <span class="label label-default">${hero.startingExperience} XP</span>
+                                </td>
+                                <td>
+                                    <g:render template="/profilable/showprofile" model="[warrior: hero]"/>
+                                </td>
+                            </tr>
+                        </g:each>
+                    </table>
+                </div>
+
             </div>
         </div>
 
@@ -57,7 +78,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
                     <div class="btn-group pull-right" role="group">
-                        <g:link controller="referentiel" action="createwrench" class="btn btn-success" id="${raceInstance.id}">
+                        <g:link controller="referentiel" action="createwrench" class="btn btn-success"
+                                id="${raceInstance.id}">
                             <span class="glyphicon glyphicon-plus"></span>
                         </g:link>
                     </div>

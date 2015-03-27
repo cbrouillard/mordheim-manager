@@ -30,7 +30,8 @@
                                     </button>
                                 </div>
 
-                                <g:link class="btn btn-warning" controller="wrenchmen" action="promote" id="${wrench.id}">
+                                <g:link class="btn btn-warning" controller="wrenchmen" action="promote"
+                                        id="${wrench.id}">
                                     <span class="glyphicon glyphicon-circle-arrow-up"></span>
                                     <g:message code="wrench.promote"/>
                                 </g:link>
@@ -50,52 +51,7 @@
                 <g:render template="/profilable/experience" model="[from: wrench, maxXp: 14]"/>
             </div>
 
-            <div class="table-responsive">
-                <table class="table table-condensed">
-                    <thead>
-                    <tr>
-                        <th class="text-center"><g:message code="profile.m"/></th>
-                        <th class="text-center"><g:message code="profile.cc"/></th>
-                        <th class="text-center"><g:message code="profile.ct"/></th>
-                        <th class="text-center"><g:message code="profile.f"/></th>
-                        <th class="text-center"><g:message code="profile.e"/></th>
-                        <th class="text-center"><g:message code="profile.pv"/></th>
-                        <th class="text-center"><g:message code="profile.i"/></th>
-                        <th class="text-center"><g:message code="profile.a"/></th>
-                        <th class="text-center"><g:message code="profile.cd"/></th>
-                    </tr
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="text-center"><span
-                                class="label label-${wrench?.M <= 2 ? "danger" : (wrench?.M <= 4 ? 'warning' : 'success')}">${wrench?.M}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${wrench?.CC <= 2 ? "danger" : (wrench?.CC <= 3 ? 'warning' : 'success')}">${wrench?.CC}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${wrench?.CT <= 2 ? "danger" : (wrench?.CT <= 3 ? 'warning' : 'success')}">${wrench?.CT}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${wrench?.F <= 2 ? "danger" : (wrench?.F <= 3 ? 'warning' : 'success')}">${wrench?.F}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${wrench?.E <= 2 ? "danger" : (wrench?.E <= 3 ? 'warning' : 'success')}">${wrench?.E}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${wrench?.PV >= 2 ? "success" : "default"}">${wrench?.PV}</span></td>
-                        <td class="text-center"><span
-                                class="label label-${wrench?.I <= 2 ? "danger" : (wrench?.I <= 3 ? 'warning' : 'success')}">${wrench?.I}</span>
-                        </td>
-                        <td class="text-center"><span
-                                class="label label-${wrench?.A >= 2 ? "success" : "default"}">${wrench?.A}</span></td>
-                        <td class="text-center"><span
-                                class="label label-${wrench?.CD <= 6 ? "danger" : (wrench?.CD <= 7 ? 'warning' : 'success')}">${wrench?.CD}</span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <g:render template="/profilable/showprofile" model="[warrior: wrench]"/>
 
             <div class="row">
 
