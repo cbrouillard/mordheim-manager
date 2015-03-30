@@ -26,6 +26,14 @@ body {
 
 }
 
+@media screen and (max-width: 640px) {
+    input.shortonphone {
+        padding: 0px !important;
+        text-align: center !important;
+        width:50px !important;
+    }
+}
+
 img.imgband {
     max-height: 100px;
     max-width: 100px;

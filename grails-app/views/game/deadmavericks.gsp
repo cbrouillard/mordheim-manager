@@ -22,6 +22,19 @@
 
             $('#' + maverickId + "results").html(message);
         }
+
+        var recalculExperience = function (heroId) {
+            var howManyBonus = $("#" + heroId + "bonus").val();
+            var alive = ${parameters.xpRef};
+
+            var total = Number(howManyBonus) + alive
+            console.log("Total " + total);
+
+            $("#" + heroId + "warrioralive").width("" + (alive * 100 / total) + "%");
+            $("#" + heroId + "warriorbonus").width("" + (Number(howManyBonus) * 100 / total) + "%");
+            $("#" + heroId + "warriorbonus").html("+" + howManyBonus)
+        }
+
     </script>
 </head>
 
@@ -44,6 +57,7 @@
 
             <div class="clearfix">&nbsp;</div>
             <ol class="breadcrumb">
+                <li><g:message code="end.howto"/></li>
                 <li><g:message code="end.wrenchmen.states"/></li>
                 <li><g:message code="end.heroes.states"/></li>
                 <li><g:message code="end.gains"/></li>
@@ -61,7 +75,7 @@
 
 <div class="col-sm-12 col-xs-12">
     <g:form action="savedeadmavericks" method="POST" data-toggle="validator"><g:hiddenField name="band"
-                                                                                         value="${bandInstance.id}"/>
+                                                                                            value="${bandInstance.id}"/>
 
         <div class="panel panel-default">
             <div class="panel-body">
@@ -81,7 +95,8 @@
                                         </div>
 
                                         <div class="col-sm-6">
-                                            <g:render template="experience" model="[from: maverick, maxXp: 1]"/>
+                                            <g:render template="experience"
+                                                      model="[from: maverick, maxXp: new Integer(parameters.xpRef)]"/>
                                         </div>
                                     </div>
                                 </div>
@@ -125,6 +140,32 @@
 
                                                 <div class="form-group">
 
+                                                    <label for="${maverick.id}[bonus]"
+                                                           class="col-sm-12 control-label"><g:message
+                                                            code="how.many.bonus.label"/></label>
+
+                                                    <div class="col-sm-12">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><span
+                                                                    class="glyphicon glyphicon-plus-sign"></span>
+                                                            </span>
+                                                            <g:field maxlength="2" pattern="^([0-9])*"
+                                                                     name="${maverick.id}.bonus"
+                                                                     type="number"
+                                                                     value="0" min="0" required="" class="form-control"
+                                                                     id="${maverick.id}bonus"
+                                                                     onchange="javascript:recalculExperience('${maverick.id}')"/>
+                                                        </div>
+
+                                                        <div class="help-block with-errors">
+                                                            <g:message code="how.many.bonus.label.hint"/>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group">
+
                                                     <label for="${maverick.id}[injuries]"
                                                            class="col-sm-12 control-label"><g:message
                                                             code="hero.injuries.label"/></label>
@@ -133,7 +174,8 @@
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><span
                                                                     class="glyphicon glyphicon-plus-sign"></span></span>
-                                                            <g:textArea name="${maverick.id}.injuries" cols="40" rows="5"
+                                                            <g:textArea name="${maverick.id}.injuries" cols="40"
+                                                                        rows="5"
                                                                         value="${maverick?.injuries}"
                                                                         class="form-control editor"/>
                                                         </div>
@@ -198,6 +240,9 @@
         </div>
     </g:form>
 </div>
-
+<jq:jquery>
+    $(".legend_chief").hide();
+    $(".legend_victims").hide();
+</jq:jquery>
 </body>
 </html>

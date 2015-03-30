@@ -50,9 +50,9 @@ class BandController {
                     marginBottom: 0,
                     marginRight: 0)
 
-            def output = new FileOutputStream(new File("/home/cyril/${band.name}.pdf"))
+            /*def output = new FileOutputStream(new File("/home/cyril/${band.name}.pdf"))
             output << pdfData
-            output.close()
+            output.close()*/
 
             response.setContentType("application/octet-stream")
             response.setHeader("Content-disposition", "attachment;filename=\"${band.name}.pdf\"")

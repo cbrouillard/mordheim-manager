@@ -42,6 +42,11 @@
 
 <div class="col-sm-4 col-xs-12">
 
+    <div class="alert alert-info">
+        <g:message code="end.xpref.value" args="[parameters.xpRef]"/>
+    </div>
+
+
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h5><g:message code="end.gains"/></h5>
@@ -101,6 +106,9 @@
                         <td>
                             <g:set var="infos" value="${data.wrenches.wrench[wrench.id]}"/>
                             <g:set var="notin" value="${data.wrenches.wrench[wrench.id]["notin"]}"/>
+                            <g:set var="bonus"
+                                   value="${new java.lang.Integer(data.wrenches[wrench.id]["bonus"] ?: 0)}"/>
+                            <g:set var="rules" value="${data.wrenches[wrench.id]["specialRules"]}"/>
                             <g:set var="alive" value="${infos.count { it.value == 'life' }}"/>
                             <g:set var="dead" value="${infos.count { it.value == 'death' }}"/>
 
@@ -116,17 +124,26 @@
                                     <span class="label label-danger"><g:message code="dead"
                                                                                 args="[dead]"/></span>
                                 </g:if>
+                                <g:if test="${bonus}">
+                                    <span class="label label-info"><g:message code="bonus"
+                                                                              args="[bonus]"/></span>
+                                </g:if>
                             </g:else>
 
                         </td>
-                        <td class="text-right" colspan="3">
+                        <td>
+                            <div class="well">
+                                ${raw(rules) ?: message(code: 'no.competences')}
+                            </div>
+                        </td>
+                        <td class="text-right" colspan="2">
                             <span class="badge">
                                 <g:if test="${notin}">
                                     + 0 xp
                                 </g:if>
                                 <g:else>
                                     <g:if test="${alive}">
-                                        + 1 xp
+                                        + ${new java.lang.Integer(parameters.xpRef) + bonus} xp
                                     </g:if>
                                     <g:else>
                                         + 0 xp
@@ -146,18 +163,26 @@
                         </td>
                         <td>
                             <g:set var="infos" value="${data.heroes[hero.id]}"/>
-                            <g:set var="xp" value="${new Integer(0)}"/>
-                            <g:if test="${infos.victoriouschief}">
-                                <span class="label label-success"><g:message code="victorious.hero"/></span>
-                                <g:set var="xp" value="${xp + 1}"/>
-                            </g:if>
+                            <g:set var="bonus" value="${new java.lang.Integer(data.heroes[hero.id]["bonus"] ?: 0)}"/>
+
+                            <g:set var="xp" value="${bonus}"/>
+
                             <g:if test="${infos.state == "life"}">
                                 <span class="label label-success"><g:message code="alive.hero"/></span>
+                                <g:set var="xp" value="${xp + new java.lang.Integer(parameters.xpRef)}"/>
+                            </g:if>
+                            <g:if test="${infos.victoriouschief}">
+                                <span class="label label-warning"><g:message code="victorious.hero"/></span>
                                 <g:set var="xp" value="${xp + 1}"/>
                             </g:if>
                             <g:set var="xp" value="${xp + new Integer(infos.kill)}"/>
-                            <span class="label label-default"><g:message code="hero.kill"
-                                                                         args="[new Integer(infos.kill)]"/></span>
+                            <span class="label label-danger"><g:message code="hero.kill"
+                                                                        args="[new Integer(infos.kill)]"/></span>
+
+                            <g:if test="${bonus}">
+                                <span class="label label-info"><g:message code="bonus"
+                                                                          args="[bonus]"/></span>
+                            </g:if>
                             <g:if test="${infos.state == "death"}">
                                 <span class="label label-danger"><g:message code="dead.hero"/></span>
                                 <g:set var="xp" value="${new Integer(0)}"/>
@@ -195,10 +220,17 @@
                             </td>
                             <td>
                                 <g:set var="infos" value="${data.mavericks[maverick.id]}"/>
-                                <g:set var="xp" value="${new Integer(0)}"/>
+                                <g:set var="bonus"
+                                       value="${new java.lang.Integer(data.mavericks[maverick.id]["bonus"] ?: 0)}"/>
+                                <g:set var="xp" value="${bonus}"/>
+
                                 <g:if test="${infos.state == "life"}">
                                     <span class="label label-success"><g:message code="alive.hero"/></span>
-                                    <g:set var="xp" value="${xp + 1}"/>
+                                    <g:set var="xp" value="${xp + new java.lang.Integer(parameters.xpRef)}"/>
+                                </g:if>
+                                <g:if test="${bonus}">
+                                    <span class="label label-info"><g:message code="bonus"
+                                                                              args="[bonus]"/></span>
                                 </g:if>
                                 <g:if test="${infos.state == "death"}">
                                     <span class="label label-danger"><g:message code="dead.hero"/></span>

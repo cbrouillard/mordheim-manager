@@ -9,6 +9,7 @@ class GameController {
     def springSecurityService
 
     class EndGameData {
+        Map parameters
         Map wrenches
         Map heroes
         Map band
@@ -17,14 +18,59 @@ class GameController {
 
     def endgame() {
         session['endGameData'] = new EndGameData()
-        redirect action: "deadwrench", id: params.id
+        redirect action: "howto", id: params.id
     }
 
-    def deadwrench() {
+    def howto() {
         def bandInstance = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
         if (bandInstance) {
 
-            render view: 'deadwrench', model: [bandInstance: bandInstance]
+            render view: 'howto', model: [bandInstance: bandInstance]
+
+        } else {
+            redirect action: 'index', controller: 'band'
+            return
+        }
+    }
+
+    def go() {
+        def bandInstance = Band.findByIdAndOwner(params.band, springSecurityService.currentUser)
+        if (!bandInstance) {
+            redirect(action: 'index', controller: 'band')
+            return
+        }
+
+        EndGameData gameData = session['endGameData']
+        if (!gameData) {
+            redirect(action: 'endgame', controller: 'game')
+            return
+        }
+
+        gameData.parameters = params
+
+        try {
+            Integer.parseInt(gameData.parameters.xpRef)
+        } catch (NumberFormatException e) {
+            redirect action: 'howto', controller: 'endgame'
+            return
+        }
+
+        redirect(action: 'deadwrench', id: params.band)
+        return
+    }
+
+    def deadwrench() {
+
+        EndGameData gameData = session['endGameData']
+        if (!gameData) {
+            redirect(action: 'endgame', controller: 'game')
+            return
+        }
+
+        def bandInstance = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (bandInstance) {
+
+            render view: 'deadwrench', model: [bandInstance: bandInstance, parameters: gameData.parameters]
 
         } else {
             redirect action: 'index', controller: 'band'
@@ -33,7 +79,6 @@ class GameController {
     }
 
     def savedeadwrench() {
-
         def bandInstance = Band.findByIdAndOwner(params.band, springSecurityService.currentUser)
         if (!bandInstance) {
             redirect(action: 'index', controller: 'band')
@@ -52,9 +97,15 @@ class GameController {
     }
 
     def deadheroes() {
+        EndGameData gameData = session['endGameData']
+        if (!gameData) {
+            redirect(action: 'endgame', controller: 'game')
+            return
+        }
+
         def bandInstance = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
         if (bandInstance) {
-            render view: 'deadheroes', model: [bandInstance: bandInstance]
+            render view: 'deadheroes', model: [bandInstance: bandInstance, parameters: gameData.parameters]
         } else {
             redirect action: 'index', controller: 'band'
             return
@@ -80,10 +131,16 @@ class GameController {
     }
 
     def bandgains() {
+        EndGameData gameData = session['endGameData']
+        if (!gameData) {
+            redirect(action: 'endgame', controller: 'game')
+            return
+        }
+
         def bandInstance = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
         if (bandInstance) {
 
-            render view: 'bandgains', model: [bandInstance: bandInstance]
+            render view: 'bandgains', model: [bandInstance: bandInstance, parameters: gameData.parameters]
 
         } else {
             redirect action: 'index', controller: 'band'
@@ -110,9 +167,15 @@ class GameController {
     }
 
     def deadmavericks() {
+        EndGameData gameData = session['endGameData']
+        if (!gameData) {
+            redirect(action: 'endgame', controller: 'game')
+            return
+        }
+
         def bandInstance = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
         if (bandInstance) {
-            render view: 'deadmavericks', model: [bandInstance: bandInstance]
+            render view: 'deadmavericks', model: [bandInstance: bandInstance, parameters: gameData.parameters]
         } else {
             redirect action: 'index', controller: 'band'
             return
@@ -147,7 +210,7 @@ class GameController {
                 return
             }
 
-            render view: 'recap', model: [bandInstance: bandInstance, data: session["endGameData"]]
+            render view: 'recap', model: [bandInstance: bandInstance, data: session["endGameData"], parameters: gameData.parameters]
 
         } else {
             redirect action: 'index', controller: 'band'
@@ -168,11 +231,12 @@ class GameController {
             }
 
             // saving
-            savewrenches(bandInstance, gameData.wrenches)
-            saveHeroes(bandInstance, gameData.heroes)
+            Integer xpRef = new Integer(gameData.parameters.xpRef)
+            savewrenches(bandInstance, gameData.wrenches, xpRef)
+            saveHeroes(bandInstance, gameData.heroes, xpRef)
             saveBand(bandInstance, gameData.band)
             if (bandInstance.mavericks) {
-                saveMavericks(bandInstance, gameData.mavericks)
+                saveMavericks(bandInstance, gameData.mavericks, xpRef)
             }
 
             bandInstance.save(flush: true)
@@ -188,12 +252,14 @@ class GameController {
         }
     }
 
-    private def savewrenches(Band bandInstance, wrenchesData) {
+    private def savewrenches(Band bandInstance, wrenchesData, Integer xpRef) {
         def toDelete = []
         bandInstance.wrenches.each { wrenches ->
 
             def status = wrenchesData.wrench[wrenches.id]
             def notin = wrenchesData.wrench[wrenches.id]["notin"]
+            def bonus = wrenchesData[wrenches.id]["bonus"]
+            def specialRules = wrenchesData[wrenches.id]["specialRules"]
 
             if (status) {
                 def life = 0
@@ -214,8 +280,16 @@ class GameController {
                         bandInstance.removeFromWrenches(wrenches)
                         toDelete.add(wrenches)
                     } else {
-                        wrenches.earnedXp += 1
+                        wrenches.earnedXp += xpRef
+                        // bonus
+                        try {
+                            def bonusInt = Integer.parseInt(bonus)
+                            wrenches.earnedXp += bonusInt
+                        } catch (NumberFormatException e) {
+                            // osef
+                        }
                         wrenches.number = life
+                        wrenches.specialRules = specialRules
                     }
                 }
             }
@@ -227,9 +301,8 @@ class GameController {
         Wrenchmen.deleteAll(toDelete)
     }
 
-    private def saveHeroes(Band bandInstance, heroesData) {
+    private def saveHeroes(Band bandInstance, heroesData, Integer xpRef) {
         def toDelete = []
-
         bandInstance.heroes.each { hero ->
             def infos = heroesData[hero.id]
 
@@ -242,7 +315,7 @@ class GameController {
 
             } else {
                 // alive
-                def earnedXp = 1
+                def earnedXp = xpRef
 
                 // kills
                 try {
@@ -254,6 +327,14 @@ class GameController {
 
                 // chief ?
                 earnedXp += infos.victoriouschief ? 1 : 0
+
+                // bonus
+                try {
+                    def bonus = Integer.parseInt(infos.bonus)
+                    earnedXp += bonus
+                } catch (NumberFormatException e) {
+                    // osef
+                }
 
                 // bind data
                 bindData(hero, infos, [include: ["injuries", "competences"]])
@@ -267,7 +348,7 @@ class GameController {
         Hero.deleteAll(toDelete)
     }
 
-    private def saveMavericks(Band bandInstance, mavericksData) {
+    private def saveMavericks(Band bandInstance, mavericksData, Integer xpRef) {
         def toDelete = []
 
         bandInstance.mavericks.each { maverick ->
@@ -281,9 +362,19 @@ class GameController {
                 //nothing.
 
             } else {
+                def earnedXp = xpRef
+
+                // bonus
+                try {
+                    def bonus = Integer.parseInt(infos.bonus)
+                    earnedXp += bonus
+                } catch (NumberFormatException e) {
+                    // osef
+                }
+
                 // bind data
                 bindData(maverick, infos, [include: ["injuries", "competences"]])
-                maverick.earnedXp += 1
+                maverick.earnedXp += earnedXp
             }
         }
 

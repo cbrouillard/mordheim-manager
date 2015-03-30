@@ -51,6 +51,18 @@
                 result(wrenchId);
             }
         }
+
+        var recalculExperience = function (heroId) {
+            var howManyBonus = $("#" + heroId + "bonus").val();
+            var alive = ${parameters.xpRef};
+
+            var total = Number(howManyBonus) + alive
+            console.log("Total " + total);
+
+            $("#" + heroId + "warrioralive").width("" + (alive * 100 / total) + "%");
+            $("#" + heroId + "warriorbonus").width("" + (Number(howManyBonus) * 100 / total) + "%");
+            $("#" + heroId + "warriorbonus").html("+" + howManyBonus)
+        }
     </script>
 </head>
 
@@ -73,6 +85,7 @@
 
             <div class="clearfix">&nbsp;</div>
             <ol class="breadcrumb">
+                <li><g:message code="end.howto"/></li>
                 <li class="active"><g:message code="end.wrenchmen.states"/></li>
                 <li><g:message code="end.heroes.states"/></li>
                 <li><g:message code="end.gains"/></li>
@@ -91,10 +104,12 @@
 </div>
 
 <div class="col-sm-12 col-xs-12">
-    <g:form action="savedeadwrench" method="POST"><g:hiddenField name="band" value="${bandInstance.id}"/>
+    <g:form action="savedeadwrench" method="POST" data-toggle="validator"><g:hiddenField name="band"
+                                                                                         value="${bandInstance.id}"/>
 
         <div class="panel panel-default">
             <div class="panel-body">
+
                 <div class="row">
                     <g:each in="${bandInstance.wrenches?.sort({ it.dateCreated })}" var="wrenchgroup">
                         <div class="col-lg-4 col-sm-6 col-xs-12">
@@ -110,7 +125,8 @@
                                         </div>
 
                                         <div class="col-sm-6">
-                                            <g:render template="experience" model="[from: wrenchgroup, maxXp: 1]"/>
+                                            <g:render template="experience"
+                                                      model="[from: wrenchgroup, maxXp: new Integer(parameters.xpRef)]"/>
                                             <div class="btn-group pull-right" data-toggle="buttons">
                                                 <label class="btn btn-default"
                                                        id="${wrenchgroup.id}notin_label">
@@ -127,7 +143,7 @@
                                 </div>
 
                                 <div class="table-responsive" id="${wrenchgroup.id}container">
-                                    <table class="table table-hover">
+                                    <table class="table">
                                         <tbody>
                                         <g:set var="i" value="${new Integer(0)}"/>
                                         <g:while test="${i < wrenchgroup.number}">
@@ -145,14 +161,6 @@
                                                             <span class="glyphicon glyphicon-thumbs-up"></span> <g:message
                                                                 code="warrior.living"/>
                                                         </label>
-                                                        %{--<label class="btn btn-default">
-                                                            <input type="radio" name="wrench.${wrenchgroup.id}.${i}"
-                                                                   id="${wrenchgroup.id}${i}_notingame"
-                                                                   onchange="javascript:result('${wrenchgroup.id}');"
-                                                                   autocomplete="off" value="notingame">
-                                                            <span class="glyphicon glyphicon-hand-right"></span> <g:message
-                                                                code="warrior.notingame"/>
-                                                        </label>--}%
                                                         <label class="btn btn-default">
                                                             <input type="radio" name="wrench.${wrenchgroup.id}.${i}"
                                                                    id="${wrenchgroup.id}${i}_death"
@@ -166,6 +174,57 @@
                                             </tr>
                                             <% i++ %>
                                         </g:while>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="form-group">
+
+                                                    <label for="${wrenchgroup.id}[bonus]"
+                                                           class="col-sm-12 control-label"><g:message
+                                                            code="how.many.bonus.label"/></label>
+
+                                                    <div class="col-sm-12">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><span
+                                                                    class="glyphicon glyphicon-plus-sign"></span>
+                                                            </span>
+                                                            <g:field maxlength="2" pattern="^([0-9])*"
+                                                                     name="${wrenchgroup.id}.bonus"
+                                                                     type="number"
+                                                                     value="0" min="0" required="" class="form-control"
+                                                                     id="${wrenchgroup.id}bonus"
+                                                                     onchange="javascript:recalculExperience('${wrenchgroup.id}')"/>
+                                                        </div>
+
+                                                        <div class="help-block with-errors">
+                                                            <g:message code="how.many.bonus.label.hint"/>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <label for="${wrenchgroup.id}[specialRules]"
+                                                           class="col-sm-12 control-label"><g:message
+                                                            code="wrench.specialRules.label"/></label>
+
+                                                    <div class="col-sm-12">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><span
+                                                                    class="glyphicon glyphicon-plus-sign"></span></span>
+                                                            <g:textArea name="${wrenchgroup.id}.specialRules" cols="40"
+                                                                        rows="5"
+                                                                        value="${wrenchgroup?.specialRules}"
+                                                                        class="form-control editor"/>
+                                                        </div>
+
+                                                        <div class="help-block with-errors"></div>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+
                                         </tbody>
                                     </table>
 
@@ -203,8 +262,8 @@
 </div>
 
 <jq:jquery>
-    $(".progress-chief").hide();
-    $(".progress-kill").hide();
+    $(".legend_chief").hide();
+    $(".legend_victims").hide();
 </jq:jquery>
 </body>
 </html>

@@ -23,6 +23,7 @@
 
             <div class="clearfix">&nbsp;</div>
             <ol class="breadcrumb">
+                <li><g:message code="end.howto"/></li>
                 <li><g:message code="end.wrenchmen.states"/></li>
                 <li><g:message code="end.heroes.states"/></li>
                 <li class="active"><g:message code="end.gains"/></li>

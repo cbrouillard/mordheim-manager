@@ -130,9 +130,9 @@
             <tr>
                 <td><strong><g:message code="band.public.url"/></strong></td>
                 <td>
-                    <g:link action="band" controller="public" id="${bandInstance.id}">
+                    <g:link action="band" controller="public" id="${bandInstance.id}" absolute="true">
                         <span class="glyphicon glyphicon-link"></span>
-                        ${createLink(absolute: true, controller: "public", action: 'band', id: bandInstance.id)}
+                        ${bandInstance.name}
                     </g:link>
                 </td>
             </tr>
