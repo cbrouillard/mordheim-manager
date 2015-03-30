@@ -106,9 +106,9 @@
             <tr>
                 <td><strong><g:message code="band.nbwarrior"/></strong></td>
                 <td>${bandInstance.nbWarriors}
-                    <g:if test="${bandInstance.nbMavericks}">
-                        <g:message code="band.plus.mavericks" args="[bandInstance.nbMavericks]"/>
-                    </g:if>
+                <g:if test="${bandInstance.nbMavericks}">
+                    <g:message code="band.plus.mavericks" args="[bandInstance.nbMavericks]"/>
+                </g:if>
                 </td>
             </tr>
             <tr>
@@ -126,6 +126,15 @@
             <tr>
                 <td><strong><g:message code="note.label"/></strong></td>
                 <td><div class="well">${raw(bandInstance.note)}</div></td>
+            </tr>
+            <tr>
+                <td><strong><g:message code="band.public.url"/></strong></td>
+                <td>
+                    <g:link action="band" controller="public" id="${bandInstance.id}">
+                        <span class="glyphicon glyphicon-link"></span>
+                        ${createLink(absolute: true, controller: "public", action: 'band', id: bandInstance.id)}
+                    </g:link>
+                </td>
             </tr>
         </table>
     </div>
