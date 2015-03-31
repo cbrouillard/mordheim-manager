@@ -1,5 +1,19 @@
 <%@ page import="com.headbangers.mordheim.Hero" %>
 
+<div class="form-group ${hasErrors(bean: heroInstance, field: 'type', 'has-error')}">
+
+    <label for="type" class="col-sm-2 control-label"><g:message code="hero.type.label"/> *</label>
+
+    <div class="col-sm-10">
+        <div class="input-group">
+            <span class="input-group-addon"><span
+                    class="glyphicon glyphicon-asterisk"></span></span>
+            <g:textField name="type" required="" value="${heroInstance?.type}" class="form-control" autofocus=""/>
+        </div>
+
+        <div class="help-block with-errors"></div>
+    </div>
+</div>
 
 <div class="form-group ${hasErrors(bean: heroInstance, field: 'name', 'has-error')}">
 
@@ -9,7 +23,7 @@
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-font"></span></span>
-            <g:textField name="name" required="" value="${heroInstance?.name}" class="form-control" autofocus=""/>
+            <g:textField name="name" required="" value="${heroInstance?.name}" class="form-control"/>
         </div>
 
         <div class="help-block with-errors"></div>
@@ -17,24 +31,9 @@
 </div>
 
 <jq:jquery>
-    $('#name').focus();
+    $('#type').focus();
 </jq:jquery>
 
-
-<div class="form-group ${hasErrors(bean: heroInstance, field: 'type', 'has-error')}">
-
-    <label for="type" class="col-sm-2 control-label"><g:message code="hero.type.label"/> *</label>
-
-    <div class="col-sm-10">
-        <div class="input-group">
-            <span class="input-group-addon"><span
-                    class="glyphicon glyphicon-asterisk"></span></span>
-            <g:textField name="type" required="" value="${heroInstance?.type}" class="form-control"/>
-        </div>
-
-        <div class="help-block with-errors"></div>
-    </div>
-</div>
 
 <div class="form-group">
 
@@ -105,7 +104,7 @@
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-check"></span></span>
             <g:field maxlength="2" pattern="^([0-9])*" name="experience" type="number"
-                     value="${heroInstance?.experience}" required="" class="form-control" min="0" />
+                     value="${heroInstance?.experience}" required="" class="form-control" min="0"/>
         </div>
 
         <div class="help-block with-errors">
@@ -120,7 +119,7 @@
                 <span class="input-group-addon"><span
                         class="glyphicon glyphicon-plus"></span></span>
                 <g:field maxlength="2" pattern="^([0-9])*" name="earnedXp" type="number"
-                         value="${heroInstance?.earnedXp}" required="" class="form-control" min="0" />
+                         value="${heroInstance?.earnedXp}" required="" class="form-control" min="0"/>
             </div>
 
             <div class="help-block with-errors">
@@ -139,7 +138,7 @@
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-link"></span></span>
             <g:field maxlength="2" pattern="^([0-9])*" name="cost" type="number"
-                     value="${heroInstance?.cost}" required="" class="form-control" min="0" />
+                     value="${heroInstance?.cost}" required="" class="form-control" min="0"/>
         </div>
 
         <div class="help-block with-errors">

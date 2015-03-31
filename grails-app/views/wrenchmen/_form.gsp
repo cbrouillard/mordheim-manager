@@ -1,5 +1,20 @@
 <%@ page import="com.headbangers.mordheim.Wrenchmen" %>
 
+<div class="form-group ${hasErrors(bean: wrenchmenInstance, field: 'type', 'has-error')}">
+
+    <label for="type" class="col-sm-2 control-label"><g:message code="wrench.type.label"/> *</label>
+
+    <div class="col-sm-10">
+        <div class="input-group">
+            <span class="input-group-addon"><span
+                    class="glyphicon glyphicon-asterisk"></span></span>
+            <g:textField name="type" required="" value="${wrenchmenInstance?.type}" class="form-control" autofocus=""/>
+        </div>
+
+        <div class="help-block with-errors"></div>
+    </div>
+</div>
+
 
 <div class="form-group ${hasErrors(bean: wrenchmenInstance, field: 'number', 'has-error')}">
     <label for="number" class="col-sm-2 control-label"><g:message code="wrench.number.label"/> *</label>
@@ -17,7 +32,7 @@
 </div>
 
 <jq:jquery>
-    $('#number').focus();
+    $('#type').focus();
 </jq:jquery>
 
 
@@ -36,21 +51,6 @@
     </div>
 </div>
 
-
-<div class="form-group ${hasErrors(bean: wrenchmenInstance, field: 'type', 'has-error')}">
-
-    <label for="type" class="col-sm-2 control-label"><g:message code="wrench.type.label"/> *</label>
-
-    <div class="col-sm-10">
-        <div class="input-group">
-            <span class="input-group-addon"><span
-                    class="glyphicon glyphicon-asterisk"></span></span>
-            <g:textField name="type" required="" value="${wrenchmenInstance?.type}" class="form-control"/>
-        </div>
-
-        <div class="help-block with-errors"></div>
-    </div>
-</div>
 
 <div class="form-group">
 

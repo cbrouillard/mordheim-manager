@@ -1,5 +1,6 @@
 package com.headbangers.mordheim
 
+import com.mordheim.helper.ImageHelper
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -27,7 +28,7 @@ class HeroController {
         }
 
         def band = Band.findByIdAndOwner(params.band, springSecurityService.currentUser)
-        if (band == null){
+        if (band == null) {
             redirect action: 'index', controller: 'band'
             return
         }
@@ -39,12 +40,12 @@ class HeroController {
 
         band.heroes.add(heroInstance)
         band.gold = band.gold - heroInstance.cost
-        band.save flush:true
+        band.save flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'Hero.label', default: 'Hero'), heroInstance.name])
-                redirect controller: 'band', action:'show', id:band.id
+                redirect controller: 'band', action: 'show', id: band.id
             }
             '*' { respond heroInstance, [status: CREATED] }
         }
@@ -73,7 +74,7 @@ class HeroController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Hero.label', default: 'Hero'), heroInstance.name])
-                redirect controller: 'band', action:'show', id:heroInstance.band.id
+                redirect controller: 'band', action: 'show', id: heroInstance.band.id
             }
             '*' { respond heroInstance, [status: OK] }
         }
@@ -98,6 +99,63 @@ class HeroController {
             }
             '*' { render status: NO_CONTENT }
         }
+    }
+
+    @Secured(['ROLE_USER'])
+    def changephoto() {
+        def heroInstance = Hero.get(params.id)
+        if (!heroInstance) {
+            redirect controller: 'band', action: 'index'
+            return
+        }
+
+        render(view: 'changephoto', model: [heroInstance: heroInstance])
+        return
+    }
+
+    @Transactional
+    @Secured(['ROLE_USER'])
+    def savephoto() {
+        def heroInstance = Hero.get(params.id)
+        if (!heroInstance) {
+            redirect controller: 'band', action: 'index'
+            return
+        }
+
+        if (params.set.equals('save')) {
+
+            def f = request.getFile('photo')
+            if (!ImageHelper.okcontents.contains(f.getContentType())) {
+                flash.message = message(code: "wrong.mimetype", args: [ImageHelper.okcontents.toString()])
+                redirect(action: 'changephoto', id: heroInstance.id)
+                return
+            }
+
+            ByteArrayOutputStream out = new ByteArrayOutputStream()
+            ImageHelper.resize(f.bytes, out, new Integer(55), new Integer(55))
+            heroInstance.photo = out.toByteArray()
+
+        } else {
+            heroInstance.photo = null
+        }
+
+        heroInstance.save(flush: true)
+        redirect(controller: 'band', action: 'show', id: heroInstance.band.id)
+        return
+    }
+
+    @Secured(['ROLE_USER'])
+    def photo() {
+        def heroInstance = Hero.get(params.id)
+        if (!heroInstance) {
+            redirect controller: 'band', action: 'index'
+            return
+        }
+
+        response.setContentType("image/jpeg")
+        //response.setHeader("Content-disposition", "attachment;filename=\"${session.name}_ticket.pdf\"")
+        response.outputStream << heroInstance.photo
+        return
     }
 
     protected void notFound() {

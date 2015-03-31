@@ -1,6 +1,7 @@
 package com.headbangers.mordheim
 
 import com.headbangers.mordheim.security.Person
+import com.mordheim.helper.ImageHelper
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -8,6 +9,8 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class BandController {
+
+    private static final okcontents = ['image/png', 'image/jpeg']
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -34,6 +37,63 @@ class BandController {
         }
 
         respond bandInstance, model: [activeTab: params.tab]
+    }
+
+    @Secured(['ROLE_USER'])
+    def changephoto() {
+        def bandInstance = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (!bandInstance) {
+            redirect controller: 'band', action: 'index'
+            return
+        }
+
+        render(view: 'changephoto', model: [bandInstance: bandInstance])
+        return
+    }
+
+    @Transactional
+    @Secured(['ROLE_USER'])
+    def savephoto() {
+        def bandInstance = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (!bandInstance) {
+            redirect controller: 'band', action: 'index'
+            return
+        }
+
+        if (params.set.equals('save')) {
+
+            def f = request.getFile('photo')
+            if (!ImageHelper.okcontents.contains(f.getContentType())) {
+                flash.message = message(code: "wrong.mimetype", args: [ImageHelper.okcontents.toString()])
+                        redirect(action: 'changephoto', id: bandInstance.id)
+                return
+            }
+
+            ByteArrayOutputStream out = new ByteArrayOutputStream()
+            ImageHelper.resize(f.bytes, out, new Integer(100), new Integer(100))
+            bandInstance.photo = out.toByteArray()
+
+        } else {
+            bandInstance.photo = null
+        }
+
+        bandInstance.save(flush: true)
+        redirect(action: 'show', id: bandInstance.id)
+        return
+    }
+
+    @Secured(['ROLE_USER'])
+    def photo() {
+        def bandInstance = Band.get(params.id)
+        if (!bandInstance) {
+            redirect controller: 'band', action: 'index'
+            return
+        }
+
+        response.setContentType("image/jpeg")
+        //response.setHeader("Content-disposition", "attachment;filename=\"${session.name}_ticket.pdf\"")
+        response.outputStream << bandInstance.photo
+        return
     }
 
     @Secured(['ROLE_USER'])

@@ -9,7 +9,7 @@
 <div class="row-fluid">
     <div class="col-sm-12">
         <div class="thumbnail pull-right">
-            <asset:image src="Mordheim.gif" class="imgband"/>
+            <g:render template="/band/image"/>
         </div>
 
         <div>
@@ -86,6 +86,11 @@
                 <h4>${step++}. <g:message code="end.howto.heroes.dices"/></h4><hr/>
 
                 <p><g:message code="end.howto.heroes.dices.text" encodeAs="raw"/></p>&nbsp;
+
+                <h4>${step++}. <g:message code="end.howto.exploration.dices"/></h4><hr/>
+
+                <p><g:message code="end.howto.exploration.dices.text" encodeAs="raw"/></p>&nbsp;
+
 
                 <h4>${step++}. <g:message code="end.howto.go.next"/></h4>
 

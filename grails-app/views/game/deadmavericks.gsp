@@ -43,7 +43,7 @@
 <div class="row-fluid">
     <div class="col-sm-12">
         <div class="thumbnail pull-right">
-            <asset:image src="Mordheim.gif" class="imgband"/>
+            <g:render template="/band/image"/>
         </div>
 
         <div>

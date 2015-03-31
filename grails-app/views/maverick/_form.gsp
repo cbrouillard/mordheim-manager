@@ -1,5 +1,20 @@
 <%@ page import="com.headbangers.mordheim.Hero" %>
 
+<div class="form-group ${hasErrors(bean: maverickInstance, field: 'type', 'has-error')}">
+
+    <label for="type" class="col-sm-2 control-label"><g:message code="hero.type.label"/> *</label>
+
+    <div class="col-sm-10">
+        <div class="input-group">
+            <span class="input-group-addon"><span
+                    class="glyphicon glyphicon-asterisk"></span></span>
+            <g:textField name="type" required="" value="${maverickInstance?.type}" class="form-control" autofocus=""/>
+        </div>
+
+        <div class="help-block with-errors"></div>
+    </div>
+</div>
+
 
 <div class="form-group ${hasErrors(bean: maverickInstance, field: 'name', 'has-error')}">
 
@@ -17,24 +32,9 @@
 </div>
 
 <jq:jquery>
-    $('#name').focus();
+    $('#type').focus();
 </jq:jquery>
 
-
-<div class="form-group ${hasErrors(bean: maverickInstance, field: 'type', 'has-error')}">
-
-    <label for="type" class="col-sm-2 control-label"><g:message code="hero.type.label"/> *</label>
-
-    <div class="col-sm-10">
-        <div class="input-group">
-            <span class="input-group-addon"><span
-                    class="glyphicon glyphicon-asterisk"></span></span>
-            <g:textField name="type" required="" value="${maverickInstance?.type}" class="form-control"/>
-        </div>
-
-        <div class="help-block with-errors"></div>
-    </div>
-</div>
 
 <div class="form-group">
 

@@ -17,7 +17,7 @@
                     <g:each in="${buddy.bands}" var="band">
                         <div class="col-lg-3 col-md-4 col-sm-5">
                             <div class="thumbnail panel-primary">
-                                <asset:image src="Mordheim.gif" width="100px"/>
+                                <g:render template="/band/image" model="[bandInstance: band]"/>
                                 <div class="caption text-center">
                                     <ul class="list-group">
                                         <li class="list-group-item list-group-item-info"><strong>${band.name}</strong>

@@ -3,9 +3,16 @@
 
         <div class="panel-heading">
 
-            <div class="row">
+            <div class="row clearfix">
                 <div class="col-sm-4">
-                    <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
+                    <g:link action="changephoto" id="${wrench.id}" controller="wrenchmen">
+                        <g:if test="${!wrench.photo}">
+                            <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
+                        </g:if>
+                        <g:else>
+                            <img src="${createLink(action: 'photo', id: wrench.id, controller: 'wrenchmen')}" class="imgwarrior pull-left"/>
+                        </g:else>
+                    </g:link>
                     <h5><strong>${wrench.name}</strong></h5>
                     <span class="label label-default">${wrench.number} ${wrench.type}</span>
                     <g:if test="${wrench.cost > 0}">

@@ -3,10 +3,17 @@
 
         <div class="panel-heading">
 
-            <div class="row">
+            <div class="row clearfix">
 
                 <div class="col-sm-4">
-                    <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
+                    <g:link action="changephoto" id="${maverick.id}" controller="maverick">
+                        <g:if test="${!maverick.photo}">
+                            <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
+                        </g:if>
+                        <g:else>
+                            <img src="${createLink(action: 'photo', id: maverick.id, controller: 'maverick')}" class="imgwarrior pull-left"/>
+                        </g:else>
+                    </g:link>
                     <h5><strong>${maverick.name}</strong></h5>
                     <span class="label label-default">${maverick.type}</span>
                     <g:if test="${maverick.cost > 0}">

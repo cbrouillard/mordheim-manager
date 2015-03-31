@@ -26,8 +26,8 @@ class Band {
     Person owner
 
     byte[] photo
-
     Race race
+    Boolean publicShowable = false
 
     static constraints = {
         note nullable: true, blank: true, widget: 'textarea'
@@ -38,6 +38,7 @@ class Band {
         photo nullable: true
         nbGame nullable: false
         race nullable:true
+        publicShowable nullable:true
     }
 
     static mapping = {

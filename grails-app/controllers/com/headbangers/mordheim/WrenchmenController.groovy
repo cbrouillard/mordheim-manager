@@ -1,5 +1,6 @@
 package com.headbangers.mordheim
 
+import com.mordheim.helper.ImageHelper
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -146,6 +147,63 @@ class WrenchmenController {
             }
             '*' { render status: NO_CONTENT }
         }
+    }
+
+    @Secured(['ROLE_USER'])
+    def changephoto() {
+        def wrenchmenInstance = Wrenchmen.get(params.id)
+        if (!wrenchmenInstance) {
+            redirect controller: 'band', action: 'index'
+            return
+        }
+
+        render(view: 'changephoto', model: [wrenchmenInstance: wrenchmenInstance])
+        return
+    }
+
+    @Transactional
+    @Secured(['ROLE_USER'])
+    def savephoto() {
+        def wrenchmenInstance = Wrenchmen.get(params.id)
+        if (!wrenchmenInstance) {
+            redirect controller: 'band', action: 'index'
+            return
+        }
+
+        if (params.set.equals('save')) {
+
+            def f = request.getFile('photo')
+            if (!ImageHelper.okcontents.contains(f.getContentType())) {
+                flash.message = message(code: "wrong.mimetype", args: [ImageHelper.okcontents.toString()])
+                redirect(action: 'changephoto', id: wrenchmenInstance.id)
+                return
+            }
+
+            ByteArrayOutputStream out = new ByteArrayOutputStream()
+            ImageHelper.resize(f.bytes, out, new Integer(55), new Integer(55))
+            wrenchmenInstance.photo = out.toByteArray()
+
+        } else {
+            wrenchmenInstance.photo = null
+        }
+
+        wrenchmenInstance.save(flush: true)
+        redirect(controller: 'band', action: 'show', id: wrenchmenInstance.band.id, params: [tab:'wrench'])
+        return
+    }
+
+    @Secured(['ROLE_USER'])
+    def photo() {
+        def wrenchmenInstance = Wrenchmen.get(params.id)
+        if (!wrenchmenInstance) {
+            redirect controller: 'band', action: 'index'
+            return
+        }
+
+        response.setContentType("image/jpeg")
+        //response.setHeader("Content-disposition", "attachment;filename=\"${session.name}_ticket.pdf\"")
+        response.outputStream << wrenchmenInstance.photo
+        return
     }
 
     protected void notFound() {
