@@ -6,6 +6,8 @@ class RefWrench {
                       allowedCompetences: RefCompetenceWrench,
                       specialRules      : RefSpecialRule]
 
+    static belongsTo = [Race]
+
     String type
     Integer maxInBand
     Integer startingExperience = 0
@@ -25,6 +27,8 @@ class RefWrench {
     String equipment
     String rules
 
+    Race race
+
     static constraints = {
         type nullable:false, blank: false
         maxInBand nullable:true
@@ -33,4 +37,6 @@ class RefWrench {
         equipment nullable: true, blank:false
         rules nullable:true, blank:false
     }
+
+    Date dateCreated
 }

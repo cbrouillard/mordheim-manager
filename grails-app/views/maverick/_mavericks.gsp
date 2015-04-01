@@ -64,7 +64,7 @@
 
                 <div class="col-sm-4">
                     <div class="panel panel-info">
-                        <div class="panel-heading"><g:message code="hero.equipment.label"/></div>
+                        <div class="panel-heading"><g:message code="warrior.equipment.label"/></div>
 
                         <div class="panel-body">
                             <div class="well">${raw(maverick.equipment)}</div>

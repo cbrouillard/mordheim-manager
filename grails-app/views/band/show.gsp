@@ -28,13 +28,11 @@
                 <g:if test="${!anonymous}">
 
                     <div class="btn-group">
-                        <g:link controller="band" action="pdf" id="${bandInstance.id}" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-list-alt"></span> <g:message code="generate.pdf"/>
-                        </g:link>
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                 aria-expanded="false">
+                            <g:message code="actions"/>
                             <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
+                            <span class="sr-only">Toggle</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
                             <li>
@@ -44,18 +42,28 @@
                                         code="generate.preview.pdf"/>
                                 </g:link>
                             </li>
+                            <li>
+                                <g:link controller="band" action="pdf" id="${bandInstance.id}">
+                                    <span class="glyphicon glyphicon-list-alt"></span> <g:message code="generate.pdf"/>
+                                </g:link>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <g:link controller="band" action="bbcode" id="${bandInstance.id}">
+                                    <span class="glyphicon glyphicon-console"></span> <g:message
+                                        code="generate.bbcode"/>
+                                </g:link>
+                            </li>
+                            <li class="divider"></li>
+                            <g:if test="${bandInstance.nbWarriors > 0}">
+                                <li>
+                                    <g:link controller="game" action="endgame" id="${bandInstance.id}">
+                                        <span class="glyphicon glyphicon-ok-circle"></span> <g:message code="end.game"/>
+                                    </g:link>
+                                </li>
+                            </g:if>
                         </ul>
                     </div>
-
-                    <g:link controller="band" action="bbcode" id="${bandInstance.id}" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-console"></span> <g:message code="generate.bbcode"/>
-                    </g:link>
-
-                    <g:if test="${bandInstance.nbWarriors > 0}">
-                        <g:link controller="game" action="endgame" id="${bandInstance.id}" class="btn btn-warning">
-                            <span class="glyphicon glyphicon-ok-circle"></span> <g:message code="end.game"/>
-                        </g:link>
-                    </g:if>
                 </g:if>
             </h1>
 
@@ -69,6 +77,7 @@
         </g:if>
     </div>
 </div>
+
 
 <div class="col-sm-4 col-xs-12">
 

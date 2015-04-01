@@ -43,9 +43,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
                     <div class="btn-group pull-right" role="group">
-                        <g:link controller="referentiel" action="createhero" class="btn btn-success"
+                        <g:link controller="referentiel" action="managehero" class="btn btn-success"
                                 id="${raceInstance.id}">
-                            <span class="glyphicon glyphicon-plus"></span>
+                            <span class="glyphicon glyphicon-cog"></span>
                         </g:link>
                     </div>
                     <h5>
@@ -78,9 +78,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
                     <div class="btn-group pull-right" role="group">
-                        <g:link controller="referentiel" action="createwrench" class="btn btn-success"
+                        <g:link controller="referentiel" action="managewrench" class="btn btn-success"
                                 id="${raceInstance.id}">
-                            <span class="glyphicon glyphicon-plus"></span>
+                            <span class="glyphicon glyphicon-cog"></span>
                         </g:link>
                     </div>
                     <h5>

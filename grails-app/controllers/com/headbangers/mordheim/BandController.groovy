@@ -1,5 +1,6 @@
 package com.headbangers.mordheim
 
+import com.headbangers.mordheim.reference.Race
 import com.headbangers.mordheim.security.Person
 import com.mordheim.helper.ImageHelper
 import grails.plugin.springsecurity.annotation.Secured
@@ -65,7 +66,7 @@ class BandController {
             def f = request.getFile('photo')
             if (!ImageHelper.okcontents.contains(f.getContentType())) {
                 flash.message = message(code: "wrong.mimetype", args: [ImageHelper.okcontents.toString()])
-                        redirect(action: 'changephoto', id: bandInstance.id)
+                redirect(action: 'changephoto', id: bandInstance.id)
                 return
             }
 
@@ -153,7 +154,20 @@ class BandController {
     def create() {
         Band band = new Band(params)
         band.owner = springSecurityService.currentUser
-        respond band
+        def races = Race.list()
+        respond band, model: [races: races]
+    }
+
+    @Secured(['ROLE_USER'])
+    def loadrace (){
+        Race race = Race.get(params.race)
+        if (race){
+            Band newBand = new Band()
+            newBand.type = race.name
+            render(template: "form", model: [bandInstance: newBand])
+        } else {
+            render(template: "form", model: [bandInstance: new Band()])
+        }
     }
 
     @Transactional

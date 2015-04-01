@@ -34,12 +34,51 @@
 
 <div class="col-xs-12">
 
+    <g:if test="${races}">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+
+                        <label for="selector" class="col-sm-2 control-label"><g:message
+                                code="referentiel.selector.race"/></label>
+
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-text-background"></span></span>
+                                <g:select class="form-control"
+                                          name="selector"
+                                          from="${races}"
+                                          optionKey="id"
+                                          optionValue="name"
+                                          noSelection="['-1': '']"
+                                          onchange="${remoteFunction(action: 'loadrace',
+                                                  update: [success: 'formContainer'],
+                                                  params: '\'race=\' + this.value')}"/>
+
+                            </div>
+
+                            <div class="help-block with-errors">
+                                <g:message code="referentiel.selector.hint"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </g:if>
+
     <g:form url="[resource: bandInstance, action: 'save']" class="form-horizontal" data-toggle="validator">
+
         <div class="panel panel-default">
             <div class="panel-body">
 
                 <fieldset class="form">
-                    <g:render template="form"/>
+                    <div id="formContainer">
+                        <g:render template="form"/>
+                    </div>
                 </fieldset>
 
             </div>

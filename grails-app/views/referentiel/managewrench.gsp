@@ -10,7 +10,7 @@
     <div class="col-xs-12">
         <div>
             <h1><g:message
-                    code="referentiel.hero.create"/> <small>${race.name}</small>
+                    code="referentiel.wrench.create"/> <small>${race.name}</small>
             </h1>
             <hr/>
         </div>
@@ -19,10 +19,10 @@
             <div class="alert alert-info" role="status">${flash.message}</div>
         </g:if>
 
-        <g:hasErrors bean="${refHeroInstance}">
+        <g:hasErrors bean="${refWrenchInstance}">
             <div class="alert-danger alert">
                 <ul class="errors" role="alert">
-                    <g:eachError bean="${refHeroInstance}" var="error">
+                    <g:eachError bean="${refWrenchInstance}" var="error">
                         <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
                                 error="${error}"/></li>
                     </g:eachError>
@@ -40,14 +40,26 @@
                 <span class="glyphicon glyphicon-backward"></span> ${race.name}
             </g:link>
 
-            <h5><g:message code="referentiel.already.created.heroes"/></h5>
+            <h5><g:message code="referentiel.already.created.wrenches"/></h5>
         </div>
 
         <div class="table-responsive">
             <table class="table">
-                <g:each in="${race.heroes.sort({ it.type })}" var="hero">
+                <g:each in="${race.wrenches.sort({ it.type })}" var="wrench">
                     <tr>
-                        <td><strong>${hero.type}</strong></td>
+                        <td><strong>${wrench.type}</strong></td>
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <g:link controller="referentiel" action="deletewrench" class="btn btn-danger btn-xs"
+                                        id="${wrench.id}">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </g:link>
+                                <g:link controller="referentiel" action="editwrench" class="btn btn-success btn-xs"
+                                        id="${wrench.id}">
+                                    <span class="glyphicon glyphicon-forward"></span>
+                                </g:link>
+                            </div>
+                        </td>
                     </tr>
                 </g:each>
             </table>
@@ -56,13 +68,16 @@
 </div>
 
 <div class="col-sm-9 col-xs-12">
-    <g:form url="[controller: 'referentiel', action: 'savehero']" class="form-horizontal" data-toggle="validator">
+    <g:form url="[controller: 'referentiel', action: toAction]" class="form-horizontal" data-toggle="validator">
         <g:hiddenField name="race" value="${race.id}"/>
+        <g:if test="${toAction.equals("updatewrench")}">
+            <g:hiddenField name="id" value="${refWrenchInstance.id}"/>
+        </g:if>
         <div class="panel panel-default">
             <div class="panel-body">
 
                 <fieldset class="form">
-                    <g:render template="formhero"/>
+                    <g:render template="formwrench"/>
                 </fieldset>
 
             </div>

@@ -6,6 +6,8 @@ class RefHero {
                       allowedCompetences: RefCompetenceHero,
                       specialRules      : RefSpecialRule]
 
+    static belongsTo = [Race]
+
     String type
     Integer maxInBand
     Integer startingExperience
@@ -25,6 +27,8 @@ class RefHero {
     String equipment
     String competences
 
+    Race race
+
     static constraints = {
         type nullable: false, blank: false
         maxInBand nullable: false
@@ -33,4 +37,6 @@ class RefHero {
         equipment nullable:true, blank:false
         competences nullable:true, blank:false
     }
+
+    Date dateCreated
 }

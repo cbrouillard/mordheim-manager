@@ -21,4 +21,6 @@ class RefEquipment {
         race nullable: true
         rareLevel nullable: true
     }
+
+    Date dateCreated
 }

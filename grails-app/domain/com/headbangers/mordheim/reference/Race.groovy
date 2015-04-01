@@ -18,4 +18,6 @@ class Race {
         maxFigures nullable: false
         initialTreasure nullable: false
     }
+
+    Date dateCreated
 }

@@ -2,7 +2,7 @@
 
 <div class="form-group ${hasErrors(bean: maverickInstance, field: 'type', 'has-error')}">
 
-    <label for="type" class="col-sm-2 control-label"><g:message code="hero.type.label"/> *</label>
+    <label for="type" class="col-sm-2 control-label"><g:message code="warrior.type.label"/> *</label>
 
     <div class="col-sm-10">
         <div class="input-group">
@@ -38,7 +38,7 @@
 
 <div class="form-group">
 
-    <label class="col-sm-2 control-label"><g:message code="hero.profile.label"/></label>
+    <label class="col-sm-2 control-label"><g:message code="profile.label"/></label>
 
     <div class="col-sm-10">
         <g:render template="/profilable/editprofile" model="[profilable: maverickInstance]"/>
@@ -49,7 +49,7 @@
 
 <div class="form-group ${hasErrors(bean: maverickInstance, field: 'equipment', 'has-error')} ${hasErrors(bean: maverickInstance, field: 'competences', 'has-error')}">
 
-    <label for="equipment" class="col-sm-2 control-label"><g:message code="hero.equipment.label"/></label>
+    <label for="equipment" class="col-sm-2 control-label"><g:message code="warrior.equipment.label"/></label>
 
     <div class="col-sm-4">
         <div class="input-group">

@@ -45,7 +45,7 @@
                 <g:each in="${bandInstance.heroes.sort({ it.dateCreated })}" var="hero">
                     [b]${hero.name}[/b] ([i]${hero.type}[/i]) [<g:message code="band.gold" args="[hero.cost]"/>]<br/>
                     <g:if test="${hero.equipment}">- <g:message
-                            code="hero.equipment.label"/> : ${raw(hero.equipment)}<br/></g:if>
+                            code="warrior.equipment.label"/> : ${raw(hero.equipment)}<br/></g:if>
                     <g:if test="${hero.competences}">- <g:message
                             code="hero.competences.label"/> : ${raw(hero.competences)}<br/></g:if>
                     <br/>
@@ -66,7 +66,7 @@
                         [b]${maverick.name}[/b] ([i]${maverick.type}[/i]) [<g:message code="band.gold"
                                                                                       args="[maverick.cost]"/>]<br/>
                         <g:if test="${maverick.equipment}">- <g:message
-                                code="hero.equipment.label"/> : ${raw(maverick.equipment)}<br/></g:if>
+                                code="warrior.equipment.label"/> : ${raw(maverick.equipment)}<br/></g:if>
                         <g:if test="${maverick.competences}">- <g:message
                                 code="hero.competences.label"/> : ${raw(maverick.competences)}<br/></g:if>
                         <br/>

@@ -35,4 +35,6 @@ class RefMaverick {
         equipment nullable:true, blank:false
         competences nullable:true, blank:false
     }
+
+    Date dateCreated
 }
