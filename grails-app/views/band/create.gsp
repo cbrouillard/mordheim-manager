@@ -34,11 +34,11 @@
 
 <div class="col-xs-12">
 
-    <g:if test="${races}">
-        <div class="panel panel-primary">
-            <div class="panel-body">
-                <div class="form-horizontal">
+    <g:form url="[resource: bandInstance, action: 'save']" class="form-horizontal" data-toggle="validator">
 
+        <div class="panel panel-default">
+            <g:if test="${races}">
+                <div class="panel-heading">
                     <div class="form-group">
 
                         <label for="selector" class="col-sm-2 control-label"><g:message
@@ -53,11 +53,10 @@
                                           from="${races}"
                                           optionKey="id"
                                           optionValue="name"
-                                          noSelection="['-1': '']"
+                                          noSelection="['NO': '']"
                                           onchange="${remoteFunction(action: 'loadrace',
                                                   update: [success: 'formContainer'],
                                                   params: '\'race=\' + this.value')}"/>
-
                             </div>
 
                             <div class="help-block with-errors">
@@ -66,13 +65,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </g:if>
-
-    <g:form url="[resource: bandInstance, action: 'save']" class="form-horizontal" data-toggle="validator">
-
-        <div class="panel panel-default">
+            </g:if>
             <div class="panel-body">
 
                 <fieldset class="form">

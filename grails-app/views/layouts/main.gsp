@@ -12,7 +12,6 @@
     <link rel="shortcut icon" href="${assetPath(src: 'favicon.ico')}" type="image/x-icon">
     <link rel="apple-touch-icon" href="${assetPath(src: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png')}">
-
     <asset:stylesheet src="application.css"/>
     <asset:javascript src="application.js"/>
 
@@ -26,6 +25,8 @@
             fontsize_formats: "6pt 7pt 8pt 9pt 10pt 11pt 12pt",
             language: '${message(code:'tinymce.lang', default: 'en_GB')}'});
     </script>
+    <link rel="stylesheet" href="${resource(dir: 'css/fa/css', file: 'font-awesome.min.css')}"/>
+
     <g:layoutHead/>
 </head>
 

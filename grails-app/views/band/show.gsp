@@ -28,6 +28,9 @@
                 <g:if test="${!anonymous}">
 
                     <div class="btn-group">
+                        <g:link class="btn btn-primary" controller="band" action="pdf" id="${bandInstance.id}">
+                            <i class="fa fa-file-pdf-o"></i>
+                        </g:link>
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                 aria-expanded="false">
                             <g:message code="actions"/>
@@ -44,7 +47,7 @@
                             </li>
                             <li>
                                 <g:link controller="band" action="pdf" id="${bandInstance.id}">
-                                    <span class="glyphicon glyphicon-list-alt"></span> <g:message code="generate.pdf"/>
+                                    <i class="fa fa-file-pdf-o"></i> <g:message code="generate.pdf"/>
                                 </g:link>
                             </li>
                             <li class="divider"></li>
@@ -54,8 +57,8 @@
                                         code="generate.bbcode"/>
                                 </g:link>
                             </li>
-                            <li class="divider"></li>
                             <g:if test="${bandInstance.nbWarriors > 0}">
+                                <li class="divider"></li>
                                 <li>
                                     <g:link controller="game" action="endgame" id="${bandInstance.id}">
                                         <span class="glyphicon glyphicon-ok-circle"></span> <g:message code="end.game"/>

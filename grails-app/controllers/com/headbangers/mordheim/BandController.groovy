@@ -180,6 +180,12 @@ class BandController {
 
         bandInstance.owner = springSecurityService.currentUser
         bandInstance.gold = 500
+
+        if (params.selector && !params.selector.equals("NO")){
+            Race race = Race.get(params.selector)
+            bandInstance.race = race
+        }
+
         bandInstance.validate()
 
         if (bandInstance.hasErrors()) {
