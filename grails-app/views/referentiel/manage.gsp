@@ -8,16 +8,40 @@
 
 <div class="row-fluid">
     <div class="col-sm-12">
-        <div>
+        <div class="row-fluid">
+            <div class="col-sm-6">
+                <h1>
+                    ${raceInstance.name}
+                </h1>
+            </div>
 
-            <h1>
-                ${raceInstance.name}
-            </h1>
-            <hr/>
+            <div class="col-sm-6 clearfix text-right">
+                <h1>
+                    <g:link class="btn btn-success" action="editrace" id="${raceInstance.id}">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </g:link>
+
+                    <div class="btn-group">
+                        <g:link class="btn btn-success" action="editrace" id="${raceInstance.id}">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </g:link>
+                        <g:link class="btn btn-danger" action="deleterace" id="${raceInstance.id}">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </g:link>
+                    </div>
+                </h1>
+            </div>
+
+            <g:if test="${flash.message}">
+                <div class="alert alert-info" role="status">${flash.message}</div>
+            </g:if>
         </div>
-        <g:if test="${flash.message}">
-            <div class="alert alert-info" role="status">${flash.message}</div>
-        </g:if>
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="col-sm-12">
+        <hr/>
     </div>
 </div>
 

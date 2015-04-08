@@ -12,11 +12,14 @@ class Race {
     Integer maxFigures = 20
     Integer initialTreasure = 500
 
+    Boolean usable = false
+
     static constraints = {
         name nullable: false, blank: false
         minFigures nullable: false
         maxFigures nullable: false
         initialTreasure nullable: false
+        usable nullable:false
     }
 
     Date dateCreated

@@ -154,7 +154,7 @@ class BandController {
     def create() {
         Band band = new Band(params)
         band.owner = springSecurityService.currentUser
-        def races = Race.list()
+        def races = Race.findAllByUsable(true)
         respond band, model: [races: races]
     }
 
