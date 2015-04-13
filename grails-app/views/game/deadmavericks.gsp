@@ -7,18 +7,26 @@
         var result = function (maverickId) {
 
             var state = $('#' + maverickId + ' input[type=radio]:checked').val();
+            var notin = $("#" + maverickId + "_notin").is(":checked")
 
             var message = "";
-            if (state == "death") {
-                message = "<g:message code="endgame.alldead.maverick"/>";
-                $('#' + maverickId + "progress").hide();
-            } else if (state == "notin") {
+            if (notin) {
                 message = "<g:message code="endgame.notin.maverick"/>";
                 $('#' + maverickId + "progress").hide();
+                $("#" + maverickId).hide();
             } else {
-                message = "<g:message code="endgame.alllife.maverick"/>";
-                $('#' + maverickId + "progress").show();
+                $("#" + maverickId).show();
+                if (state == "death") {
+                    message = "<g:message code="endgame.alldead.maverick"/>";
+                    $('#' + maverickId + "progress").hide();
+                    $("#"+ maverickId + "_infosnotdead").hide();
+                } else {
+                    message = "<g:message code="endgame.alllife.maverick"/>";
+                    $('#' + maverickId + "progress").show();
+                    $("#"+ maverickId + "_infosnotdead").show();
+                }
             }
+
 
             $('#' + maverickId + "results").html(message);
         }
@@ -86,28 +94,40 @@
                             <div class="panel panel-warning">
                                 <div class="panel-heading">
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6 col-xs-12">
                                             <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
-                                            <h5><strong>${maverick.name}</strong></h5>
-                                            <span class="label label-default">${maverick.type}</span>
-                                            <span class="label label-default"><g:message code="experience.current"
-                                                                                         args="[maverick.fullXp]"/></span>
+                                            <div class="pull-left">
+                                                <h5><strong>${maverick.name}</strong></h5>
+                                                <span class="label label-default">${maverick.type}</span>
+                                                <span class="label label-default"><g:message code="experience.current"
+                                                                                             args="[maverick.fullXp]"/></span>
+                                            </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6 col-xs-12 text-right">
                                             <g:render template="experience"
                                                       model="[from: maverick, maxXp: new Integer(parameters.xpRef)]"/>
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn btn-default">
+                                                    <input type="checkbox" name="${maverick.id}.state"
+                                                           id="${maverick.id}_notin"
+                                                           onchange="javascript:result('${maverick.id}');"
+                                                           autocomplete="off" value="notin">
+                                                    <span class="glyphicon glyphicon-hand-right"></span> <g:message
+                                                        code="ignore"/>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="table-responsive">
+                                <div class="table-responsive" id="${maverick.id}">
                                     <table class="table">
                                         <tbody>
                                         <tr>
                                             <td class="text-right">
 
-                                                <div class="btn-group" data-toggle="buttons" id="${maverick.id}">
+                                                <div class="btn-group" data-toggle="buttons">
                                                     <label class="btn btn-default active">
                                                         <input type="radio" name="${maverick.id}.state"
                                                                id="${maverick.id}_life"
@@ -116,14 +136,7 @@
                                                         <span class="glyphicon glyphicon-thumbs-up"></span> <g:message
                                                             code="warrior.living"/>
                                                     </label>
-                                                    <label class="btn btn-default">
-                                                        <input type="radio" name="${maverick.id}.state"
-                                                               id="${maverick.id}_notin"
-                                                               onchange="javascript:result('${maverick.id}');"
-                                                               autocomplete="off" value="notin">
-                                                        <span class="glyphicon glyphicon-hand-right"></span> <g:message
-                                                            code="warrior.notingame"/>
-                                                    </label>
+
                                                     <label class="btn btn-default">
                                                         <input type="radio" name="${maverick.id}.state"
                                                                id="${maverick.id}_death"
@@ -137,69 +150,73 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2">
+                                                <div id="${maverick.id}_infosnotdead">
 
-                                                <div class="form-group">
+                                                    <div class="form-group">
 
-                                                    <label for="${maverick.id}[bonus]"
-                                                           class="col-sm-12 control-label"><g:message
-                                                            code="how.many.bonus.label"/></label>
+                                                        <label for="${maverick.id}[bonus]"
+                                                               class="col-sm-12 control-label"><g:message
+                                                                code="how.many.bonus.label"/></label>
 
-                                                    <div class="col-sm-12">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><span
-                                                                    class="glyphicon glyphicon-plus-sign"></span>
-                                                            </span>
-                                                            <g:field maxlength="2" pattern="^([0-9])*"
-                                                                     name="${maverick.id}.bonus"
-                                                                     type="number"
-                                                                     value="0" min="0" required="" class="form-control"
-                                                                     id="${maverick.id}bonus"
-                                                                     onchange="javascript:recalculExperience('${maverick.id}')"/>
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><span
+                                                                        class="glyphicon glyphicon-plus-sign"></span>
+                                                                </span>
+                                                                <g:field maxlength="2" pattern="^([0-9])*"
+                                                                         name="${maverick.id}.bonus"
+                                                                         type="number"
+                                                                         value="0" min="0" required=""
+                                                                         class="form-control"
+                                                                         id="${maverick.id}bonus"
+                                                                         onchange="javascript:recalculExperience('${maverick.id}')"/>
+                                                            </div>
+
+                                                            <div class="help-block with-errors">
+                                                                <g:message code="how.many.bonus.label.hint"/>
+                                                            </div>
                                                         </div>
 
-                                                        <div class="help-block with-errors">
-                                                            <g:message code="how.many.bonus.label.hint"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+
+                                                        <label for="${maverick.id}[injuries]"
+                                                               class="col-sm-12 control-label"><g:message
+                                                                code="hero.injuries.label"/></label>
+
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><span
+                                                                        class="glyphicon glyphicon-plus-sign"></span>
+                                                                </span>
+                                                                <g:textArea name="${maverick.id}.injuries" cols="40"
+                                                                            rows="5"
+                                                                            value="${maverick?.injuries}"
+                                                                            class="form-control editor"/>
+                                                            </div>
+
+                                                            <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
 
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label for="${maverick.id}[competences]"
+                                                               class="col-sm-12 control-label"><g:message
+                                                                code="hero.competences.label"/></label>
 
-                                                <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><span
+                                                                        class="glyphicon glyphicon-lamp"></span></span>
+                                                                <g:textArea name="${maverick.id}.competences" cols="40"
+                                                                            rows="5"
+                                                                            value="${maverick?.competences}"
+                                                                            class="form-control editor"/>
+                                                            </div>
 
-                                                    <label for="${maverick.id}[injuries]"
-                                                           class="col-sm-12 control-label"><g:message
-                                                            code="hero.injuries.label"/></label>
-
-                                                    <div class="col-sm-12">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><span
-                                                                    class="glyphicon glyphicon-plus-sign"></span></span>
-                                                            <g:textArea name="${maverick.id}.injuries" cols="40"
-                                                                        rows="5"
-                                                                        value="${maverick?.injuries}"
-                                                                        class="form-control editor"/>
+                                                            <div class="help-block with-errors"></div>
                                                         </div>
-
-                                                        <div class="help-block with-errors"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="${maverick.id}[competences]"
-                                                           class="col-sm-12 control-label"><g:message
-                                                            code="hero.competences.label"/></label>
-
-                                                    <div class="col-sm-12">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><span
-                                                                    class="glyphicon glyphicon-lamp"></span></span>
-                                                            <g:textArea name="${maverick.id}.competences" cols="40"
-                                                                        rows="5"
-                                                                        value="${maverick?.competences}"
-                                                                        class="form-control editor"/>
-                                                        </div>
-
-                                                        <div class="help-block with-errors"></div>
                                                     </div>
                                                 </div>
                                             </td>

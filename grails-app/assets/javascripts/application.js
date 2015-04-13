@@ -9,6 +9,7 @@
 //= require bootstrap
 //= require validator
 //= require fileinput
+//= require responsive-tabs
 //= require_tree .
 //= require_self
 

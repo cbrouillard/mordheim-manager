@@ -29,10 +29,11 @@
 
                     <div class="btn-group">
                         <g:link class="btn btn-primary" controller="band" action="pdf" id="${bandInstance.id}">
-                            <i class="fa fa-file-pdf-o"></i>
+                            <i class="fa fa-file-pdf-o"></i> <g:message code="pdf"/>
                         </g:link>
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"
                                 aria-expanded="false">
+                            <span class="glyphicon glyphicon-cog"></span>
                             <g:message code="actions"/>
                             <span class="caret"></span>
                             <span class="sr-only">Toggle</span>
@@ -67,15 +68,19 @@
                             </g:if>
                         </ul>
                     </div>
+
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteBandModal">
+                        <span class="glyphicon glyphicon-remove"></span> ${message(code: 'default.button.delete.label', default: 'Delete')}
+                    </button>
+
                 </g:if>
             </h1>
 
             <hr/>
+            <div class="clearfix">&nbsp;</div>
         </div>
 
         <g:if test="${flash.message}">
-            <div class="clearfix">&nbsp;</div>
-
             <div class="alert alert-info" role="status">${flash.message}</div>
         </g:if>
     </div>
@@ -89,19 +94,12 @@
 
             <g:if test="${!anonymous}">
                 <div class="form-inline pull-right">
-                    <g:form url="[resource: bandInstance, action: 'delete']" method="DELETE"
-                            class="form-inline pull-right">
-                        <div class="btn-group">
-                            <g:link class="btn btn-success" controller="band" action="edit" id="${bandInstance.id}">
-                                <span class="glyphicon glyphicon-edit"></span>
-                                <g:message code="default.button.edit.label"/>
-                            </g:link>
-                            <button type="submit" class="btn btn-danger"
-                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                                <span class="glyphicon glyphicon-remove"></span> ${message(code: 'default.button.delete.label', default: 'Delete')}
-                            </button>
-                        </div>
-                    </g:form>
+                    <div class="btn-group">
+                        <g:link class="btn btn-success" controller="band" action="edit" id="${bandInstance.id}">
+                            <span class="glyphicon glyphicon-edit"></span>
+                            <g:message code="default.button.edit.label"/>
+                        </g:link>
+                    </div>
                 </div>
             </g:if>
             <h5><g:message code="band.infos"/></h5>
@@ -164,7 +162,7 @@
     <div role="tabpanel">
 
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav nav-tabs responsive" role="tablist">
             <li role="presentation" class=" ${!activeTab ? 'active' : ''}">
                 <a href="#heroes" role="tab" data-toggle="tab">
                     <span class="badge">${bandInstance.heroes.size()}</span>
@@ -207,7 +205,7 @@
 
 
         <!-- Tab panes -->
-        <div class="tab-content">
+        <div class="tab-content responsive">
             <div role="tabpanel" class="tab-pane ${!activeTab ? 'active' : ''}" id="heroes">
                 <g:render template="/hero/heroes"/>
 
@@ -232,5 +230,42 @@
     </g:if>
 
 </div>
+
+
+<!-- Modal -->
+<g:form url="[resource: bandInstance, action: 'delete']" method="DELETE">
+    <div class="modal fade" id="deleteBandModal" tabindex="-1" role="dialog" aria-labelledby="deleteBandModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="deleteBandModalLabel">
+                        <g:message code="default.button.delete.label"/>
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <g:message code="default.button.delete.confirm.message"/>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <g:message code="cancel"/>
+                    </button>
+                    <button type="submit" class="btn btn-danger">
+                        ${message(code: 'default.button.delete.label', default: 'Delete')}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</g:form>
+
+<jq:jquery>
+    fakewaffle.responsiveTabs(['xs']);
+</jq:jquery>
+
 </body>
 </html>

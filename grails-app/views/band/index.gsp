@@ -50,7 +50,7 @@
                     <div class="row-fluid">
                 </g:if>
                 <div class="col-lg-2 col-md-4 col-sm-5">
-                    <div class="thumbnail panel-primary">
+                    <div class="thumbnail panel-primary band-presenter">
                         <g:render template="/band/image" model="[bandInstance:band]"/>
                         <div class="caption text-center">
                             <ul class="list-group">

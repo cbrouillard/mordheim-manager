@@ -32,6 +32,10 @@ body {
         text-align: center !important;
         width:50px !important;
     }
+
+    .reduce-on-little-screen{
+        text-overflow: ellipsis;
+    }
 }
 
 img.imgband {
@@ -55,4 +59,9 @@ img.imgwarrior:hover {
 
 .photo-changer{
     display: none;
+}
+
+.band-presenter:hover{
+    background:#eee;
+    border-color: #bbb;
 }

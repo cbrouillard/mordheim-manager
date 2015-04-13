@@ -11,33 +11,34 @@
                             <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
                         </g:if>
                         <g:else>
-                            <img src="${createLink(action: 'photo', id: hero.id, controller: 'hero')}" class="imgwarrior pull-left"/>
+                            <img src="${createLink(action: 'photo', id: hero.id, controller: 'hero')}"
+                                 class="imgwarrior pull-left"/>
                         </g:else>
                     </g:link>
-                    <h5><strong>${hero.name}</strong></h5>
-                    <span class="label label-default">${hero.type}</span>
-                    <g:if test="${hero.cost > 0}">
-                        <span class="label label-default"><g:message code="recruted.for" args="[hero.cost]"/></span>
-                    </g:if>
+                    <div class="pull-left">
+                        <h5><strong>${hero.name}</strong></h5>
+                        <span class="label label-default">${hero.type}</span>
+                        <g:if test="${hero.cost > 0}">
+                            <span class="label label-default"><g:message code="recruted.for" args="[hero.cost]"/></span>
+                        </g:if>
+                    </div>
                 </div>
 
                 <g:if test="${!anonymous}">
-                    <div class="col-sm-8">
-                        <div class="form-inline">
-                            <g:form url="[resource: hero, action: 'delete']" method="DELETE"
-                                    class="form-inline pull-right">
-                                <g:hiddenField name="band" value="${bandInstance.id}"/>
-                                <div class="btn-group">
-                                    <g:link class="btn btn-success" controller="hero" action="edit" id="${hero.id}">
-                                        <span class="glyphicon glyphicon-edit"></span>
-                                    </g:link>
-                                    <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                                        <span class="glyphicon glyphicon-remove"></span>
-                                    </button>
-                                </div>
-                            </g:form>
-                        </div>
+                    <div class="col-sm-8 text-right">
+                        <g:form url="[resource: hero, action: 'delete']" method="DELETE"
+                                class="form-inline">
+                            <g:hiddenField name="band" value="${bandInstance.id}"/>
+                            <div class="btn-group">
+                                <g:link class="btn btn-success" controller="hero" action="edit" id="${hero.id}">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </g:link>
+                                <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </g:form>
                     </div>
                 </g:if>
             </div>

@@ -27,11 +27,14 @@
             if (allDead) {
                 message = "<g:message code="endgame.alldead"/>";
                 $('#' + wrenchgroupId + "progress").hide();
+                $("#"+wrenchgroupId+"_infosnotdead").hide();
             } else if (allLife) {
                 message = "<g:message code="endgame.alllife"/>";
                 $('#' + wrenchgroupId + "progress").show();
+                $("#"+wrenchgroupId+"_infosnotdead").show();
             } else {
                 $('#' + wrenchgroupId + "progress").show();
+                $("#"+wrenchgroupId+"_infosnotdead").show();
             }
 
             $('#' + wrenchgroupId + "results").html(message);
@@ -116,18 +119,20 @@
                             <div class="panel panel-warning">
                                 <div class="panel-heading">
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6 col-xs-12">
                                             <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
-                                            <h5><strong>${wrenchgroup.name}</strong></h5>
-                                            <span class="label label-default">${wrenchgroup.number} ${wrenchgroup.type}</span>
-                                            <span class="label label-default"><g:message code="experience.current"
-                                                                                         args="[wrenchgroup.fullXp]"/></span>
+                                            <div class="pull-left">
+                                                <h5><strong>${wrenchgroup.name}</strong></h5>
+                                                %{--<span class="label label-default">${wrenchgroup.number} ${wrenchgroup.type}</span>--}%
+                                                <span class="label label-default"><g:message code="experience.current"
+                                                                                             args="[wrenchgroup.fullXp]"/></span>
+                                            </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6 col-xs-12 text-right">
                                             <g:render template="experience"
                                                       model="[from: wrenchgroup, maxXp: new Integer(parameters.xpRef)]"/>
-                                            <div class="btn-group pull-right" data-toggle="buttons">
+                                            <div class="btn-group" data-toggle="buttons">
                                                 <label class="btn btn-default"
                                                        id="${wrenchgroup.id}notin_label">
                                                     <input type="checkbox" autocomplete="off"
@@ -135,7 +140,7 @@
                                                            id='${wrenchgroup.id}notin'
                                                            onchange="javascript:wrenchNotApply('${wrenchgroup.id}');">
                                                     <span class="glyphicon glyphicon-hand-right"></span> <g:message
-                                                        code="wrench.notapply"/>
+                                                        code="ignore"/>
                                                 </label>
                                             </div>
                                         </div>
@@ -176,52 +181,55 @@
                                         </g:while>
                                         <tr>
                                             <td colspan="2">
-                                                <div class="form-group">
+                                                <div id="${wrenchgroup.id}_infosnotdead">
 
-                                                    <label for="${wrenchgroup.id}[bonus]"
-                                                           class="col-sm-12 control-label"><g:message
-                                                            code="how.many.bonus.label"/></label>
+                                                    <div class="form-group">
+                                                        <label for="${wrenchgroup.id}[bonus]"
+                                                               class="col-sm-12 col-xs-12 control-label"><g:message
+                                                                code="how.many.bonus.label"/></label>
 
-                                                    <div class="col-sm-12">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><span
-                                                                    class="glyphicon glyphicon-plus-sign"></span>
-                                                            </span>
-                                                            <g:field maxlength="2" pattern="^([0-9])*"
-                                                                     name="${wrenchgroup.id}.bonus"
-                                                                     type="number"
-                                                                     value="0" min="0" required="" class="form-control"
-                                                                     id="${wrenchgroup.id}bonus"
-                                                                     onchange="javascript:recalculExperience('${wrenchgroup.id}')"/>
+                                                        <div class="col-sm-12 col-xs-12">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><span
+                                                                        class="glyphicon glyphicon-plus-sign"></span>
+                                                                </span>
+                                                                <g:field maxlength="2" pattern="^([0-9])*"
+                                                                         name="${wrenchgroup.id}.bonus"
+                                                                         type="number"
+                                                                         value="0" min="0" required=""
+                                                                         class="form-control"
+                                                                         id="${wrenchgroup.id}bonus"
+                                                                         onchange="javascript:recalculExperience('${wrenchgroup.id}')"/>
+                                                            </div>
+
+                                                            <div class="help-block with-errors">
+                                                                <g:message code="how.many.bonus.label.hint"/>
+                                                            </div>
                                                         </div>
 
-                                                        <div class="help-block with-errors">
-                                                            <g:message code="how.many.bonus.label.hint"/>
-                                                        </div>
                                                     </div>
 
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label for="${wrenchgroup.id}[specialRules]"
+                                                               class="col-sm-12 col-xs-12 control-label"><g:message
+                                                                code="wrench.specialRules.label"/></label>
 
-                                                <div class="form-group">
+                                                        <div class="col-sm-12 col-xs-12">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><span
+                                                                        class="glyphicon glyphicon-plus-sign"></span>
+                                                                </span>
+                                                                <g:textArea name="${wrenchgroup.id}.specialRules"
+                                                                            cols="40"
+                                                                            rows="5"
+                                                                            value="${wrenchgroup?.specialRules}"
+                                                                            class="form-control editor"/>
+                                                            </div>
 
-                                                    <label for="${wrenchgroup.id}[specialRules]"
-                                                           class="col-sm-12 control-label"><g:message
-                                                            code="wrench.specialRules.label"/></label>
-
-                                                    <div class="col-sm-12">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><span
-                                                                    class="glyphicon glyphicon-plus-sign"></span></span>
-                                                            <g:textArea name="${wrenchgroup.id}.specialRules" cols="40"
-                                                                        rows="5"
-                                                                        value="${wrenchgroup?.specialRules}"
-                                                                        class="form-control editor"/>
+                                                            <div class="help-block with-errors"></div>
                                                         </div>
-
-                                                        <div class="help-block with-errors"></div>
                                                     </div>
                                                 </div>
-
                                             </td>
                                         </tr>
 

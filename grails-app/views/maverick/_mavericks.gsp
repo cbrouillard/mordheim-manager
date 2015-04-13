@@ -11,39 +11,44 @@
                             <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
                         </g:if>
                         <g:else>
-                            <img src="${createLink(action: 'photo', id: maverick.id, controller: 'maverick')}" class="imgwarrior pull-left"/>
+                            <img src="${createLink(action: 'photo', id: maverick.id, controller: 'maverick')}"
+                                 class="imgwarrior pull-left"/>
                         </g:else>
                     </g:link>
-                    <h5><strong>${maverick.name}</strong></h5>
-                    <span class="label label-default">${maverick.type}</span>
-                    <g:if test="${maverick.cost > 0}">
-                        <span class="label label-default"><g:message code="recruted.for" args="[maverick.cost]"/></span>
-                    </g:if>
-                    <g:if test="${maverick.bandSupValue}">
-                        <span class="label label-default"><g:message code="increase.bandvalue.for" args="[maverick.bandSupValue]"/></span>
-                    </g:if>
-                    <g:if test="${maverick.retenueCost}">
-                        <span class="label label-default"><g:message code="retenue.cost.for" args="[maverick.retenueCost]"/></span>
-                    </g:if>
+                    <div class="pull-left">
+                        <h5><strong>${maverick.name}</strong></h5>
+                        <span class="label label-default">${maverick.type}</span>
+                        <g:if test="${maverick.cost > 0}">
+                            <span class="label label-default"><g:message code="recruted.for"
+                                                                         args="[maverick.cost]"/></span>
+                        </g:if>
+                        <g:if test="${maverick.bandSupValue}">
+                            <span class="label label-default"><g:message code="increase.bandvalue.for"
+                                                                         args="[maverick.bandSupValue]"/></span>
+                        </g:if>
+                        <g:if test="${maverick.retenueCost}">
+                            <span class="label label-default"><g:message code="retenue.cost.for"
+                                                                         args="[maverick.retenueCost]"/></span>
+                        </g:if>
+                    </div>
                 </div>
 
                 <g:if test="${!anonymous}">
-                    <div class="col-sm-8">
-                        <div class="form-inline">
-                            <g:form url="[resource: maverick, action: 'delete']" method="DELETE"
-                                    class="form-inline pull-right">
-                                <g:hiddenField name="band" value="${bandInstance.id}"/>
-                                <div class="btn-group">
-                                    <g:link class="btn btn-success" controller="maverick" action="edit" id="${maverick.id}">
-                                        <span class="glyphicon glyphicon-edit"></span>
-                                    </g:link>
-                                    <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                                        <span class="glyphicon glyphicon-remove"></span>
-                                    </button>
-                                </div>
-                            </g:form>
-                        </div>
+                    <div class="col-sm-8 text-right">
+                        <g:form url="[resource: maverick, action: 'delete']" method="DELETE"
+                                class="form-inline">
+                            <g:hiddenField name="band" value="${bandInstance.id}"/>
+                            <div class="btn-group">
+                                <g:link class="btn btn-success" controller="maverick" action="edit"
+                                        id="${maverick.id}">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </g:link>
+                                <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </g:form>
                     </div>
                 </g:if>
             </div>
@@ -52,7 +57,8 @@
         <div class="panel-body">
 
             <div>
-                <span class="label label-info pull-right"><g:message code="experience.label"/> : ${maverick.fullXp}</span>
+                <span class="label label-info pull-right"><g:message
+                        code="experience.label"/> : ${maverick.fullXp}</span>
 
                 <g:render template="/profilable/experience" model="[from: maverick, maxXp: 14]"/>
 

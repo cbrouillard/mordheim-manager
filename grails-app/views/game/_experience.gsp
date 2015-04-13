@@ -1,4 +1,5 @@
 <div id="${from.id}progress">
+    <span class="badge"><g:message code="legend"/>:</span>
     <span class="label label-success legend_alive"><g:message code="alive.legend"/></span>
     <span class="label label-warning legend_chief"><g:message code="chief.legend"/></span>
     <span class="label label-danger legend_victims"><g:message code="victims.legend"/></span>
