@@ -37,9 +37,9 @@ class Maverick {
 
     static constraints = {
         note nullable: true, blank: true, widget: 'textarea'
-        competences nullable: true, blank: false, widget: 'textarea'
-        injuries nullable: true, blank: false, widget: 'textarea'
-        equipment nullable: true, blank: false, widget: 'textarea'
+        competences nullable: true, blank: true, widget: 'textarea'
+        injuries nullable: true, blank: true, widget: 'textarea'
+        equipment nullable: true, blank: true, widget: 'textarea'
         experience nullable: false, defaultValue: 0
         earnedXp nullable: false, defaultValue: 0
         type nullable: false, blank: false

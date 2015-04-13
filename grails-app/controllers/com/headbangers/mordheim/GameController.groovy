@@ -2,6 +2,7 @@ package com.headbangers.mordheim
 
 import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
+import org.springframework.transaction.annotation.Propagation
 
 @Secured(['ROLE_USER'])
 class GameController {
@@ -14,6 +15,14 @@ class GameController {
         Map heroes
         Map band
         Map mavericks
+
+        @Override
+        String toString() {
+            return "Parameters : " + parameters.toString() + " Wrenches : " +
+                    wrenches.toString() + " Heroes : " + heroes.toString() + " Band : " + band.toString() +
+                    " Mavericks : " + mavericks.toString()
+
+        }
     }
 
     def endgame() {
@@ -232,16 +241,19 @@ class GameController {
 
             // saving
             Integer xpRef = new Integer(gameData.parameters.xpRef)
-            savewrenches(bandInstance, gameData.wrenches, xpRef)
+            bandInstance = savewrenches(bandInstance, gameData.wrenches, xpRef)
             saveHeroes(bandInstance, gameData.heroes, xpRef)
             saveBand(bandInstance, gameData.band)
             if (bandInstance.mavericks) {
                 saveMavericks(bandInstance, gameData.mavericks, xpRef)
             }
 
-            bandInstance.save(flush: true)
-
-            session['endGameData'] = null
+            if (!bandInstance.validate()){
+                log.error bandInstance.errors
+            } else {
+                bandInstance.save(flush: true)
+                session['endGameData'] = null
+            }
 
             flash.message = message(code: 'default.updated.message', args: [message(code: 'Band.label', default: 'Band'), bandInstance.name])
             redirect(controller: "band", action: 'show', id: bandInstance.id)
@@ -252,7 +264,8 @@ class GameController {
         }
     }
 
-    private def savewrenches(Band bandInstance, wrenchesData, Integer xpRef) {
+    @Transactional(propagation = Propagation.REQUIRED)
+    def savewrenches(Band bandInstance, wrenchesData, Integer xpRef) {
         def toDelete = []
         bandInstance.wrenches.each { wrenches ->
 
@@ -277,7 +290,6 @@ class GameController {
                 if (!notin) {
                     if (death == wrenches.number) {
                         // everyone is dead.
-                        bandInstance.removeFromWrenches(wrenches)
                         toDelete.add(wrenches)
                     } else {
                         wrenches.earnedXp += xpRef
@@ -290,6 +302,7 @@ class GameController {
                         }
                         wrenches.number = life
                         wrenches.specialRules = specialRules
+                        wrenches.save(flush: true)
                     }
                 }
             }
@@ -299,9 +312,12 @@ class GameController {
             bandInstance.removeFromWrenches(bye)
         }
         Wrenchmen.deleteAll(toDelete)
+
+        return bandInstance
     }
 
-    private def saveHeroes(Band bandInstance, heroesData, Integer xpRef) {
+    @Transactional
+    def saveHeroes(Band bandInstance, heroesData, Integer xpRef) {
         def toDelete = []
         bandInstance.heroes.each { hero ->
             def infos = heroesData[hero.id]
@@ -346,9 +362,12 @@ class GameController {
             bandInstance.removeFromHeroes(bye)
         }
         Hero.deleteAll(toDelete)
+
+        return bandInstance
     }
 
-    private def saveMavericks(Band bandInstance, mavericksData, Integer xpRef) {
+    @Transactional
+    def saveMavericks(Band bandInstance, mavericksData, Integer xpRef) {
         def toDelete = []
 
         bandInstance.mavericks.each { maverick ->
@@ -382,9 +401,12 @@ class GameController {
             bandInstance.removeFromMavericks(bye)
         }
         Maverick.deleteAll(toDelete)
+
+        return bandInstance
     }
 
-    private def saveBand(Band bandInstance, bandData) {
+    @Transactional
+    def saveBand(Band bandInstance, bandData) {
         bindData(bandInstance, bandData, [include: ["reserve", "note"]])
 
         // ajouter gold et stones
@@ -396,5 +418,6 @@ class GameController {
         }
 
         bandInstance.nbGame += 1
+        return bandInstance
     }
 }
