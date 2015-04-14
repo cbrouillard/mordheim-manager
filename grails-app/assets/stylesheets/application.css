@@ -19,6 +19,11 @@ body {
     padding-bottom: 70px;
 }
 
+.band-infos-affixed.affix{
+    position: fixed;
+    top:20px;
+}
+
 @media screen and (max-width: 480px) {
     .no-show-onphone {
         display: none;
