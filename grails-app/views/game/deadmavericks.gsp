@@ -109,7 +109,7 @@
                                                       model="[from: maverick, maxXp: new Integer(parameters.xpRef)]"/>
                                             <div class="btn-group" data-toggle="buttons">
                                                 <label class="btn btn-default">
-                                                    <input type="checkbox" name="${maverick.id}.state"
+                                                    <input type="checkbox" name="${maverick.id}.notin"
                                                            id="${maverick.id}_notin"
                                                            onchange="javascript:result('${maverick.id}');"
                                                            autocomplete="off" value="notin">

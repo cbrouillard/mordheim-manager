@@ -131,7 +131,7 @@
 
                                 <div class="btn-group" data-toggle="buttons">
                                     <label class="btn btn-default">
-                                        <input type="checkbox" name="${hero.id}.state"
+                                        <input type="checkbox" name="${hero.id}.notin"
                                                id="${hero.id}_notin"
                                                onchange="javascript:result('${hero.id}');"
                                                autocomplete="off" value="notin">

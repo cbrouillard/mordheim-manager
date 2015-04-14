@@ -187,7 +187,7 @@
                                 <span class="label label-danger"><g:message code="dead.hero"/></span>
                                 <g:set var="xp" value="${new Integer(0)}"/>
                             </g:if>
-                            <g:if test="${infos.state == "notin"}">
+                            <g:if test="${infos.notin}">
                                 <span class="label label-warning"><g:message code="notin.hero"/></span>
                                 <g:set var="xp" value="${new Integer(0)}"/>
                             </g:if>
@@ -236,7 +236,7 @@
                                     <span class="label label-danger"><g:message code="dead.hero"/></span>
                                     <g:set var="xp" value="${new Integer(0)}"/>
                                 </g:if>
-                                <g:if test="${infos.state == "notin"}">
+                                <g:if test="${infos.notin}">
                                     <span class="label label-warning"><g:message code="notin.hero"/></span>
                                     <g:set var="xp" value="${new Integer(0)}"/>
                                 </g:if>

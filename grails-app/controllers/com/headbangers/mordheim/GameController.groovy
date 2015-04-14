@@ -322,39 +322,38 @@ class GameController {
         bandInstance.heroes.each { hero ->
             def infos = heroesData[hero.id]
 
-            if (infos.state == "death") {
-                // dead. so bad.
-                toDelete.add(hero)
-            } else if (infos.state == "notin") {
+            if (!infos.notin) {
 
-                //nothing.
+                if (infos.state == "death") {
+                    // dead. so bad.
+                    toDelete.add(hero)
+                } else {
+                    // alive
+                    def earnedXp = xpRef
 
-            } else {
-                // alive
-                def earnedXp = xpRef
+                    // kills
+                    try {
+                        def kill = Integer.parseInt(infos.kill)
+                        earnedXp += kill > 0 ? kill : 0
+                    } catch (NumberFormatException e) {
+                        // osef
+                    }
 
-                // kills
-                try {
-                    def kill = Integer.parseInt(infos.kill)
-                    earnedXp += kill > 0 ? kill : 0
-                } catch (NumberFormatException e) {
-                    // osef
+                    // chief ?
+                    earnedXp += infos.victoriouschief ? 1 : 0
+
+                    // bonus
+                    try {
+                        def bonus = Integer.parseInt(infos.bonus)
+                        earnedXp += bonus
+                    } catch (NumberFormatException e) {
+                        // osef
+                    }
+
+                    // bind data
+                    bindData(hero, infos, [include: ["injuries", "competences"]])
+                    hero.earnedXp += earnedXp
                 }
-
-                // chief ?
-                earnedXp += infos.victoriouschief ? 1 : 0
-
-                // bonus
-                try {
-                    def bonus = Integer.parseInt(infos.bonus)
-                    earnedXp += bonus
-                } catch (NumberFormatException e) {
-                    // osef
-                }
-
-                // bind data
-                bindData(hero, infos, [include: ["injuries", "competences"]])
-                hero.earnedXp += earnedXp
             }
         }
 
@@ -373,27 +372,25 @@ class GameController {
         bandInstance.mavericks.each { maverick ->
             def infos = mavericksData[maverick.id]
 
-            if (infos.state == "death") {
-                // dead. so bad.
-                toDelete.add(maverick)
-            } else if (infos.state == "notin") {
+            if (!infos.notin) {
+                if (infos.state == "death") {
+                    // dead. so bad.
+                    toDelete.add(maverick)
+                } else {
+                    def earnedXp = xpRef
 
-                //nothing.
+                    // bonus
+                    try {
+                        def bonus = Integer.parseInt(infos.bonus)
+                        earnedXp += bonus
+                    } catch (NumberFormatException e) {
+                        // osef
+                    }
 
-            } else {
-                def earnedXp = xpRef
-
-                // bonus
-                try {
-                    def bonus = Integer.parseInt(infos.bonus)
-                    earnedXp += bonus
-                } catch (NumberFormatException e) {
-                    // osef
+                    // bind data
+                    bindData(maverick, infos, [include: ["injuries", "competences"]])
+                    maverick.earnedXp += earnedXp
                 }
-
-                // bind data
-                bindData(maverick, infos, [include: ["injuries", "competences"]])
-                maverick.earnedXp += earnedXp
             }
         }
 
