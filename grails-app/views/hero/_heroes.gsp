@@ -26,19 +26,15 @@
 
                 <g:if test="${!anonymous}">
                     <div class="col-sm-8 text-right">
-                        <g:form url="[resource: hero, action: 'delete']" method="DELETE"
-                                class="form-inline">
-                            <g:hiddenField name="band" value="${bandInstance.id}"/>
-                            <div class="btn-group">
-                                <g:link class="btn btn-success" controller="hero" action="edit" id="${hero.id}">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                </g:link>
-                                <button type="submit" class="btn btn-danger"
-                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                            </div>
-                        </g:form>
+                        <div class="btn-group">
+                            <g:link class="btn btn-success" controller="hero" action="edit" id="${hero.id}">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </g:link>
+                            <a class="btn btn-danger" data-toggle="modal" data-target="#globalModal"
+                               href="${createLink(controller: 'hero', action: 'askdelete', id: hero.id)}">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </div>
                     </div>
                 </g:if>
             </div>

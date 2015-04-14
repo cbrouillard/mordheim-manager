@@ -80,6 +80,17 @@ class WrenchmenController {
         }
     }
 
+    @Secured(['ROLE_USER'])
+    def askpromote() {
+        def wrench = Wrenchmen.get(params.id)
+        if (!wrench) {
+            notFound()
+            return
+        }
+
+        render(template: 'askpromote', model: [wrench: wrench])
+    }
+
     @Transactional
     @Secured(['ROLE_USER'])
     def promote() {
@@ -114,7 +125,7 @@ class WrenchmenController {
         hero.I = wrench.I
         hero.CD = wrench.CD
 
-        hero.save(flush:true)
+        hero.save(flush: true)
         flash.message = message(code: 'wrench.has.been.promoted', args: [hero.name])
 
         if (wrench.number == 1) {
@@ -126,6 +137,16 @@ class WrenchmenController {
 
         redirect(controller: 'band', action: 'show', id: wrench.band.id)
         return
+    }
+
+    @Secured(['ROLE_USER'])
+    def askdelete() {
+        Wrenchmen wrench = Wrenchmen.get(params.id)
+        if (!wrench) {
+            notFound()
+            return
+        }
+        render(template: 'askdelete', model: [wrench: wrench])
     }
 
     @Transactional
@@ -188,7 +209,7 @@ class WrenchmenController {
         }
 
         wrenchmenInstance.save(flush: true)
-        redirect(controller: 'band', action: 'show', id: wrenchmenInstance.band.id, params: [tab:'wrench'])
+        redirect(controller: 'band', action: 'show', id: wrenchmenInstance.band.id, params: [tab: 'wrench'])
         return
     }
 

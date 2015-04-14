@@ -53,7 +53,8 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <g:link controller="band" action="bbcode" id="${bandInstance.id}">
+                                <g:link controller="band" action="bbcode" id="${bandInstance.id}"
+                                        data-toggle="modal" data-target="#globalModal">
                                     <span class="glyphicon glyphicon-console"></span> <g:message
                                         code="generate.bbcode"/>
                                 </g:link>
@@ -77,6 +78,7 @@
             </h1>
 
             <hr/>
+
             <div class="clearfix">&nbsp;</div>
         </div>
 
@@ -208,7 +210,6 @@
         <div class="tab-content responsive">
             <div role="tabpanel" class="tab-pane ${!activeTab ? 'active' : ''}" id="heroes">
                 <g:render template="/hero/heroes"/>
-
             </div>
 
             <div role="tabpanel" class="tab-pane ${activeTab == 'wrench' ? 'active' : ''}" id="wrenches">

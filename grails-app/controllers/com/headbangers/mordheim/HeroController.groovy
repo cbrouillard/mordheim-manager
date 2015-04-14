@@ -80,6 +80,17 @@ class HeroController {
         }
     }
 
+    @Secured(['ROLE_USER'])
+    def askdelete() {
+        Hero heroInstance = Hero.get(params.id)
+        if (!heroInstance) {
+            notFound()
+            return
+        }
+
+        render(template: 'askdelete', model: [heroInstance: heroInstance])
+    }
+
     @Transactional
     @Secured(['ROLE_USER'])
     def delete(Hero heroInstance) {

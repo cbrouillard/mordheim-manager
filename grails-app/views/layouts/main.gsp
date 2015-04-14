@@ -111,6 +111,19 @@
     <g:layoutBody/>
 </div>
 
+<div class="modal fade" id="globalModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+<jq:jquery>
+    $('body').on('hidden.bs.modal', '.modal', function () {
+        $(this).removeData('bs.modal');
+    });
+</jq:jquery>
+
+
 <footer>
     <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
         <div class="container-fluid clearfix">

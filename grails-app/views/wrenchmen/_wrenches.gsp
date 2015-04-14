@@ -26,26 +26,24 @@
 
                 <g:if test="${!anonymous}">
                     <div class="col-sm-8 text-right">
-                        <g:form url="[resource: wrench, action: 'delete']" method="DELETE"
-                                class="form-inline">
-                            <g:hiddenField name="band" value="${bandInstance.id}"/>
-                            <div class="btn-group">
-                                <g:link class="btn btn-success" controller="wrenchmen" action="edit"
-                                        id="${wrench.id}">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                </g:link>
-                                <button type="submit" class="btn btn-danger"
-                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                            </div>
-
-                            <g:link class="btn btn-warning" controller="wrenchmen" action="promote"
+                        <div class="btn-group">
+                            <g:link class="btn btn-success" controller="wrenchmen" action="edit"
                                     id="${wrench.id}">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </g:link>
+                            <a class="btn btn-danger" data-toggle="modal" data-target="#globalModal"
+                               href="${createLink(controller: 'wrenchmen', action: 'askdelete', id: wrench.id)}">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </div>
+
+                        <g:if test="${bandInstance.heroes.size() < 6}">
+                            <g:link class="btn btn-warning" controller="wrenchmen" action="askpromote"
+                                    id="${wrench.id}" data-toggle="modal" data-target="#globalModal">
                                 <span class="glyphicon glyphicon-circle-arrow-up"></span>
                                 <g:message code="wrench.promote"/>
                             </g:link>
-                        </g:form>
+                        </g:if>
                     </div>
                 </g:if>
             </div>

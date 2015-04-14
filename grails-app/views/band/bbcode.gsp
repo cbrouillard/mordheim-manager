@@ -1,36 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <meta name="layout" content="main">
+    <meta name="layout" content="popup">
 </head>
 
 <body>
 
-<div class="row-fluid">
-    <div class="col-sm-12">
-        <div class="thumbnail pull-right">
-            <g:render template="/band/image"/>
-        </div>
-
-        <div>
-
-            <h1>
-                <g:message
-                        code="band.show"/> <small>${bandInstance.name}</small>
-            </h1>
-
-            <hr/>
-        </div>
-
-        <g:if test="${flash.message}">
-            <div class="clearfix">&nbsp;</div>
-
-            <div class="alert alert-info" role="status">${flash.message}</div>
-        </g:if>
-    </div>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title"><g:message code="generate.bbcode"/></h4>
 </div>
 
-<div class="col-sm-12 col-xs-12">
+
+<div class="modal-body">
 
     <div class="panel panel-default">
         <div class="panel-heading clearfix">
@@ -43,7 +25,8 @@
                 [b]${bandInstance.name}[/b] ([i]${bandInstance.type}[/i])<br/>
                 [<g:message code="heroes"/>]---------------------------------------------------------<br/>
                 <g:each in="${bandInstance.heroes.sort({ it.dateCreated })}" var="hero">
-                    [b]${hero.name}[/b] ([i]${hero.type}[/i]) [<g:message code="band.gold" args="[hero.cost]"/>]<br/>
+                    [b]${hero.name}[/b] ([i]${hero.type}[/i]) [<g:message code="band.gold"
+                                                                          args="[hero.cost]"/>]<br/>
                     <g:if test="${hero.equipment}">- <g:message
                             code="warrior.equipment.label"/> : ${raw(hero.equipment)}<br/></g:if>
                     <g:if test="${hero.competences}">- <g:message
@@ -75,20 +58,11 @@
             </code>
 
         </div>
-
-        <div class="panel-footer clearfix">
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10 ">
-
-                    <g:link action="show" controller="band" id="${bandInstance.id}" class="btn btn-default">
-                        <span class="glyphicon glyphicon-backward"></span> ${message(code: 'back', default: 'Back')}
-                    </g:link>
-
-                </div>
-            </div>
-        </div>
     </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal"><g:message code="close"/></button>
 </div>
 </body>
 </html>

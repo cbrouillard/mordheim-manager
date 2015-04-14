@@ -80,6 +80,17 @@ class MaverickController {
         }
     }
 
+    @Secured(['ROLE_USER'])
+    def askdelete() {
+        Maverick maverick = Maverick.get(params.id)
+        if (!maverick) {
+            notFound()
+            return
+        }
+
+        render(template: 'askdelete', model: [maverick: maverick])
+    }
+
     @Transactional
     @Secured(['ROLE_USER'])
     def delete(Maverick maverickInstance) {
@@ -140,7 +151,7 @@ class MaverickController {
         }
 
         maverickInstance.save(flush: true)
-        redirect(controller: 'band', action: 'show', id: maverickInstance.band.id, params: [tab:'maverick'])
+        redirect(controller: 'band', action: 'show', id: maverickInstance.band.id, params: [tab: 'maverick'])
         return
     }
 
