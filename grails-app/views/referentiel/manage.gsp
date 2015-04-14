@@ -17,15 +17,24 @@
 
             <div class="col-sm-6 clearfix text-right">
                 <h1>
-                    <g:link class="btn btn-success" action="editrace" id="${raceInstance.id}">
-                        <span class="glyphicon glyphicon-edit"></span>
+
+                    <g:link class="btn btn-warning" action="toggleusable" id="${raceInstance.id}">
+                        <g:if test="${raceInstance.usable}">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <g:message code="usable"/>
+                        </g:if>
+                        <g:else>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            <g:message code="not.usable"/>
+                        </g:else>
                     </g:link>
 
                     <div class="btn-group">
                         <g:link class="btn btn-success" action="editrace" id="${raceInstance.id}">
                             <span class="glyphicon glyphicon-edit"></span>
                         </g:link>
-                        <g:link class="btn btn-danger" action="deleterace" id="${raceInstance.id}">
+                        <g:link class="btn btn-danger" action="askdeleterace" id="${raceInstance.id}"
+                                data-toggle="modal" data-target="#globalModal">
                             <span class="glyphicon glyphicon-remove"></span>
                         </g:link>
                     </div>

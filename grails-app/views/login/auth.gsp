@@ -17,6 +17,15 @@
     <div class="panel panel-warning">
 
         <div class="panel-heading">
+            <div class="pull-right">
+                <div class="addthis_toolbox addthis_default_style">
+                    <a class="addthis_button_facebook"></a>
+                    <a class="addthis_button_twitter"></a>
+                    <a class="addthis_button_email"></a>
+                    <a class="addthis_button_compact"></a>
+                    <a class="addthis_counter addthis_bubble_style"></a>
+                </div>
+            </div>
             <h4><g:message code="login"/></h4>
         </div>
 

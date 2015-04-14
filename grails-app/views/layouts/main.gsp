@@ -26,6 +26,8 @@
             language: '${message(code:'tinymce.lang', default: 'en_GB')}'});
     </script>
     <link rel="stylesheet" href="${resource(dir: 'css/fa/css', file: 'font-awesome.min.css')}"/>
+    <script type="text/javascript"
+            src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-515ac4271be2a5ca"></script>
 
     <g:layoutHead/>
 </head>

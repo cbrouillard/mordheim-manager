@@ -104,6 +104,17 @@
                     </div>
                 </div>
             </g:if>
+            <g:else>
+                <div class="pull-right">
+                    <div class="addthis_toolbox addthis_default_style">
+                        <a class="addthis_button_facebook"></a>
+                        <a class="addthis_button_twitter"></a>
+                        <a class="addthis_button_email"></a>
+                        <a class="addthis_button_compact"></a>
+                        <a class="addthis_counter addthis_bubble_style"></a>
+                    </div>
+                </div>
+            </g:else>
             <h5><g:message code="band.infos"/></h5>
 
         </div>

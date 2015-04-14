@@ -198,4 +198,40 @@ class ReferentielController {
         redirect(action: 'managehero', id: params.race)
         return
     }
+
+    def askdeleterace() {
+        Race race = Race.get(params.id)
+        if (!race) {
+            redirect(action: 'index')
+            return
+        }
+
+        render(template: 'askdeleterace', model: [race: race])
+    }
+
+    @Transactional
+    def deleterace (){
+        Race race = Race.get(params.id)
+        if (!race) {
+            redirect(action: 'index')
+            return
+        }
+
+        race.delete(flush: true)
+        flash.message = "Race effacée."
+        redirect(action: 'index')
+    }
+
+    @Transactional
+    def toggleusable() {
+        Race race = Race.get(params.id)
+        if (!race) {
+            redirect(action: 'index')
+            return
+        }
+
+        race.usable = !race.usable
+        race.save(flush: true)
+        redirect(action: 'manage', id: race.id)
+    }
 }
