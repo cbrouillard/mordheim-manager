@@ -1,5 +1,7 @@
 package com.headbangers.mordheim
 
+import com.headbangers.mordheim.reference.Race
+import com.headbangers.mordheim.reference.RefHero
 import com.mordheim.helper.ImageHelper
 import grails.plugin.springsecurity.annotation.Secured
 
@@ -16,7 +18,35 @@ class HeroController {
     @Secured(['ROLE_USER'])
     def create() {
         Hero hero = new Hero(params)
+        hero.band = Band.findByIdAndOwner(params.band, springSecurityService.currentUser)
         [bandId: params.band, heroInstance: hero]
+    }
+
+    @Secured(['ROLE_USER'])
+    def loadhero (){
+        RefHero refHero = RefHero.get(params.hero)
+        if (refHero){
+            Hero hero = new Hero()
+
+            hero.type = refHero.type
+            hero.M = refHero.M
+            hero.CC = refHero.CC
+            hero.CT = refHero.CT
+            hero.F = refHero.F
+            hero.E = refHero.E
+            hero.PV = refHero.PV
+            hero.I = refHero.I
+            hero.A = refHero.A
+            hero.CD = refHero.CD
+            hero.equipment = refHero.equipment
+            hero.competences = refHero.equipment
+            hero.experience = refHero.startingExperience
+            hero.cost = refHero.costWithoutEquipment
+
+            render(template: "form", model: [heroInstance: hero])
+        } else {
+            render(template: "form", model: [heroInstance: new Hero()])
+        }
     }
 
     @Transactional

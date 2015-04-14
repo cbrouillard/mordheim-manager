@@ -11,11 +11,18 @@
     <div class="col-sm-12">
 
         <div class="pull-right">
-            <g:link action="changephoto" id="${bandInstance.id}">
-                <div class="btn btn-default">
+            <g:if test="${!anonymous}">
+                <g:link action="changephoto" id="${bandInstance.id}">
+                    <div class="btn btn-default">
+                        <g:render template="/band/image"/>
+                    </div>
+                </g:link>
+            </g:if>
+            <g:else>
+                <div class="thumbnail pull-right">
                     <g:render template="/band/image"/>
                 </div>
-            </g:link>
+            </g:else>
         </div>
 
 
@@ -277,17 +284,6 @@
 
 <jq:jquery>
     fakewaffle.responsiveTabs(['xs']);
-    $('[data-clampedwidth]').each(function () {
-    var elem = $(this);
-    var parentPanel = elem.data('clampedwidth');
-    var resizeFn = function () {
-        var sideBarNavWidth = $(parentPanel).width() - parseInt(elem.css('paddingLeft')) - parseInt(elem.css('paddingRight')) - parseInt(elem.css('marginLeft')) - parseInt(elem.css('marginRight')) - parseInt(elem.css('borderLeftWidth')) - parseInt(elem.css('borderRightWidth'));
-        elem.css('width', sideBarNavWidth);
-    };
-
-    resizeFn();
-    $(window).resize(resizeFn);
-    });
 </jq:jquery>
 
 </body>

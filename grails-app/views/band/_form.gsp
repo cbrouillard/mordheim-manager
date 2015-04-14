@@ -17,6 +17,10 @@
     </div>
 </div>
 
+<jq:jquery>
+    $('#name').focus();
+</jq:jquery>
+
 <div class="form-group ${hasErrors(bean: bandInstance, field: 'type', 'has-error')}">
 
     <label for="type" class="col-sm-2 control-label"><g:message code="band.type.label"

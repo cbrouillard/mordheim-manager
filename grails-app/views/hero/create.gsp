@@ -35,10 +35,43 @@
 
     <g:form url="[resource: heroInstance, action: 'save']" class="form-horizontal" data-toggle="validator">
         <div class="panel panel-default">
+            <g:if test="${heroInstance.band.race}">
+                <div class="panel-heading">
+                    <div class="form-group">
+
+                        <label for="selector" class="col-sm-2 control-label"><g:message
+                                code="referentiel.selector.hero"/></label>
+
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-text-background"></span></span>
+                                <g:select class="form-control"
+                                          name="selector"
+                                          from="${heroInstance.band.race.heroes}"
+                                          optionKey="id"
+                                          optionValue="type"
+                                          noSelection="['NO': '']"
+                                          onchange="${remoteFunction(action: 'loadhero',
+                                                  update: [success: 'formContainer'],
+                                                  params: '\'hero=\' + this.value')}"/>
+                            </div>
+
+                            <div class="help-block with-errors">
+                                <g:message code="referentiel.selector.hint"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </g:if>
+
+
             <div class="panel-body">
 
                 <fieldset class="form">
-                    <g:render template="form"/>
+                    <div id="formContainer">
+                        <g:render template="form"/>
+                    </div>
                     <g:hiddenField name="band" value="${bandId}"/>
                 </fieldset>
 
