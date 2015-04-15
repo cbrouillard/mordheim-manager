@@ -46,7 +46,7 @@
         <div class="table-responsive">
             <table class="table">
                 <g:each in="${race.heroes.sort({ it.type })}" var="hero">
-                    <tr>
+                    <tr class="${hero.id == refHeroInstance.id ? 'warning' : ''}">
                         <td><strong>${hero.type}</strong></td>
                         <td class="text-right">
                             <div class="btn-group">

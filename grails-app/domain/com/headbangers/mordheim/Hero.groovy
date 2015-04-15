@@ -1,5 +1,7 @@
 package com.headbangers.mordheim
 
+import com.headbangers.mordheim.reference.RefHero
+
 class Hero {
 
     static belongsTo = [Band]
@@ -33,6 +35,8 @@ class Hero {
 
     byte[] photo
 
+    RefHero refHero
+
     static constraints = {
         note nullable: true, blank: true, widget: 'textarea'
         competences nullable: true, blank: true, widget: 'textarea'
@@ -44,6 +48,7 @@ class Hero {
         name nullable: false, blank: false
         photo nullable: true
         cost nullable: false, defaultValue: 0
+        refHero nullable:true
     }
 
     static mapping = {

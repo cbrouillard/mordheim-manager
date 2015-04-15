@@ -3,6 +3,7 @@ package com.headbangers.mordheim
 import com.headbangers.mordheim.reference.Race
 import com.headbangers.mordheim.reference.RefHero
 import com.mordheim.helper.ImageHelper
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -24,28 +25,11 @@ class HeroController {
 
     @Secured(['ROLE_USER'])
     def loadhero (){
-        RefHero refHero = RefHero.get(params.hero)
+        RefHero refHero = RefHero.get(params.id)
         if (refHero){
-            Hero hero = new Hero()
-
-            hero.type = refHero.type
-            hero.M = refHero.M
-            hero.CC = refHero.CC
-            hero.CT = refHero.CT
-            hero.F = refHero.F
-            hero.E = refHero.E
-            hero.PV = refHero.PV
-            hero.I = refHero.I
-            hero.A = refHero.A
-            hero.CD = refHero.CD
-            hero.equipment = refHero.equipment
-            hero.competences = refHero.equipment
-            hero.experience = refHero.startingExperience
-            hero.cost = refHero.costWithoutEquipment
-
-            render(template: "form", model: [heroInstance: hero])
+            render refHero as JSON
         } else {
-            render(template: "form", model: [heroInstance: new Hero()])
+            render new RefHero() as JSON
         }
     }
 
@@ -61,6 +45,11 @@ class HeroController {
         if (band == null) {
             redirect action: 'index', controller: 'band'
             return
+        }
+
+        if (params.selector && !params.selector.equals("NO")){
+            RefHero ref = RefHero.get(params.selector)
+            heroInstance.refHero = ref
         }
 
         if (heroInstance.hasErrors()) {

@@ -234,6 +234,7 @@ class ReferentielController {
             return
         }
 
+        race.specialRules.clear()
         race.delete(flush: true)
         flash.message = "Race effacée."
         redirect(action: 'index')

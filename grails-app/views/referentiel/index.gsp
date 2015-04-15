@@ -57,46 +57,49 @@
     </div>
 </div>
 
-<div class="col-sm-4 col-xs-12">
-    <div class="panel panel-default">
-        <div class="panel-heading clearfix">
-            <div class="btn-group pull-right" role="group">
-                <g:link controller="referentiel" action="createequipment" class="btn btn-success">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </g:link>
-            </div>
-            <h5><g:message code="referentiel.equipments"/></h5>
-        </div>
+<div class="col-sm-8 col-xs-12">
 
-        <div class="table-responsive">
-            <table class="table">
+    <div role="tabpanel">
+
+        <ul class="nav nav-tabs responsive" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#equipments" role="tab" data-toggle="tab">
+                    <g:message code="referentiel.equipments"/>
+                    <button class="btn btn-success btn-xs"
+                            onclick="document.location = '${createLink(controller: 'referentiel', action:'manageequipment')}'">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </a>
+            </li>
+
+            <li role="presentation">
+                <a href="#competences" role="tab" data-toggle="tab">
+                    <g:message code="referentiel.competences"/>
+                    <button class="btn btn-success btn-xs"
+                            onclick="document.location = '${createLink(controller: 'referentiel', action:'managecompetences')}'">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="tab-content responsive">
+            <div role="tabpanel" class="tab-pane active" id="equipments">EQUIPEMENTS
                 <g:each in="${equipments}" var="equipment">
 
                 </g:each>
-            </table>
-        </div>
-    </div>
-</div>
-
-<div class="col-sm-4 col-xs-12">
-    <div class="panel panel-default">
-        <div class="panel-heading clearfix">
-            <div class="btn-group pull-right" role="group">
-                <g:link controller="referentiel" action="createcompetence" class="btn btn-success">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </g:link>
             </div>
-            <h5><g:message code="referentiel.competences"/></h5>
-        </div>
 
-        <div class="table-responsive">
-            <table class="table">
+            <div role="tabpanel" class="tab-pane" id="competences">COMPETENCES
                 <g:each in="${competences}" var="competence">
 
                 </g:each>
-            </table>
+            </div>
         </div>
+
     </div>
+
 </div>
 
 </body>

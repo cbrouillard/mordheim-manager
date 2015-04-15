@@ -20,18 +20,20 @@
 
 <div class="form-group ${hasErrors(bean: refWrenchInstance, field: 'maxInBand', 'has-error')}">
 
-    <label for="maxInBand" class="col-sm-2 control-label"><g:message code="race.maxInBand"/> *</label>
+    <label for="maxInBand" class="col-sm-2 control-label"><g:message code="race.maxInBand"/></label>
 
     <div class="col-sm-10">
         <div class="input-group">
             <span class="input-group-addon"><span
                     class="glyphicon glyphicon-info-sign"></span></span>
-            <g:field type="number" name="maxInBand" required="" value="${refWrenchInstance?.maxInBand}"
+            <g:field type="number" name="maxInBand" value="${refWrenchInstance?.maxInBand}"
                      class="form-control"
                      min="0"/>
         </div>
 
-        <div class="help-block with-errors"></div>
+        <div class="help-block with-errors">
+            <g:message code="race.wrench.max.leave.empty.infinite"/>
+        </div>
     </div>
 </div>
 
