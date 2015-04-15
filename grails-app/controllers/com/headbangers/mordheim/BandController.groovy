@@ -3,6 +3,7 @@ package com.headbangers.mordheim
 import com.headbangers.mordheim.reference.Race
 import com.headbangers.mordheim.security.Person
 import com.mordheim.helper.ImageHelper
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -160,14 +161,13 @@ class BandController {
 
     @Secured(['ROLE_USER'])
     def loadrace (){
-        Race race = Race.get(params.race)
+        Race race = Race.get(params.id)
         if (race){
-            Band newBand = new Band()
-            newBand.type = race.name
-            render(template: "form", model: [bandInstance: newBand])
-        } else {
-            render(template: "form", model: [bandInstance: new Band()])
+            render race as JSON
+            return
         }
+
+        render new Race() as JSON
     }
 
     @Transactional

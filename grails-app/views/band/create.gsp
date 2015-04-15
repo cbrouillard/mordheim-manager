@@ -2,6 +2,17 @@
 <html>
 <head>
     <meta name="layout" content="main">
+    <script type="application/javascript">
+        var loadrace = function (raceId) {
+            $.get('${createLink(action:'loadrace')}' + "/" + raceId, function (data) {
+
+                console.log(data)
+                $("#type").val(data.name);
+
+            });
+
+        }
+    </script>
 </head>
 
 <body>
@@ -54,9 +65,7 @@
                                           optionKey="id"
                                           optionValue="name"
                                           noSelection="['NO': '']"
-                                          onchange="${remoteFunction(action: 'loadrace',
-                                                  update: [success: 'formContainer'],
-                                                  params: '\'race=\' + this.value')}"/>
+                                          onchange="javascript:loadrace(this.value);"/>
                             </div>
 
                             <div class="help-block with-errors">
