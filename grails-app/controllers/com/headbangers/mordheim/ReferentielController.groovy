@@ -27,6 +27,22 @@ class ReferentielController {
         respond race
     }
 
+    def editrace() {
+        Race race = Race.get(params.id)
+        render(view: 'editrace', model: [raceInstance: race])
+    }
+
+    @Transactional
+    def updaterace(Race raceInstance) {
+        if (raceInstance.hasErrors()) {
+            respond raceInstance.errors, view: 'editrace'
+            return
+        }
+
+        raceInstance.save(flush: true)
+        redirect(action: 'manage', id: raceInstance.id)
+    }
+
     @Transactional
     def saverace(Race raceInstance) {
 
@@ -210,7 +226,7 @@ class ReferentielController {
     }
 
     @Transactional
-    def deleterace (){
+    def deleterace() {
         Race race = Race.get(params.id)
         if (!race) {
             redirect(action: 'index')
