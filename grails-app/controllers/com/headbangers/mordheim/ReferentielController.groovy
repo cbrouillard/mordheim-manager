@@ -4,6 +4,7 @@ import com.headbangers.mordheim.reference.Race
 import com.headbangers.mordheim.reference.RefCompetence
 import com.headbangers.mordheim.reference.RefEquipment
 import com.headbangers.mordheim.reference.RefHero
+import com.headbangers.mordheim.reference.RefSpecialRule
 import com.headbangers.mordheim.reference.RefWrench
 import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
@@ -250,4 +251,80 @@ class ReferentielController {
         race.save(flush: true)
         redirect(action: 'manage', id: race.id)
     }
+
+    def manageracerule(){
+        Race race = Race.get(params.id)
+        if (!race) {
+            redirect(action: 'index')
+            return
+        }
+        RefSpecialRule refSpecialRule = new RefSpecialRule()
+        respond refSpecialRule, model: [race: race, toAction: 'saveracerule']
+    }
+
+
+    @Transactional
+    def saveracerule(RefSpecialRule rule){
+        def race = Race.get(params.race)
+        if (!race) {
+            redirect(action: 'index')
+            return
+        }
+
+
+        if (rule.hasErrors()) {
+            respond rule.errors, view: 'manageracerule', model: [race: race, toAction: 'saveracerule']
+            return
+        }
+
+        race.addToSpecialRules(rule);
+        race.save(flush: true)
+        redirect(action: 'manageracerule', id: race.id)
+        return
+    }
+
+    def editracerule (){
+        def rule = RefSpecialRule.get(params.id)
+        def race = Race.get(params.race)
+        if (!rule || !race) {
+            redirect(action: 'index')
+            return
+        }
+
+        render(view: 'manageracerule', model: [refSpecialRuleInstance: rule, race: race, toAction: "updateracerule"])
+    }
+
+    @Transactional
+    def updateracerule(RefSpecialRule rule){
+
+        def race = Race.get(params.race)
+        if (!race) {
+            redirect(action: 'index')
+            return
+        }
+
+        if (rule.hasErrors()) {
+            respond rule.errors, view: 'manageracerule', model: [race: race, toAction: 'updateracerule']
+            return
+        }
+
+        rule.save(flush: true)
+        redirect(action: 'manageracerule', id: race.id)
+        return
+    }
+
+    @Transactional
+    def deleteracerule (){
+        def rule = RefSpecialRule.get(params.id)
+        def race = Race.get(params.race)
+        if (!rule || !race) {
+            redirect(action: 'index')
+            return
+        }
+
+        race.removeFromSpecialRules(rule)
+        rule.delete(flush: true)
+        render(view: 'manageracerule', model: [refSpecialRuleInstance: new RefSpecialRule(), race: race, toAction: "saveracerule"])
+    }
+
 }

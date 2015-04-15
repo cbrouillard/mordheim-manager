@@ -58,9 +58,9 @@
     <div class="panel panel-default">
         <div class="panel-heading clearfix">
             <div class="btn-group pull-right" role="group">
-                <g:link controller="referentiel" action="createracerule" class="btn btn-success"
+                <g:link controller="referentiel" action="manageracerule" class="btn btn-success"
                         id="${raceInstance.id}">
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-cog"></span>
                 </g:link>
             </div>
             <h5>
