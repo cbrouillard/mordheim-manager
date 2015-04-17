@@ -36,7 +36,7 @@
 <div class="col-sm-3 col-xs-12">
     <div class="panel panel-default">
         <div class="panel-heading clearfix">
-            <g:link controller="referentiel" action="manage" id="${race.id}" class="btn btn-default pull-right">
+            <g:link controller="referentiel" action="manage" id="${race.id}" class="btn btn-default pull-right"  params="[tab:'wrenches']">
                 <span class="glyphicon glyphicon-backward"></span> ${race.name}
             </g:link>
 

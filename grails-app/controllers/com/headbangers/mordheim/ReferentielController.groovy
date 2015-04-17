@@ -65,7 +65,7 @@ class ReferentielController {
 
     def manage() {
         def race = Race.get(params.id)
-        [raceInstance: race]
+        [raceInstance: race, tab:params.tab]
     }
 
     // WRENCH
