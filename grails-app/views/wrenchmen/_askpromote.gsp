@@ -18,6 +18,9 @@
         <g:if test="${wrench.number > 1}">
             <li><g:message code="new.number" args="[wrench.number, wrench.number - 1]"/></li>
         </g:if>
+        <g:else>
+            <li><g:message code="new.hero.delete.group"/></li>
+        </g:else>
         <li><g:message code="new.hero"/></li>
     </ul>
 

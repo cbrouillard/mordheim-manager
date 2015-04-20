@@ -44,21 +44,22 @@
 
         <div class="panel-body">
 
-            <g:set var="counter" value="${0}"/>
             <g:each in="${bandInstanceList}" var="band" status="index">
-                <g:if test="${counter == 0}">
-                    <div class="row-fluid">
-                </g:if>
-                <div class="col-lg-2 col-md-4 col-sm-5">
+                <div class="col-lg-3 col-md-5 col-sm-5">
                     <div class="thumbnail panel-primary band-presenter">
                         <g:render template="/band/image" model="[bandInstance: band]"/>
                         <div class="caption text-center">
                             <ul class="list-group">
-                                <li class="list-group-item list-group-item-info"><strong>${band.name}</strong></li>
+                                <li class="list-group-item list-group-item-info"><strong>${band.name}</strong>
+                                    <g:link action="band" controller="public" id="${band.id}" absolute="true">
+                                        <span class="glyphicon glyphicon-link"></span>
+                                    </g:link>
+                                </li>
                                 <li class="list-group-item">${band.type}</li>
-                                <li class="list-group-item"><g:message code="band.gold" args="[band.gold]"/></li>
-                                <li class="list-group-item"><g:message code="band.magical.stones"
-                                                                       args="[band.magicalStones]"/></li>
+                                <li class="list-group-item"><g:message code="band.nbGame" args="[band.nbGame]"/></li>
+                                <li class="list-group-item"><g:message code="band.gold" args="[band.gold]"/><br/>
+                                    <g:message code="band.magical.stones"
+                                               args="[band.magicalStones]"/></li>
                                 <li class="list-group-item">
                                     <div class="btn-group">
                                         <g:link controller="band" action="show" id="${band.id}"
@@ -73,14 +74,6 @@
                     </div>
 
                 </div>
-
-                <g:if test="${counter == 0}">
-                    </div>
-                </g:if>
-                <g:set var="counter" value="${counter + 1}"/>
-                <g:if test="${counter >= 6}">
-                    <g:set var="counter" value="${0}"/>
-                </g:if>
             </g:each>
         </div>
 
