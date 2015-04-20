@@ -19,9 +19,9 @@ body {
     padding-bottom: 70px;
 }
 
-.band-infos-affixed.affix{
+.band-infos-affixed.affix {
     position: fixed;
-    top:20px;
+    top: 20px;
 }
 
 @media screen and (max-width: 480px) {
@@ -35,11 +35,19 @@ body {
     input.shortonphone {
         padding: 0px !important;
         text-align: center !important;
-        width:50px !important;
+        width: 50px !important;
     }
 
-    .reduce-on-little-screen{
+    .reduce-on-little-screen {
         text-overflow: ellipsis;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .band-infos-affixed.affix {
+        position: static !important;
+        top: 0px;
+        width: auto;
     }
 }
 
@@ -61,12 +69,11 @@ img.imgwarrior:hover {
     border: 2px solid #ccc;
 }
 
-
-.photo-changer{
+.photo-changer {
     display: none;
 }
 
-.band-presenter:hover{
-    background:#eee;
+.band-presenter:hover {
+    background: #eee;
     border-color: #bbb;
 }
