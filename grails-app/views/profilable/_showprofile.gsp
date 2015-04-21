@@ -16,7 +16,7 @@
         <tbody>
         <tr>
             <td class="text-center"><span
-                    class="label label-${warrior?.M <= 2 ? "danger" : (warrior?.M <= 4 ? 'warning' : 'success')}">${warrior?.M}</span>
+                    class="label label-${warrior?.M <= 2 ? "danger" : (warrior?.M <= 4 ? 'warning' : 'success')}">${warrior?.M != null ? warrior.M :"&nbsp;".encodeAsRaw()}</span>
             </td>
             <td class="text-center"><span
                     class="label label-${warrior?.CC <= 2 ? "danger" : (warrior?.CC <= 3 ? 'warning' : 'success')}">${warrior?.CC}</span>

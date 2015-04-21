@@ -155,7 +155,7 @@ class MaverickController {
         return
     }
 
-    @Secured(['ROLE_USER'])
+    // anonyme
     def photo() {
         def maverickInstance = Maverick.get(params.id)
         if (!maverickInstance) {

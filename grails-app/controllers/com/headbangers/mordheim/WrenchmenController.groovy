@@ -213,7 +213,7 @@ class WrenchmenController {
         return
     }
 
-    @Secured(['ROLE_USER'])
+    // anonyme
     def photo() {
         def wrenchmenInstance = Wrenchmen.get(params.id)
         if (!wrenchmenInstance) {

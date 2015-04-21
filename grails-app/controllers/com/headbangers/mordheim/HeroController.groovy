@@ -174,7 +174,7 @@ class HeroController {
         return
     }
 
-    @Secured(['ROLE_USER'])
+    // anonyme
     def photo() {
         def heroInstance = Hero.get(params.id)
         if (!heroInstance) {

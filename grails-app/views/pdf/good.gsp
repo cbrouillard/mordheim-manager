@@ -89,30 +89,34 @@
 <!-- PROFIL HOMME DE MAIN -->
 <g:set var="top" value="${new java.lang.Integer(480)}"/>
 <g:set var="left" value="${new java.lang.Integer(45)}"/>
-<g:each in="${band.wrenches?.sort { it.dateCreated }}" var="wrench">
+<g:set var="nb" value="${new Integer(0)}"/>
+<g:set var="wrenches" value="${band.wrenches.sort({ it.dateCreated })}"/>
+<g:while test="${nb < 6}">
+    <g:set var="wrench" value="${wrenches.getAt(nb)}"/>
+
     <div class="pos" id="23:228" style="top:${top};left:${left};width: 385px;">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.name" args="[wrench.name]"/></span>
+            <g:message code="warband.warrior.name" args="[wrench?.name ?: '']"/></span>
     </div>
 
     <div class="pos" id="221:228" style="top:${top};left:${left + 405};width: 380px;">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.equipment" args="[raw(wrench.equipment ?: '')]"/></span>
+            <g:message code="warband.warrior.equipment" args="[raw(wrench?.equipment ?: '')]"/></span>
     </div>
 
     <div class="pos" id="404:228" style="top:${top};left:${left + 800};width: 355px;">
         <span id="9.3" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.specialrules" args="[raw(wrench.specialRules ?: '')]"/></span>
+            <g:message code="warband.warrior.specialrules" args="[raw(wrench?.specialRules ?: '')]"/></span>
     </div>
 
     <div class="pos" id="23:243" style="top:${top + 35};left:${left};width: 125px;">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.number" args="[wrench.number]"/></span>
+            <g:message code="warband.warrior.number" args="[wrench?.number ?: '']"/></span>
     </div>
 
     <div class="pos" id="88:243" style="top:${top + 35};left:${left + 140};width: 250px;">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.type" args="[wrench.type]"/></span>
+            <g:message code="warband.warrior.type" args="[wrench?.type ?: '']"/></span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 90};left:${left + 19}">
@@ -122,7 +126,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 123};left:${left + 19}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${wrench.M}</span>
+            ${wrench?.M}</span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 90};left:${left + 56}">
@@ -132,7 +136,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 123};left:${left + 60}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${wrench.CC}</span>
+            ${wrench?.CC}</span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 90};left:${left + 100}">
@@ -142,7 +146,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 123};left:${left + 104}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${wrench.CT}</span>
+            ${wrench?.CT}</span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 90};left:${left + 148}">
@@ -152,7 +156,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 123};left:${left + 148}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${wrench.F}</span>
+            ${wrench?.F}</span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 90};left:${left + 190}">
@@ -162,7 +166,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 123};left:${left + 190}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${wrench.E}</span>
+            ${wrench?.E}</span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 90};left:${left + 230}">
@@ -172,7 +176,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 123};left:${left + 234}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${wrench.PV}</span>
+            ${wrench?.PV}</span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 90};left:${left + 280}">
@@ -182,7 +186,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 123};left:${left + 278}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${wrench.I}</span>
+            ${wrench?.I}</span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 90};left:${left + 322}">
@@ -192,7 +196,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 123};left:${left + 322}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${wrench.A}</span>
+            ${wrench?.A}</span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 90};left:${left + 359}">
@@ -202,12 +206,12 @@
 
     <div class="pos" id="28:270" style="top:${top + 123};left:${left + 363}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${wrench.CD}</span>
+            ${wrench?.CD}</span>
     </div>
 
     <div class="pos" id="219:288" style="top:${top + 132};left:${left + 485}">
         <span id="8.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.experience" args="[wrench.fullXp]"/></span>
+            <g:message code="warband.warrior.experience" args="[wrench?.fullXp != null ? wrench.fullXp : '__']"/></span>
     </div>
 
     <!-- XP &#x22A0; -->
@@ -222,7 +226,7 @@
             <g:else>
                 <span id="8.8" style=" font-family:Arial; font-size:29px; color: #892a1a24">
             </g:else>
-            <g:if test="${wrench.fullXp >= cpt}">
+            <g:if test="${wrench?.fullXp >= cpt}">
                 &#x25A3;
             </g:if>
             <g:else>
@@ -236,8 +240,8 @@
 
 
     <g:set var="top" value="${top + 206}"/>
-</g:each>
-
+    <% nb++ %>
+</g:while>
 
 <div class="pos" id="0:0" style="top:1754">
     <img name="_842:596" src="${resource(dir: 'images', file: 'page_002.jpg', absolute: true)}" border="0"/></div>
@@ -251,30 +255,34 @@
 <!-- PROFIL HERO -->
 <g:set var="top" value="${new java.lang.Integer(1908)}"/>
 <g:set var="left" value="${new java.lang.Integer(45)}"/>
-<g:each in="${band.heroes?.sort({ it.dateCreated })}" var="hero">
+<g:set var="nb" value="${new Integer(0)}"/>
+<g:set var="heroes" value="${band.heroes.sort({ it.dateCreated })}"/>
+<g:while test="${nb < 6}">
+    <g:set var="hero" value="${heroes.getAt(nb)}"/>
+
     <div class="pos" id="23:911" style="top:${top};left:${left};width: 385px;">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.name" args="[hero.name]"/></span>
+            <g:message code="warband.warrior.name" args="[hero?.name ?: '']"/></span>
     </div>
 
     <div class="pos" id="221:912" style="top:${top};left:${left + 405};width: 225px;">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24;">
-            <g:message code="warband.warrior.equipment" args="[raw(hero.equipment ?: '')]"/></span>
+            <g:message code="warband.warrior.equipment" args="[raw(hero?.equipment ?: '')]"/></span>
     </div>
 
     <div class="pos" id="404:912" style="top:${top};left:${left + 645};width: 270px;">
         <span id="9.4" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.competences" args="[raw(hero.competences ?: '')]"/></span>
+            <g:message code="warband.warrior.competences" args="[raw(hero?.competences ?: '')]"/></span>
     </div>
 
     <div class="pos" id="404:912" style="top:${top};left:${left + 930};width: 220px;">
         <span id="9.4" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.injuries" args="[raw(hero.injuries ?: '')]"/></span>
+            <g:message code="warband.warrior.injuries" args="[raw(hero?.injuries ?: '')]"/></span>
     </div>
 
     <div class="pos" id="23:928" style="top:${top + 35};left:${left};width: 385px;">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.type" args="[hero.type]"/></span>
+            <g:message code="warband.warrior.type" args="[hero?.type ?: '']"/></span>
     </div>
 
     <div class="pos" id="28:951" style="top:${top + 85};left:${left + 19}">
@@ -284,7 +292,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 112};left:${left + 19}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${hero.M}</span>
+            ${hero?.M}</span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 85};left:${left + 56}">
@@ -294,7 +302,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 112};left:${left + 61}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${hero.CC}</span>
+            ${hero?.CC}</span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 85};left:${left + 100}">
@@ -304,7 +312,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 112};left:${left + 106}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${hero.CT}</span>
+            ${hero?.CT}</span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 85};left:${left + 148}">
@@ -314,7 +322,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 112};left:${left + 149}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${hero.F}</span>
+            ${hero?.F}</span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 85};left:${left + 190}">
@@ -324,7 +332,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 112};left:${left + 191}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${hero.E}</span>
+            ${hero?.E}</span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 85};left:${left + 230}">
@@ -334,7 +342,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 112};left:${left + 234}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${hero.PV}</span>
+            ${hero?.PV}</span>
     </div>
 
 
@@ -345,7 +353,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 112};left:${left + 279}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${hero.I}</span>
+            ${hero?.I}</span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 85};left:${left + 322}">
@@ -355,7 +363,7 @@
 
     <div class="pos" id="28:270" style="top:${top + 112};left:${left + 322}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${hero.A}</span>
+            ${hero?.A}</span>
     </div>
 
     <div class="pos" id="28:270" style="top:${top + 85};left:${left + 359}">
@@ -365,12 +373,12 @@
 
     <div class="pos" id="28:270" style="top:${top + 112};left:${left + 364}">
         <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-            ${hero.CD}</span>
+            ${hero?.CD}</span>
     </div>
 
     <div class="pos" id="159:983" style="top:${top + 147};left:${left + 220}">
         <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-            <g:message code="warband.warrior.experience.hero" args="[hero.fullXp]"/></span>
+            <g:message code="warband.warrior.experience.hero" args="[hero?.fullXp != null ? hero.fullXp : '__']"/></span>
     </div>
 
     <!-- XP &#x22A0; -->
@@ -386,7 +394,7 @@
             <g:else>
                 <span id="8.8" style=" font-family:Arial; font-size:25px; color: #892a1a24">
             </g:else>
-            <g:if test="${hero.fullXp >= cpt}">
+            <g:if test="${hero?.fullXp >= cpt}">
                 &#x25A3;
             </g:if>
             <g:else>
@@ -405,7 +413,9 @@
 
     <g:set var="top" value="${top + 263}"/>
 
-</g:each>
+    <% nb++ %>
+</g:while>
+
 
 <g:if test="${band.mavericks}">
     <!-- FRANC TIREURS -->
@@ -420,30 +430,33 @@
 
     <g:set var="top" value="${new java.lang.Integer(3662)}"/>
     <g:set var="left" value="${new java.lang.Integer(45)}"/>
-    <g:each in="${band.mavericks?.sort({ it.dateCreated })}" var="maverick">
+    <g:set var="nb" value="${new Integer(0)}"/>
+    <g:set var="mavericks" value="${band.mavericks.sort({ it.dateCreated })}"/>
+    <g:while test="${nb < 6}">
+        <g:set var="maverick" value="${mavericks.getAt(nb)}"/>
         <div class="pos" id="23:911" style="top:${top};left:${left};width: 385px;">
             <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-                <g:message code="warband.warrior.name" args="[maverick.name]"/></span>
+                <g:message code="warband.warrior.name" args="[maverick?.name?:'']"/></span>
         </div>
 
         <div class="pos" id="221:912" style="top:${top};left:${left + 405};width: 225px;">
             <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24;">
-                <g:message code="warband.warrior.equipment" args="[raw(maverick.equipment ?: '')]"/></span>
+                <g:message code="warband.warrior.equipment" args="[raw(maverick?.equipment ?: '')]"/></span>
         </div>
 
         <div class="pos" id="404:912" style="top:${top};left:${left + 645};width: 270px;">
             <span id="9.4" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-                <g:message code="warband.warrior.competences" args="[raw(maverick.competences ?: '')]"/></span>
+                <g:message code="warband.warrior.competences" args="[raw(maverick?.competences ?: '')]"/></span>
         </div>
 
         <div class="pos" id="404:912" style="top:${top};left:${left + 930};width: 220px;">
             <span id="9.4" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-                <g:message code="warband.warrior.injuries" args="[raw(maverick.injuries ?: '')]"/></span>
+                <g:message code="warband.warrior.injuries" args="[raw(maverick?.injuries ?: '')]"/></span>
         </div>
 
         <div class="pos" id="23:928" style="top:${top + 35};left:${left};width: 385px;">
             <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-                <g:message code="warband.warrior.type" args="[maverick.type]"/></span>
+                <g:message code="warband.warrior.type" args="[maverick?.type?:'']"/></span>
         </div>
 
         <div class="pos" id="28:951" style="top:${top + 85};left:${left + 19}">
@@ -453,7 +466,7 @@
 
         <div class="pos" id="28:270" style="top:${top + 112};left:${left + 19}">
             <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-                ${maverick.M}</span>
+                ${maverick?.M}</span>
         </div>
 
         <div class="pos" id="28:270" style="top:${top + 85};left:${left + 56}">
@@ -463,7 +476,7 @@
 
         <div class="pos" id="28:270" style="top:${top + 112};left:${left + 61}">
             <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-                ${maverick.CC}</span>
+                ${maverick?.CC}</span>
         </div>
 
         <div class="pos" id="28:270" style="top:${top + 85};left:${left + 100}">
@@ -473,7 +486,7 @@
 
         <div class="pos" id="28:270" style="top:${top + 112};left:${left + 106}">
             <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-                ${maverick.CT}</span>
+                ${maverick?.CT}</span>
         </div>
 
         <div class="pos" id="28:270" style="top:${top + 85};left:${left + 148}">
@@ -483,7 +496,7 @@
 
         <div class="pos" id="28:270" style="top:${top + 112};left:${left + 149}">
             <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-                ${maverick.F}</span>
+                ${maverick?.F}</span>
         </div>
 
         <div class="pos" id="28:270" style="top:${top + 85};left:${left + 190}">
@@ -493,7 +506,7 @@
 
         <div class="pos" id="28:270" style="top:${top + 112};left:${left + 191}">
             <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-                ${maverick.E}</span>
+                ${maverick?.E}</span>
         </div>
 
         <div class="pos" id="28:270" style="top:${top + 85};left:${left + 230}">
@@ -503,7 +516,7 @@
 
         <div class="pos" id="28:270" style="top:${top + 112};left:${left + 234}">
             <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-                ${maverick.PV}</span>
+                ${maverick?.PV}</span>
         </div>
 
 
@@ -514,7 +527,7 @@
 
         <div class="pos" id="28:270" style="top:${top + 112};left:${left + 279}">
             <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-                ${maverick.I}</span>
+                ${maverick?.I}</span>
         </div>
 
         <div class="pos" id="28:270" style="top:${top + 85};left:${left + 322}">
@@ -524,7 +537,7 @@
 
         <div class="pos" id="28:270" style="top:${top + 112};left:${left + 322}">
             <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-                ${maverick.A}</span>
+                ${maverick?.A}</span>
         </div>
 
         <div class="pos" id="28:270" style="top:${top + 85};left:${left + 359}">
@@ -534,17 +547,17 @@
 
         <div class="pos" id="28:270" style="top:${top + 112};left:${left + 364}">
             <span id="9.8" style=" font-family:Arial; font-size:13px; color:#892a1a24">
-                ${maverick.CD}</span>
+                ${maverick?.CD}</span>
         </div>
 
         <div class="pos" id="159:983" style="top:${top + 150};left:${left + 190}">
             <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-                <g:message code="warband.warrior.experience.maverick" args="[maverick.fullXp]"/></span>
+                <g:message code="warband.warrior.experience.maverick" args="[maverick?.fullXp != null ? maverick.fullXp :'__']"/></span>
         </div>
 
         <div class="pos" id="159:983" style="top:${top + 170};left:${left + 190}">
             <span id="9.8" style=" font-family:Arial; font-size:14px; color:#892a1a24">
-                <g:message code="warband.warrior.retenue.maverick" args="[maverick.retenueCost]"/></span>
+                <g:message code="warband.warrior.retenue.maverick" args="[maverick?.retenueCost != null ? maverick.retenueCost : '__']"/></span>
         </div>
 
         <!-- XP &#x22A0; -->
@@ -561,7 +574,7 @@
                 <g:else>
                     <span id="8.8" style=" font-family:Arial; font-size:29px; color: #892a1a24">
                 </g:else>
-                <g:if test="${maverick.fullXp >= cpt}">
+                <g:if test="${maverick?.fullXp >= cpt}">
                     &#x25A3;
                 </g:if>
                 <g:else>
@@ -574,8 +587,8 @@
         </g:while>
 
         <g:set var="top" value="${top + 263}"/>
-
-    </g:each>
+        <% nb++ %>
+    </g:while>
 </g:if>
 
 </body>
