@@ -59,6 +59,20 @@
                                 </g:link>
                             </li>
                             <li class="divider"></li>
+
+                            <li>
+                                <g:link controller="band" action="previewcards" id="${bandInstance.id}"
+                                        target="_blank">
+                                    <span class="glyphicon glyphicon-eye-open"></span> <g:message
+                                        code="generate.preview.cards"/>
+                                </g:link>
+                            </li>
+                            <li>
+                                <g:link controller="band" action="cards" id="${bandInstance.id}">
+                                    <span class="glyphicon glyphicon-picture"></span> <g:message code="generate.cards"/>
+                                </g:link>
+                            </li>
+                            <li class="divider"></li>
                             <li>
                                 <g:link controller="band" action="bbcode" id="${bandInstance.id}"
                                         data-toggle="modal" data-target="#globalModal">

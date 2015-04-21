@@ -128,6 +128,31 @@ class BandController {
     }
 
     @Secured(['ROLE_USER'])
+    def cards() {
+        Band band = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (band) {
+            def byte[] pdfData = wkhtmltoxService.makePdf(
+                    view: "/pdf/cards",
+                    model: [band: band],
+                    //header: "/pdf/someHeader",
+                    //footer: "/pdf/someFooter",
+                    marginLeft: 0,
+                    marginTop: 0,
+                    marginBottom: 0,
+                    marginRight: 0)
+
+            response.setContentType("application/octet-stream")
+            response.setHeader("Content-disposition", "attachment;filename=\"${band.name}_cards.pdf\"")
+            response.outputStream << pdfData
+            return
+        }
+
+        redirect(action: 'index')
+        return
+    }
+
+
+    @Secured(['ROLE_USER'])
     def bbcode() {
         Band band = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
         if (band) {
@@ -152,6 +177,18 @@ class BandController {
     }
 
     @Secured(['ROLE_USER'])
+    def previewcards() {
+        Band band = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (band) {
+            render(view: '/pdf/cards', model: [band: band])
+            return
+        }
+
+        redirect(action: 'index')
+        return
+    }
+
+    @Secured(['ROLE_USER'])
     def create() {
         Band band = new Band(params)
         band.owner = springSecurityService.currentUser
@@ -160,9 +197,9 @@ class BandController {
     }
 
     @Secured(['ROLE_USER'])
-    def loadrace (){
+    def loadrace() {
         Race race = Race.get(params.id)
-        if (race){
+        if (race) {
             render race as JSON
             return
         }
@@ -181,7 +218,7 @@ class BandController {
         bandInstance.owner = springSecurityService.currentUser
         bandInstance.gold = 500
 
-        if (params.selector && !params.selector.equals("NO")){
+        if (params.selector && !params.selector.equals("NO")) {
             Race race = Race.get(params.selector)
             bandInstance.race = race
         }
