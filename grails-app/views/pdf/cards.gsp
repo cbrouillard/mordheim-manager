@@ -258,7 +258,7 @@
 </g:while>
 
 <div class="pos" style="top:1754">
-    <img src="${resource(dir: 'images', file: 'cards.png', absolute: true)}"
+    <img src="${resource(dir: 'images', file: 'cards2.png', absolute: true)}"
          border="0"/>
 </div>
 
@@ -380,7 +380,7 @@
 
 
     <div class="pos" style="top:3508">
-        <img src="${resource(dir: 'images', file: 'cards.png', absolute: true)}"
+        <img src="${resource(dir: 'images', file: 'cards3.png', absolute: true)}"
              border="0"/>
     </div>
 
