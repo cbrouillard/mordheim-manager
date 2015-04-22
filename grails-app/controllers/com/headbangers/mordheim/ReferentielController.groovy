@@ -68,6 +68,12 @@ class ReferentielController {
         [raceInstance: race, tab:params.tab]
     }
 
+    def manageequipment (){
+        RefEquipment refEquipment = new RefEquipment()
+        respond refEquipment, model: [toAction: 'saveequipment']
+    }
+
+
     // WRENCH
     def managewrench() {
         Race race = Race.get(params.id)

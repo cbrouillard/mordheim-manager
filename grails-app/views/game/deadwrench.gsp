@@ -8,7 +8,9 @@
         var result = function (wrenchgroupId) {
             var allDead = 1;
             var allLife = 1;
-            var notInGame = 1;
+
+            var ignored = $('#' + wrenchgroupId + 'notin').is(":checked");
+            console.log("Is ignored ? "+ignored);
 
             $('#' + wrenchgroupId + ' input[type=radio]:checked').each(
                     function (index) {
@@ -26,16 +28,28 @@
             var message = "<g:message code="endgame.notalldead.notalllife"/>";
             if (allDead) {
                 message = "<g:message code="endgame.alldead"/>";
-                $('#' + wrenchgroupId + "progress").hide();
-                $("#"+wrenchgroupId+"_infosnotdead").hide();
+                if (!ignored) {
+                    $('#' + wrenchgroupId + "progress").hide();
+                    $("#" + wrenchgroupId + "_infosnotdead").hide();
+                }
             } else if (allLife) {
-                message = "<g:message code="endgame.alllife"/>";
-                $('#' + wrenchgroupId + "progress").show();
-                $("#"+wrenchgroupId+"_infosnotdead").show();
-            } else {
-                $('#' + wrenchgroupId + "progress").show();
-                $("#"+wrenchgroupId+"_infosnotdead").show();
+
+                if (!ignored) {
+                    message = "<g:message code="endgame.alllife"/>";
+                    $('#' + wrenchgroupId + "progress").show();
+                    $("#" + wrenchgroupId + "_infosnotdead").show();
+                } else {
+                    message = "<g:message code="endgame.alllife.ignored"/>";
+                }
+            } else  {
+                if (!ignored) {
+                    $('#' + wrenchgroupId + "progress").show();
+                    $("#" + wrenchgroupId + "_infosnotdead").show();
+                } else {
+                    message = "<g:message code="endgame.notalldead.notalllife.ignored"/>";
+                }
             }
+
 
             $('#' + wrenchgroupId + "results").html(message);
         }
@@ -44,13 +58,13 @@
             var value = $('#' + wrenchId + 'notin').is(":checked");
             console.log(value);
 
-            var message = "<g:message code="endgame.ignored"/>";
+            var message = "<g:message code="endgame.wrench.ignored"/>";
             if (value) {
-                $('#' + wrenchId + 'container').hide();
+                $("#" + wrenchId + "_infosnotdead").hide();
                 $('#' + wrenchId + "progress").hide();
                 $('#' + wrenchId + "results").html(message);
             } else {
-                $('#' + wrenchId + 'container').show();
+                $("#" + wrenchId + "_infosnotdead").show();
                 result(wrenchId);
             }
         }

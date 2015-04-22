@@ -248,7 +248,7 @@ class GameController {
                 saveMavericks(bandInstance, gameData.mavericks, xpRef)
             }
 
-            if (!bandInstance.validate()){
+            if (!bandInstance.validate()) {
                 log.error bandInstance.errors
             } else {
                 bandInstance.save(flush: true)
@@ -280,18 +280,19 @@ class GameController {
                 status.each { k, v ->
                     if (v.equals("death")) {
                         death += 1
-                    } else {
+                    } else if (v.equals("life")) {
                         life += 1
                     }
                 }
 
                 log.debug "Wrench $wrenches.id life=$life && death=$death"
 
-                if (!notin) {
-                    if (death == wrenches.number) {
-                        // everyone is dead.
-                        toDelete.add(wrenches)
-                    } else {
+                if (death == wrenches.number) {
+                    // everyone is dead.
+                    toDelete.add(wrenches)
+                } else {
+                    // level up
+                    if (!notin) {
                         wrenches.earnedXp += xpRef
                         // bonus
                         try {
@@ -300,10 +301,9 @@ class GameController {
                         } catch (NumberFormatException e) {
                             // osef
                         }
-                        wrenches.number = life
                         wrenches.specialRules = specialRules
-                        wrenches.save(flush: true)
                     }
+                    wrenches.number = life
                 }
             }
         }

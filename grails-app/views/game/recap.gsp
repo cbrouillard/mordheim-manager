@@ -113,22 +113,20 @@
                             <g:set var="dead" value="${infos.count { it.value == 'death' }}"/>
 
                             <g:if test="${notin}">
-                                <span class="label label-warning"><g:message code="notin.hero"/></span>
+                                <span class="label label-warning"><g:message code="xp.ignored"/></span>
                             </g:if>
-                            <g:else>
-                                <g:if test="${alive}">
-                                    <span class="label label-success"><g:message code="alive"
-                                                                                 args="[alive]"/></span>
-                                </g:if>
-                                <g:if test="${dead}">
-                                    <span class="label label-danger"><g:message code="dead"
-                                                                                args="[dead]"/></span>
-                                </g:if>
-                                <g:if test="${bonus}">
-                                    <span class="label label-info"><g:message code="bonus"
-                                                                              args="[bonus]"/></span>
-                                </g:if>
-                            </g:else>
+                            <g:if test="${alive}">
+                                <span class="label label-success"><g:message code="alive"
+                                                                             args="[alive]"/></span>
+                            </g:if>
+                            <g:if test="${dead}">
+                                <span class="label label-danger"><g:message code="dead"
+                                                                            args="[dead]"/></span>
+                            </g:if>
+                            <g:if test="${bonus}">
+                                <span class="label label-info"><g:message code="bonus"
+                                                                          args="[bonus]"/></span>
+                            </g:if>
 
                         </td>
                         <td>

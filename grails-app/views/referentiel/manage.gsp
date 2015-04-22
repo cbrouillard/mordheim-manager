@@ -61,7 +61,7 @@
         <ul class="nav nav-tabs responsive" role="tablist">
 
             <li role="presentation" class="${tab == 'rules' ? 'active' : ''}">
-                <a href="#specialRules" role="tab" data-toggle="tab" >
+                <a href="#specialRules" role="tab" data-toggle="tab">
                     <g:message code="referentiel.race.specialRules"/>
                     <button class="btn btn-success btn-xs"
                             onclick="document.location = '${createLink(controller: 'referentiel', action:'manageracerule', id: raceInstance.id)}'">
@@ -91,10 +91,20 @@
             </li>
 
             <li role="presentation" class="${tab == 'heroesequipment' ? 'active' : ''}">
-                <a href="#wrenches" role="tab" data-toggle="tab">
+                <a href="#heroesequipment" role="tab" data-toggle="tab">
                     <g:message code="referentiel.heroes.allowed.equipment"/>
                     <button class="btn btn-success btn-xs"
-                            onclick="document.location = '${createLink(controller: 'referentiel', action:'managewrench', id: raceInstance.id)}'">
+                            onclick="document.location = '${createLink(controller: 'referentiel', action:'manageheroesequipments', id: raceInstance.id)}'">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </button>
+                </a>
+            </li>
+
+            <li role="presentation" class="${tab == 'wrenchesequipment' ? 'active' : ''}">
+                <a href="#wrenchesequipment" role="tab" data-toggle="tab">
+                    <g:message code="referentiel.wrenches.allowed.equipment"/>
+                    <button class="btn btn-success btn-xs"
+                            onclick="document.location = '${createLink(controller: 'referentiel', action:'managewrenchesequipment', id: raceInstance.id)}'">
                         <span class="glyphicon glyphicon-cog"></span>
                     </button>
                 </a>
@@ -236,6 +246,14 @@
                         </g:each>
                     </table>
                 </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane ${tab == 'heroesequipment' ? 'active' : ''}" id="heroesequipment">
+                Equipements pour les héros
+            </div>
+
+            <div role="tabpanel" class="tab-pane ${tab == 'wrenchesequipment' ? 'active' : ''}" id="wrenchesequipment">
+                Equipements pour les hdm
             </div>
         </div>
 
