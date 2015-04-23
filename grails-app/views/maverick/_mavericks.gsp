@@ -6,7 +6,18 @@
             <div class="row clearfix">
 
                 <div class="col-sm-4">
-                    <g:link action="changephoto" id="${maverick.id}" controller="maverick">
+                    <g:if test="${!anonymous}">
+                        <g:link action="changephoto" id="${maverick.id}" controller="maverick">
+                            <g:if test="${!maverick.photo}">
+                                <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
+                            </g:if>
+                            <g:else>
+                                <img src="${createLink(action: 'photo', id: maverick.id, controller: 'maverick')}"
+                                     class="imgwarrior pull-left"/>
+                            </g:else>
+                        </g:link>
+                    </g:if>
+                    <g:else>
                         <g:if test="${!maverick.photo}">
                             <asset:image src="Mordheim.gif" class="imgwarrior pull-left"/>
                         </g:if>
@@ -14,7 +25,7 @@
                             <img src="${createLink(action: 'photo', id: maverick.id, controller: 'maverick')}"
                                  class="imgwarrior pull-left"/>
                         </g:else>
-                    </g:link>
+                    </g:else>
                     <div class="pull-left">
                         <h5><strong>${maverick.name}</strong></h5>
                         <span class="label label-default">${maverick.type}</span>

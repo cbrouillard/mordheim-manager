@@ -82,9 +82,6 @@
         color: white;
     }
 
-    .well .body {
-    }
-
     .well.data {
         height: 135px;
         overflow: hidden;
