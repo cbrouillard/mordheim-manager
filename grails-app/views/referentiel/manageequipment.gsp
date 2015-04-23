@@ -10,7 +10,7 @@
     <div class="col-xs-12">
         <div>
             <h1><g:message
-                    code="referentiel.equipement.create"/> <small></small>
+                    code="referentiel.equipement.manage"/> <small></small>
             </h1>
             <hr/>
         </div>

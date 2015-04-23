@@ -80,3 +80,28 @@
     </div>
 </div>
 
+<div class="form-group ${hasErrors(bean: personInstance, field: 'generateOnlyOnePDF', 'has-error')}">
+
+    <label for="email" class="col-sm-2 control-label"><g:message code="person.onlyonepdf.label"/> *</label>
+
+    <div class="col-sm-10">
+        <div class="input-group">
+
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default ${personInstance.generateOnlyOnePDF ? 'active' : ''}">
+                    <g:checkBox name="generateOnlyOnePDF" autocomplete="off"
+                                checked="${personInstance.generateOnlyOnePDF}"/>
+                    <span class="glyphicon glyphicon-${personInstance.generateOnlyOnePDF ? 'check' : 'unchecked'}"
+                          id="checkbtn"></span>
+                </label>
+            </div>
+
+        </div>
+
+        <div class="help-block with-errors">
+            <g:message code="person.onlyonepdf.hint"/>
+        </div>
+    </div>
+</div>
+
+

@@ -102,20 +102,28 @@ class BandController {
     def pdf() {
         Band band = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
         if (band) {
-            def byte[] pdfData = wkhtmltoxService.makePdf(
-                    view: "/pdf/good",
-                    model: [band: band],
-                    //header: "/pdf/someHeader",
-                    //footer: "/pdf/someFooter",
-                    marginLeft: 0,
-                    marginTop: 0,
-                    marginBottom: 0,
-                    marginRight: 0)
 
-            /*def output = new FileOutputStream(new File("/home/cyril/${band.name}.pdf"))
-            output << pdfData
-            output.close()*/
+            def byte[] pdfData
+            if (springSecurityService.currentUser.generateOnlyOnePDF) {
 
+                pdfData = wkhtmltoxService.makePdf(
+                        view: "/pdf/all",
+                        model: [band: band],
+                        marginLeft: 0,
+                        marginTop: 0,
+                        marginBottom: 0,
+                        marginRight: 0)
+
+            } else {
+
+                pdfData = wkhtmltoxService.makePdf(
+                        view: "/pdf/good",
+                        model: [band: band],
+                        marginLeft: 0,
+                        marginTop: 0,
+                        marginBottom: 0,
+                        marginRight: 0)
+            }
             response.setContentType("application/octet-stream")
             response.setHeader("Content-disposition", "attachment;filename=\"${band.name}.pdf\"")
             response.outputStream << pdfData
@@ -168,7 +176,12 @@ class BandController {
     def previewpdf() {
         Band band = Band.findByIdAndOwner(params.id, springSecurityService.currentUser)
         if (band) {
-            render(view: '/pdf/good', model: [band: band])
+            String view = "/pdf/good"
+            if (springSecurityService.currentUser.generateOnlyOnePDF) {
+                view = "/pdf/all"
+            }
+
+            render(view: view, model: [band: band])
             return
         }
 

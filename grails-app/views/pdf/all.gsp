@@ -121,8 +121,7 @@
 </head>
 
 <body>
-
-<g:render template="/pdf/cardsdata" model="[startingTop: 0]"/>
-
+<g:render template="/pdf/banddata"/>
+<g:render template="/pdf/cardsdata" model="[startingTop: 3508 + (band.mavericks ? 1754 : 0)]"/>
 </body>
 </html>

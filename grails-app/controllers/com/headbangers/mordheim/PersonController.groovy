@@ -145,6 +145,7 @@ class PersonController {
         if (params.passwordNew && params.passwordCheck && params.passwordNew == params.passwordCheck) {
             personInstance.password = params.passwordNew
         }
+        personInstance.generateOnlyOnePDF = params.generateOnlyOnePDF ? true : false
 
         if (personInstance.hasErrors()) {
             respond personInstance.errors, view: 'myprofile'

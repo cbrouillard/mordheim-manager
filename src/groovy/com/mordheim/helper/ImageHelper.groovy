@@ -19,8 +19,8 @@ class ImageHelper {
         float aspectRatio = width / height
         float requiredAspectRatio = maxW / maxH
 
-        int dstW = 0
-        int dstH = 0
+        int dstW
+        int dstH
         if (requiredAspectRatio < aspectRatio) {
             dstW = maxW
             dstH = Math.round(maxW / aspectRatio)
@@ -35,6 +35,6 @@ class ImageHelper {
         Graphics2D g2d = bi.createGraphics()
         g2d.drawImage(ai, 0, 0, dstW, dstH, null, null)
 
-        ImageIO.write(bi, 'JPEG', out)
+        ImageIO.write(bi, 'PNG', out)
     }
 }

@@ -74,7 +74,9 @@
                                 </p>
                             </div>
 
-                            <div class="help-block with-errors"></div>
+                            <div class="help-block with-errors">
+                                <g:message code="photo.will.be.resized" args="[135]"/>
+                            </div>
                         </div>
                     </div>
 

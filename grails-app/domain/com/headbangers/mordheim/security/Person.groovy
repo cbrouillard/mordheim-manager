@@ -21,6 +21,8 @@ class Person {
 
     String token
 
+    boolean generateOnlyOnePDF = false
+
     static transients = ['springSecurityService']
 
     static constraints = {
@@ -28,6 +30,7 @@ class Person {
         password blank: false
         email blank: false, nullable: false, unique: true
         token blank: false, nullable: false
+        generateOnlyOnePDF nullable:false
     }
 
     static mapping = {

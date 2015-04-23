@@ -33,15 +33,13 @@
                         code="band.show"/> <small>${bandInstance.name}</small>
 
                 <g:if test="${!anonymous}">
-
                     <div class="btn-group">
                         <g:link class="btn btn-primary" controller="band" action="pdf" id="${bandInstance.id}">
-                            <i class="fa fa-file-pdf-o"></i> <g:message code="pdf"/>
+                            <i class="fa fa-file-pdf-o"></i> <g:message code="pdf.band"/>
                         </g:link>
                         <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"
                                 aria-expanded="false">
                             <span class="glyphicon glyphicon-cog"></span>
-                            <g:message code="actions"/>
                             <span class="caret"></span>
                             <span class="sr-only">Toggle</span>
                         </button>
@@ -50,28 +48,33 @@
                                 <g:link controller="band" action="previewpdf" id="${bandInstance.id}"
                                         target="_blank">
                                     <span class="glyphicon glyphicon-eye-open"></span> <g:message
-                                        code="generate.preview.pdf"/>
+                                        code="generate.preview.pdf.${bandInstance.owner.generateOnlyOnePDF}"/>
                                 </g:link>
                             </li>
                             <li>
                                 <g:link controller="band" action="pdf" id="${bandInstance.id}">
-                                    <i class="fa fa-file-pdf-o"></i> <g:message code="generate.pdf"/>
+                                    <i class="fa fa-file-pdf-o"></i> <g:message
+                                        code="generate.pdf.${bandInstance.owner.generateOnlyOnePDF}"/>
                                 </g:link>
                             </li>
-                            <li class="divider"></li>
 
-                            <li>
-                                <g:link controller="band" action="previewcards" id="${bandInstance.id}"
-                                        target="_blank">
-                                    <span class="glyphicon glyphicon-eye-open"></span> <g:message
-                                        code="generate.preview.cards"/>
-                                </g:link>
-                            </li>
-                            <li>
-                                <g:link controller="band" action="cards" id="${bandInstance.id}">
-                                    <span class="glyphicon glyphicon-picture"></span> <g:message code="generate.cards"/>
-                                </g:link>
-                            </li>
+                            <g:if test="${!bandInstance.owner.generateOnlyOnePDF}">
+                                <li class="divider"></li>
+                                <li>
+                                    <g:link controller="band" action="previewcards" id="${bandInstance.id}"
+                                            target="_blank">
+                                        <span class="glyphicon glyphicon-eye-open"></span> <g:message
+                                            code="generate.preview.cards"/>
+                                    </g:link>
+                                </li>
+                                <li>
+                                    <g:link controller="band" action="cards" id="${bandInstance.id}">
+                                        <span class="glyphicon glyphicon-picture"></span> <g:message
+                                            code="generate.cards"/>
+                                    </g:link>
+                                </li>
+                            </g:if>
+
                             <li class="divider"></li>
                             <li>
                                 <g:link controller="band" action="bbcode" id="${bandInstance.id}"
@@ -112,86 +115,86 @@
 
 <div class="col-sm-4 col-xs-12">
     <div data-spy="affix" data-offset-top="200" class="band-infos-affixed">
-    <div class="panel panel-info" data-clampedwidth=".band-infos-affixed">
-        <div class="panel-heading clearfix">
+        <div class="panel panel-info" data-clampedwidth=".band-infos-affixed">
+            <div class="panel-heading clearfix">
 
-            <g:if test="${!anonymous}">
-                <div class="form-inline pull-right">
-                    <div class="btn-group">
-                        <g:link class="btn btn-success" controller="band" action="edit" id="${bandInstance.id}">
-                            <span class="glyphicon glyphicon-edit"></span>
-                            <g:message code="default.button.edit.label"/>
-                        </g:link>
+                <g:if test="${!anonymous}">
+                    <div class="form-inline pull-right">
+                        <div class="btn-group">
+                            <g:link class="btn btn-success" controller="band" action="edit" id="${bandInstance.id}">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                <g:message code="default.button.edit.label"/>
+                            </g:link>
+                        </div>
                     </div>
-                </div>
-            </g:if>
-            <g:else>
-                <div class="pull-right">
-                    <div class="addthis_toolbox addthis_default_style">
-                        <a class="addthis_button_facebook"></a>
-                        <a class="addthis_button_twitter"></a>
-                        <a class="addthis_button_email"></a>
-                        <a class="addthis_button_compact"></a>
-                        <a class="addthis_counter addthis_bubble_style"></a>
-                    </div>
-                </div>
-            </g:else>
-            <h5><g:message code="band.infos"/></h5>
-
-        </div>
-
-        <table class="table">
-            <tr>
-                <td><strong><g:message code="band.nbGame.title"/></strong></td>
-                <td><strong>${bandInstance.nbGame}</strong></td>
-            </tr>
-            <tr class="warning">
-                <td><strong><g:message code="band.value"/></strong></td>
-                <td><strong>${bandInstance.bandValue}</strong></td>
-            </tr>
-            <tr>
-                <td><strong><g:message code="band.name.label"/></strong></td>
-                <td>${bandInstance.name}</td>
-            </tr>
-            <tr>
-                <td><strong><g:message code="band.type.label"/></strong></td>
-                <td>${bandInstance.type}</td>
-            </tr>
-            <tr>
-                <td><strong><g:message code="band.nbwarrior"/></strong></td>
-                <td>${bandInstance.nbWarriors}
-                <g:if test="${bandInstance.nbMavericks}">
-                    <g:message code="band.plus.mavericks" args="[bandInstance.nbMavericks]"/>
                 </g:if>
-                </td>
-            </tr>
-            <tr>
-                <td><strong><g:message code="band.gold.title"/></strong></td>
-                <td><g:message code="band.gold" args="[bandInstance.gold]"/></td>
-            </tr>
-            <tr>
-                <td><strong><g:message code="band.magical.stones.title"/></strong></td>
-                <td><g:formatNumber number="${bandInstance.magicalStones}"/></td>
-            </tr>
-            <tr>
-                <td><strong><g:message code="band.equipment"/></strong></td>
-                <td><div class="well">${raw(bandInstance.reserve)}</div></td>
-            </tr>
-            <tr>
-                <td><strong><g:message code="note.label"/></strong></td>
-                <td><div class="well">${raw(bandInstance.note)}</div></td>
-            </tr>
-            <tr>
-                <td><strong><g:message code="band.public.url"/></strong></td>
-                <td>
-                    <g:link action="band" controller="public" id="${bandInstance.id}" absolute="true">
-                        <span class="glyphicon glyphicon-link"></span>
-                        ${bandInstance.name}
-                    </g:link>
-                </td>
-            </tr>
-        </table>
-    </div>
+                <g:else>
+                    <div class="pull-right">
+                        <div class="addthis_toolbox addthis_default_style">
+                            <a class="addthis_button_facebook"></a>
+                            <a class="addthis_button_twitter"></a>
+                            <a class="addthis_button_email"></a>
+                            <a class="addthis_button_compact"></a>
+                            <a class="addthis_counter addthis_bubble_style"></a>
+                        </div>
+                    </div>
+                </g:else>
+                <h5><g:message code="band.infos"/></h5>
+
+            </div>
+
+            <table class="table">
+                <tr>
+                    <td><strong><g:message code="band.nbGame.title"/></strong></td>
+                    <td><strong>${bandInstance.nbGame}</strong></td>
+                </tr>
+                <tr class="warning">
+                    <td><strong><g:message code="band.value"/></strong></td>
+                    <td><strong>${bandInstance.bandValue}</strong></td>
+                </tr>
+                <tr>
+                    <td><strong><g:message code="band.name.label"/></strong></td>
+                    <td>${bandInstance.name}</td>
+                </tr>
+                <tr>
+                    <td><strong><g:message code="band.type.label"/></strong></td>
+                    <td>${bandInstance.type}</td>
+                </tr>
+                <tr>
+                    <td><strong><g:message code="band.nbwarrior"/></strong></td>
+                    <td>${bandInstance.nbWarriors}
+                    <g:if test="${bandInstance.nbMavericks}">
+                        <g:message code="band.plus.mavericks" args="[bandInstance.nbMavericks]"/>
+                    </g:if>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong><g:message code="band.gold.title"/></strong></td>
+                    <td><g:message code="band.gold" args="[bandInstance.gold]"/></td>
+                </tr>
+                <tr>
+                    <td><strong><g:message code="band.magical.stones.title"/></strong></td>
+                    <td><g:formatNumber number="${bandInstance.magicalStones}"/></td>
+                </tr>
+                <tr>
+                    <td><strong><g:message code="band.equipment"/></strong></td>
+                    <td><div class="well">${raw(bandInstance.reserve)}</div></td>
+                </tr>
+                <tr>
+                    <td><strong><g:message code="note.label"/></strong></td>
+                    <td><div class="well">${raw(bandInstance.note)}</div></td>
+                </tr>
+                <tr>
+                    <td><strong><g:message code="band.public.url"/></strong></td>
+                    <td>
+                        <g:link action="band" controller="public" id="${bandInstance.id}" absolute="true">
+                            <span class="glyphicon glyphicon-link"></span>
+                            ${bandInstance.name}
+                        </g:link>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
 

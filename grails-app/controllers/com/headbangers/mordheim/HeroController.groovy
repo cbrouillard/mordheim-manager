@@ -162,7 +162,7 @@ class HeroController {
             }
 
             ByteArrayOutputStream out = new ByteArrayOutputStream()
-            ImageHelper.resize(f.bytes, out, new Integer(55), new Integer(55))
+            ImageHelper.resize(f.bytes, out, new Integer(135), new Integer(135))
             heroInstance.photo = out.toByteArray()
 
         } else {
