@@ -8,7 +8,7 @@ import grails.transaction.Transactional
 class ReferentielEquipmentController {
 
     def index() {
-        redirect(action: 'manageequipment')
+        redirect(action: 'manage')
     }
 
     def manage() {
