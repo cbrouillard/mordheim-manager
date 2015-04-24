@@ -211,10 +211,13 @@ class BandController {
 
     @Secured(['ROLE_USER'])
     def loadrace() {
-        Race race = Race.get(params.id)
-        if (race) {
-            render race as JSON
-            return
+
+        if (params.id != "NO") {
+            Race race = Race.get(params.id)
+            if (race) {
+                render race as JSON
+                return
+            }
         }
 
         render new Race() as JSON

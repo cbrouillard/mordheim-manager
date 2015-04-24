@@ -66,7 +66,7 @@
                 <a href="#equipments" role="tab" data-toggle="tab">
                     <g:message code="referentiel.equipments"/>
                     <button class="btn btn-success btn-xs"
-                            onclick="document.location = '${createLink(controller: 'referentiel', action:'manageequipment')}'">
+                            onclick="document.location = '${createLink(controller: 'referentielEquipment', action:'manage')}'">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </a>
@@ -85,16 +85,52 @@
         </ul>
 
         <div class="tab-content responsive">
-            <div role="tabpanel" class="tab-pane active" id="equipments">EQUIPEMENTS
-                <g:each in="${equipments}" var="equipment">
+            <div role="tabpanel" class="tab-pane active" id="equipments">
+                &nbsp;
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th><g:message code="name.label"/></th>
+                            <th><g:message code="type.label"/></th>
+                            <th><g:message code="equipment.rarity.level"/></th>
+                            <th><g:message code="referentiel.race.specialRules"/></th>
+                            <th class="text-right"><g:message code="actions"/></th>
+                        </tr>
+                        </thead>
+                        <g:each in="${equipments}" var="equipment">
+                            <tr>
+                                <td><strong>${equipment.name}</strong></td>
+                                <td><g:message code="EquipmentType.${equipment.type}"/></td>
+                                <td>${equipment.rareLevel}</td>
+                                <td>
+                                    <div class="well">
+                                        ${raw(equipment.rule)}
+                                    </div>
 
-                </g:each>
+                                </td>
+                                <td class="text-right">
+                                    <div class="btn-group">
+                                        <g:link controller="referentiel" action="editequipment" class="btn btn-success"
+                                                id="${equipment.id}">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                        </g:link>
+                                        <g:link controller="referentiel" action="deleteequipment" class="btn btn-danger"
+                                                id="${equipment.id}">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </g:link>
+                                    </div>
+                                </td>
+                            </tr>
+                        </g:each>
+                    </table>
+                </div>
             </div>
 
             <div role="tabpanel" class="tab-pane" id="competences">COMPETENCES
-                <g:each in="${competences}" var="competence">
+            <g:each in="${competences}" var="competence">
 
-                </g:each>
+            </g:each>
             </div>
         </div>
 

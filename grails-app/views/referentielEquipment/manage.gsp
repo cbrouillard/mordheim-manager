@@ -10,7 +10,7 @@
     <div class="col-xs-12">
         <div>
             <h1><g:message
-                    code="referentiel.wrench.create"/> <small>${race.name}</small>
+                    code="referentiel.equipement.manage"/> <small></small>
             </h1>
             <hr/>
         </div>
@@ -19,10 +19,10 @@
             <div class="alert alert-info" role="status">${flash.message}</div>
         </g:if>
 
-        <g:hasErrors bean="${refWrenchInstance}">
+        <g:hasErrors bean="${refEquipmentInstance}">
             <div class="alert-danger alert">
                 <ul class="errors" role="alert">
-                    <g:eachError bean="${refWrenchInstance}" var="error">
+                    <g:eachError bean="${refEquipmentInstance}" var="error">
                         <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
                                 error="${error}"/></li>
                     </g:eachError>
@@ -36,26 +36,27 @@
 <div class="col-sm-3 col-xs-12">
     <div class="panel panel-default">
         <div class="panel-heading clearfix">
-            <g:link controller="referentiel" action="manage" id="${race.id}" class="btn btn-default pull-right"  params="[tab:'wrenches']">
-                <span class="glyphicon glyphicon-backward"></span> ${race.name}
+            <g:link controller="referentiel" action="index" class="btn btn-default pull-right">
+                <span class="glyphicon glyphicon-backward"></span> <g:message code="back"/>
             </g:link>
 
-            <h5><g:message code="referentiel.already.created.wrenches"/></h5>
+            <h5><g:message code="referentiel.already.created.equipments"/></h5>
         </div>
 
         <div class="table-responsive">
             <table class="table">
-                <g:each in="${race.wrenches.sort({ it.type })}" var="wrench">
-                    <tr>
-                        <td><strong>${wrench.type}</strong></td>
+                <g:each in="${equipments.sort({ it.name })}" var="equipment">
+                    <tr class="${equipment.id == refEquipmentInstance.id ? 'warning' : ''}">
+                        <td><strong>${equipment.name}</strong></td>
+                        <td><g:message code="EquipmentType.${equipment.type}"/> [${equipment.rareLevel}]</td>
                         <td class="text-right">
                             <div class="btn-group">
-                                <g:link controller="referentiel" action="deletewrench" class="btn btn-danger btn-xs"
-                                        id="${wrench.id}">
+                                <g:link action="delete" class="btn btn-danger btn-xs"
+                                        id="${equipment.id}">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </g:link>
-                                <g:link controller="referentiel" action="editwrench" class="btn btn-success btn-xs"
-                                        id="${wrench.id}">
+                                <g:link action="edit" class="btn btn-success btn-xs"
+                                        id="${equipment.id}">
                                     <span class="glyphicon glyphicon-forward"></span>
                                 </g:link>
                             </div>
@@ -67,17 +68,17 @@
     </div>
 </div>
 
+
 <div class="col-sm-9 col-xs-12">
-    <g:form url="[controller: 'referentiel', action: toAction]" class="form-horizontal" data-toggle="validator">
-        <g:hiddenField name="race" value="${race.id}"/>
-        <g:if test="${toAction.equals("updatewrench")}">
-            <g:hiddenField name="id" value="${refWrenchInstance.id}"/>
+    <g:form url="[controller: 'referentielEquipment', action: toAction]" class="form-horizontal" data-toggle="validator">
+        <g:if test="${toAction.equals("update")}">
+            <g:hiddenField name="id" value="${refEquipmentInstance.id}"/>
         </g:if>
         <div class="panel panel-default">
             <div class="panel-body">
 
                 <fieldset class="form">
-                    <g:render template="formwrench"/>
+                    <g:render template="form"/>
                 </fieldset>
 
             </div>
@@ -95,6 +96,7 @@
         </div>
     </g:form>
 </div>
+
 
 </body>
 </html>

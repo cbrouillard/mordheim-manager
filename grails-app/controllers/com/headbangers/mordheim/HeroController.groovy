@@ -24,13 +24,15 @@ class HeroController {
     }
 
     @Secured(['ROLE_USER'])
-    def loadhero (){
-        RefHero refHero = RefHero.get(params.id)
-        if (refHero){
-            render refHero as JSON
-        } else {
-            render new RefHero() as JSON
+    def loadhero() {
+        if (params.id != 'NO') {
+            RefHero refHero = RefHero.get(params.id)
+            if (refHero) {
+                render refHero as JSON
+                return
+            }
         }
+        render new RefHero() as JSON
     }
 
     @Transactional
@@ -47,7 +49,7 @@ class HeroController {
             return
         }
 
-        if (params.selector && !params.selector.equals("NO")){
+        if (params.selector && !params.selector.equals("NO")) {
             RefHero ref = RefHero.get(params.selector)
             heroInstance.refHero = ref
         }
