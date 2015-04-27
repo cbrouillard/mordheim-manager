@@ -51,7 +51,7 @@ class ReferentielCompetenceController {
             return
         }
 
-        render(view: 'manage', model: [refCompetenceInstance: competence, equipments: RefCompetence.findAll(), toAction: "update"])
+        render(view: 'manage', model: [refCompetenceInstance: competence, competences: RefCompetence.findAll(), toAction: "update"])
     }
 
     @Transactional
@@ -64,7 +64,7 @@ class ReferentielCompetenceController {
 
         bindData(competence, params)
         if (competence.hasErrors()) {
-            respond competence.errors, view: 'manage', model: [refCompetenceInstance: competence, equipments: RefCompetence.findAll(), toAction: 'update']
+            respond competence.errors, view: 'manage', model: [refCompetenceInstance: competence, competences: RefCompetence.findAll(), toAction: 'update']
             return
         }
 

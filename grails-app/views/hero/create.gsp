@@ -4,23 +4,8 @@
     <meta name="layout" content="main">
     <script type="application/javascript">
         var loadhero = function (heroId) {
-            $.get('${createLink(action:'loadhero')}' + "/" + heroId, function (data) {
-
-                console.log (data);
-                $("#type").val(data.type);
-                $("#M").val(data.m);
-                $("#CC").val(data.CC);
-                $("#CT").val(data.CT);
-                $("#F").val(data.f);
-                $("#E").val(data.e);
-                $("#PV").val(data.PV);
-                $("#I").val(data.i);
-                $("#A").val(data.a);
-                $("#CD").val(data.CD);
-                $("#experience").val(data.startingExperience);
-                $("#cost").val(data.costWithoutEquipment);
-                tinyMCE.get('equipment').setContent(data.equipment);
-                tinyMCE.get('competences').setContent(data.competences);
+            $.get('${createLink(action:'loadhero', controller: 'hero')}' + "/" + heroId, function (data) {
+                fillHeroForm(data);
             });
 
         }

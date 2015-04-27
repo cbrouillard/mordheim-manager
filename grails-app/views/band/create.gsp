@@ -5,10 +5,10 @@
     <script type="application/javascript">
         var loadrace = function (raceId) {
             $.get('${createLink(action:'loadrace')}' + "/" + raceId, function (data) {
-
                 console.log(data)
                 $("#type").val(data.name);
-
+                $("form[data-toggle='validator']").validator('validate');
+                $('#name').focus();
             });
 
         }

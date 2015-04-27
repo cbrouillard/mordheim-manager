@@ -92,7 +92,7 @@
             <a href="#heroesequipment" role="tab" data-toggle="tab">
                 <g:message code="referentiel.heroes.allowed.equipment"/>
                 <button class="btn btn-success btn-xs"
-                        onclick="document.location = '${createLink(controller: 'referentiel', action:'manageheroesequipments', id: raceInstance.id)}'">
+                        onclick="document.location = '${createLink(controller: 'referentielEquipment', action:'manageheroes', id: raceInstance.id)}'">
                     <span class="glyphicon glyphicon-cog"></span>
                 </button>
             </a>
@@ -102,7 +102,7 @@
             <a href="#wrenchesequipment" role="tab" data-toggle="tab">
                 <g:message code="referentiel.wrenches.allowed.equipment"/>
                 <button class="btn btn-success btn-xs"
-                        onclick="document.location = '${createLink(controller: 'referentiel', action:'managewrenchesequipment', id: raceInstance.id)}'">
+                        onclick="document.location = '${createLink(controller: 'referentielEquipment', action:'managewrenches', id: raceInstance.id)}'">
                     <span class="glyphicon glyphicon-cog"></span>
                 </button>
             </a>

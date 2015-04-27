@@ -2,6 +2,13 @@
 <html>
 <head>
     <meta name="layout" content="main">
+    <script type="application/javascript">
+        var loadwrench = function (wId) {
+            $.get('${createLink(action:'loadwrench', controller: 'wrenchmen')}' + "/" + wId, function (data) {
+                fillWrenchForm(data);
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -33,8 +40,36 @@
 
 <div class="col-xs-12">
 
-    <g:form url="[resource: wrenchmenInstance, action: 'save']" class="form-horizontal" data-toggle="validator">
+    <g:form url="[resource: wrenchmenInstance, action: 'save']" class="form-horizontal" data-toggle="validator"
+            id="form">
         <div class="panel panel-default">
+            <g:if test="${wrenchmenInstance.band.race}">
+                <div class="panel-heading">
+                    <div class="form-group">
+
+                        <label for="selector" class="col-sm-2 control-label"><g:message
+                                code="referentiel.selector.wrench"/></label>
+
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-text-background"></span></span>
+                                <g:select class="form-control"
+                                          name="selector"
+                                          from="${wrenchmenInstance.band.race.wrenches}"
+                                          optionKey="id"
+                                          optionValue="type"
+                                          noSelection="['NO': '']"
+                                          onchange="javascript:loadwrench(this.value);"/>
+                            </div>
+
+                            <div class="help-block with-errors">
+                                <g:message code="referentiel.selector.hint"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </g:if>
             <div class="panel-body">
 
                 <fieldset class="form">
@@ -53,7 +88,8 @@
                             <span class="glyphicon glyphicon-save"></span> ${message(code: 'default.button.create.label', default: 'Save')}
                         </button>
 
-                        <g:link class="btn btn-default" controller="band" action="show" id="${bandId}" params="[tab:'wrench']">
+                        <g:link class="btn btn-default" controller="band" action="show" id="${bandId}"
+                                params="[tab: 'wrench']">
                             <span class="glyphicon glyphicon-triangle-left"></span> <g:message
                                 code="cancel"/>
                         </g:link>

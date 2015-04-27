@@ -19,7 +19,7 @@ class ReferentielController {
     def index() {
         def races = Race.list([sort: 'name', order: "asc"])
         def equipments = RefEquipment.findAllByRace(null)
-        def competences = RefCompetence.list()
+        def competences = RefCompetence.findAllByRace(null)
 
         render(view: 'index', model: [races: races, equipments: equipments, competences: competences])
 

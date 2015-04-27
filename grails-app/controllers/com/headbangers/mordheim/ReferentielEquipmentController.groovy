@@ -1,6 +1,8 @@
 package com.headbangers.mordheim
 
+import com.headbangers.mordheim.reference.Race
 import com.headbangers.mordheim.reference.RefEquipment
+import com.headbangers.mordheim.reference.RefEquipmentHero
 import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
 
@@ -71,5 +73,19 @@ class ReferentielEquipmentController {
         equipment.save(flush: true)
         redirect(action: 'manage')
         return
+    }
+
+    def manageheroes() {
+
+        Race race = Race.get(params.id)
+        if (!race) {
+            redirect(action: 'index', controller: 'referentiel')
+            return
+        }
+
+        RefEquipment refEquipment = new RefEquipment([rareLevel: 0])
+
+        def equipments = RefEquipmentHero.list()
+        respond refEquipment, model: [toAction: 'saveforhero', equipments: equipments, race:race]
     }
 }

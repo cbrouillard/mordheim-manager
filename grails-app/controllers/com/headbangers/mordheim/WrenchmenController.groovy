@@ -1,6 +1,9 @@
 package com.headbangers.mordheim
 
+import com.headbangers.mordheim.reference.RefHero
+import com.headbangers.mordheim.reference.RefWrench
 import com.mordheim.helper.ImageHelper
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -17,6 +20,18 @@ class WrenchmenController {
     def create() {
         Wrenchmen man = new Wrenchmen(params)
         [bandId: params.band, wrenchmenInstance: man]
+    }
+
+    @Secured(['ROLE_USER'])
+    def loadwrench() {
+        if (params.id != 'NO') {
+            RefWrench refWrench = RefWrench.get(params.id)
+            if (refWrench) {
+                render refWrench as JSON
+                return
+            }
+        }
+        render new RefWrench() as JSON
     }
 
     @Transactional

@@ -1,6 +1,7 @@
 package com.headbangers.mordheim
 
 import com.headbangers.mordheim.reference.Race
+import com.headbangers.mordheim.reference.RefHero
 import com.headbangers.mordheim.security.Person
 import com.mordheim.helper.ImageHelper
 import grails.converters.JSON
@@ -285,6 +286,10 @@ class BandController {
             return
         }
 
+        if (params.selector && !params.selector.equals("NO")) {
+            RefHero ref = RefHero.get(params.selector)
+            heroInstance.refHero = ref
+        }
 
         if (band.heroes.size() >= 6) {
             // nope, trop de héros.

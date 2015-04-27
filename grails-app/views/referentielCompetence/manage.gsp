@@ -45,18 +45,18 @@
 
         <div class="table-responsive">
             <table class="table">
-                <g:each in="${competences.sort({ it.name })}" var="equipment">
-                    <tr class="${equipment.id == refCompetenceInstance.id ? 'warning' : ''}">
-                        <td><strong>${equipment.name}</strong></td>
-                        <td><g:message code="EquipmentType.${equipment.type}"/> [${equipment.rareLevel}]</td>
+                <g:each in="${competences.sort({ it.name })}" var="competence">
+                    <tr class="${competence.id == refCompetenceInstance.id ? 'warning' : ''}">
+                        <td><strong>${competence.name}</strong></td>
+                        <td><g:message code="CompetenceType.${competence.type}"/></td>
                         <td class="text-right">
                             <div class="btn-group">
                                 <g:link action="delete" class="btn btn-danger btn-xs"
-                                        id="${equipment.id}">
+                                        id="${competence.id}">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </g:link>
                                 <g:link action="edit" class="btn btn-success btn-xs"
-                                        id="${equipment.id}">
+                                        id="${competence.id}">
                                     <span class="glyphicon glyphicon-forward"></span>
                                 </g:link>
                             </div>
@@ -70,7 +70,7 @@
 
 
 <div class="col-sm-9 col-xs-12">
-    <g:form url="[controller: 'referentielEquipment', action: toAction]" class="form-horizontal" data-toggle="validator">
+    <g:form url="[controller: 'referentielCompetence', action: toAction]" class="form-horizontal" data-toggle="validator">
         <g:if test="${toAction.equals("update")}">
             <g:hiddenField name="id" value="${refCompetenceInstance.id}"/>
         </g:if>
