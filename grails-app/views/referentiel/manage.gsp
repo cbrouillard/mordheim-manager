@@ -114,7 +114,7 @@
         <div role="tabpanel" class="tab-pane ${tab == 'rules' ? 'active' : ''}" id="specialRules">
             &nbsp;
             <div class="table-responsive">
-                <table class="table">
+                <table class="table table-hover table-striped">
                     <thead>
                     <tr>
                         <th><g:message code="rule.name.label"/></th>
@@ -188,11 +188,11 @@
                             </td>
                             <td class="text-right">
                                 <div class="btn-group">
-                                    <g:link controller="referentiel" action="edithero" class="btn btn-success"
+                                    <g:link controller="referentielHero" action="edit" class="btn btn-success"
                                             id="${hero.id}">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </g:link>
-                                    <g:link controller="referentiel" action="deletehero" class="btn btn-danger"
+                                    <g:link controller="referentielHero" action="delete" class="btn btn-danger"
                                             id="${hero.id}">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </g:link>
@@ -208,7 +208,7 @@
         <div role="tabpanel" class="tab-pane ${tab == 'wrenches' ? 'active' : ''}" id="wrenches">
             &nbsp;
             <div class="table-responsive">
-                <table class="table">
+                <table class="table table-hover table-striped">
                     <thead>
                     <tr>
                         <th><g:message code="warrior.type.label"/></th>
@@ -238,6 +238,18 @@
                             <td>
                                 <div class="well">
                                     ${raw(wrench.rules)}
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <g:link controller="referentielWrench" action="edit" class="btn btn-success"
+                                            id="${wrench.id}">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </g:link>
+                                    <g:link controller="referentielWrench" action="delete" class="btn btn-danger"
+                                            id="${wrench.id}">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </g:link>
                                 </div>
                             </td>
                         </tr>

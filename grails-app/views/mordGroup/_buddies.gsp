@@ -15,7 +15,7 @@
 
                 <div class="panel-body">
                     <g:each in="${buddy.bands}" var="band">
-                        <div class="col-lg-3 col-md-4 col-sm-5">
+                        <div class="col-lg-4 col-sm-6 col-xs-12">
                             <div class="thumbnail panel-primary">
                                 <g:render template="/band/image" model="[bandInstance: band]"/>
                                 <div class="caption text-center">
@@ -23,6 +23,7 @@
                                         <li class="list-group-item list-group-item-info"><strong>${band.name}</strong>
                                         </li>
                                         <li class="list-group-item">${band.type}</li>
+                                        <li class="list-group-item"><g:message code="band.nbGame" args="[band.nbGame]"/></li>
                                         <li class="list-group-item">
 
                                             <div class="btn-group">
