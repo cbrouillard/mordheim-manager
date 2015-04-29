@@ -58,7 +58,7 @@ class ReferentielController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'Race.label', default: 'Race'), raceInstance.name])
-                redirect action: 'index'
+                redirect action: 'editrace', id: raceInstance.id
             }
             '*' { respond raceInstance, [status: CREATED] }
         }

@@ -56,7 +56,7 @@
                                         class="glyphicon glyphicon-text-background"></span></span>
                                 <g:select class="form-control"
                                           name="selector"
-                                          from="${wrenchmenInstance.band.race.wrenches}"
+                                          from="${wrenchmenInstance.band.race.wrenches.sort({it.dateCreated})}"
                                           optionKey="id"
                                           optionValue="type"
                                           noSelection="['NO': '']"

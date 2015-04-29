@@ -36,7 +36,7 @@
         <div class="table-responsive">
             <table class="table">
                 <g:each in="${races}" var="race">
-                    <tr>
+                    <tr class="${race.usable ? 'success' : ''}">
                         <td><strong>${race.name}</strong></td>
                         <td>
                             <span class="label label-default">${race.minFigures}&lt;=</span>
@@ -155,7 +155,8 @@
                                                 id="${competence.id}">
                                             <span class="glyphicon glyphicon-edit"></span>
                                         </g:link>
-                                        <g:link controller="referentielCompetence" action="delete" class="btn btn-danger"
+                                        <g:link controller="referentielCompetence" action="delete"
+                                                class="btn btn-danger"
                                                 id="${competence.id}">
                                             <span class="glyphicon glyphicon-remove"></span>
                                         </g:link>
